@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin/index', function () {
+    return view('admin.index.index');
 });
+Route::controller('/admin','admin\UserController');
