@@ -20,7 +20,7 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="/admin/images/logo.png" alt="logo" style="width:200px;height:45px;" /></a>
+        <a class="navbar-brand brand-logo" href="/admin/index"><img src="/admin/images/logo.png" alt="logo" style="width:200px;height:45px;" /></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/admin/images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -46,7 +46,7 @@
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="/admin/login">
                 <i class="mdi mdi-cached mr-2 text-success"></i>
                切换登录
               </a>

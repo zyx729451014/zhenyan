@@ -15,3 +15,5 @@ Route::get('/admin/index', function () {
     return view('admin.index.index');
 });
 Route::controller('/admin','admin\UserController');
+// 后台注册页面
+Route::get('/admin/login','admin')
