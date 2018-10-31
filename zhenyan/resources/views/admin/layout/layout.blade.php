@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Purple Admin</title>
+  <title>Zhen yan</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/admin/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/admin/images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/admin/vendors/css/page.css">
 </head>
 <body>
   <div class="container-scroller">
@@ -144,7 +145,8 @@
             </a>
             <div class="collapse" id="ui-basic2">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">类别浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/cates/create">类别添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/cates">类别浏览</a></li>
               </ul>
             </div>
           </li> 
@@ -183,6 +185,7 @@
       <div class="main-panel">
         <!-- 内容开头 -->
         <div class="content-wrapper">
+<<<<<<< HEAD:zhenyan/resources/views/admin/layout/layout.blade.php
           <!-- 读取提示信息开始 -->
           @if (session('success'))
               <div class="alert alert-success">
@@ -218,7 +221,7 @@
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="" target="_blank">BootstrapDash</a>. All rights reserved. </span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
-              <i class="mdi mdi-heart text-danger"></i> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
+              <i class="mdi mdi-heart text-danger"></i> - More Templates <a href="http://www.cssmoban.com/" target="_blank">甄研论坛</a> </span>
           </div>
         </footer>
         <!-- partial -->

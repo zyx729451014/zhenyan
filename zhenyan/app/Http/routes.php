@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::controller('/admin/user','admin\UserController');
 
 Route::resource('/admin/links','admin\LinksController'); // 后台友情链接管理
+Route::resource('/admin/cates','admin\CatesController'); // 后台类别管理
