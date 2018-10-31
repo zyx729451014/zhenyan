@@ -12,6 +12,7 @@
 */
 
 Route::get('/admin/index', function () {
-    return view('admin.index.index');
+    return view('admin.layout.layout');
 });
-Route::controller('/admin','admin\UserController');
+Route::controller('/admin/user','admin\UserController');
+Route::resource('/admin/cates','admin\CatesController'); // 后台类别管理
