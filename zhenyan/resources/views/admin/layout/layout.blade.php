@@ -185,7 +185,6 @@
       <div class="main-panel">
         <!-- 内容开头 -->
         <div class="content-wrapper">
-
           <!-- 读取提示信息开始 -->
           @if (session('success'))
               <div class="alert alert-success">

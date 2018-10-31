@@ -99,13 +99,22 @@
 	padding-top:8px;
 }
 .sousuo .uname{
-	margin-left:400px;
+	margin-left: 480px;
+}
+.sousuo .uname span{
+	margin-right: 20px;
+	color: #333;
+}
+.sousuo .uname input[type='text']{
+	height:  40px;
+	background-color: rgba(0,0,0,0);
+	border: 1px solid purple;
+
 }
 .sousuo .num{
 	margin-left:10px;
 }
 .sousuo input[type="submit"]{
-	background:#7ce093;
 	border:none;
 	color:#484d49;
 	cursor:pointer;

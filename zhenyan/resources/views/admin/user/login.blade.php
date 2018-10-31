@@ -29,29 +29,37 @@
                 <img src="/admin/images/logo.png" style="width:280px;height:60px;">
               </div>
               <h4 style="color:#ccc;">你好！让我们开始吧~</h4>
-              
-              <form class="pt-3">
+              @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
+
+              <form class="pt-3" action="/admin/user/dologin" method="post">
+                {{ csrf_field() }}
                 <div class="form-group">
-                  <input type="email" name="uname" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="用户名">
+                  <input type="text" name="uname" class="form-control form-control-lg" id="uname" placeholder="请输入用户名">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="pass" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="密码">
+                  <input type="password" name="upass" class="form-control form-control-lg" id="upass" placeholder="请输入密码">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">登录</a>
+                  <input type="submit" value='登录' style='width:260px;height:50px;background:#c588f0;border:none;font-size:15px;color:#fff;'>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
-                      
-                      
                     </label>
                   </div>
                   <a href="#" class="auth-link text-black">忘记密码？</a>
                 </div>
                
                 <div class="text-center mt-4 font-weight-light">
-                  没有账号? <a href="/admin/register" class="text-primary">注册</a>
+                  没有账号? <a href="/admin/user/register" class="text-primary">注册</a>
                 </div>
               </form>
             </div>
