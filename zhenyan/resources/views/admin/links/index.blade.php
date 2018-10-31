@@ -37,7 +37,12 @@
                       </tr>
                       @endforeach
                     </tbody>
+                     
+
                   </table>
+                  <ul class="pagination" style="margin:0px auto;">
+                  {!! $links->render() !!}
+                  </ul>
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@
 	<title>Document</title>
 </head>
 <body>
-	@section('container')
+	@section('content-wrapper')
    <div class="col-12 grid-margin">
       <div class="card">
         <div class="card-body">

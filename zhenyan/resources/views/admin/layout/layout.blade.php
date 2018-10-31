@@ -185,7 +185,7 @@
       <div class="main-panel">
         <!-- 内容开头 -->
         <div class="content-wrapper">
-<<<<<<< HEAD:zhenyan/resources/views/admin/layout/layout.blade.php
+
           <!-- 读取提示信息开始 -->
           @if (session('success'))
               <div class="alert alert-success">

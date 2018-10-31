@@ -19,7 +19,7 @@ class LinksController extends Controller
      */
     public function index()
     {
-        $links = Link::all();
+        $links = Link::paginate(5);
         return view('admin.links.index',['links'=>$links]);
     }
 
