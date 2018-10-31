@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="/admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
+  <!-- page.css -->
+  <link rel="stylesheet" type="text/css" href="/admin/vendors/css/page.css">
   <!-- inject:css -->
   <link rel="stylesheet" href="/admin/css/style.css">
   <!-- endinject -->
@@ -89,8 +91,8 @@
             </a>
             <div class="collapse" id="general-pages1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=""> 添加用户 </a></li> 
-                <li class="nav-item"> <a class="nav-link" href=""> 浏览用户 </a></li>         
+                <li class="nav-item"> <a class="nav-link" href="/admin/user/create"> 添加用户 </a></li> 
+                <li class="nav-item"> <a class="nav-link" href="/admin/user/index"> 浏览用户 </a></li>         
               </ul>
             </div>
           </li>
@@ -181,7 +183,32 @@
       <div class="main-panel">
         <!-- 内容开头 -->
         <div class="content-wrapper">
-          
+          <!-- 读取提示信息开始 -->
+          @if (session('success'))
+              <div class="alert alert-success">
+                  {{ session('success') }}
+              </div>
+          @endif
+          @if (session('error'))
+              <div class="alert alert-error">
+                  {{ session('error') }}
+              </div>
+          @endif
+          <!-- 读取提示信息结束 -->
+
+           <!-- 显示验证错误信息 开始 -->
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
+              <!-- 显示验证错误信息 结束 -->
+          @section('content-wrapper')
+          @show
         
         </div>
         <!-- 内容结尾 -->

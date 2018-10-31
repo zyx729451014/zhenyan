@@ -29,15 +29,25 @@
                 <img src="/admin/images/logo.png" style="width:280px;height:60px;">
               </div>
               <h4 style="color:#ccc;">新用户?点了注册我们的故事就开始了!</h4>
-              <form class="pt-3">
+               @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+              <form class="pt-3" action='/admin/user/doregister' method='post'>
+                 {{ csrf_field() }} 
                 <div class="form-group">
-                  <input type="text" name="uname" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="用户名">
+                  <input type="text" name="uname" class="form-control form-control-lg" id="uname" placeholder="请输入用户名">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="pass" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="密码">
+                  <input type="password" name="upass" class="form-control form-control-lg" id="upass" placeholder="请输入密码">
                 </div>
                  <div class="form-group">
-                  <input type="password" name="passok" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="确认密码">
+                  <input type="password" name="upassok" class="form-control form-control-lg" id="upassok" placeholder="请再次输入确认密码">
                 </div>
                 <div class="mb-4">
                   <div class="form-check">
@@ -48,10 +58,10 @@
                   </div>
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="/admin/index.html">注册</a>
+                 <input type="submit" value='注册' style='width:260px;height:50px;background:#c588f0;border:none;font-size:15px;color:#fff;'>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                 已经有账号？ <a href="/admin/login" class="text-primary">登录</a>
+                 已经有账号？ <a href="/admin/user/login" class="text-primary">登录</a>
                 </div>
               </form>
             </div>

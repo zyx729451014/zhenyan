@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/admin/index', function () {
-    return view('admin.index.index');
+Route::get('/', function () {
+    return view('welcome');
 });
-Route::controller('/admin','admin\UserController');
-// 后台注册页面
-Route::get('/admin/login','admin')
+Route::controller('/admin/user','admin\UserController');// 用户管理 注册 登录
+
+
