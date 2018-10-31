@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/admin/index', function () {
-    return view('admin.index.index');
+Route::get('/', function () {
+    return view('welcome');
 });
-Route::controller('/admin','admin\UserController');
+Route::controller('/admin/user','admin\UserController');
+
+Route::resource('/admin/links','admin\LinksController'); // 后台友情链接管理

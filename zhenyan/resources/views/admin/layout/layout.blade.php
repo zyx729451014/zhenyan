@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="/admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
+  <!-- page.css -->
+  <link rel="stylesheet" type="text/css" href="/admin/vendors/css/page.css">
   <!-- inject:css -->
   <link rel="stylesheet" href="/admin/css/style.css">
   <!-- endinject -->
@@ -20,7 +22,7 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="/admin/images/logo.png" alt="logo" style="width:200px;height:45px;" /></a>
+        <a class="navbar-brand brand-logo" href="/admin/index"><img src="/admin/images/logo.png" alt="logo" style="width:200px;height:45px;" /></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/admin/images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -46,7 +48,7 @@
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="/admin/login">
                 <i class="mdi mdi-cached mr-2 text-success"></i>
                切换登录
               </a>
@@ -89,8 +91,8 @@
             </a>
             <div class="collapse" id="general-pages1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=""> 添加用户 </a></li> 
-                <li class="nav-item"> <a class="nav-link" href=""> 浏览用户 </a></li>         
+                <li class="nav-item"> <a class="nav-link" href="/admin/user/create"> 添加用户 </a></li> 
+                <li class="nav-item"> <a class="nav-link" href="/admin/user/index"> 浏览用户 </a></li>         
               </ul>
             </div>
           </li>
@@ -169,8 +171,8 @@
             </a>
             <div class="collapse" id="ui-basic3">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">浏览</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links">浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links/create">添加</a></li>
               </ul>
             </div>
           </li>
@@ -181,7 +183,32 @@
       <div class="main-panel">
         <!-- 内容开头 -->
         <div class="content-wrapper">
-          
+          <!-- 读取提示信息开始 -->
+          @if (session('success'))
+              <div class="alert alert-success">
+                  {{ session('success') }}
+              </div>
+          @endif
+          @if (session('error'))
+              <div class="alert alert-error">
+                  {{ session('error') }}
+              </div>
+          @endif
+          <!-- 读取提示信息结束 -->
+
+           <!-- 显示验证错误信息 开始 -->
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
+              <!-- 显示验证错误信息 结束 -->
+          @section('content-wrapper')
+          @show
         
         </div>
         <!-- 内容结尾 -->
