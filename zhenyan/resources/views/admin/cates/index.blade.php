@@ -71,7 +71,7 @@
                  {{ $v['status'] ==1 ? '激活' : '未激活' }}
                 </td>
                 <td>
-                  <label class="badge badge-warning"><a href="/admin/cates/{{ $v['cid'] }}/edit">修改</a></label>
+                  <a href="/admin/cates/{{ $v['cid'] }}/edit"><button  class="badge badge-warning">修改</button></a>
                 </td>
               </tr>                      
             </tbody>
