@@ -45,16 +45,16 @@
                 <span class="availability-status online"></span>             
               </div>
               <div class="nav-profile-text">
-                <p class="mb-1 text-black">David Greymaax</p>
+                <p class="mb-1 text-black">{{ session('uname') }}</p>
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/admin/login">
+              <a class="dropdown-item" href="/admin/login/login">
                 <i class="mdi mdi-cached mr-2 text-success"></i>
                切换登录
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="/admin/login/logout">
                 <i class="mdi mdi-logout mr-2 text-primary"></i>
                 退出
               </a>

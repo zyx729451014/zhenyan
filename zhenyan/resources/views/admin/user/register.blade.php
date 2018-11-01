@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 @endif
-              <form class="pt-3" action='/admin/user/doregister' method='post'>
+              <form class="pt-3" action='/admin/login/doregister' method='post'>
                  {{ csrf_field() }} 
                 <div class="form-group">
                   <input type="text" name="uname" class="form-control form-control-lg" id="uname" placeholder="请输入用户名">
@@ -61,7 +61,7 @@
                  <input type="submit" value='注册' style='width:260px;height:50px;background:#c588f0;border:none;font-size:15px;color:#fff;'>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                 已经有账号？ <a href="/admin/user/login" class="text-primary">登录</a>
+                 已经有账号？ <a href="/admin/login/login" class="text-primary">登录</a>
                 </div>
               </form>
             </div>

@@ -49,7 +49,7 @@
 	 	@endforeach
 	</tbody>
 	</table>
-	<ul class="pagination">
+	<ul class="pagination" style='margin-left:100px;'>
 		{!! $user->appends ($request)->render() !!}
   	</ul>
 	</div>
