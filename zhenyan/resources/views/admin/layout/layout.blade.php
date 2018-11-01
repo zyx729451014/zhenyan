@@ -119,9 +119,9 @@
             <div class="collapse" id="general-pages">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/slid/create"> 轮播图广告添加 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href="/admin/slid"> 轮播图广告浏览 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告添加 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告浏览 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/slid"> 轮播图广告浏览 </a></li>                
+                <li class="nav-item"> <a class="nav-link" href="/admin/adver/create"> 推荐位广告添加 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/adver"> 推荐位广告浏览 </a></li>          
               </ul>
               </div>
           </li>
@@ -173,6 +173,7 @@
             </a>
             <div class="collapse" id="ui-basic3">
               <ul class="nav flex-column sub-menu">
+<<<<<<< HEAD
                 <li class="nav-item"> <a class="nav-link" href="/admin/links/create">友情链接添加</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/links">友情链接浏览</a></li>
                 
@@ -188,6 +189,10 @@
             <div class="collapse" id="ui-basic5">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/web">网站信息浏览</a></li>
+=======
+                <li class="nav-item"> <a class="nav-link" href="/admin/links/create">添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links">浏览</a></li>               
+>>>>>>> origin/gxm
               </ul>
             </div>
           </li>
