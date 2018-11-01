@@ -17,10 +17,14 @@ class LinksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $links = Link::paginate(5);
-        return view('admin.links.index',['links'=>$links]);
+        $showCount = $request->input('showCount',5);
+        $search    = $request->input('search','');
+        // 获取数据
+        $links = Link::where('lname','like','%'.$search .'%')->paginate($showCount);
+        // 加载到列表页面
+        return view('admin.links.index',['links'=>$links,'request'=>$request->all()]);
     }
 
     /**

@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Zhen yan</title>
+  <title>臻妍后台管理</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
@@ -118,8 +118,8 @@
             </a>
             <div class="collapse" id="general-pages">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=""> 轮播图广告添加 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href=""> 轮播图广告浏览 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/slid/create"> 轮播图广告添加 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/slid"> 轮播图广告浏览 </a></li>          
                 <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告添加 </a></li>          
                 <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告浏览 </a></li>          
               </ul>
@@ -173,12 +173,24 @@
             </a>
             <div class="collapse" id="ui-basic3">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/links">浏览</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/links/create">添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links/create">友情链接添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links">友情链接浏览</a></li>
+                
               </ul>
             </div>
           </li>
-         
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false">
+              <span class="menu-title">网站管理</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic5">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/web">网站信息浏览</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
       

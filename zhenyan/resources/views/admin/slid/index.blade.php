@@ -1,10 +1,10 @@
-@extends('admin/layout/layout');
+@extends('admin/layout/layout')
 @section('content-wrapper')
-<div class='card'>
+  <div class='card'>
   <div class="card-body">
-   <h4 class="card-title">友情链接浏览</h4>
+   <h4 class="card-title">轮播图广告浏览</h4>
     <br>
-    <form action="/admin/links" method="get" class='table-primary'>
+    <form action="/admin/slid" method="get" class='table-primary'>
       <div class='sousuo'>
       <label class='num'>显示
         <select size="1" name="showCount">
@@ -26,18 +26,20 @@
                     <thead>
                       <tr>
                         <th> ID </th>
-                        <th> 链接名称 </th>
+                        <th> 广告名称 </th>
                         <th> 链接URL地址 </th>
+                        <th> 广告图片 </th>
                         <th> 状态 </th>
                         <th> 操作 </th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($links as $k=>$v)
+                      @foreach ($slid as $k=>$v)
                       <tr>
-                      		<td>{{ $v->id }}</td>
-                      		<td>{{ $v->lname }}</td>
-                      		<td>{{ $v->lurl }}</td>
+                      		<td>{{ $v->sid }}</td>
+                      		<td>{{ $v->sname }}</td>
+                      		<td>{{ $v->surl }}</td>
+                      		<td><img src="{{ $v->simg }}" style="width:200px;height:70px;border-radius:0px;"></td>
                       		<td>@if ($v->status == 0)
 								    未激活
 								@else
@@ -45,11 +47,11 @@
 								@endif
 							</td>
                       		<td>
-                      			<a href="/admin/links/{{$v->id}}/edit" class="badge badge-warning">修改</a>
-								<form action="/admin/links/{{ $v->id }}" method="post" style="display:inline-block;">
+                      			<a href="/admin/slid/{{$v->sid}}/edit" class="badge badge-warning">修改</a>
+								<form action="/admin/slid/{{ $v->sid }}" method="post" style="display:inline-block;">
 									{{ csrf_field() }}
 									{{ method_field('DELETE') }}
-									<a href="/admin/links/{{$v->id}}"></a><button type="submit" class="badge badge-danger">删除</button>
+									<a href="/admin/slid/{{$v->sid}}"></a><button type="submit" class="badge badge-danger">删除</button>
 								</form>		
                       		</td>
                       </tr>
@@ -59,7 +61,7 @@
 
                   </table>
                   <ul class="pagination" style="margin:0px auto;">
-                  {!! $links->render() !!}
+                  {!! $slid->render() !!}
                   </ul>
                 </div>
               </div>

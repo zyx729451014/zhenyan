@@ -40,7 +40,7 @@ class LinksRequest extends Request
             'lname.max' => '链接名称最长为6个字符',
             'lurl.required'  => '链接URL地址不能为空',
             'lurl.url'  => '链接URL地址格式不正确',
-            'status' => '状态不能为空',
+            'status.required' => '状态不能为空',
         ];
     }
 }
