@@ -1,0 +1,20 @@
+ul{
+	display: none;
+} 
+ul,li{
+	margin:0;
+	padding:0;
+	list-style-type: none;
+}
+li{
+	float: left;
+	background: #ddd;
+	width: 55px;
+	margin-right: 2px;
+	margin-top:10px;
+	text-align: center;
+	font-size:8px;
+	height: 13px;
+	line-height: 13px;
+	color:#999;
+}

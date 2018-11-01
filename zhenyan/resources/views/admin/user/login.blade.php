@@ -39,7 +39,7 @@
                   </div>
               @endif
 
-              <form class="pt-3" action="/admin/user/dologin" method="post">
+              <form class="pt-3" action="/admin/login/dologin" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <input type="text" name="uname" class="form-control form-control-lg" id="uname" placeholder="请输入用户名">
@@ -59,7 +59,7 @@
                 </div>
                
                 <div class="text-center mt-4 font-weight-light">
-                  没有账号? <a href="/admin/user/register" class="text-primary">注册</a>
+                  没有账号? <a href="/admin/login/register" class="text-primary">注册</a>
                 </div>
               </form>
             </div>
