@@ -31,7 +31,7 @@
 								<form action="/admin/links/{{ $v->id }}" method="post" style="display:inline-block;">
 									{{ csrf_field() }}
 									{{ method_field('DELETE') }}
-									<a href="/admin/links/{{$v->id}}"></a><button type="submit" class="badge badge-danger">删除</button>
+									<a href="/admin/links/{{$v->id}}"><button type="submit" class="badge badge-danger">删除</button></a>
 								</form>		
                       		</td>
                       </tr>

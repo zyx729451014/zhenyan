@@ -120,8 +120,8 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href=""> 轮播图广告添加 </a></li>          
                 <li class="nav-item"> <a class="nav-link" href=""> 轮播图广告浏览 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告添加 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href=""> 推荐位广告浏览 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/adver/create"> 推荐位广告添加 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/adver"> 推荐位广告浏览 </a></li>          
               </ul>
               </div>
           </li>
@@ -173,8 +173,8 @@
             </a>
             <div class="collapse" id="ui-basic3">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/links">浏览</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/links/create">添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/links">浏览</a></li>               
               </ul>
             </div>
           </li>

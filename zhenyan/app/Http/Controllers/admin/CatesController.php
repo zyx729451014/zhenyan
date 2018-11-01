@@ -25,11 +25,20 @@ class CatesController extends Controller
             $n = substr_count($value->path, ',');
             $cates[$key]->cname = str_repeat('|-----',$n).$value->cname;
         }
-        return $cates;
+        return $cates; 
+        // 获取数据
     }
-    public function index()
-    {
-        return view('admin.cates.index',['cates'=>self::getCates()]);
+    public function index(Request $request)
+    {         
+        $showCount = $request->input('showCount',5);
+        $search    = $request->input('search','');
+        $cates = Cates::select('*',DB::raw("concat(path,',',cid) as paths"))->where('cname','like','%'.$search .'%')->orderBy('paths','asc')->paginate($showCount);
+        foreach ($cates as $key => $value) {
+            $n = substr_count($value->path, ',');
+            $cates[$key]->cname = str_repeat('|-----',$n).$value->cname;
+        }
+        // 加载到列表页面
+        return view('admin.cates.index',['cates'=>$cates]);
     }
 
     /**
