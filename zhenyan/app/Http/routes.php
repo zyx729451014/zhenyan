@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index.index');
 });
 /**
  *
@@ -34,7 +34,6 @@ Route::controller('/admin/login','admin\LoginController');   // 后台 注册 �
  *	前台路由
  * 
  */
-Route::resource('/home/index','home\IndexController');  //前台首页 
 Route::controller('/home/user','home\UserController');   // 前台用户管理 注册 登录
 Route::get('/home/invitation/{id}','home\InvitationController@index');	//前台列表
 
