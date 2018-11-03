@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="www.zhenyan.com">
-	<title>臻妍论坛</title>
+	<?php $web = \App\Models\Web::find(1); ?>
+	<title>{{ $web->name }}</title>
 
 		<!-- 首页 -->
 		<link rel="stylesheet" type="text/css" href="/home/css/style2.css">
@@ -48,49 +49,31 @@
 	<header>
 	<?php
 		$cates = \App\Models\Cates::select()->where('pid','=',0)->get();
+		
 	?>
-		<nav>
+		<nav style="background:#fff url({{ $web->logo }}) no-repeat -15px;">
 			<ul>			
-				<li><a href="/home/index">首页</a></li>
+				<li><a href="/">首页</a></li>
 				@foreach($cates as $k=>$v)
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
+				<li><a href="/home/glossary">图文</a></li>
 				<li><a href="#">问答</a></li>
 			</ul>
-			<a href="">登录</a>
-			<a href="">注册</a>
+			<a href="/home/user/login">登录</a>
+			<a href="/home/user/register">注册</a>
 		</nav>
 	</header>
 <!-- 轮播图 -->
+
+	<?php
+		$slids = \App\Models\Slid::where('status',1)->get();
+	?>
 	<div class="banner" style="margin-top: 65px;">
 		<ul>
-			<li style="background-image: url('img/sunset.jpg');">
-				<div class="inner">
-					<h1>The jQuery slider that just slides.</h1>
-					<p>No fancy effects or unnecessary markup, and it’s less than 3kb.</p>
-				</div>
-			</li>
-
-			<li style="background-image: url('img/wood.jpg');">
-				<div class="inner">
-					<h1>Fluid, flexible, fantastically minimal.</h1>
-					<p>Use any HTML in your slides, extend with CSS. You have full control.</p>
-				</div>
-			</li>
-
-			<li style="background-image: url('img/subway.jpg');">
-				<div class="inner">
-					<h1>Open-source.</h1>
-					<p>Everything to do with Unslider is hosted on GitHub.</p>
-				</div>
-			</li>
-
-			<li style="background-image: url('img/shop.jpg');">
-				<div class="inner">
-					<h1>Uh, that’s about it.</h1>
-					<p>I just wanted to show you another slide.</p>
-				</div>
-			</li>
+			@foreach($slids as $k=>$v)
+			<li style="background-image: url('{{ $v->simg }}');">
+			@endforeach
 		</ul>
 	</div>
 	<script src="/home/js/jquery-1.11.0.min.js"></script>
@@ -138,8 +121,11 @@
 	</script>
 
 <!-- 内容 -->
+
 @section('content-wrapper')
+
 @show
+
 	<!-- 推荐位广告 -->
 	<script src="/home/http://www.jq22.com/jquery/jquery-1.8.2.js" type="text/javascript"></script>
 
@@ -449,61 +435,70 @@
 				</ul>
 
 			</div>
+
+			<!-- 读取提示信息开始 -->
+	  	@if (session('success'))
+	      	<script type="text/javascript">
+		      	alert('添加成功');        	
+		    </script>;
+	  	@endif
+	  	@if (session('error'))
+	      <div class="alert alert-error">
+	          {{ session('error') }}
+	      </div>
+	  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+	    @if (count($errors) > 0)
+	    <div class="">
+	        <ul> 
+	        @foreach ($errors->all() as $k=>$v)
+		        <script type="text/javascript">
+		        	if('{{ $k }}' == 0){
+		        		alert('{{ $v }}')
+		        	}		        	
+		        </script>;
+	     	@endforeach
+	       </ul>
+	    </div>
+	    @endif
+	    <!-- 显示验证错误信息 结束 -->
 <!-- 尾部 -->
 	<footer>
 		<div class="footer-top">
-			
+			<?php
+				$links = \App\Models\Link::where('status',1)->get();
+			?>
 			<ol>
 				<h4>友情链接：</h4>
-				<a href="">财新网</a>
-				<a href="">财经网</a>
-				<a href="">南方周末</a>
-				<a href="">新京报</a>
-				<a href="">hao1232345</a>
-				<a href="">星岛环球网</a>
-				<a href="">海南房产</a>
-				<a href="">环球网(英语)</a>
-				<a href="">星辰在线</a>
-				<a href="">红网</a>
-				<a href="">西部网</a>
-				<a href="">亚心网</a>
-				<a href="">华声在线</a>
-				<a href="">中国周刊</a>
-				<a href="">扬子晚报</a>
-				<a href="">海南旅游网</a>
-				<a href="">海南在线</a>
-				<a href="">广西旅游在线</a>
-				<a href="">中国改革论坛</a>
-				<a href="">清博大数据</a>
-				<a href="">凯迪网络</a>
-				<a href="">去哪TV</a>
-				<a href="">交易街商业信息</a>
-				<a href="">北京参考</a>
-				<a href="">雄安论坛</a>
-				<a href="">天眼查NBA直播吧</a>
+				@foreach ($links as $k=>$v)
+				<li><a href="{{ $v->lurl }}">{{ $v->lname }}</a></li>
+				@endforeach
 			<ol>
 		</div>
 		<div class="footer-bottom">
 			<ul>
-				<li><a href="">关于甄妍 </a></li>
+				<li><a href="">关于臻妍 </a></li>
 				<li><a href="">| </a></li>
 				<li><a href="">广告服务 </a></li>
 				<li><a href="">| </a></li>
-				<li><a href="">甄妍客服 </a></li>
+				<li><a href="">臻妍客服 </a></li>
 				<li><a href="">| </a></li>
 				<li><a href="">隐私和版权 </a></li>
 				<li><a href="">| </a></li>
 				<li><a href=""> </a></li>
 				<li><a href="">联系我们 </a></li>
-				<li><a href="">加入天涯 </a></li>
+				<li><a href="">加入臻妍 </a></li>
 				<li><a href="">| </a></li>
 				<li><a href="">手机版 </a></li>
 				<li><a href="">| </a></li>
 				<li><a href="">隐私和版权 </a></li>
 			</ul>
-		<p>© 1999 - 2018 甄妍论坛</p>
+		<p>© 1999 - 2018 臻妍论坛</p>
 		</div>
 		
 	</footer>
+
 </body>
 </html>

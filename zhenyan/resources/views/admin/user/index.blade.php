@@ -40,7 +40,7 @@
 	 		<td>{{ $v->uname }}</td>
 	 		<td>{{ $v->phone }}</td>
 	 		<td>{{ $v->email }}</td>
-	 		<td>{{ $v->identity ==0 ? '管理员' : '普通用户' }}</td>
+	 		<td>{{ $v->identity ==1 ? '管理员' : '普通用户' }}</td>
 	 		<td>
 				<a href="/admin/user/userdetails/{{ $v['uid'] }}" class='badge badge-info'>详情</a>
 				<a href="/admin/user/delete/{{ $v['uid'] }}" class='badge badge-danger'>删除</a>

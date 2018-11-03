@@ -158,8 +158,8 @@
             </a>
             <div class="collapse" id="ui-basic4">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">图文贴添加</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">图文贴浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/glossary/create">图文贴添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/glossary">图文贴浏览</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">帖子添加</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">帖子浏览</a></li>
               </ul>

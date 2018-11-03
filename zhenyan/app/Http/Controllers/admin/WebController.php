@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Http\Requests\WebRequest;
+use App\Models\Web;
 
 class WebController extends Controller
 {
@@ -19,7 +20,7 @@ class WebController extends Controller
     public function index()
     {
         // 查询网站信息
-        $web=DB::table('webs')->first();
+        $web = Web::find(1);;
         return view('admin.web.index',['web'=>$web]);
     }
 
@@ -63,7 +64,7 @@ class WebController extends Controller
      */
     public function edit($id)
     {
-        $web=DB::table('webs')->where('id',$id)->first();
+        $web = Web::find($id);
         return view('admin.web.edit',['web'=>$web]);
     }
 
@@ -87,17 +88,16 @@ class WebController extends Controller
             // 拼接数据库存放路径
             $profile_path = ltrim($dir_name.'/'.$file_name,'.');
         }
-        $res = DB::table('webs')
-            ->where('id', $id)
-            ->update(['name' => $request->input('name'),
-                     'describe' => $request->input('describe'),
-                     'filing' => $request->input('filing'),
-                     'telephone' => $request->input('telephone'),
-                     'statu' => $request->input('statu'),
-                     'url' => $request->input('url'),
-                     'cright' => $request->input('cright'),
-                     'logo' => $profile_path,
-                    ]);
+        $web = Web::find($id);
+        $web->name = $request->input('name');
+        $web->describe = $request->input('describe');
+        $web->filing = $request->input('filing');
+        $web->telephone = $request->input('telephone');
+        $web->statu = $request->input('statu');
+        $web->url = $request->input('url');
+        $web->cright = $request->input('cright');
+        $web->logo = $profile_path;
+        $res = $web->save();
         if($res){
             // 提交事务
             DB::commit();

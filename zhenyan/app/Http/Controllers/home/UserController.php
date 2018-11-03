@@ -37,9 +37,9 @@ class UserController extends Controller
         $res = $user->save(); // bool
         // 逻辑判断
         if($res){
-            echo "<script>alert('恭喜您注册成功,快去登录吧！',location.href='/home/user/login')</script>";
+            return redirect('/home/user/login');
         }else{
-            echo "<script>alert('很遗憾您注册失败了',location.href='')</script>";
+            echo "<script>alert('很遗憾您注册失败了');";
         }
 
     } 
@@ -74,19 +74,16 @@ class UserController extends Controller
      */
     public function postDologin(Request $request)
     {
-       // 判断用户输入
-        $res = $request->except('_token');
+        $uname = $_POST['uname'];
+        $upass=$_POST['upass'];
         // 查询数据库用户 
-        $user = User::where('uname',$res['uname'])->first();
-        // 判断用户是否存在数据库 没有返回登录页面
-        if(!$user){
-            echo '<script>alert("此用户不存在",location.href="/home/user/login");</script>';
-        }
+        $user = User::where('uname',$uname)->first();
         // 判断密码错误
-        if (Hash::check($res['upass'],$user['upass'])) {
-            echo '<script>alert("登录成功",location.href="/home/user/login");</script>';
+        if (Hash::check($upass,$user['upass'])) {
+            session(['userinfo'=>$user]);
+            echo "<script>location.href='/';</script>";
         }else{
-            echo '<script>alert("密码错误",location.href="/home/user/login");</script>';
+            echo "error";
         }
        
       

@@ -48,7 +48,7 @@
                   <div class="form-check">
                     <label class="form-check-label">
                       <input type="radio" class="form-check-input" name="status" id="membershipRadios1" value="0" checked>
-                     激活
+                     未激活
                     </label>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                   <div class="form-check">
                     <label class="form-check-label">
                       <input type="radio" class="form-check-input" name="status" id="membershipRadios2" value="1">
-                     未激活
+                     激活
                     </label>
                   </div>
                 </div>

@@ -33,13 +33,14 @@ class LoginController extends Controller
         $res = $request->except('_token');
         // 查询数据库用户 
         $user = User::where('uname',$res['uname'])->first();
-        session(['uname'=>$res['uname']]);
+        
         // 判断用户是否存在数据库 没有返回登录页面
         if(!$user){
             return back()->withErrors('没有此用户')->withInput();
         }
       // 判断密码错误
         if (Hash::check($res['upass'],$user['upass'])) {
+            session(['uname'=>$res['uname']]);
             return redirect('admin/user/index');
         }else{
             return back()->withErrors('密码错误')->withInput();
