@@ -69,7 +69,7 @@
 				<li><a href="#">问答</a></li>
 			</ul>
 			@if (session()->has('user'))
-			<button style='height:30px;float: right;line-height: 75px;'>欢迎您：{{ session('user')->uname }}</button>
+			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您：{{ session('user')->uname }}</button>
 				<div class="person" style="display: none;">
 					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
 					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
@@ -81,14 +81,12 @@
 		</nav>
 	</header>
 	<script type="text/javascript">
-		$(function(){
-			$('nav button').click(function(){
+			$('.navbut').click(function(){
 				// 停止正在执行的动画  并且隐藏
 				$('.person:animated').stop().hide();
 				// 切换滑动效果
 				$('.person').slideToggle('slow');
 			});
-		});
 	</script>
 <!-- 轮播图 -->
 

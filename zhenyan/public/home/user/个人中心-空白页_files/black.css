@@ -1,5 +1,5 @@
 a:hover { color: #ff6862 }
-body { font: 400 12px/1.5 'Microsoft YaHei', '\5FAE\8F6F\96C5\9ED1', Arial; position: relative; background: #fff; min-width: 1200px;padding-top:44px !important; }
+body { font: 400 12px/1.5 'Microsoft YaHei', '\5FAE\8F6F\96C5\9ED1', Arial; position: relative; background: #fff; min-width: 1200px; }
 .global-topnav a, .global-topnav a:hover, a, a:hover { text-decoration: none }
 .global-topnav { position: fixed !important; z-index: 1200; left: 0; top: 0; width: 100%; height: auto; min-width: 1200px; margin: 0 auto; background: #111; font-family: arial }
 .global-topnav .wrapper { font-size: 12px; width: 100% }

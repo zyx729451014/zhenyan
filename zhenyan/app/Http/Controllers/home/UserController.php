@@ -86,7 +86,7 @@ class UserController extends Controller
         $user = User::where('uname',$uname)->first();
         // 判断密码错误
         if (Hash::check($upass,$user['upass'])) {
-            session(['userinfo'=>$user]);
+            session(['user'=>$user]);
             echo "<script>location.href='/';</script>";
         }else{
             echo "error";

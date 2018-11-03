@@ -4,7 +4,6 @@
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>个人中心-空白页</title>
 <link rel="shortcut icon" href="https://cms.qn.img-space.com/favicon.ico">
 <link rel="bookmark" href="https://cms.qn.img-space.com/favicon.ico">
 <link href="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/jquery.css" rel="stylesheet">

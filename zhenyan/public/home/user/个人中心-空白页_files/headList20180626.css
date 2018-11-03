@@ -429,7 +429,7 @@ textarea{outline: none;resize: none; border:none;font-family: 'Microsoft YaHei';
 .personalListBlank .yingSaiBlankTxt{margin-top:25px;margin-right:30px}
 .personalListBlank .zuoPinBlank{background:url(../images/zuopin.png) center bottom no-repeat}
 .personalListBlank .zuoPinBlankTxt{margin-top:40px;margin-right:65px}
-.personalListBlank .non-existent{padding-top:80px!important;background:url(https://icon.fengniao.com/fengniaoMy/images/noCont.png) center bottom no-repeat}
+.personalListBlank .non-existent{padding-top:80px!important;background:url(/home/dateails/noCont.png) center bottom no-repeat}
 .personalListBlank .non-existentTxt{margin-top:20px;margin-right:-70px}
 
 /*loading*/
