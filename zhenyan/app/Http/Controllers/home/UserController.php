@@ -85,11 +85,9 @@ class UserController extends Controller
         }else{
             echo "error";
         }
-       
+    
       
     } 
-
-
 
 
 

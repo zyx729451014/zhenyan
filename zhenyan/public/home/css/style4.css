@@ -1,0 +1,105 @@
+.content{
+	width: 1000px;
+	height: auto;
+	margin: 0px auto;
+}
+.content .title{
+	text-align: center;
+	font-size: 30px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+.content .name span{
+	color:#ccc;
+}
+.content .name a{
+	color: #23527c;
+}
+a{
+	text-decoration: none;
+}
+.content .cont{
+	width: 996px;
+	height: 520px;
+	border-top:3px solid #333;
+	margin-top: 20px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.content .cont .tw1{
+	width: 900px;
+	height: 30px;
+	background-image:url('./strip3.png');
+	margin: 20px auto;
+}
+.content .bpic{
+	width: 900px;
+	height: 300px;
+	margin: 10px auto;
+}
+.content .bpic img{
+	width: 100%;
+	height: 100%;
+}
+.content .spic{
+	width: 100%;
+	height: 55px;
+	margin: 0px auto;
+}
+.content .spic ul{
+	text-align: center;
+}
+.content .spic ul li{
+	width: 100px;
+	height: 55px;
+	border: 1px solid #ccc;
+	float: left;
+	padding: 3px;
+	list-style-type: none;
+	margin-right: 5px;
+}
+.content .spic ul li img{
+	width: 100%;
+	height: 100%;
+}
+.content .tw2{
+	width: 900px;
+	height: 50px;
+	background-image:url('./strip3.png');
+	margin: 20px auto;
+}
+.content .cont p{
+	width: 100%;
+	height: 40px;
+	background-color: #f8f8f8;
+	line-height: 40px;
+	font-size: 13px;
+}
+.content .comment{
+	width: 950px;
+	height:auto;
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+}
+.content .comment li{
+	list-style-type: none;
+}
+cite{
+	font-size: 12px;
+}
+.huifu{
+	width:80%;
+	margin-left:10%;
+	background-color:#fff;
+}
+.huifu ul li{
+	margin: 20px;
+	border-bottom: 1px solid #ccc;
+}
+.fbpl{
+	width: 100%;
+	height: 290px;
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+}

@@ -49,7 +49,15 @@
 	<header>
 	<?php
 		$cates = \App\Models\Cates::select()->where('pid','=',0)->get();
-		
+		/**
+		 * 
+		 *cates 类别分类
+		 *advers 推荐位广告
+		 *slid  轮播图
+		 */
+		$cates = \App\Models\Cates::getCates();
+		$advers  = \App\Models\Adver::select()->where('status','=',1)->get();
+		$slids  = \App\Models\Slid::select()->where('status','=',1)->get();
 	?>
 		<nav style="background:#fff url({{ $web->logo }}) no-repeat -15px;">
 			<ul>			
@@ -62,6 +70,7 @@
 			</ul>
 			<a href="/home/user/login">登录</a>
 			<a href="/home/user/register">注册</a>
+			{{ session('homeUserInfo.uname') }}
 		</nav>
 	</header>
 <!-- 轮播图 -->
@@ -73,6 +82,10 @@
 		<ul>
 			@foreach($slids as $k=>$v)
 			<li style="background-image: url('{{ $v->simg }}');">
+				<div class="inner">
+					<h1></h1>
+				</div>
+			</li>			
 			@endforeach
 		</ul>
 	</div>
@@ -419,19 +432,9 @@
 			<div id="carousel">
 
 				<ul>
-
-					<li><img src="/home/img/up1.jpg" alt="" /><span>Image1</span></li>
-
-					<li><img src="/home/img/up2.jpg" alt="" /><span>Image2</span></li>
-
-					<li><img src="/home/img/up3.jpg" alt="" /><span>Image3</span></li>
-
-					<li><img src="/home/img/up4.jpg" alt="" /><span>Image4</span></li>
-
-					<li><img src="/home/img/up5.jpg" alt="" /><span>Image5</span></li>
-
-					<li><img src="/home/img/up6.jpg" alt="" /><span>Image6</span></li>					
-
+					@foreach($advers as $k=>$v)
+					<li><img src="{{ $v['apic'] }}" alt="" /><span>Image1</span></li>					
+					@endforeach
 				</ul>
 
 			</div>

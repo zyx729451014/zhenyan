@@ -50,16 +50,17 @@ class AdverController extends Controller
         $adver->atitle   = $request->input('atitle');
         $adver->aurl     = $request->input('aurl');
         $adver->status   = $request->input('status');
-        if($request->hasFile('apic')){
-            $profile = $request -> file('apic');
+        if( !$request -> hasFile('apic') )
+        {
+            return redirect() -> back() -> withInput() -> withErrors('没有文件上传');
+        }else{
+             $profile = $request -> file('apic');
             $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
             $file_name = str_random('20').'.'.$ext;
             $dir_name = './uploads/'.date('Ymd',time());
             $res = $profile -> move($dir_name,$file_name);
             // 拼接数据库存放路径
             $profile_path = ltrim($dir_name.'/'.$file_name,'.');
-        }else{
-            return back()->with('error','图片不能为空');
         }
         $adver->apic   =  $profile_path;
         $res = $adver->save(); // bool

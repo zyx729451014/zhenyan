@@ -119,8 +119,8 @@
             <div class="collapse" id="general-pages">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/slid/create"> 轮播图广告添加 </a></li>          
-                <li class="nav-item"> <a class="nav-link" href="/admin/slid"> 轮播图广告浏览 </a></li>                
-                <li class="nav-item"> <a class="nav-link" href="/admin/adver/create"> 推荐位广告添加 </a></li>          
+                <li class="nav-item"> <a class="nav-link" href="/admin/slid"> 轮播图广告浏览 </a></li>  
+                <li class="nav-item"> <a class="nav-link" href="/admin/adver/create"> 推荐位广告添加 </a></li>                       
                 <li class="nav-item"> <a class="nav-link" href="/admin/adver"> 推荐位广告浏览 </a></li>          
               </ul>
               </div>
@@ -160,8 +160,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/glossary/create">图文贴添加</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/glossary">图文贴浏览</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">帖子添加</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">帖子浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/invitation">帖子浏览</a></li>
               </ul>
             </div>
           </li>
