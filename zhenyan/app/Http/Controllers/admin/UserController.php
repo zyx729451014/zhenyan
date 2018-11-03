@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\User;
 use App\Http\Requests\UsersStoreRequest;
 use Hash;
-use App\Models\Userdetail;   
+use App\Models\Userdetail;        
 use DB;
 class UserController extends Controller
 {
