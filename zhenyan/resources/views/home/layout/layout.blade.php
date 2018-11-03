@@ -51,16 +51,34 @@
 	?>
 		<nav>
 			<ul>			
-				<li><a href="/home/index">首页</a></li>
+				<li><a href="/">首页</a></li>
 				@foreach($cates as $k=>$v)
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
 				<li><a href="#">问答</a></li>
 			</ul>
-			<a href="">登录</a>
-			<a href="">注册</a>
+			@if (session()->has('user'))
+			<button style='height:30px;float: right;line-height: 75px;'>欢迎您：{{ session('user')->uname }}</button>
+				<div class="person" style="display: none;">
+					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
+					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
+				</div>
+			@else
+			<a href="/home/user/login">登录</a>
+			<a href="/home/user/register">注册</a>
+			@endif
 		</nav>
 	</header>
+	<script type="text/javascript">
+		$(function(){
+			$('nav button').click(function(){
+				// 停止正在执行的动画  并且隐藏
+				$('.person:animated').stop().hide();
+				// 切换滑动效果
+				$('.person').slideToggle('slow');
+			});
+		});
+	</script>
 <!-- 轮播图 -->
 	<div class="banner" style="margin-top: 65px;">
 		<ul>
@@ -148,8 +166,6 @@
 
 			$(function() {
 
-
-
 				$('#carousel ul').carouFredSel({
 
 					prev: '#prev',
@@ -174,7 +190,7 @@
 
 			height: 220px;
 
-			margin: 0px auto
+			margin: 0px auto;
 
 			position: absolute;
 

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DoRegisterRequest;
 use App\User;
 use Hash;
+use App\Models\Userdateail;
+
 
 class LoginController extends Controller
 {
@@ -33,7 +35,6 @@ class LoginController extends Controller
         $res = $request->except('_token');
         // 查询数据库用户 
         $user = User::where('uname',$res['uname'])->first();
-        session(['uname'=>$res['uname']]);
         // 判断用户是否存在数据库 没有返回登录页面
         if(!$user){
             return back()->withErrors('没有此用户')->withInput();
@@ -41,6 +42,7 @@ class LoginController extends Controller
       // 判断密码错误
         if (Hash::check($res['upass'],$user['upass'])) {
             return redirect('admin/user/index');
+            session(['uname'=>$res['uname']]);
         }else{
             return back()->withErrors('密码错误')->withInput();
         }
@@ -81,12 +83,16 @@ class LoginController extends Controller
         $user = new User;
         $user->uname = $request->input('uname');
         $user->upass = hash::make($request->input('upass'));
-        $res = $user->save(); // bool
+        $res1 = $user->save(); // bool
+        $id = $user->id;
+        $userdateail = new Userdateail;
+        $userdateail->uid = $id;
+        $res2 = $userdateail->save();
         // 逻辑判断
-        if($res){
-            return redirect('admin/login/login')->with('success', '注册成功');
+        if($res1 && $res2){
+            echo "<script>alert('恭喜您注册成功,快去登录吧！',location.href='/admin/login/login')</script>";
         }else{
-            return back()->with('error','注册失败');
+            echo "<script>alert('很遗憾您注册失败了',location.href='')</script>";
         }
     
     }

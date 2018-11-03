@@ -65,13 +65,13 @@
                     <label class="form-check-label">
                       <input type="radio" class="form-check-input" name="identity" id="identity" value="1">
                      管理员
-                    </label>
+                    </label> 
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="identity" id="identity" value="2" checked>
+                      <input type="radio" class="form-check-input" name="identity" id="identity" value="0" checked>
                      普通用户
                     </label>
                   </div>

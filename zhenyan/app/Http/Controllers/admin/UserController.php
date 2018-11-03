@@ -60,9 +60,13 @@ class UserController extends Controller
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');
         $user->identity = $request->input('identity');
-        $res = $user->save(); // bool
+        $res1 = $user->save(); // bool
+        $id = $user->id;
+        $userdateail = new Userdateail;
+        $userdateail->uid = $id;
+        $res2 = $userdateail->save();
         // 逻辑判断
-        if($res){
+        if($res1 && $res2){
             // 提交事务
             DB::commit();
             return redirect('admin/user/index')->with('success', '添加成功');
