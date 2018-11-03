@@ -84,15 +84,16 @@ class UserController extends Controller
         }
         // 判断密码错误
         if (Hash::check($res['upass'],$user['upass'])) {
-            echo '<script>alert("登录成功",location.href="/home/user/login");</script>';
+             session(['homeUserInfo'=>$user]);
+             // dump(session('homeUserInfo')['uid']);
+             // exit;
+            echo '<script>location.href="/";</script>';
         }else{
-            echo '<script>alert("密码错误",location.href="/home/user/login");</script>';
+            echo '<script>location.href="/home/user/login;</script>';
         }
-       
+    
       
     } 
-
-
 
 
 

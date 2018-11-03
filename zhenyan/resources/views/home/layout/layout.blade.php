@@ -47,50 +47,40 @@
 <!-- 导航 -->
 	<header>
 	<?php
-		$cates = \App\Models\Cates::select()->where('pid','=',0)->get();
+		/**
+		 * 
+		 *cates 类别分类
+		 *advers 推荐位广告
+		 *slid  轮播图
+		 */
+		$cates = \App\Models\Cates::getCates();
+		$advers  = \App\Models\Adver::select()->where('status','=',1)->get();
+		$slids  = \App\Models\Slid::select()->where('status','=',1)->get();
 	?>
 		<nav>
 			<ul>			
-				<li><a href="/home/index">首页</a></li>
+				<li><a href="/">首页</a></li>
 				@foreach($cates as $k=>$v)
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
+				<li><a href="#">图文</a></li>
 				<li><a href="#">问答</a></li>
 			</ul>
-			<a href="">登录</a>
-			<a href="">注册</a>
+			<a href="/home/user/login">登录</a>
+			<a href="/home/user/register">注册</a>
+			{{ session('homeUserInfo.uname') }}
 		</nav>
 	</header>
 <!-- 轮播图 -->
 	<div class="banner" style="margin-top: 65px;">
 		<ul>
-			<li style="background-image: url('img/sunset.jpg');">
+			@foreach($slids as $k=>$v)
+			<li style="background-image: url('{{ $v['simg'] }}');">
 				<div class="inner">
-					<h1>The jQuery slider that just slides.</h1>
-					<p>No fancy effects or unnecessary markup, and it’s less than 3kb.</p>
+					<h1></h1>
 				</div>
-			</li>
-
-			<li style="background-image: url('img/wood.jpg');">
-				<div class="inner">
-					<h1>Fluid, flexible, fantastically minimal.</h1>
-					<p>Use any HTML in your slides, extend with CSS. You have full control.</p>
-				</div>
-			</li>
-
-			<li style="background-image: url('img/subway.jpg');">
-				<div class="inner">
-					<h1>Open-source.</h1>
-					<p>Everything to do with Unslider is hosted on GitHub.</p>
-				</div>
-			</li>
-
-			<li style="background-image: url('img/shop.jpg');">
-				<div class="inner">
-					<h1>Uh, that’s about it.</h1>
-					<p>I just wanted to show you another slide.</p>
-				</div>
-			</li>
+			</li>			
+			@endforeach
 		</ul>
 	</div>
 	<script src="/home/js/jquery-1.11.0.min.js"></script>
@@ -138,6 +128,34 @@
 	</script>
 
 <!-- 内容 -->
+	<!-- 读取提示信息开始 -->
+	  	@if (session('success'))
+	      	<script type="text/javascript">
+		      	alert('添加成功');        	
+		    </script>;
+	  	@endif
+	  	@if (session('error'))
+	      <div class="alert alert-error">
+	          {{ session('error') }}
+	      </div>
+	  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+	    @if (count($errors) > 0)
+	    <div class="">
+	        <ul> 
+	        @foreach ($errors->all() as $k=>$v)
+		        <script type="text/javascript">
+		        	if('{{ $k }}' == 0){
+		        		alert('{{ $v }}')
+		        	}		        	
+		        </script>;
+	     	@endforeach
+	       </ul>
+	    </div>
+	    @endif
+	    <!-- 显示验证错误信息 结束 -->
 @section('content-wrapper')
 @show
 	<!-- 推荐位广告 -->
@@ -433,19 +451,9 @@
 			<div id="carousel">
 
 				<ul>
-
-					<li><img src="/home/img/up1.jpg" alt="" /><span>Image1</span></li>
-
-					<li><img src="/home/img/up2.jpg" alt="" /><span>Image2</span></li>
-
-					<li><img src="/home/img/up3.jpg" alt="" /><span>Image3</span></li>
-
-					<li><img src="/home/img/up4.jpg" alt="" /><span>Image4</span></li>
-
-					<li><img src="/home/img/up5.jpg" alt="" /><span>Image5</span></li>
-
-					<li><img src="/home/img/up6.jpg" alt="" /><span>Image6</span></li>					
-
+					@foreach($advers as $k=>$v)
+					<li><img src="{{ $v['apic'] }}" alt="" /><span>Image1</span></li>					
+					@endforeach
 				</ul>
 
 			</div>

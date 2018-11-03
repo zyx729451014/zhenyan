@@ -20,7 +20,7 @@ class CatesController extends Controller
      */
     public static function getCates()
     {
-        $cates = Cates::select('*',DB::raw("concat(path,',',cid) as paths"))->orderBy('paths','asc')->paginate(10);
+        $cates = Cates::select('*',DB::raw("concat(path,',',cid) as paths"))->orderBy('paths','asc')->get();
         foreach ($cates as $key => $value) {
             $n = substr_count($value->path, ',');
             $cates[$key]->cname = str_repeat('|-----',$n).$value->cname;

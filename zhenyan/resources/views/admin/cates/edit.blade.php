@@ -33,7 +33,7 @@
                             	<option>--请选择--</option>
                               	<option value="0">顶级类别</option>    
                                 @foreach($cates as $k=>$v)
-                                <option value="{{ $v->cid }}" @if($cate->pid == $v->cid) selected @endif>{{ $v->cname }}</option>
+                                <option value="{{ $v->cid }}" @if($cate->cid == $v->cid) selected @endif>{{ $v->cname }}</option>
                                 @endforeach                          
                             </select>
                           </div>
