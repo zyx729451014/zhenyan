@@ -1,0 +1,441 @@
+/*个人中心头图+图片列表*/
+body{background: #f5f5f5 !important;}
+em{font-style: normal;}
+textarea{outline: none;resize: none; border:none;font-family: 'Microsoft YaHei';}
+.heiBg{width: 100%;height: 100%;position: absolute; top:0; left:0;background: #000;opacity: 0.5; filter:alpha(opacity=50);font-size: 0;line-height: 100;overflow: hidden;}
+.bBg{background: url(../images/headListBg.png?20180601) no-repeat;display: inline-block;line-height: 200;overflow: hidden;}
+.personalCont100{width: 100%;}
+.personalCont{max-width: 1440px;min-width: 980px;width: 100%;margin: 0 auto;}
+.redBtn{background: #ff4b4b;border-radius: 4px;display: inline-block;font-size: 14px;color: #fff;text-align: center;line-height: 28px;border:1px solid #ff4b4b;min-width: 74px;}
+.redBtnLong{width:100px;height: 31px;line-height: 31px;margin-right: 15px;}
+.redWhiteBtn{background: #fff;border-radius: 4px;display: inline-block;font-size: 14px;color: #ff4b4b;text-align: center;line-height: 28px; border:1px solid #ff4b4b;min-width: 74px;}
+.redBtn:hover{background: #ff676f;border-color:#ff676f;color: #fff;}
+.redBtn.act{background: #fff;border-color:#c0c0c0;color: #999;}
+.followBtn .bBg{background-position: 0 -50px;width: 9px;height: 9px;margin-right: 8px;vertical-align: middle;margin-top: -4px;*margin-top: -1px;}
+.redWhiteBtn:hover{border-color:#ff676f;color: #fff;background: #ff676f;}
+.whiteBtn{background: #fff;border-radius: 4px;display: inline-block;font-size: 14px;color: #666666;text-align: center;line-height: 28px; border:1px solid #c0c0c0;min-width: 74px;}
+.whiteBtnLong{width:100px;height: 31px;line-height: 31px;}
+.whiteBtn:hover{border-color:#666;color: #333;}
+.defaultA{color: #ec7272;}
+.defaultA:hover{color: #ff4b4b;}
+.yinYing{-moz-box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);-webkit-box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);}
+.txt14{font-size: 14px;}
+.redTxt{color: red;}
+.overTxtHidden{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+/*backTop*/
+.backTop{position: fixed; bottom: 224px; right: 1%; width: 50px; height: 104px; z-index: 1005;}
+.backTop .goTop2018{display: none;}
+.backTop a{ background: url(../images/bbsRightMenu.png) no-repeat; display: inline-block;font-size: 0; line-height: 200%; overflow: hidden;margin-bottom: 10px;}
+.backTop .goTopA { background-position: -80px 0; width: 50px; height: 50px;}
+.backTop .goTopA:hover{background-position: -80px -50px;}
+.backTop .toYingSai { background-position: -350px 0; width: 50px; height: 68px;margin-top: -18px;}
+.backTop .toYingSai:hover{ background-position: -350px -68px; }
+.backTop .toUpPic { background-position: -440px 0; width: 50px; height: 50px;}
+.backTop .toUpPic:hover{ background-position: -440px -50px;}
+.backTop .postA { background-position: 0 0; width: 50px; height: 50px;}
+.backTop .postA:hover{ background-position: 0 -50px;}
+
+
+/*personalHead*/
+.personalHead{width: 100%;position: relative;background: #fff;}
+.personalHead .bgBox{width: 100%;position: absolute; top:0; left:0;width: 100%;height: 360px;overflow: hidden;background: #000;}
+.personalHead .bgAuthor{position: absolute; top: 20px; left: 20px; font-size: 12px; color: #fff; height: 22px; line-height: 20px; padding: 0 5px; border-radius: 4px; overflow: hidden;}
+.personalHead .bgAuthor .author{ background: none; opacity: 0.4;filter:alpha(opacity=40); width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: block;font-size: 0;line-height: 200;overflow: hidden;}
+.personalHead .bgAuthor .authorTxt{position: relative;}
+.personalHead .bg{background: #fff url(../images/headBg.jpg) no-repeat center;background-size: cover;height: 360px;}
+.personalHead .editCover{position: absolute; top:10px; left:50%;margin-left: 500px;font-size: 12px;color: #fff;line-height: 26px;padding:  0 10px;height: 26px;border-radius: 4px;overflow: hidden;cursor: pointer;}
+.personalHead .editCover .cont{position: relative;}
+.personalHead .editCover .bBg{width: 12px;height: 12px;background-position: -100px -214px;vertical-align: middle;margin: -3px 5px 0 0;}
+.personalHead .personalCont100{background: url(../images/headHeiBg.png) repeat-x center bottom;margin-top: 257px; float: left;height: 103px;position: relative;}
+.personalHead .menu{font-size: 16px;line-height: 38px;color: #fff;text-align: center;height: 70px;margin-top: 18px;position: relative;z-index: 10;}
+.personalHead .menu .menuLi{ float: left;width: 20%;}
+.personalHead .menu .menuLi span,.personalHead .menu .menuLi a{display: inline-block;font-size: 16px;line-height: 38px;color: #fff;}
+.personalHead .menu .menuLi a:hover{color: #ff4b4b;}
+.personalHead .menu .menuLi .tit{}
+.personalHead .menu .menuLi .txt{font-size: 18px;}
+.personalHead .menu .menuLi .txt em{font-size: 12px;margin-left: 4px;display: inline-block;}
+.personalHead .menu .menuLi .line{width: 1px;height: 61px;float: right;background-position: -50px 0;margin-top: 6px;}
+.personalHead .menu .menuLi .gradeBox .txt{font-size: 14px;}
+.personalHead .menu .menuLi .grade{margin-right: 8px;}
+.personalHead .menu .menuLi .grade i{width: 24px;height: 24px;margin: 0 2px;vertical-align: middle;margin-top: -3px;*margin-top:0;}
+.oneRank { background-position: -220px -0px }
+.twoRank { background-position: -220px -25px }
+.threeRank { background-position: -220px -50px }
+.fourRank { background-position: -220px -75px }
+.fiveRank { background-position: -220px -100px }
+.sixRank { background-position: -220px -125px }
+.sevenRank { background-position: -220px -150px }
+.eightRank { background-position: -220px -175px }
+.nineRank { background-position: -220px -200px }
+.personalHead .menu .menuLi.yanXuan .tit { position: relative; }
+.personalHead .menu .menuLi.yanXuan .new{width: 29px;height: 15px;background-position: 0 -250px;position: absolute; top:3px; right:-33px;}
+.personalHead .menu .menuLi.yanXuan .liBox{position: relative;}
+.personalHead .menu .menuLi.yanXuan .txt{font-size: 14px;}
+.personalHead .menu .menuLi.gradeBigBox{position: relative;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan{position: absolute;width: 326px; border:1px solid #f8e6df;border-radius: 2px; left:50%;margin-left: -163px; top:76px;display: none;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .sanJiao{width: 12px;height: 6px;background-position: -160px -110px;position: absolute; top:-5px; left:50%;margin-left: -6px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont{position: relative;width: 326px;height: 78px;background: #fdfaf6;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .txt{font-size: 12px;color: #83411f;line-height: 20px; float: left;margin: 40px 0 0 16px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .nextNum{font-size: 12px;color: #83411f;line-height: 20px; float: left;margin: 40px 0 0 10px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .barBox{width: 200px; height:10px;background: #f0e8dc;border-radius: 5px;text-align: left; float: left;margin: 46px 0 0 10px;position: relative;display: block;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .bar{height:10px;background: #ff6f44;border-radius: 5px;position: absolute; top:0; left:0;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .onNum{ border:1px solid #ffc3ac;position: absolute;font-size: 12px;color: #ff7643;line-height: 16px; top:-26px; right:0; padding:  0 5px;border-radius: 2px;display: block;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .onCoin{width: 326px;height: 46px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .onCoin .txt{font-size: 12px;color: #83411f;line-height: 20px;margin-top: 13px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .onCoin .coin{font-size: 12px;color: #ff7543;line-height: 20px;margin-top: 13px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeTan .cont .onNum .bBg{width: 10px;height: 5px;background-position: -160px -130px;position: absolute;bottom: -5px; left:50%;margin-left: -5px;}
+.personalHead .menu .menuLi.gradeBigBox .gradeBox,.personalHead .menu .menuLi.yanXuan .liBox{cursor: default;}
+
+.personalHead .headImgBox{width: 200px;position: absolute; top:45px; left:50%;margin-left: -100px;}
+.personalHead .headImg{width: 106px;height: 106px;border-radius: 100%;overflow: hidden; border:4px solid #fff;display: block;background: #f6f6f6;margin: 0 auto;}
+.personalHead .headImg img{width: 100%;height: 100%;}
+.personalHead .userName{font-size: 14px;font-weight: bold;line-height: 26px;text-align: center;}
+.personalHead .nameLabel{font-size: 12px; border-radius: 4px; height: 22px; line-height: 22px; padding: 0 10px; display: inline-block; font-weight: normal;}
+.personalHead .nameLabel.banZhu{color: #d36207; background: #f9f1e4;}
+.personalHead .nameLabel.guanLi{color: #4178c0; background: #ecf3fc;}
+.personalHead .nameLabel.xianFeng{color: #bb981d; background: #f5efdc;}
+
+.personalHead .menu .menuLi.yanXuan .yanErWM{width: 162px;height: 192px;background-position: -260px 0;position: absolute; top:32px; left:50%;margin-left: -81px;display: none;}
+.personalHead .menu .menuLi.yanXuan .liBox:hover .yanErWM{display: inline-block;}
+.personalHead .menu .menuLiR{ float: right;}
+.personalHead .personalInfor{text-align: center;clear: both;width: 100%;padding: 85px 0 0;*padding-top:95px;}
+
+
+.personalHead .personalInfor .btnBox{margin-top: 10px;}
+.personalHead .personalInfor .editBtn{}
+.personalHead .personalInfor .editBtn .bBg{width: 12px;height: 12px;background-position: -100px -190px;vertical-align: middle;margin: -3px 8px 0 0;}
+.personalHead .personalInfor .editBtn:hover .bBg{background-position: -100px -202px}
+.personalHead .personalInfor .followBtn{margin-right: 10px;}
+
+.personalHead .personalInfor .autograph{font-size: 12px;color: #666;line-height: 20px;margin-top: 16px;display: inline-block;}
+.personalHead .menuBox{font-size: 14px;text-align: center;margin-top: 25px;height: 50px;}
+.personalHead .menuBox a{width: 70px;height: 50px;line-height: 50px;position: relative;display: inline-block;margin: 0 10px;}
+.personalHead .menuBox a .bBg{width: 14px;height: 4px; background-position: 0 -80px;display: block;position: absolute;bottom: 0; left:50%;margin-left: -7px;display: none;vertical-align: middle;}
+.personalHead .menuBox a:hover{font-weight: bold;}
+.personalHead .menuBox a.act{font-size: 16px;font-weight: bold;color: #ff4b4b;}
+.personalHead .menuBox a.act .bBg{display: block;}
+/**/
+/*personalList*/
+.personalList{min-height: 600px;margin-bottom: 30px;}
+.personalList .headBox{margin: 10px 0 0;height: 40px;}
+.personalList .headBox .tit{ float: left;font-size: 14px;color: #333;line-height: 26px;margin-left: 10px;}
+.personalList .headBox .tit:hover{color: #ff676f;}
+.personalList .headBox .tit:hover span{color: #ff676f;}
+.personalList .headBox .tit.act{color: #ff676f;font-weight: bold;}
+.personalList .headBox .line{ float: left;font-size: 14px;line-height: 26px;color: #bebebe;margin: 0 10px 0 20px;}
+.personalList .headBox .tit span{font-size: 12px;color: #666;font-weight: normal;display: inline-block;margin-left: 5px;}
+.personalList .headBox .tit span.txt14{font-size: 14px;}
+.personalList .headBox .tit.act span{color: #ff676f;}
+.personalList .headBox .listType{float: right;font-size: 14px;color: #666;outline: none;background: none; border:none;line-height: 26px;height: 40px;margin: 0 10px 0 0px;position: relative;width: 120px;z-index: 10;cursor: pointer;}
+.personalListShouEr .headBox .listType{width: 80px;}
+.personalList .headBox .listType .isSelect{width: 120px;height: 40px;display: inline-block;line-height: 26px;text-align: center;}
+.personalListShouEr .headBox .listType .isSelect{width: 80px;}
+.personalList .headBox .listType.noShow{overflow: hidden;background: none;}
+.personalList .headBox .listType .bBg{width: 13px;height: 8px;background-position: 0 -100px;position:absolute; right: 2px; top:9px;z-index: 11;}
+.personalList .headBox .listType .optionBox{position: absolute; top:30px; left:0;display: block;width: 120px;background: #fff;border-radius: 4px;overflow: hidden;display: block;    -moz-box-shadow: 0 0 10px 3px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 10px 3px rgba(0,0,0,0.1); box-shadow: 0 0 10px 3px rgba(0,0,0,0.1);}
+.personalListShouEr .headBox .listType .optionBox{width: 80px;}
+.personalList .headBox .listType.noShow .optionBox{display: none;}
+.personalList .headBox .listType .optionBox a{display: inline-block;height: 40px;width: 100%;line-height: 40px;text-align: center;color: #666;}
+.personalList .headBox .listType .optionBox a:hover{background: #f5f5f5;}
+.personalList .headBox .listType.noShow .optionBox{background: none;}
+.personalList .headBox .postBtn,.personalList .headBox .newFoundBtn,.personalList .headBox .postBtn,.personalList .headBox .newAlbumBtn,.personalList .headBox .upPicBtn{float: right;font-size: 14px;line-height: 26px;}
+.personalList .headBox .postBtn .bBg{width: 14px;height: 14px;background-position: -100px 0;vertical-align: middle;margin-right: 10px;}
+.personalList .headBox .postBtn:hover .bBg{width: 14px;height: 14px;background-position: -100px -14px;}
+.personalList .headBox .newFoundBtn .bBg{width: 16px;height: 14px;background-position: -100px -320px;vertical-align: middle;margin: -3px 10px 0 0;}
+.personalList .headBox .newAlbumBtn .bBg{width: 19px;height: 15px;background-position: -100px -65px;vertical-align: middle;margin: -3px 10px 0 0;*margin-top:0px;}
+.personalList .headBox .upPicBtn{margin-right: 10px;}
+.personalList .headBox .upPicBtn .bBg{width: 19px;height: 15px;background-position: -100px -65px;vertical-align: middle;margin: -3px 10px 0 0;*margin-top:0px;}
+.personalList .headBox .newFoundBtn:hover{}
+
+.personalList .listBox li{width:260px;margin: 0 10px 20px;background: #fff;float: left;border-radius: 4px;position: relative;border-radius: 4px;overflow: hidden; -moz-box-shadow: 0 0 25px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.1); box-shadow: 0 0 25px rgba(0,0,0,0.1);background-image: url(../images/zhanwei.png);*background-image: none;background-repeat: no-repeat;background-position: center 0px;background-size: 94%;}
+.personalList .listBoxMy li{padding-bottom: 10px;}
+.personalList .listShouCangBox li{}
+.personalList .listBox li .img{width: 100%;height: 174px;background: url(../images/noHave.png) no-repeat;background-position: center;display: block;overflow: hidden;}
+.personalList .listBox li.shuTu .img{background-position: center 20%; background-size: 100%;}
+.personalList .listShouCangBox li .img,.personalList .listXiangCeBox li .img{background: url(../images/listShouCangBg1.png) no-repeat center bottom;background-size: 92%;}
+.perso
+
+.personalList .listShouCangBox li .img .imgS,.personalList .listXiangCeBox li .img .imgS{background: #fafafa url(../images/noHave1.png) no-repeat center;border-radius: 4px;width: 92%;height:90%;display: block;margin: 9px auto 0;}
+.personalList .listYingSaiBox li .img,.personalList .listZuoPinBox li .img,.personalList .listBoxShouEr li .img,.personalList .listBoxLesson li .img{background: url(../images/noHave1.png) no-repeat center;}
+.personalList .listBox li .cont{width: 92%;margin: 0 auto;}
+.personalList .listBox li .cont h3{line-height: 26px;margin-top: 10px;font-size: 14px;*margin-bottom:10px;}
+.personalList .listBox li .cont h3 a{display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 100%}
+.personalList .listYingSaiBox li .cont h4,.personalList .listZuoPinBox li .cont h4,.personalList .listXiangCeBox li .cont h4{line-height: 26px;margin-top: 10px;font-size: 14px;margin-bottom:6px;height: 43px;}
+.personalList .listYingSaiBox li .cont h4 a,.personalList .listZuoPinBox li .cont h4 a,.personalList .listXiangCeBox li .cont h4 a{display: inline-block;line-height: 20px;}
+.personalList .listBox li .cont .peopleImg{width: 26px;height: 26px;overflow: hidden;border-radius: 100%;display: inline-block; float: left;border:1px solid #e9e9e9;}
+.personalList .listBox li .cont .peopleImg img{display: block;}
+.personalList .listBoxShouEr li .cont .peopleImg,.personalList .listBoxFriends li .cont .peopleImg,.personalList .listBoxLesson li .cont .peopleImg{margin-top: 10px;}
+.personalList .listBox li .cont .peopleName{font-size: 12px;color: #999;line-height: 26px;display: inline-block; float: left;margin-left: 8px;}
+.personalList .listBox li .cont .peopleName:hover{color: #ff4b4b;}
+.personalList .listBoxShouEr li .cont .peopleName,.personalList .listBoxFriends li .cont .peopleName,.personalList .listBoxLesson li .cont .peopleName{margin-top: 10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 110px;font-size: 12px;color: #333;}
+.personalList .listBoxLesson li .cont .peopleName{max-width: 90px;}
+.personalList .listBoxShouEr li .cont .peopleName:hover,.personalList .listBoxFriends li .cont .peopleName:hover{color: #ff4b4b;}
+.personalList .listBox li .cont .num{display: inline-block;font-size: 12px;color: #999;line-height: 26px;margin-right: 14px;}
+.personalList .listBox li .cont .num .bBg{vertical-align: middle;margin-right: 8px;}
+.personalList .listBox li .cont .mySelfSee{display: inline-block;float: right;}
+.personalList .listBox li .cont .mySelfSee .bBg{width: 12px;height: 16px;background-position: -100px -530px;vertical-align: middle;}
+.personalList .listBox li .cont .picNum .bBg{width: 19px;height: 15px;background-position: -100px -50px;margin-top: -2px;}
+.personalList .listBox li .cont .seeNum .bBg{width: 19px;height: 15px;background-position: -100px -100px;}
+.personalList .listBox li .cont .commentNum .bBg{width: 19px;height: 15px;background-position: -100px -150px;}
+.personalList .listBox li .cont .collectionNum{cursor: pointer;}
+.personalList .listBox li .cont .collectionNum .bBg{width: 17px;height: 16px;background-position: -100px -250px;margin-top: -4px;*margin-top: -1px;}
+.personalList .listBox li .cont .collectionNum:hover .bBg{background-position: -100px -282px;}
+.personalList .listBox li .cont .collectionNum.act{color: #ff4b4b;}
+.personalList .listBox li .cont .collectionNum.act .bBg{background-position: -100px -266px;}
+.personalList .listBox li .cont .typeA{font-size: 12px;color: #76b2b7;height: 20px;line-height: 20px;background: #eaf7f8;display: inline-block;padding: 0 8px;border-radius: 4px;margin-top: 10px;}
+.personalList .listBox li .cont .typeAMy{float: right;margin-top: 4px;}
+.personalList .listBox li .cont .typeA:hover{text-decoration: underline;}
+.personalList .listBox li .labelBox{width: 100%; border-top:1px solid #e9e9e9;font-size: 12px;color: #999;height: 48px;line-height: 48px;margin-top: 13px;}
+.personalList .listBox li .labelBoxMy{line-height: 18px;height: 40px;background: #f8f8f8; border:none;width: 92%;margin: 0 auto;border-radius: 4px;margin-top: 17px;padding: 10px 0;color: #333;}
+.personalList .listBox li .labelBoxMy .tit{display: block; float: left;height: 40px;color: #999;}
+.personalList .listBox li .labelBox .time{float: right;}
+.personalList .listShouCangBox li .labelBox .time{float: left;}
+.personalList .listBox li .labelBox .tit{display: inline-block; float: left;}
+.personalList .listShouCangBox li .labelBox .tit{margin-left: 8px;}
+.personalList .listBox li .labelBox .titA{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 70px;display: inline-block; float: left;}
+.personalList .listBox li .labelBox .yingSaiTxt{font-size: 12px;color: #a46c4e;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 100%}
+.personalList .listBox li .labelBox .yingSaiTxt:hover{text-decoration: underline;}
+.personalList .listBox li .typeBottom{float: left;height: 20px;line-height: 20px;padding: 0 8px;display: inline-block;margin-top: 14px;font-size: 12px;color: #fff;border-radius: 4px;}
+.personalList .listBoxShouEr li .typeBottom,.personalList .listBoxFriends li .typeBottom{float: none;margin: 0 0 10px;}
+.personalList .listXiangCeBox li .typeBottom{float: none;margin: 10px 0 0;*margin-top:15px;background: #e8eef6;color: #3f87d9;}
+.personalList .listBox li .typeBottom:hover{text-decoration: underline;}
+.personalList .listBox li .typeB01{background: #28b8c5;}
+.personalList .listBox li .typeB02{background: #a06f50;}
+.personalList .listBox li .typeB03{background: #3f87d9;}
+.personalList .listBoxLesson li .price{font-size: 18px;color: #f42706;line-height: 40px;}
+.personalList .listBoxLesson li .studyNum{font-size: 12px;color: #8fb2df;line-height: 50px;float: right;}
+.personalList .listBoxLesson li .studyNum .bBg{width: 18px;height: 15px;background-position: -160px -80px;vertical-align: middle;margin: -1px 8px 0 0;}
+
+
+.operationBox{position: absolute; top:2px; right:2px;}
+.operationBox .operationBtn{width: 28px;height: 18px;background-position: -160px 0;}
+.operationBox .operationCont{width: 90px;height: 80px;position: absolute; top:18px;right: 2px;padding-top: 4px;display: none;-moz-box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);-webkit-box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);box-shadow: 0 0 28px 3px rgba(0,0,0,0.2);border-radius: 4px;overflow: hidden;}
+.operationBox:hover .operationCont{display: block;}
+.operationBox .operationCont a{width: 90px;height: 40px;display: inline-block;font-size: 14px;color: #666;line-height: 40px;background: #fff;text-align: center;}
+.operationBox .operationCont a:hover{background: #f5f5f5;}
+.operationBox .operationCont a .bBg{vertical-align: middle;margin: -3px 12px 0 0;}
+.operationBox .operationCont .editBtn{border-radius: 4px 4px 0 0;}
+.operationBox .operationCont .editBtn .bBg{width: 15px;height: 15px;background-position: -100px -410px;}
+.operationBox .operationCont .deleteBtn{border-radius: 0 0 4px 4px}
+.operationBox .operationCont .deleteBtn .bBg{width: 15px;height: 15px;background-position: -100px -460px;}
+.deleteInBtn{ top:5px; right:5px;cursor: pointer;display: none;width: 24px;height: 24px;background: url(../images/buHei.png) no-repeat center;}
+.listBoxShouEr li:hover .deleteInBtn{display: block;}
+.deleteInBtn .bBg{width: 24px;height: 24px;background-position: -94px -488px;}
+
+/*dataFriend*/
+.dataFriendBox{padding-bottom: 52px;margin-top: 30px;}
+.dataFriend{background: #fff;border-radius: 4px;max-width: 1000px;}
+.dataFriend .cont{width: 94%;margin: 0 auto;background: #fff;padding-bottom: 30px;}
+.dataFriend .cont .boxCont{margin-top: 30px;}
+.dataFriend .cont .dataHead{width: 100%;height: 53px;line-height: 53px;border-bottom: 1px solid #e9e9e9;font-size: 16px;margin-bottom: 18px;}
+.dataFriend .cont .dataList li{line-height: 40px; font-size: 14px;position: relative;}
+.dataFriend .cont .dataList li span{display: inline-block;}
+.dataFriend .cont .dataList .tit{width: 70px;text-align: right;color: #999;float: left;position: absolute; top:0; left:0;}
+.dataFriend .cont .dataList .txt{text-align: left;color: #333;margin: 7px 0 0 90px;line-height: 26px;}
+
+/*page*/
+.page { width: 1200px; height: 36px; margin: 30px auto 70px; text-align: center; font-size: 14px; line-height: 36px }
+.page a { color: #000; display: inline-block; padding: 0 14px; height: 34px; line-height: 34px; border: 1px solid #e9e9e9; background: #fff; margin: 0 3px; border-radius: 5px }
+.page span { margin: 0 6px }
+.page .btn2 { width: 50px }
+.page .btn3 { width: 50px }
+.page a:hover { color: #000; border-color: #ff4b4b }
+.page a.act { color: #fff; border-color: #ff4b4b; background: #ff4b4b }
+.page input { width: 42px; height: 34px; line-height: 34px; border: 1px solid #e9e9e9; background: #fff; display: inline-block; padding: 0 6px; *height: 20px; *line-height: 20px }
+
+
+
+/*animate*/
+.banner_img{animation: banner_img 0.5s; -moz-animation: banner_img 0.5s;-webkit-animation: banner_img 0.5s; -o-animation: banner_img 0.5s;}
+.fadeInUp { -webkit-animation: fadeInUp ease .5s both; -moz-animation: fadeInUp ease .5s both; -o-animation: fadeInUp ease .5s both; animation: fadeInUp ease .5s both }
+.fadeIn { -webkit-animation: fadeIn ease .2s both; -moz-animation: fadeIn ease .2s both; -o-animation: fadeIn ease .2s both; animation: fadeIn ease .5s both }
+.fadeInDown1 { -webkit-animation: fadeInDown ease .5s 100ms both; -moz-animation: fadeInDown ease .5s 100ms both; -o-animation: fadeInDown ease .5s 100ms both; animation: fadeInDown ease .5s 100ms both }
+.slideInLeft { -webkit-animation: slideInLeft ease .2s both; -moz-animation: slideInLeft ease .2s both; -o-animation: slideInLeft ease .2s both; animation: slideInLeft ease .3s both }
+.fadeInLeft { -webkit-animation: fadeInLeft ease .2s both; -moz-animation: fadeInLeft ease .2s both; -o-animation: fadeInLeft ease .2s both; animation: fadeInLeft ease .3s both }
+.fadeInDown { -webkit-animation: fadeInDown ease .5s both; -moz-animation: fadeInDown ease .5s both; -o-animation: fadeInDown ease .5s both; animation: fadeInDown ease .5s both }
+.zoomIn { -webkit-animation: zoomIn ease .5s both; -moz-animation: zoomIn ease .5s both; -o-animation: zoomIn ease .5s both; animation: zoomIn ease .5s both }
+
+/*personalTanBox*/
+.personalTanBox{width: 100%;height: 100%;position: fixed; top:0; left:0;z-index: 100;}
+.personalTanBox .personalTan{width: 560px;height: auto;min-height: 200px;position: absolute; top:30%; left:50%;margin-left: -280px;background: #fff;border-radius: 4px;overflow: hidden;}
+.personalTanBox .personalTan.personalTan300{width: 360px;margin-left: -180px;}
+.personalTan i{font-style: normal;}
+.personalTan dt{font-size: 16px;border-bottom: 1px solid #e9e9e9;height: 50px;width: 100%;line-height: 50px;}
+.personalTan dt .txt{font-size: 14px;line-height: 50px;color: #999;}
+.personalTan dt b{padding: 0 10px 0 30px;}
+.personalTan dt .hint{font-size: 14px;color: #999;margin-left: 12px;}
+.personalTan dt .personalTanClose{width: 50px;height: 50px;background-position: 18px -112px;float: right;}
+.personalTan dd{width: 92%;margin: 0 auto 0;}
+.personalTan300 dd{width: 300px;}
+.personalTan dd .cont{min-height: 150px;}
+.personalTan300 dd .cont{min-height: 50px;}
+.personalTan dd .hint{font-size: 14px;color: #f0930e;}
+.personalTan dd .point{font-size: 14px;color: #999;}
+.personalTan dd .cont .txt{font-size: 14px;}
+.personalTan dd .labelInputBox{width: 470px;display: inline-block;margin-top: 15px;line-height: 40px;}
+.personalTan dd .labelInput{width: 360px;height: 40px; border:1px solid #e9e9e9;border-radius: 4px;display: inline-block;}
+.personalTan dd .labelInput.yzLabelInput{width: 204px;}
+.personalTan .errorBox{font-size: 12px;color: red;line-height: 24px;display: inline-block; float: left;display: none;}
+.personalTan dd .labelInput input[type='text']{width: 340px;height: 100%;margin-left: 10px;}
+.personalTan dd .labelInput.yzLabelInput input[type='text']{width: 194px;}
+.personalTan dd .getCode{width: 140px;margin-left: 10px;}
+.personalTan dd .getCode.act{background:#b8b8b8;border-color: #b8b8b8;}
+.personalTan .editHeadImg{}
+.personalTan .editHeadImg .fileBox{width: 240px;height: 300px;margin-left: 25px;}
+.personalTan .editHeadImg .inputFileBtn{width: 240px;height: 240px;background-position: -400px 0;}
+.personalTan .editHeadImg .fileImg{width: 100%;height: 100%;display: inline-block;opacity: 0; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);}
+.personalTan .editHeadImg .reFileBtn{font-size: 14px;color: #e18f8f;position: relative;line-height: 40px; float: left;}
+.personalTan .editHeadImg .reFileBtn .fileImg{position: absolute; top:0; left:0;width: 100%;height: 100%;}
+.personalTan .editHeadImg .reFileBtn:hover{color: #ff4b4b;}
+.personalTan .editHeadImg .editBtnBox{float: right;display: inline-block;margin-top: 10px;width: 120px;}
+.personalTan .editHeadImg .editBtnBox .imgEditBtn{ float: right;width: 22px;height: 22px;margin-left: 15px;cursor: pointer;}
+.personalTan .editHeadImg .editBtnBox .rotateBtn{background-position: -340px 0px;}
+.personalTan .editHeadImg .editBtnBox .rotateBtn:hover{background-position: -340px -22px;}
+.personalTan .editHeadImg .editBtnBox .narrowBtn{background-position: -340px -54px;}
+.personalTan .editHeadImg .editBtnBox .narrowBtn:hover{background-position: -340px -76px;}
+.personalTan .editHeadImg .editBtnBox .enlargeBtn{background-position: -340px -108px;}
+.personalTan .editHeadImg .editBtnBox .enlargeBtn:hover{background-position: -340px -130px;}
+.personalTan .editHeadImg .headImgPre{ float: right;margin-right: 86px;text-align: center;}
+.personalTan .editHeadImg .headImgPre .preImg{width: 106px;height: 106px;border-radius: 106px;overflow: hidden;background: #f8f8f8;display: inline-block;}
+.personalTan .editHeadImg .headImgPre p{font-size: 14px;color: #999;margin-top: 10px;}
+.personalTan .labelBoxBottom{text-align: center;margin: 30px 0 20px;}
+.personalTan .oneCont{font-weight: normal;text-align: center;font-size: 14px;color: #333;margin-bottom: 50px;}
+
+.personalTanBox .editCoverImg{width: 800px;margin-left: -400px;}
+.personalTanBox .editCoverImg .cont{margin-top: 30px;}
+.personalTanBox .editCoverImg .headImgPre{float: right;margin-right: 10px;text-align: center;}
+.personalTanBox .editCoverImg .headImgPre .preImg{width: 320px;height: 40px;overflow: hidden;background: #f8f8f8;display: inline-block;}
+.personalTanBox .editCoverImg .fileBox{width: 320px;height: auto;overflow: hidden;}
+.personalTanBox .editCoverImg .inputFileBtn{width: 240px;height: 240px;background-position: -400px 0;}
+.personalTanBox .editCoverImg .fileImg{width: 100%;height: 100%;display: inline-block;opacity: 0; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);}
+.personalTanBox .editCoverImg .reFileBtn{font-size: 14px;color: #e18f8f;position: relative;line-height: 40px; float: left;}
+.personalTanBox .editCoverImg .reFileBtn .fileImg{position: absolute; top:0; left:0;width: 100%;height: 100%;}
+.personalTanBox .editCoverImg .reFileBtn:hover{color: #ff4b4b;}
+
+/*修改封面*/
+.personalTanBoxCover{display: none;}
+.upCoverBtn{width: 100%;margin: 0 auto 0;background: #f8f8f8;display: inline-block;text-align: center;border-radius: 4px;height: 160px;position: relative;overflow: hidden;}
+.upCoverBtn:hover{opacity: 0.85;filter:alpha(opacity=85)}
+.upCoverBtn.reBtn{width: 100px;height: 42px;opacity: 0; overflow: hidden;}
+.upCoverBtn .bBg{width: 48px;height: 48px;background-position: 0 -170px;margin-top: 35px;}
+.upCoverBtn .webuploader-pick{height: 100%;}
+.upCoverBtn div{width: 100% !important;height: 160px !important;}
+
+.upCoverBtn input{opacity: 0;}
+.upCoverBtn p{font-size: 14px;color: #999;line-height: 26px;margin-top: 14px;}
+.upCoverCont .reUpTxt{font-size: 14px;cursor: pointer;margin-top: 6px;display: inline-block;}
+.upCoverCont .uploader-list{width: 100%;}
+.upCoverCont .uploader-list .file-item{width: 100%;height: 160px;position: relative;}
+.upCoverCont .uploader-list .imgWrap{width: 100%;height: 100%;}
+.upCoverCont .uploader-list img{width: 100%;height: 100%;}
+.upCoverCont .uploader-list .info{display: none;}
+.upCoverCont .uploader-list .error{position: absolute; top:5px; right:5px;background: red;color: #fff;line-height: 28px; font-size: 12px; height: 30px; padding: 0 10px;}
+.personalTanBoxCover .errorTxt{color: red;line-height: 30px;margin: 5px 0;height: 30px;}
+
+
+/*创建收藏夹*/
+.personalTan .cont80{width: 94%;margin: 20px auto 0;}
+.personalTan .Clist{width: 100%;margin: 0 auto 10px;position: relative;font-size: 14px;color: #333;line-height: 42px;font-weight: normal; clear: both;}
+.personalTan .Clist select{width: 100px;border: 1px solid #e9e9e9; padding: 10px 0 10px 7px;border-radius: 4px;*margin-top:12px;}
+.personalTan .Clist .errorBox{font-size: 12px;color: red;line-height: 24px;display: inline-block;display: none;margin: 0 0 0px 100px;}
+.personalTan .Clist .tit1{width: 85px;height: 42px;line-height: 42px;margin-right: 15px;text-align: right;display: inline-block; float: left;}
+.personalTan .Clist .inputBox{display: inline-block;width: 375px;height: 40px; border:1px solid #e9e9e9;line-height: 38px;padding-left: 10px;position: relative;border-radius: 4px;}
+.personalTan .Clist .textAreaBox{height: 90px;}
+.personalTan .Clist .textAreaBox textarea{width: 360px; height: 52px; margin: 10px 0 0;font-family: '微软雅黑';}
+.personalTan .Clist .inputBox input{width: 327px;height: 40px;line-height: 40px;*line-height: 36px;}
+.personalTan .Clist .inputBox .count{position: absolute; bottom:0;right: 10px;font-size: 12px;color: #999;}
+.personalTan .Clist .inputBox .count em{font-style: normal;}
+.personalTan .Clist .textAreaBox .count{bottom: -5px;}
+.personalTan .Clist .radio{cursor: pointer;}
+.personalTan .Clist .radio .bBg{width: 14px;height: 14px;background-position: -100px -370px;vertical-align: middle;margin: -4px 10px 0 0;}
+.personalTan .Clist .radio.act .bBg{background-position: -100px -384px;}
+.personalTan .Clist .allPeople{margin-right: 20px;}
+
+
+/*私信*/
+.personalTan .Slist{font-size: 14px;color: #333;line-height: 42px;width: 95%;margin: 0 auto 5px;}
+.personalTan .Slist .tit1{ float: left;margin-right: 5px;}
+.personalTan .letterTxtBox{width: 400px;height: 68px;position: relative;display: inline-block;border: 1px solid #e9e9e9;padding: 10px;}
+.personalTan .letterTxtBox .count{position: absolute;bottom: 0; right:10px;font-size: 12px;color: #999;line-height: 26px;}
+.personalTan .letterTxtBox .count em{font-style: normal;}
+.personalTan .Slist .errorBox{margin-left: 48px;}
+.personalTan .letterTxt{width: 400px;height: 50px;}
+
+
+/*好友*/
+.friendBox{margin-top: 20px;*padding-bottom: 40px;}
+.friendBox .friendSide{float: right;width: 260px;}
+.friendBox .friendSide .Flist{width: 222px;padding: 0 19px; border-radius: 4px;margin-bottom: 10px;background: #fff;}
+.friendBox .friendSide dt{border-bottom: 1px solid #e9e9e9;}
+.friendBox .friendSide dt h3{font-size: 14px;font-weight: bold;color: #666;line-height: 36px;}
+.friendBox .friendSide .visitListCont{height: 355px;overflow: hidden;position: relative;}
+.friendBox .friendSide .visitListUl{position: absolute; top:0; left:0;}
+
+.friendBox .friendSide .visitList li{ float: left;width: 70px;text-align: center;margin: 15px 2px 0 2px;font-size: 12px;line-height: 16px;}
+.friendBox .friendSide .visitList li .img{width: 50px;height: 50px;border-radius: 100%;overflow: hidden;display: inline-block;border: 1px solid #e9e9e9;}
+.friendBox .friendSide .visitList li .tit{width: 58px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;margin-top: 8px;}
+.friendBox .friendSide .visitList li .tit a{font-size: 12px;}
+.friendBox .friendSide .visitList li .time{color: #999;display: inline-block;}
+.friendBox .friendSide .labelBox{margin-top: 20px;padding-bottom: 6px;}
+.friendBox .friendSide .labelBox .tabBtn{width: 20px;height: 20px;display: block; float: right;cursor: pointer;}
+.friendBox .friendSide .labelBox .tabBtn:hover{opacity: 0.65;filter:alpha(opacity=65)}
+.friendBox .friendSide .labelBox .tabBtn .bBg{width: 20px;height: 20px;vertical-align: middle;}
+.friendBox .friendSide .labelBox .next .bBg{background-position: -180px -40px;}
+.friendBox .friendSide .labelBox .prev .bBg{background-position: -160px -40px;}
+.friendBox .friendSide .labelBox .tab{float: right;display: block;font-size: 12px;color: #999;margin: 0 10px;line-height: 20px;}
+.friendBox .friendSide .labelBox .tab em{color: #666;}
+.friendBox .friendSide .hotRecomList{margin-top: 12px;padding-bottom: 9px;}
+.friendBox .friendSide .hotRecomList li{margin-bottom: 12px;}
+.friendBox .friendSide .hotRecomList .img{width: 220px;height: 146px;border-radius: 4px;display: inline-block;background-position: center;}
+.friendBox .friendSide .hotRecomList .tit{font-size: 14px;line-height: 32px;}
+.friendBox .friendMain{float: left;background: #fff;padding: 0 20px 40px;min-height: 200px;border-radius:4px;margin-bottom: 40px;}
+.friendBox .friendMainMy{float: left;padding: 0;min-height: 200px;border-radius:4px;margin-bottom: 40px;}
+.friendBox .friendMain .Fhead{width: 100%;height: 50px;padding-top: 4px;border-bottom: 1px solid #e9e9e9;}
+.friendBox .friendMain .Fhead a,.friendBox .friendMain .Fhead span{ float: left;display: inline-block;font-size: 14px;color: #666;line-height: 50px;}
+.friendBox .friendMain .Fhead a em{margin-left: 5px;}
+.friendBox .friendMain .Fhead a.act{font-size: 16px;color: #ff4b4b;font-weight: bold;}
+.friendBox .friendMain .Fhead a.act em{font-weight: normal;font-size: 14px;}
+.friendBox .friendMain .Fhead a:hover{color: #ff4b4b;}
+.friendBox .friendMain .Fhead .line{height: 16px;color: #e9e9e9;font-size: 12px;line-height: 48px;margin: 0 30px;}
+.friendBox .friendMain .FriendsList{}
+.friendBox .friendMain .FriendsList li{padding: 30px 0;width: 50%; float: left;border-bottom: 1px solid #f0f0f0;}
+.friendBox .friendMain .FriendsList .img{width: 50px;height: 50px;display: inline-block; float: left;border-radius: 100%;overflow: hidden;border: 1px solid #e9e9e9;}
+.friendBox .friendMain .FriendsList .titTxt{ float: left;margin: 0 20px;width: 40%;}
+.friendBox .friendMain .FriendsList .tit{max-width: 200px;}
+.friendBox .friendMain .FriendsList .tit a{font-size: 14px;font-weight: bold;line-height: 25px;}
+.friendBox .friendMain .FriendsList .txt{font-size: 12px;color: #666;margin-right: 20px;display: inline-block;line-height: 20px;margin-top: 6px;}
+.friendBox .friendMain .FriendsList .FBtn{margin-top: 11px;}
+.friendBox .friendMain .FriendsList .followBtn{margin-right: 10px;}
+.friendBox .friendMain .page,.friendBox .friendMainMy .page{margin-bottom: 0px;width: 100%;}
+.friendBox .friendMain .overFList .FBtn{margin-top: 0px;}
+.friendBox .friendMain .overFList .letterBtn{margin-top: 8px;}
+
+/*空白页20180522*/
+.personalListBlank{min-height: 530px;background: #f5f5f5;}
+.personalListBlank .blankList{width: 387px;height: 320px;padding-top: 70px;margin: 0 auto;display: none}
+.personalListBlank .blankList.show{display: block;}
+.personalListBlank .blankList p{display: inline-block;font-size: 14px;color: #a8a0a0;float: right;line-height: 20px;position: relative;}
+.personalListBlank .blankList a{color: #c76161;text-decoration: none}
+.personalListBlank .blankList a:hover{color: #ff4b4b;}
+.personalListBlank ._404blank{background:url(../images/404.png) center bottom no-repeat}
+.personalListBlank ._404blankTxt{top:16px;left:110px}
+.personalListBlank .keChengBlank{background:url(../images/kecheng.png) center bottom no-repeat}
+.personalListBlank .keChengBlankTxt{top:16px;left:120px}
+.personalListBlank .shouCangJiaBlank{background:url(../images/shoucangjia.png) center bottom no-repeat;}
+.personalListBlank .shouCangJiaBlankTxt{margin-top:36px;margin-right:68px}
+.personalListBlank .xiangCeBlank{background:url(../images/xiangce.png) center bottom no-repeat}
+.personalListBlank .xiangCeBlankTxt{margin-top:40px;margin-right:68px}
+.personalListBlank .yingSaiBlank{background:url(../images/yingsai.png) center bottom no-repeat}
+.personalListBlank .yingSaiBlankTxt{margin-top:25px;margin-right:30px}
+.personalListBlank .zuoPinBlank{background:url(../images/zuopin.png) center bottom no-repeat}
+.personalListBlank .zuoPinBlankTxt{margin-top:40px;margin-right:65px}
+.personalListBlank .non-existent{padding-top:80px!important;background:url(https://icon.fengniao.com/fengniaoMy/images/noCont.png) center bottom no-repeat}
+.personalListBlank .non-existentTxt{margin-top:20px;margin-right:-70px}
+
+/*loading*/
+.loading{width: 100%;text-align: center;padding: 30px 0;}
+.loadingNo{display: none;}
+.loading img{margin: 0 auto}
+/*uploadImg*/
+.upLoading{position: fixed; width: 140px; height: 40px; z-index: 103; top: 29%; left: 50%; margin: 0 0 0 -70px; font-size: 14px; color: #fff; background: #000; border-radius: 4px; text-align: center; line-height: 40px;}
+

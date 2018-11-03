@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use App\User;
 use DB;
 use Hash;
 use Crypt;
+use App\Models\Userdateail;
 
 class UserController extends Controller
 { 
@@ -34,7 +36,11 @@ class UserController extends Controller
         $user = new User;
         $user->uname = $request->input('uname');
         $user->upass = hash::make($request->input('upass'));
-        $res = $user->save(); // bool
+        $res1 = $user->save(); // bool
+        $id = $user->id;
+        $userdateail = new Userdateail;
+        $userdateail->uid = $id;
+        $res2 = $userdateail->save();
         // 逻辑判断
         if($res){
             return redirect('/home/user/login');
@@ -87,7 +93,88 @@ class UserController extends Controller
         }
     
       
+        
     } 
+
+
+    /**
+     * 前退出登录
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout(Request $request)
+    {
+       $request->session()->flush();
+       return redirect('home/user/login');
+
+    }
+
+
+    /**
+     * 个人中心
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserdateail()
+    {
+        $id = session('user')->uid;
+        $user = User::where('uid',$id)->first();
+        $userinfo = $user->userinfo;
+        // 加载模板
+        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user]);
+    }
+
+    /**
+     * 我的资料
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getInformation()
+    {
+        $id = session('user')->uid;
+        $user = User::where('uid',$id)->first();
+        $userinfo = $user->userinfo;
+        // 加载模板
+        return view('home.user.information',['userinfo'=>$userinfo]);
+    }
+
+    /**
+     * 资料保存
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postUpdate(Request $request,$id)
+    {
+        // 获取一条数据
+         $userdateail = Userdateail::where('uid',$id)->first();
+        if($request->hasFile('face')){
+            $profile = $request -> file('face');
+            // 获取文件后缀
+            $ext = $profile ->getClientOriginalExtension(); 
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+            $res = $profile -> move($dir_name,$file_name);
+            // 拼接数据库存放路径
+            $profile_path = ltrim($dir_name.'/'.$file_name,'.');        
+        }else{
+            $profile_path = $userdateail->face;
+        }
+        $userdateail->face = $profile_path;
+        $userdateail->sex = $request->input('sex');
+        $userdateail->birthdate = $request->input('birthdate');
+        $userdateail->point = $request->input('point');
+       
+        $res = $userdateail->save();
+        // 逻辑判断
+        if($res){
+            echo "<script>alert('编辑资料成功！',location.href='/home/user/information')</script>";
+        }else{
+            echo "<script>alert('编辑资料失败！',location.href='/home/user/information')</script>";
+        }
+       
+       
+    }
 
 
 
@@ -117,16 +204,7 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Display the specified resource.

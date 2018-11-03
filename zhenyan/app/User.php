@@ -39,4 +39,10 @@ class User extends Model implements AuthenticatableContract,
 
     //设置模型主键
     public $primaryKey = 'uid';
+    
+     public function userinfo()
+    {
+        return $this->hasOne('App\Models\Userdateail','uid','uid');
+    }
+
 }

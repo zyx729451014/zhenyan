@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-
 	//设置模型主键
    	public $primaryKey = 'uid';
 	// 对应关系
