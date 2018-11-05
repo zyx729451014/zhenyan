@@ -82,7 +82,7 @@ class UserController extends Controller
     public function postDologin(Request $request)
     {
         $uname = $_POST['uname'];
-        $upass=$_POST['upass'];
+        $upass = $_POST['upass'];
         // 查询数据库用户 
         $user = User::where('uname',$uname)->first();
         // 判断密码错误
