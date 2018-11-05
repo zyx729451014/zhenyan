@@ -125,7 +125,7 @@ class InvitationController extends Controller
         // 开启事务 作为回滚点
         DB::beginTransaction();
         // 获取数据 进行添加
-        $invitation = new Invitation;
+        $invitation = Invitation::find($id);
         $invitation->cid = $request->input('cid');
         $invitation->stick = $request->input('stick');
         $res = $invitation->save(); // bool
