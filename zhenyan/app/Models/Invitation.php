@@ -9,7 +9,7 @@ class Invitation extends Model
 	//关联
     public function invitationuser()
     {
-          return $this->belongsTo('App\User', 'uid');
+        return $this->belongsTo('App\User','uid');
     }
     /* public function invitationcates()
     {

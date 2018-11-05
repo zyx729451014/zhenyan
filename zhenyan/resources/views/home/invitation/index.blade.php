@@ -17,10 +17,11 @@
 					<br>
 					<?php
 						$cates = \app\Models\Cates::getCates();
+						// dump($cates);exit;
 					?>
 					<ul>
 						@foreach($cates as $k=>$v)
-							@if($k == $cate['cid'])
+							@if($k == $cate['cid']-1)							
 								@foreach($v->sub as $kk=>$vv)
 									<li><a href="/home/invitation/{{ $vv['cid'] }}">{{ $vv['cname'] }}</a></li>
 								@endforeach
@@ -31,7 +32,9 @@
   				</div>
   				@foreach($invitation as $k=>$v)
 				<article class="excerpt" style="margin-top:20px;">
+						@if($v['stick'] == 1)
 						<a class="cat" href="#" title="MZ-NetBlog主题" >置顶<i></i></a>
+						@endif
 						<h2><a href="/home/invitation/show/{{ $v['id'] }}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >{{ $v['title'] }}</a></h2>
 					<p class="meta">
 						<br>
