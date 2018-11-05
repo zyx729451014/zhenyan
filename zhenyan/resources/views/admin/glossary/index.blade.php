@@ -2,7 +2,7 @@
 @section('content-wrapper')
 <div class='card'>
   <div class="card-body">
-   <h4 class="card-title">友情链接浏览</h4>
+   <h4 class="card-title">图集浏览</h4>
     <br>
     <form action="/admin/glossary" method="get" class='table-primary'>
       <div class='sousuo'>

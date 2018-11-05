@@ -63,57 +63,71 @@
 		<p>总楼层 | 发表时间	{{ $glossary->created_at }}</p>
 
 			<ol class="comment">
-
+				@foreach ($glocomment as $k=>$v)
 				<li>
 
 					<div style="height:10px;">
-						<p style="float:right;">1楼</p>
+						<p style="float:right;">{{ $k+1 }}楼</p>
 					</div>
 
 					<cite>
-						<img alt="" src="images/gravatar.jpg" height="70" width="70" />			
-						<a href="index.html">名字</a> Says: <br />				
-						<a href="#comment-63">时间</a><br>
+						<img alt="" src="{{ $v->commentuser->userinfo->face }}" height="70" width="70" />			
+						<a href="">{{ $v->commentuser->uname }}</a>Says: 
+							<span>{{ $v->content }}</span> 
+						<br />				
+						<a href="">{{ $v->created_at }}</a><br>
 					</cite>
-						<span>Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!</span>
+						
 					<div style="width:100%;height:10px;">
-						<a href="" style="float:right">回复</a>
+						<a href="#" style="float:right" class="hf">回复</a>
 					</div>
 
 					<div class="huifu">
 						<ul>
+							<?php
+								 $gloreply = App\Models\Gloreply::where('cid',$v->id)->get();
+							?>
+							@foreach ($gloreply as $kk=>$vv)
+								<li>
+									<img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30">
+									<a href="">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
+								</li>
+							@endforeach
 							<li>
-								<img src="images/gravatar.jpg" height="20" width="20">
-								<a href="">名字</a>:<span>Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!Comments are great!</span>
-							</li>
-							<li>
-								<img src="images/gravatar.jpg" height="20" width="20">
-								<a href="">名字</a>:<span>Comments are great!</span>
-							</li>
-							<li>
-								<img src="images/gravatar.jpg" height="20" width="20">
-								<a href="">名字</a>:<span>Comments are great!</span>
-							</li>
-							<li>
-								<img src="images/gravatar.jpg" height="20" width="20">
-								<a href="">名字</a>:<span>Comments are great!</span>
+								<form action="/home/glossary/reply" method="post" class="fbpl fbpl1" style="width:750px;height:180px;" hidden>	
+									{{ csrf_field() }}	
+									<label for="message"></label><br />
+									<input type="hidden" name="cid" value="{{ $v->id }}">
+									<input type="hidden" name="gid" value="{{ $glossary->id }}">
+									<textarea id="message" name="content" rows="2" cols="30" tabindex="4" style="width:90%;margin-left:5%;"  placeholder="@ {{ $v->commentuser->uname }}　{{ $v['created_at'] }}"></textarea>	
+									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;" />         		
+								</form>	
 							</li>
 						</ul>
 					</div>
 				</li>
+				@endforeach
 
 			</ol>
 
 
 			<h3>发表评论</h3>				
 			
-			<form action="index.html" method="post" class="fbpl">		
+			<form action="/home/glossary/comment" class="fbpl" method="post">
+				{{ csrf_field() }}	
 					<label for="message"></label><br />
-					<textarea id="message" name="message" rows="7" cols="30" tabindex="4" style="width:90%;margin-left:5%;border:1px solid #333;"></textarea>	
+					<input type="hidden" name="gid" value="{{ $glossary->id }}">
+					<textarea id="message" name="content" rows="7" cols="30" tabindex="4" style="width:90%;margin-left:5%;border:1px solid #333;"></textarea>	
 					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;color:#fff;" />         		
 			</form>	
 	</div>
 	<div style="clear:both;"></div>
+	<script type="text/javascript">
+	$('.hf').click(function(){
+		$(this).parent().next().find('form').slideToggle();;
+	});
+
+	</script>
 </body>
 </html>
 @endsection

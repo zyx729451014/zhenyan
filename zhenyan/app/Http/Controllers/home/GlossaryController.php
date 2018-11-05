@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Userdateail;
 use App\Models\Glossary;
+use App\Models\Glocomment;
+use App\Models\Gloreply;
 use App\Http\Requests\GlossaryRequest;
 use DB;
 
@@ -73,7 +76,10 @@ class GlossaryController extends Controller
         $glossary -> title = $request->input('title');
         $glossary -> image = $file;
         $glossary -> save();
-        if($res){
+        $user = Userdateail::find($id);
+        $user -> point +=5;
+        $res1 = $user->save();
+        if($res && $res1){
             // 提交事务
             DB::commit();
             return redirect('home/glossary')->with('success', '发表成功');
@@ -94,7 +100,8 @@ class GlossaryController extends Controller
     public function show($id)
     {
         $glossary = Glossary::find($id);
-        return view('home.glossary.show',['glossary'=>$glossary]);
+        $glocomment = Glocomment::where('gid',$id)->get();
+        return view('home.glossary.show',['glossary'=>$glossary,'glocomment'=>$glocomment]);
     }
 
     /**

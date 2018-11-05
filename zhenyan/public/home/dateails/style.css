@@ -87,6 +87,7 @@ a{
 }
 cite{
 	font-size: 12px;
+	margin-left: 20px;
 }
 .huifu{
 	width:80%;
@@ -95,7 +96,7 @@ cite{
 }
 .huifu ul li{
 	margin: 20px;
-	border-bottom: 1px solid #ccc;
+	line-height: 30px;
 }
 .fbpl{
 	width: 100%;

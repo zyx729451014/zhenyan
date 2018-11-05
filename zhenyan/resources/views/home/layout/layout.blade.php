@@ -65,7 +65,7 @@
 				@foreach($cates as $k=>$v)
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
-				<li><a href="/home/glossary">图文</a></li>
+				<li><a href="/home/glossary">图集</a></li>
 				<li><a href="#">问答</a></li>
 			</ul>
 			@if (session()->has('user'))
@@ -455,7 +455,7 @@
 			<!-- 读取提示信息开始 -->
 	  	@if (session('success'))
 	      	<script type="text/javascript">
-		      	alert('添加成功');        	
+		      	alert('发表成功');        	
 		    </script>;
 	  	@endif
 	  	@if (session('error'))

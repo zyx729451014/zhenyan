@@ -10,6 +10,6 @@ class Userdateail extends Model
     protected $table = 'user_dateails';
     public function userinfo2()
     {
-        return $this->belongsTo('App\Models\User','uid');
+        return $this->belongsTo('App\User','uid');
     }
 }

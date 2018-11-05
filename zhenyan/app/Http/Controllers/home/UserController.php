@@ -37,12 +37,13 @@ class UserController extends Controller
         $user->uname = $request->input('uname');
         $user->upass = hash::make($request->input('upass'));
         $res1 = $user->save(); // bool
-        $id = $user->id;
+        $id = $user->uid;
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
+        $userdateail->point = 200;
         $res2 = $userdateail->save();
         // 逻辑判断
-        if($res){
+        if($res1 && $res2){
             return redirect('/home/user/login');
         }else{
             echo "<script>alert('很遗憾您注册失败了');";
@@ -87,6 +88,9 @@ class UserController extends Controller
         // 判断密码错误
         if (Hash::check($upass,$user['upass'])) {
             session(['user'=>$user]);
+            $user = Userdateail::find($user->uid);
+            $user -> point +=10;
+            $res1 = $user->save();
             echo "<script>location.href='/';</script>";
         }else{
             echo "error";
@@ -168,12 +172,11 @@ class UserController extends Controller
         $res = $userdateail->save();
         // 逻辑判断
         if($res){
-            echo "<script>alert('编辑资料成功！',location.href='/home/user/information')</script>";
+            return redirect('/home/user/information')->with('success', '修改成功');
         }else{
-            echo "<script>alert('编辑资料失败！',location.href='/home/user/information')</script>";
+            return back()->with('error','修改失败');
         }
-       
-       
+    
     }
 
 

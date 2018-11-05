@@ -42,4 +42,7 @@ Route::resource('/home/glossary','home\GlossaryController'); //前台图文
 Route::get('/home/invitation/create','home\InvitationController@create'); //前台帖子发布
 Route::post('/home/invitation/store','home\InvitationController@store'); //前台帖子发布判断
 Route::get('/home/invitation/show/{id}','home\InvitationController@show');	//前台帖子详情
+Route::resource('/home/glossary/comment','home\GlossaryCommentController'); //前台图文评论
+Route::resource('/home/glossary/reply','home\GlossaryReplyController'); //前台图文回复评论
+
 
