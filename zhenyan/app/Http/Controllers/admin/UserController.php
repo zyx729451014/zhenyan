@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\User;
 use App\Http\Requests\UsersStoreRequest;
 use Hash;
-use App\Models\Userdetail;        
+use App\Models\Userdateail;        
 use DB;
 class UserController extends Controller
 {
@@ -28,7 +28,7 @@ class UserController extends Controller
         // 获取数据
         $user = User::where('uname','like','%'.$search .'%')->paginate($showCount);
         // 加载到列表页面
-        return view('admin.user.index',['title'=>'浏览用户','user'=>$user,'request'=>$request->all()]);
+        return view('admin.user.index',['title'=>'用户浏览','user'=>$user,'request'=>$request->all()]);
     }
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function getCreate()
     {
-        return view('admin.user.create',['title'=>'添加用户']);
+        return view('admin.user.create',['title'=>'用户添加']);
     }
 
     /**
@@ -61,7 +61,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->identity = $request->input('identity');
         $res1 = $user->save(); // bool
-        $id = $user->id;
+        $id = $user->uid;
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
         $res2 = $userdateail->save();
@@ -86,7 +86,9 @@ class UserController extends Controller
      */
     public function getUserdetails($id)
     {
-        return view('admin.user.userdetails');
+        $user = User::where('uid',$id)->first();
+        $sex = $user->userinfo->sex;
+        return view('admin.user.userdetails',['user'=>$user,'sex'=>$sex]);
     }
 
     /**

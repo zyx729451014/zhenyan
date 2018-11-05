@@ -35,7 +35,10 @@ class LoginController extends Controller
         $res = $request->except('_token');
         // 查询数据库用户 
         $user = User::where('uname',$res['uname'])->first();
-
+        // 判断普通用户不能登录后台
+        if($user->identity == 0){
+            return back()->withErrors('抱歉普通用户无法登录后台')->withInput();
+        }
         // 判断用户是否存在数据库 没有返回登录页面
         if(!$user){
             return back()->withErrors('没有此用户')->withInput();

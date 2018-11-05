@@ -25,9 +25,10 @@ Route::group(['middleware'=>'login'],function(){
 	Route::controller('/admin/user','admin\UserController'); // 后台用户管理
 	Route::resource('/admin/web','admin\WebController'); // 后台网站管理
 	Route::resource('/admin/slid','admin\SlidController'); // 后台轮播图管理 
-	Route::resource('/admin/adver','admin\AdverController');	//后台推荐位广告	
-	Route::resource('/admin/glossary','admin\GlossaryController');	//后台图集	
-	Route::resource('/admin/invitation','admin\InvitationController');	//后台帖子管理	
+	Route::resource('/admin/adver','admin\AdverController');	// 后台推荐位广告	
+	Route::resource('/admin/glossary','admin\GlossaryController');	// 后台图集	
+	Route::resource('/admin/invitation','admin\InvitationController');	// 后台帖子管理	
+	Route::resource('/admin/notice','admin\NoticeController'); // 后台公告管理
 });
 Route::controller('/admin/login','admin\LoginController');   // 后台 注册 登录
 

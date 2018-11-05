@@ -105,8 +105,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">公告添加</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">公告浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/notice/create">公告添加</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/notice">公告浏览</a></li>
               </ul>
             </div>
           </li>
