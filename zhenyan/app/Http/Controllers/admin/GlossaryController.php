@@ -54,7 +54,9 @@ class GlossaryController extends Controller
      */
     public function show($id)
     {
-        //
+        //获取软删除的数据
+        $glossary = Glossary::onlyTrashed()->get();
+        return view('admin.glossary.show',['glossary'=>$glossary]);
     }
 
     /**
@@ -81,7 +83,7 @@ class GlossaryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 软删除
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -94,5 +96,37 @@ class GlossaryController extends Controller
         }else{
             return back()->with('error', '删除失败');
         }   
+    }
+
+    /**
+     *
+     *  永久删除  
+     *
+     *  @param  $id 被删除的id
+     * 
+     */
+    public function forcedelete($id)
+    {
+        $glossary = Glossary::onlyTrashed()->where('id',$id)->get();
+        $glossary->forceDelete();
+        return back()->with('success', '删除成功');
+    }
+
+    /**
+     *
+     *  恢复被软删除的数据
+     *
+     *  @param   $id 恢复的id
+     * 
+     */
+    
+    public function recovery($id)
+    {
+         $res = Glossary::withTrashed()->where('id',$id)->restore();
+         if ($res) {
+            return redirect('admin/glossary')->with('success', '恢复成功');
+        }else{
+            return back()->with('error', '恢复失败');
+        } 
     }
 }

@@ -4,6 +4,7 @@
   <div class="card-body">
    <h4 class="card-title">图集浏览</h4>
     <br>
+    <a href="/admin/glossary/show" class="btn btn-gradient-primary" style="float:right;margin-top:8px;">回收站</a>
     <form action="/admin/glossary" method="get" class='table-primary'>
       <div class='sousuo'>
       <label class='num'>显示

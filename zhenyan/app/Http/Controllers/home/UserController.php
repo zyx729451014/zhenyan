@@ -89,7 +89,7 @@ class UserController extends Controller
         if (Hash::check($upass,$user['upass'])) {
             session(['user'=>$user]);
             $user = Userdateail::find($user->uid);
-            $user -> point +=10;
+            $user->point +=10;
             $res1 = $user->save();
             echo "<script>location.href='/';</script>";
         }else{

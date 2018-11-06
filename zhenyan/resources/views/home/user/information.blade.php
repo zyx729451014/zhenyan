@@ -214,7 +214,7 @@
 	                        <span class="module-tit">生日</span>
 	                        <div class="module-main">
 	                            <label class="inputText">    
-	                               <input type="text" name='birthdate' value='1990-01-01'>
+	                               <input type="date" name='birthdate' value='1990-01-01' style="height:40px;">
 	                            </label>
 	                        </div>
 	                    </li>
