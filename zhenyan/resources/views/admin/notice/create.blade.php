@@ -9,7 +9,7 @@
             <div class="row">
               <div class="col-md-7">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">帖子标题：</label>
+                  <label class="col-sm-3 col-form-label">公告标题：</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" name="title" />
                   </div>
@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-md-7">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">帖子内容：</label>
+                  <label class="col-sm-3 col-form-label">公告内容：</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" name="content" />
                   </div>

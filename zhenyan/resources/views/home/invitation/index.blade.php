@@ -17,7 +17,6 @@
 					<br>
 					<?php
 						$cates = \app\Models\Cates::getCates();
-						// dump($cates);exit;
 					?>
 					<ul>
 						@foreach($cates as $k=>$v)
@@ -38,8 +37,13 @@
 						<h2><a href="/home/invitation/show/{{ $v['id'] }}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >{{ $v['title'] }}</a></h2>
 					<p class="meta">
 						<br>
+						<?php
+							// 评论条数
+							$comment = \App\Models\Invi_comment::where('iid',$v['id'])->get();
+							$sum = count($comment);
+						?>
 						<time class="time"><i class="glyphicon glyphicon-time"></i> {{ $v['created_at'] }}</time>
-						<span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
+						<span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment">{{ $sum }}</i></a></p>
 					<a class="note1">{!!$v['content'] !!}</a>
 				</article> 			
 				@endforeach	

@@ -50,7 +50,7 @@ class GlossaryReplyController extends Controller
         $gloreply->cid = $request->input('cid');
         $gloreply->content = $request->input('content');
         $res = $gloreply->save();
-        $user = Userdateail::find($id);
+        $user = Userdateail::find(session('user')->uid);
         $user -> point +=50;
         $res1 = $user->save();
         if($res){

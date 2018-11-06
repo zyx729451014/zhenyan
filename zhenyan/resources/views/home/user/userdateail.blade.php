@@ -122,7 +122,7 @@
                 {{ $user->uname }}
                 <a class="editBtn defaultA" href="/home/user/information"><i class="bBg">0</i>编辑</a>
         </div>
-        <span class="autograph">积分  |   {{$userinfo->point}}</span>
+        <span class="autograph">积分  |   {{ $user->userinfo->point }}</span>
     </div>
     <div class="menuBox personalCont">
         <a class="" href="" target="_self">我的帖子<i class="bBg">0</i></a>

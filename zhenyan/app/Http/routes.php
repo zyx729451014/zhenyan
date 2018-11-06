@@ -47,4 +47,3 @@ Route::resource('/home/Invi_reply','home\Invi_replyController'); 							// 前�
 Route::resource('/home/glossary/comment','home\GlossaryCommentController'); 				// 前台图集评论
 Route::resource('/home/glossary/reply','home\GlossaryReplyController'); 					// 前台图集回复评论
 Route::controller('/home/index','home\IndexController'); 									// 前台公告详情
-
