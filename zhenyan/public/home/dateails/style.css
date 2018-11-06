@@ -1,3 +1,4 @@
+
 .content{
 	width: 1000px;
 	height: auto;
@@ -72,18 +73,20 @@ a{
 .content p{
 	width: 100%;
 	height: 40px;
-	background-color: #f8f8f8;
 	line-height: 40px;
 	font-size: 13px;
 }
 .content .comment{
 	width: 100%;
 	height:auto;
-	background-color: #f8f8f8;
-	border: 1px solid #ccc;
+	
+	
 }
-.content .comment li{
+.content .comment>li{
+	border: 1px solid #ccc;
 	list-style-type: none;
+	margin-bottom: 20px;
+	background-color: #f8f8f8;
 }
 cite{
 	font-size: 12px;

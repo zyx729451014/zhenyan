@@ -60,9 +60,9 @@
 			<div class="tw2"></div>
 			
 		</div>
-		<p>总楼层 | 发表时间	{{ $glossary->created_at }}</p>
+		<p>总楼层 <?= count($glocomment)?> | 发表时间	{{ $glossary->created_at }}</p>
 
-			<ol class="comment">
+			<ol class="comment" >
 				@foreach ($glocomment as $k=>$v)
 				<li>
 
@@ -121,7 +121,6 @@
 					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;color:#fff;" />         		
 			</form>	
 	</div>
-	<div style="clear:both;"></div>
 	<script type="text/javascript">
 	$('.hf').click(function(){
 		$(this).parent().next().find('form').slideToggle();;

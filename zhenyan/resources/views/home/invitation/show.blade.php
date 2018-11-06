@@ -27,7 +27,7 @@
 		<div id="cont">
 				{!! $invitation->content !!}	
 		</div>
-		<p>总楼层 | 发表时间</p>
+		<p>总楼层 <?= count($invi_comments)?> | 发表时间 {{ $invitation->created_at }} </p>
 			@foreach($invi_comments as $k=>$v)
 			<ol class="comment">
 
