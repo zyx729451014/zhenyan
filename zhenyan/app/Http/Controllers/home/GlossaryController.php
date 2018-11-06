@@ -76,9 +76,9 @@ class GlossaryController extends Controller
         $glossary -> title = $request->input('title');
         $glossary -> image = $file;
         $glossary -> save();
-        $user = Userdateail::find($id);
-        $user -> point +=5;
-        $res1 = $user->save();
+        $userdateail = Userdateail::where('uid',session('user')['uid'])->first();
+        $userdateail->point = $userdateail->point+10; 
+        $res1 = $userdateail->save(); 
         if($res && $res1){
             // 提交事务
             DB::commit();

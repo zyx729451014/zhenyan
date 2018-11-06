@@ -64,6 +64,7 @@ class UserController extends Controller
         $id = $user->uid;
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
+        $userdateail->point = 200;
         $res2 = $userdateail->save();
         // 逻辑判断
         if($res1 && $res2){

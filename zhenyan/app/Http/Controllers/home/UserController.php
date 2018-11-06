@@ -12,6 +12,9 @@ use DB;
 use Hash;
 use Crypt;
 use App\Models\Userdateail;
+use App\Models\Invi_collect;
+use App\Models\Invitation;
+use App\Models\Invi_comment;
 
 class UserController extends Controller
 { 
@@ -124,8 +127,17 @@ class UserController extends Controller
         $id = session('user')->uid;
         $user = User::where('uid',$id)->first();
         $userinfo = $user->userinfo;
+        // 我发布的帖子
+        $invitations = Invitation::where('uid',$id)->paginate(15);
+        $invitations1 = Invitation::where('uid',$id)->get();
+        // 我的回帖
+        $invi_comments = Invi_comment::where('uid',$id)->paginate(5);
+        $comments = Invi_comment::where('uid',$id)->get();
+        // 帖子收藏
+        $invi_collects = Invi_collect::where('uid',$id)->paginate(15);
+        $collects = Invi_collect::where('uid',$id)->get();
         // 加载模板
-        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user]);
+        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,'invitations'=>$invitations,'invitations1'=>$invitations1,'invi_comments'=>$invi_comments,'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects]);
     }
 
     /**

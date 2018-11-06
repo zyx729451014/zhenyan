@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="/home/dateails/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-	<div class="content">
+	<div class="content" style="margin-top:90px;">
 		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:10px;"><a href="/home/glossary">返回</a></div>
 		<div class="title">{{ $glossary->title }}</div>
 		<div class="name"><span>Posted by </span>|<a href="">{{ $glossary->glossaryuser->uname }}</a></div>

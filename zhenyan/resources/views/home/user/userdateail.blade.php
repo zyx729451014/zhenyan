@@ -125,18 +125,216 @@
         <span class="autograph">积分  |   {{ $user->userinfo->point }}</span>
     </div>
     <div class="menuBox personalCont">
-        <a class="" href="" target="_self">我的帖子<i class="bBg">0</i></a>
-        <a class="" href="" target="_self">我的回帖<i class="bBg">0</i></a>
-        <a class="" href="" target="_self">我的收藏<i class="bBg">0</i></a>
-        <a class="" href="/home/user/information" target="_self">我的资料<i class="bBg">0</i></a>
+        <a class="invi" href="#" target="_self" style="border-bottom:2px solid #333;">我的帖子<i class="bBg">0</i></a>
+        <a class="glo" href="#" target="_self">我的图集<i class="bBg">0</i></a>
     </div>
 </div>
 <!--personalList-->
-<div class="personalListBlank personalCont">
-    <div class="blankList non-existent show">
-        <p class="non-existentTxt">暂时木有内容呀~</p>
+<!-- 我的帖子 -->
+<div class="personalListBlank personalCont" id="invi">
+    <div style="text-align:center;line-height:40px;">
+        <a class="invitation" href="#" target="_self" style="margin-right:20px;color:#07aacd;">我的帖子</a>
+        <a class="comment" href="#" target="_self" style="margin-right:20px;">我的回帖</a>
+        <a class="collect" href="#" target="_self">我的收藏</a>
+    </div>
+    <div class="personalListBlank" id="invitation" style="width:970px;margin:0px auto;">
+       @if($invitations->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else  
+        <h4>我发布的帖子</h4>
+        <ol>
+            @foreach($invitations as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                    <a href="/home/invitation/destroy/{{ $v->id }}" style="float:right;width:70px;"><button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button></a>
+                    <a href="/home/invitation/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+            </li>            
+            @endforeach
+           
+        </ol> 
+        @if(count($invitations) >=15)
+        <div style="margin-left:450px;">
+            <a href="#" id="invi_qb">点击查看全部</a>
+        </div>
+        @endif
+        @endif
+    </div>
+     <div class="personalListBlank" id="invitations" style="width:970px;margin:0px auto;display:none;">
+        <ol>
+            @foreach($invitations1 as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                    <a href="/home/invitation/destroy/{{ $v->id }}" style="float:right;width:70px;"><button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button></a>
+                    <a href="/home/invitation/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+            </li>            
+            @endforeach
+        </ol>
+    </div>
+    <div class="personalListBlank" id="comment" style="width:970px;margin:0px auto;display:none;">
+        @if($invi_comments->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else  
+        <h4>我的回帖</h4>
+        <ol style="margin-left:20px;">
+            @foreach($invi_comments as $k=>$v)
+            <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                <br>
+                <a href="" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
+                <span style="color:#abafb0;font-size:15px;"> {{ $v->invi_commentuser->uname }}</span>
+            </li>
+             @endforeach          
+        </ol>
+        @if(count($comments) >= 5)
+        <div style="margin-left:450px;">
+            <a href="#" id="comm_qb">点击查看全部</a>
+        </div>
+        @endif
+        @endif
+    </div>
+    <div class="personalListBlank" id="comments" style="width:970px;margin:0px auto;display:none;">
+        <ol style="margin-left:20px;">
+            @foreach($comments as $k=>$v)
+            <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                <br>
+                <a href="" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
+                <span style="color:#abafb0;font-size:15px;"> {{ $v->invi_commentuser->uname }}</span>
+            </li>
+             @endforeach          
+        </ol>
+    </div>
+    <div class="personalListBlank" id="collect" style="width:970px;margin:0px auto;display:none;">
+        @if($invi_collects->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else  
+        <h4>帖子收藏</h4>
+        <ol>
+            @foreach($invi_collects as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}">{{ $v->invi_collectinvi->title }}</a>
+            <form action="/home/Invi_collect/{{ $v->id }}" method="post" style="float:right;width:70px;margin-right:20px;">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}   
+                <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" type="submit">取消收藏</button>           
+            </form>
+            </li> 
+            @endforeach
+        </ol>
+        @if(count($collects) >=15)
+        <div style="margin-left:450px;">
+            <a href="#" id="coll_qb">点击查看全部</a>
+        </div>
+        @endif
+        @endif
+    </div>
+        <div class="personalListBlank" id="collects" style="width:970px;margin:0px auto;display:none;">
+        <ol>
+            @foreach($collects as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}">{{ $v->invi_collectinvi->title }}</a>
+            <form action="/home/Invi_collect/{{ $v->id }}" method="post" style="float:right;width:70px;margin-right:20px;">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}   
+                <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" type="submit">取消收藏</button>           
+            </form>
+            </li> 
+            @endforeach
+        </ol>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.invi').click(function(){
+        $(this).css('border-bottom','2px solid #333');
+        $('.glo').css('border-bottom','');
+        $('#invi').show();
+        $('#glo').hide();
+    });
+    $('.glo').click(function(){
+        $(this).css('border-bottom','2px solid #333');
+        $('.invi').css('border-bottom','');
+        $('#glo').show();
+        $('#invi').hide();
+    });
+    $('.collect').click(function(){
+        $('#collect').css('display','block');
+        $('#collects').css('display','none');
+        $('#invitation').css('display','none');
+        $('#invitations').css('display','none');
+        $('#comment').css('display','none');
+        $('#comments').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.invitation').css('color','');
+        $('.comment').css('color','');
+    });
+     $('.invitation').click(function(){
+        $('#invitation').css('display','block');
+        $('#invitations').css('display','none');
+        $('#collect').css('display','none');
+        $('#collects').css('display','none');
+        $('#comment').css('display','none');
+        $('#comments').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.collect').css('color','');
+        $('.comment').css('color','');
+    });
+    $('.comment').click(function(){
+        $('#comment').css('display','block');
+        $('#comments').css('display','none');
+        $('#invitation').css('display','none');
+        $('#invitations').css('display','none');
+        $('#collect').css('display','none');
+        $('#collects').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.invitation').css('color','');
+        $('.collect').css('color','');
+    });
+    $('.gcollect').click(function(){
+        $('#gcollect').css('display','block');
+        $('#glossary').css('display','none');
+        $('#gcomment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.glossary').css('color','');
+        $('.gcomment').css('color','');
+    });
+     $('.glossary').click(function(){
+        $('#glossary').css('display','block');
+        $('#gcollect').css('display','none');
+        $('#gcomment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.gcollect').css('color','');
+        $('.gcomment').css('color','');
+    });
+      $('.gcomment').click(function(){
+        $('#gcomment').css('display','block');
+        $('#glossary').css('display','none');
+        $('#gcollect').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.gcollect').css('color','');
+        $('.glossary').css('color','');
+    });
+    $('#invi_qb').click(function(){
+        $('#invitation').css('display','none');
+        $('#invitations').css('display','block');
+    });
+     $('#comm_qb').click(function(){
+        $('#comment').css('display','none');
+        $('#comments').css('display','block');
+    });
+      $('#coll_qb').click(function(){
+        $('#collect').css('display','none');
+        $('#collects').css('display','block');
+    });
+
+
+</script><style type="text/css">
+    {
+        display: none;
+    }
+</style>
 </body>
 </html>
 

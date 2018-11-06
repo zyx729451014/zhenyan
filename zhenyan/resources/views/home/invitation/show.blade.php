@@ -21,12 +21,16 @@
 	</style>
 </head>
 <body>
-	<div class="content">
+	<div class="content" style="margin-top:90px;">
 		<div class="title">{{ $invitation->title }}</div>
 		<div class="name"><span>Posted by </span>|<a href="">{{ $invitation->invitationuser->uname }}</a></div>
 		<div id="cont">
 				{!! $invitation->content !!}	
 		</div>
+		<form action="/home/Invi_collect" method="post" style="float:right;">
+			{{ csrf_field() }}	
+			<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $invitation->id }}">收藏</button>
+		</form><br>
 		<p>总楼层 <?= count($invi_comments)?> | 发表时间 {{ $invitation->created_at }} </p>
 			@foreach($invi_comments as $k=>$v)
 			<ol class="comment">
@@ -58,6 +62,7 @@
 								<img src="{{ $vv->invi_replyuser->userinfo->face }}" height="20" width="20">
 								<a href="/home/information/{{ $vv->invi_replyuser->uid }}">{{ $vv->invi_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
 							</li>
+
 							@endforeach
 							<li>
 								<form action="/home/Invi_reply" method="post" class="fbpl fbpl1" style="width:750px;height:150px;" hidden>	
@@ -72,7 +77,6 @@
 						</ul>
 					</div>
 				</li>
-
 			</ol>
 			
 			@endforeach
