@@ -35,8 +35,8 @@ nav {width:1000px;height: 65px;margin: 0 auto;border-radius: 3px;}
 nav ul {list-style: none;margin: 0;padding: 0;margin-left: 280px;}
 nav ul li {position: relative;float: left;padding: 6px 5px 0px 5px}
 nav ul li:hover {border-bottom: 2px solid #000;}
-nav ul li a {font-size: 13px; line-height:50px;color: #000;display: block;padding: 6px 10px 6px 10px;margin-bottom: 5px;z-index: 6;position: relative;font-weight:bold;}
-nav ul li:hover a{color: #38d4ff;}
+nav>ul>li>a {font-size: 13px; line-height:50px;color: #000;display: block;padding: 6px 10px 6px 10px;margin-bottom: 5px;z-index: 6;position: relative;font-weight:bold;}
+nav>ul>li:hover a{color: #38d4ff;}
 nav>a{
 	float: left;
 	line-height:75px;
@@ -46,13 +46,13 @@ nav{
 	position:relative;
 }
 nav button{
-	height:30px;
+	height:50px;
 	border:none;
 	background-color:#fff;
 }
 nav div.person{
-	width:100px;
-	height:60px;
+	width: 150px;
+	height:80px;
 	position:absolute;
 	background-color:#fff;
 	left:890px;
@@ -62,10 +62,10 @@ nav div.person{
 nav div.person li{
 	text-decoration:none;
 	width:100%;
-	height:50px;
+	height:40px;
 	text-align:center;
 	line-height:40px;
-	font-size:20px;
+	font-size:15px;
 	color:#aaa;
 	border:1px solid #ddd;
 }

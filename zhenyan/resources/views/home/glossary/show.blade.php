@@ -11,12 +11,13 @@
 <body>
 	<div class="content">
 		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:10px;"><a href="/home/glossary">返回</a></div>
+		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:-30px;float:right;"><a href="/home/glossary/collect/{{ $glossary->id }}">收藏</a></div>
 		<div class="title">{{ $glossary->title }}</div>
 		<div class="name"><span>Posted by </span>|<a href="">{{ $glossary->glossaryuser->uname }}</a></div>
 		<div class="cont">
 			<div class="tw1"></div>
 			<div class="bpic">
-				<img src="./1.jpg" class="image">
+				<img src="" class="image">
 			</div>
 			<div class="spic">
 				<ul class="spic">

@@ -12,6 +12,9 @@ use DB;
 use Hash;
 use Crypt;
 use App\Models\Userdateail;
+use App\Models\Glossary;
+use App\Models\Glocomment;
+use App\Models\Glocollect;
 
 class UserController extends Controller
 { 
@@ -57,9 +60,10 @@ class UserController extends Controller
         $name = $_POST['uname'];
         $data = User::where('uname',$name)->first();
         if ($data) {
-           echo "error";
-           
+           // 用户名存在返回error
+           echo "error";  
         }else{
+            // 用户不存在返回success
             echo "success";
            
         }
@@ -88,11 +92,14 @@ class UserController extends Controller
         // 判断密码错误
         if (Hash::check($upass,$user['upass'])) {
             session(['user'=>$user]);
+            // 用户登录积分加10
             $user = Userdateail::find($user->uid);
             $user->point +=10;
             $res1 = $user->save();
+            // 密码正确跳转到首页
             echo "<script>location.href='/';</script>";
         }else{
+            //密码错误返回error 
             echo "error";
         }
     
@@ -108,6 +115,7 @@ class UserController extends Controller
      */
     public function getLogout(Request $request)
     {
+       // 清除用户登录session
        $request->session()->flush();
        return redirect('home/user/login');
 
@@ -124,8 +132,11 @@ class UserController extends Controller
         $id = session('user')->uid;
         $user = User::where('uid',$id)->first();
         $userinfo = $user->userinfo;
+        $glossary = Glossary::where('uid',$id)->paginate(1);
+        $glossary_comment = Glocomment::where('uid',$id)->paginate(1);
+        $glossary_collect = Glocollect::where('uid',$id)->paginate(1);
         // 加载模板
-        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user]);
+        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect]);
     }
 
     /**

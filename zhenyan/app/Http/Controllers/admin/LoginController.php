@@ -35,19 +35,19 @@ class LoginController extends Controller
         $res = $request->except('_token');
         // 查询数据库用户 
         $user = User::where('uname',$res['uname'])->first();
+        // 判断用户是否存在数据库 没有返回登录页面
+        if(!$user){
+            return back()->withErrors('没有此管理员')->withInput();
+        }
         // 判断普通用户不能登录后台
         if($user->identity == 0){
             return back()->withErrors('抱歉普通用户无法登录后台')->withInput();
         }
-        // 判断用户是否存在数据库 没有返回登录页面
-        if(!$user){
-            return back()->withErrors('没有此用户')->withInput();
-        }
-      // 判断密码错误
+        // 判断密码错误
         if (Hash::check($res['upass'],$user['upass'])) {
-            session(['uname'=>$res['uname']]);
-            return redirect('admin/user/index');
-            session(['uname'=>$res['uname']]);
+            session(['admin'=>$user]);
+            return redirect('admin/index');
+
         }else{
             return back()->withErrors('密码错误')->withInput();
         }

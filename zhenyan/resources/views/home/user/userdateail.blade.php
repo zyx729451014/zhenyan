@@ -125,18 +125,218 @@
         <span class="autograph">积分  |   {{ $user->userinfo->point }}</span>
     </div>
     <div class="menuBox personalCont">
-        <a class="" href="" target="_self">我的帖子<i class="bBg">0</i></a>
-        <a class="" href="" target="_self">我的回帖<i class="bBg">0</i></a>
-        <a class="" href="" target="_self">我的收藏<i class="bBg">0</i></a>
-        <a class="" href="/home/user/information" target="_self">我的资料<i class="bBg">0</i></a>
+        <a class="invi" href="#" target="_self" style="border-bottom:2px solid #333;">我的帖子<i class="bBg">0</i></a>
+        <a class="glo" href="#" target="_self">我的图集<i class="bBg">0</i></a>
     </div>
 </div>
 <!--personalList-->
-<div class="personalListBlank personalCont">
-    <div class="blankList non-existent show">
-        <p class="non-existentTxt">暂时木有内容呀~</p>
+
+<!-- 我的帖子 -->
+<div class="personalListBlank personalCont" id="invi">
+    <div style="text-align:center;line-height:40px;">
+        <a class="invitation" href="#" target="_self" style="margin-right:20px;color:#07aacd;">我的帖子</a>
+        <a class="comment" href="#" target="_self" style="margin-right:20px;">我的回帖</a>
+        <a class="collect" href="#" target="_self">我的收藏</a>
     </div>
+    <div class="personalListBlank" id="invitation" style="display:block;width:970px;margin:0px auto;">
+        @if($glossary->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>我发布的帖子</h4>
+        <ol>
+            @foreach($glossary as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                <form style="float:right;width:70px;">
+                    <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button>
+                </form>  
+                    <a href="/home/invitation/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+            </li>
+            
+            @endforeach
+        </ol>
+         <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    <div class="personalListBlank " id="comment" style="width:970px;margin:0px auto;display:none;">
+        @if($glossary->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>我的回帖</h4>
+        <ol style="margin-left:20px;">
+            @foreach($glocomment as $k=>$v)
+            <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                <br>
+                <a href="" style="color:#47494a;">{{ $v->commentglo->title }}</a>
+                <span style="color:#abafb0;font-size:15px;float:right;"> {{ $v->commentuser->uname }}</span>
+            </li>
+             @endforeach          
+        </ol>
+        <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    <div class="personalListBlank" id="collect" style="width:970px;margin:0px auto;display:none;">
+         @if($glossary->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>帖子收藏</h4>
+        <ol>
+            @foreach($glocollect as $k=>$v)
+            <li style="line-height:25px;margin-left:10px;">{{ $k+1 }}.&nbsp <a href="/home/invitation/show/{{ $v->id }}">{{ $v->collectglo->title }}</a></li>
+            @endforeach
+        </ol>
+         <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    
 </div>
+
+
+
+<!-- 我的图集  -->
+<div class="personalListBlank personalCont" id="glo" style="display:none;">
+    <div style="text-align:center;line-height:40px;">
+        <a class="glossary" href="#" target="_self" style="margin-right:20px;color:#07aacd;">我的图集</a>
+        <a class="gcomment" href="#" target="_self" style="margin-right:20px;">我的评论</a>
+        <a class="gcollect" href="#" target="_self">我的收藏</a>
+    </div>
+    <div class="personalListBlank" id="glossary" style="display:block;width:970px;margin:0px auto;">
+        @if($glossary->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>我发布的图集</h4>
+        <ol>
+            @foreach($glossary as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/glossary/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                <form style="float:right;width:70px;" action="/home/glossary/{{ $v->id }}" method="post">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button>
+                </form>  
+                    <a href="/home/glossary/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+            </li>
+            
+            @endforeach
+        </ol>
+         <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    <div class="personalListBlank " id="gcomment" style="width:970px;margin:0px auto;display:none;">
+        @if($glocomment->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>我的评论</h4>
+        <ol style="margin-left:20px;">
+            @foreach($glocomment as $k=>$v)
+            <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                <br>
+                <a href="/home/glossary/{{ $v->commentglo->id }}" style="color:#47494a;">{{ $v->commentglo->title }}</a>
+                <span style="color:#abafb0;font-size:15px;float:right;"> {{ $v->commentuser->uname }}</span>
+            </li>
+             @endforeach          
+        </ol>
+        <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    <div class="personalListBlank" id="gcollect" style="width:970px;margin:0px auto;display:none;">
+         @if($glocollect->isEmpty())
+            <div class="blankList non-existent show">
+                <p class="non-existentTxt">暂时木有内容呀~</p>
+            </div>
+        @else
+        <h4>图集收藏</h4>
+        <ol>
+            @foreach($glocollect as $k=>$v)
+            <li style="line-height:25px;margin-left:10px;">{{ $k+1 }}.&nbsp <a href="/home/glossary/{{ $v->collectglo->id }}">{{ $v->collectglo->title }}</a></li>
+            @endforeach
+        </ol>
+         <ul class="pagination" style="margin-left:300px;">
+        </ul>
+        @endif
+    </div>
+    
+</div>
+<script type="text/javascript">
+    $('.invi').click(function(){
+        $(this).css('border-bottom','2px solid #333');
+        $('.glo').css('border-bottom','');
+        $('#invi').show();
+        $('#glo').hide();
+    });
+    $('.glo').click(function(){
+        $(this).css('border-bottom','2px solid #333');
+        $('.invi').css('border-bottom','');
+        $('#glo').show();
+        $('#invi').hide();
+    });
+    $('.collect').click(function(){
+        $('#collect').css('display','block');
+        $('#invitation').css('display','none');
+        $('#comment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.invitation').css('color','');
+        $('.comment').css('color','');
+    });
+     $('.invitation').click(function(){
+        $('#invitation').css('display','block');
+        $('#collect').css('display','none');
+        $('#comment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.collect').css('color','');
+        $('.comment').css('color','');
+    });
+      $('.comment').click(function(){
+        $('#comment').css('display','block');
+        $('#invitation').css('display','none');
+        $('#collect').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.invitation').css('color','');
+        $('.collect').css('color','');
+    });
+      $('.gcollect').click(function(){
+        $('#gcollect').css('display','block');
+        $('#glossary').css('display','none');
+        $('#gcomment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.glossary').css('color','');
+        $('.gcomment').css('color','');
+    });
+     $('.glossary').click(function(){
+        $('#glossary').css('display','block');
+        $('#gcollect').css('display','none');
+        $('#gcomment').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.gcollect').css('color','');
+        $('.gcomment').css('color','');
+    });
+      $('.gcomment').click(function(){
+        $('#gcomment').css('display','block');
+        $('#glossary').css('display','none');
+        $('#gcollect').css('display','none');
+        $(this).css('color','#07aacd');
+        $('.gcollect').css('color','');
+        $('.glossary').css('color','');
+    });
+
+
+</script>
+</style>
 </body>
 </html>
 

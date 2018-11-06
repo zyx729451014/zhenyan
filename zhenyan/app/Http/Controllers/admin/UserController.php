@@ -64,6 +64,9 @@ class UserController extends Controller
         $id = $user->uid;
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
+        if ($request->input('identity')==1) {
+            $userdateail->face = '/home/images/timg1.jpg';
+        }
         $res2 = $userdateail->save();
         // 逻辑判断
         if($res1 && $res2){

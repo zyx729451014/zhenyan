@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Http\Model\Web;
 
-class LoginMiddleware
+class HomeMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,11 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has('admin')) {
-                return $next($request); //执行下一次请求 通过
+        $web = Web::find(1);
+        if($web->statu == 1){
+            return $next($request);
         }else{
-            // 跳转到登录页面
-            return redirect('/admin/login/login');
+            return 123;
         }
-
     }
 }

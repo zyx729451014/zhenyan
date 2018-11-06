@@ -6,20 +6,26 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Glocomment;
-use App\Models\Userdateail;
+use App\Models\Glocollect;
 
-
-class GlossaryCommentController extends Controller
+class GlossaryCollectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $glocollect = new Glocollect;
+        $glocollect->uid = session('user')->uid;
+        $glocollect->gid = $id;
+        $res = $glocollect->save();
+        if($res){
+            return back()->with('success', '收藏成功');
+        }else{
+            return back()->with('error','收藏失败');
+        }
     }
 
     /**
@@ -33,32 +39,14 @@ class GlossaryCommentController extends Controller
     }
 
     /**
-     * 图集评论判断.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // 评论内容为空返回错误信息
-        if (empty($request->input('content'))) {
-            return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');
-        }
-        // 添加数据
-        $glocomment = new Glocomment;
-        $glocomment->uid = session('user')->uid;
-        $glocomment->gid = $request->input('gid');
-        $glocomment->content = $request->input('content');
-        $res = $glocomment->save();
-        // 评论用户积分加5
-        $user = Userdateail::find(session('user')->uid);
-        $user -> point +=5;
-        $res1 = $user->save(); 
-        if($res && $res1){
-            return back()->with('success', '发表成功');
-        }else{
-            return back()->with('error','发表失败');
-        }
+        //
     }
 
     /**

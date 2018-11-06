@@ -13,7 +13,7 @@ use DB;
 class SlidController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示浏览轮播图页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +28,7 @@ class SlidController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示添加轮播图页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class SlidController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 添加轮播图判断
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,6 +57,7 @@ class SlidController extends Controller
             // 拼接数据库存放路径
             $profile_path = ltrim($dir_name.'/'.$file_name,'.');
         }else{
+            // 没有文件上传返回错误信息
             return redirect() -> back() -> withInput() -> withErrors('没有文件上传');
         }
         // 获取数据 进行添加
@@ -89,7 +90,7 @@ class SlidController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 显示修改轮播图页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -101,7 +102,7 @@ class SlidController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 修改轮播图判断.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -112,7 +113,7 @@ class SlidController extends Controller
         // 开启事物
         DB::beginTransaction();
         
-        // 获取数据 进行添加
+        // 获取数据 进行修改
         $slid = Slid::find($id);
         $slid->sname = $request->input('sname');
         $slid->surl = $request->input('surl');
@@ -142,7 +143,7 @@ class SlidController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除轮播图.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

@@ -5,8 +5,6 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title></title>
-<link rel="shortcut icon" href="https://cms.qn.img-space.com/favicon.ico">
-<link rel="bookmark" href="https://cms.qn.img-space.com/favicon.ico">
 <link href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/jquery.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/personalPublic20180626.css">
 <style>
@@ -72,7 +70,7 @@
 	                         </div>
 	                    </li>
 	                    <!--份箱 end-->
-
+						@if($user->identity == 0)
 	                    <!--性别 begin-->
 	                    <li class="mList" style='padding-top:10px;'>
 	                        <span class="module-tit">性别</span>
@@ -86,6 +84,7 @@
 	                            </span>
 	                         </div>
 	                    </li>
+	                    @endif
 	                    <!--性别 end-->
 
 						<!--手机号 begin-->
@@ -109,7 +108,7 @@
 	                         </div>
 	                    </li>
 	                    <!--邮箱 end-->
-
+						@if($user->identity == 0)
 	                    <!--用户名积分 begin-->
 
 	                    <li class="mList" style='padding-top:20px;'>
@@ -134,6 +133,7 @@
 	                        </div>
 	                    </li>
 	                    <!--生日 end-->
+	                    @endif
 	                </ul>
 	                <div class="subBtn">
 	                </div>

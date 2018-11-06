@@ -11,7 +11,7 @@ use App\Models\Glossary;
 class GlossaryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示浏览图集页
      *
      * @return \Illuminate\Http\Response
      */
@@ -47,14 +47,14 @@ class GlossaryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 显示回收站(软删除)的页面
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //获取软删除的数据
+        // 获取软删除的数据
         $glossary = Glossary::onlyTrashed()->get();
         return view('admin.glossary.show',['glossary'=>$glossary]);
     }
@@ -107,7 +107,9 @@ class GlossaryController extends Controller
      */
     public function forcedelete($id)
     {
-        $glossary = Glossary::onlyTrashed()->where('id',$id)->get();
+        // 获取被软删除的指定数据
+        $glossary = Glossary::onlyTrashed()->where('id',$id)->first();
+        // 永久删除
         $glossary->forceDelete();
         return back()->with('success', '删除成功');
     }
@@ -122,6 +124,7 @@ class GlossaryController extends Controller
     
     public function recovery($id)
     {
+        // 恢复指定数据
          $res = Glossary::withTrashed()->where('id',$id)->restore();
          if ($res) {
             return redirect('admin/glossary')->with('success', '恢复成功');
