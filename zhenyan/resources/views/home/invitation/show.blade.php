@@ -37,7 +37,7 @@
 					</div>
 					
 					<cite>
-						<img alt="" src="images/gravatar.jpg" height="70" width="70" />			
+						<img alt="" src="{{ $v->invi_commentuser->userinfo->face }}" height="70" width="70" />			
 						<a href="index.html">名字：	{{ $v->invi_commentuser->uname }}</a>  <br />				
 						<a href="#comment-63">时间：	{{ $v['created_at'] }}</a><br>
 					</cite>
@@ -53,7 +53,7 @@
 							@foreach($invi_replys as $kk=>$vv)
 							<li>
 								<img src="{{ $vv->invi_replyuser->userinfo->face }}" height="20" width="20">
-								<a href="">{{ $vv->invi_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
+								<a href="/home/information/{{ $vv->invi_replyuser->uid }}">{{ $vv->invi_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
 							</li>
 							@endforeach
 							<li>

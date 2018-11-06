@@ -2,7 +2,7 @@
 @section('content-wrapper')
 <div class='card'>
   <div class="card-body">
-   <h4 class="card-title">友情链接浏览</h4>
+   <h4 class="card-title">公告浏览</h4>
     <br>
     <form action="/admin/notice" method="get" class='table-primary'>
       <div class='sousuo'>
@@ -27,8 +27,8 @@
           <tr>
             <th> ID </th>
             <th> 发表人 </th>
-            <th> 帖子标题 </th>
-            <th> 帖子内容 </th>
+            <th> 公告标题 </th>
+            <th> 公告内容 </th>
             <th> 发表时间 </th>
             <th> 操作 </th>
           </tr>

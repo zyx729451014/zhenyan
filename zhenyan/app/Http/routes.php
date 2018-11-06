@@ -37,13 +37,13 @@ Route::controller('/admin/login','admin\LoginController');   					// 后台 注�
  *	前台路由
  * 
  */
-Route::controller('/home/user','home\UserController');   // 前台用户管理 注册 登录
-Route::get('/home/invitation/create','home\InvitationController@create'); //前台帖子发布
-Route::get('/home/invitation/{id}','home\InvitationController@index');	//前台列表
-Route::resource('/home/glossary','home\GlossaryController'); //前台图集
-Route::post('/home/invitation/store','home\InvitationController@store'); //前台帖子发布判断
-Route::get('/home/invitation/show/{id}','home\InvitationController@show');	//前台帖子详情
+Route::controller('/home/user','home\UserController');   						// 前台用户管理 注册 登录
+Route::get('/home/invitation/create','home\InvitationController@create'); 		//前台帖子发布
+Route::get('/home/invitation/{id}','home\InvitationController@index');			//前台列表
+Route::resource('/home/glossary','home\GlossaryController'); 					//前台图集
+Route::post('/home/invitation/store','home\InvitationController@store'); 		//前台帖子发布判断
+Route::get('/home/invitation/show/{id}','home\InvitationController@show');		//前台帖子详情
 Route::resource('/home/Invi_comment','home\Invi_commentController'); 			//前台帖子评论
-Route::resource('/home/Invi_reply','home\Invi_replyController'); 			//前台帖子评论回复
-Route::resource('/home/glossary/comment','home\GlossaryCommentController'); //前台图集评论
-Route::resource('/home/glossary/reply','home\GlossaryReplyController'); //前台图集回复评论
+Route::resource('/home/Invi_reply','home\Invi_replyController'); 				//前台帖子评论回复
+Route::resource('/home/glossary/comment','home\GlossaryCommentController'); 	//前台图集评论
+Route::resource('/home/glossary/reply','home\GlossaryReplyController'); 		//前台图集回复评论
