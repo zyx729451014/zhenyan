@@ -39,11 +39,9 @@
 					
 					<cite>
 						<img alt="" src="{{ $v->invi_commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="index.html">名字：	{{ $v->invi_commentuser->uname }}</a>  <br />				
-						<a href="#comment-63">时间：	{{ $v['created_at'] }}</a><br>
-					</cite>
+						<a href="index.html">{{ $v->invi_commentuser->uname }}</a> 
 						<span>{{ $v['content'] }}</span>
-						 <br />				
+						<br />				
 						<a href="#comment-63">{{ $v['created_at'] }}</a><br>
 					</cite>
 						
