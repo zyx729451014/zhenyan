@@ -111,10 +111,13 @@
 	                    <!--邮箱 end-->
 
 	                    <!--用户名积分 begin-->
-	                    <li class="mList" style='padding-top:10px;'>
-	                        <span class="module-tit">用户积分</span>
+
+	                    <li class="mList" style='padding-top:20px;'>
+	                        <span class="module-tit">
+	                            用户积分
+	                        </span>
 	                        <div class="module-main">
-	                            <span>
+	                            <span >
 									{{ $user->userinfo->point }}
 	                            </span>
 	                        </div>

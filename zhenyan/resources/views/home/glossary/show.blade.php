@@ -72,7 +72,7 @@
 
 					<cite>
 						<img alt="" src="{{ $v->commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="">{{ $v->commentuser->uname }}</a>Says: 
+						<a href="">{{ $v->commentuser->uname }}</a>
 							<span>{{ $v->content }}</span> 
 						<br />				
 						<a href="">{{ $v->created_at }}</a><br>

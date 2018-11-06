@@ -77,7 +77,6 @@ a{
 	font-size: 13px;
 }
 .content .comment{
-	width: 950px;
 	height:auto;
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
@@ -87,6 +86,7 @@ a{
 }
 cite{
 	font-size: 12px;
+	margin-left: 20px;
 }
 .huifu{
 	width:80%;
@@ -95,7 +95,6 @@ cite{
 }
 .huifu ul li{
 	margin: 20px;
-	border-bottom: 1px solid #ccc;
 }
 .fbpl{
 	width: 100%;
