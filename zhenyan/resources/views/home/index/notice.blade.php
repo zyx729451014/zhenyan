@@ -22,13 +22,14 @@
 </head>
 <body>
 	<div class="content">
-		<div class="title">{{ $invitation['title'] }}</div>
-		<div class="name"><span>Posted by </span>|<a href="">{{ $invitation->invitationuser->uname }}</a></div>
+		<div class="title">{{ $notice->title }}</div>
+		<div class="name">
 		<div id="cont">
-				{!! $invitation['content'] !!}
-			<p>总楼层 | 发表时间 </p>
+				{{ $notice->content }}
+			<br><br>
+			<p>总楼层 | 发表时间 {{ $notice->created_at }}</p>
 
-			<ol class="comment">
+			<!-- <ol class="comment">
 
 				<li>
 
@@ -68,12 +69,12 @@
 					</div>
 				</li>
 
-			</ol>
+			</ol> -->
 
 
 			<h3>发表评论</h3>				
 			
-			<form action="index.html" method="post" class="fbpl">		
+			<form action="" method="post" class="fbpl">		
 					<label for="message"></label><br />
 					<textarea id="message" name="message" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>	
 					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;" />         		

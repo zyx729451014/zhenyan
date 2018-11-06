@@ -65,19 +65,20 @@
 				@foreach($cates as $k=>$v)
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
-				<li><a href="/home/glossary">图文</a></li>
+				<li><a href="/home/glossary">图集</a></li>
 				<li><a href="#">问答</a></li>
-			</ul>
+			
 			@if (session()->has('user'))
-			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您：{{ session('user')->uname }}</button>
+			<button style='height:75px;float: left;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>
 				<div class="person" style="display: none;">
 					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
 					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
 				</div>
-			@else
-			<a href="/home/user/login">登录</a>
-			<a href="/home/user/register">注册</a>
+			@else  
+			<a href="/home/user/login" style='line-height:75px;'>登录</a>
+			<a href="/home/user/register" style='margin-left:5px;line-height:75px;'>注册</a>
 			@endif
+		</ul>
 		</nav>
 	</header>
 	<script type="text/javascript">

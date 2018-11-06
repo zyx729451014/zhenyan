@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Notice;
+use DB;
 
 class IndexController extends Controller
 {
@@ -16,9 +18,34 @@ class IndexController extends Controller
      */
     public function index()
     {
-        echo 'index';
+        //  按发表时间顺序获取5条数据
+        $notice = DB::select('select * from notice order by created_at desc limit 5');
+        // 加载模板
+        return view('home.index.index',['notice'=>$notice]);
        
     }
+
+    /**
+     * 公告详情
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNotice($id)
+    { 
+        // 获取一条数据
+        $notice = Notice::where('id',$id)->first();
+        // 加载模板
+        return view('home.index.notice',['notice'=>$notice]);
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

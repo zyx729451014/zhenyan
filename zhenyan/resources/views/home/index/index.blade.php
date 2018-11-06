@@ -71,12 +71,11 @@
 				<section>
 					<div class="heading">公告</div>
 					<div class="content">
+
 						<ul class="list">
-							<li><a href="http://www.cssmoban.com">1</a></li>
-							<li><a href="http://www.cssmoban.com">2</a></li>
-							<li><a href="http://www.cssmoban.com">3</a></li>
-							<li><a href="http://www.cssmoban.com">4</a></li>
-							<li><a href="http://www.cssmoban.com">5</a></li>
+							@foreach($notice as $k=>$v)
+							<li><a href="/home/index/notice/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+							@endforeach
 						</ul>
 					</div>
 				</section>

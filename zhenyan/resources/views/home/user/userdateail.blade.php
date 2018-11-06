@@ -18,7 +18,7 @@
 <script language="JavaScript" type="text/javascript" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
 <div class="personalHead clearfix">
     <div class="personalInfor" style='margin-top:-50px;'>
-        <p class='touxiang' style='width:100px;height:100px;margin-left:670px'>
+        <p class='touxiang' style='width:100px;height:100px;margin-left:600px'>
             @if(!empty($userinfo->face))
             <img src="{{ $userinfo->face }}" alt="" style='width:100%;height:100%;border-radius:50%;'>
             @endif

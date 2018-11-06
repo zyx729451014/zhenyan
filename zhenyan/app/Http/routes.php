@@ -10,10 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/','home\IndexController@index'); // 前台首页
+Route::controller('/home/index','home\IndexController'); // 公告详情
 
-Route::get('/', function () {
-    return view('home.index.index');
-});
 /**
  *
  *	后台路由

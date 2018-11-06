@@ -21,10 +21,10 @@ class NoticeController extends Controller
     {
         $showCount = $request->input('showCount',5);
         $search    = $request->input('search','');
-        // dump($data);
+        
         // 获取数据
         $notice = Notice::where('title','like','%'.$search .'%')->paginate($showCount);
-        // dump($notice->noticeuser->uname);
+        // dump($notice->noticeuser);
         
 
         // 加载到列表页面

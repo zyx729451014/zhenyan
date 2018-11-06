@@ -37,12 +37,12 @@ class UserController extends Controller
         $user->uname = $request->input('uname');
         $user->upass = hash::make($request->input('upass'));
         $res1 = $user->save(); // bool
-        $id = $user->id;
+        $id = $user->uid;
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
         $res2 = $userdateail->save();
         // 逻辑判断
-        if($res){
+        if($res1 && $res2){
             return redirect('/home/user/login');
         }else{
             echo "<script>alert('很遗憾您注册失败了');";

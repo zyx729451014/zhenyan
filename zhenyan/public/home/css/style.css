@@ -31,17 +31,16 @@ header {height: 75px;width:100%;background-color: #fff;position: fixed;top: 0px;
 
 /*------------menu */
 
-nav {width:970px;height: 65px;margin: 0 auto;border-radius: 3px;}
+nav {width:1000px;height: 65px;margin: 0 auto;border-radius: 3px;}
 nav ul {list-style: none;margin: 0;padding: 0;margin-left: 280px;}
 nav ul li {position: relative;float: left;padding: 6px 5px 0px 5px}
 nav ul li:hover {border-bottom: 2px solid #000;}
 nav ul li a {font-size: 13px; line-height:50px;color: #000;display: block;padding: 6px 10px 6px 10px;margin-bottom: 5px;z-index: 6;position: relative;font-weight:bold;}
 nav ul li:hover a{color: #38d4ff;}
 nav>a{
-	width: 50px;
-	height: 100%;
-	float: right;
-	line-height: 75px;
+	float: left;
+	line-height:75px;
+
 }
 nav{
 	position:relative;
@@ -52,18 +51,18 @@ nav button{
 	background-color:#fff;
 }
 nav div.person{
-	width:130px;
-	height:80px;
+	width:100px;
+	height:60px;
 	position:absolute;
 	background-color:#fff;
-	left:860px;
+	left:890px;
 	top:50px;
 	z-index: 9999;
 }
 nav div.person li{
 	text-decoration:none;
 	width:100%;
-	height:40px;
+	height:50px;
 	text-align:center;
 	line-height:40px;
 	font-size:20px;
@@ -94,8 +93,8 @@ nav div.person li{
 .featured{width:100%; margin-bottom: 20px;}
 
 ul {margin:0; padding:0;list-style-image:none;}
-ul.list li {padding:0px 0 5px 12px; line-height:25px; background:url(../images/marker-1.gif) 0 11px no-repeat;}
-ul.list li a { font-size:14px; color:#292929; line-height:25px;}
+ul.list li {width:280px;padding:0px 0 5px 12px; line-height:25px; background:url(../images/marker-1.gif) 0 11px no-repeat;}
+ul.list li a {font-size:14px; color:#292929; line-height:25px;}
 ul.list li a:hover {color:#006699; text-decoration:none;}
 
 /*------------footer */ 
