@@ -141,9 +141,10 @@ class UserController extends Controller
         // 我的图集评论
         $glossary_comment = Glocomment::where('uid',$id)->paginate(5);
         $glossary_comments = Glocomment::where('uid',$id)->get();
+        // 我的图集收藏
         $glossary_collect = Glocollect::where('uid',$id)->paginate(15);
         $glossary_collects = Glocollect::where('uid',$id)->get();
-        // 我的图集收藏
+        // 我的帖子
         $invitations = Invitation::where('uid',$id)->paginate(15);
         $invitations1 = Invitation::where('uid',$id)->get();
         // 我的回帖
@@ -158,6 +159,38 @@ class UserController extends Controller
             'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects,
             'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect,
             'glossaries'=>$glossaries,'glocomments'=>$glossary_comments,'glocollects'=>$glossary_collects]);
+    }
+    /**
+     * 用户个人中心
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsercenter()
+    {
+        $user = User::where('uid',session('uid'))->first();
+        // 他的帖子
+        $invitation = Invitation::where('uid',session('uid'))->paginate(5);
+        $invitations = Invitation::where('uid',session('uid'))->get();
+        // 他的回复
+        $invicomments = Invi_comment::where('uid',session('uid'))->paginate(5);
+        // 他的收藏
+         $invicollect = Invi_collect::where('uid',session('uid'))->paginate(5);
+         $invicollects = Invi_collect::where('uid',session('uid'))->get();
+        return view('home.user.usercenter',['user'=>$user,'invitations'=>$invitations,'invitation'=>$invitation,'invicomments'=>$invicomments,'invicollects'=>$invicollects,
+                                            'invicollect'=>$invicollect]);
+    }
+    /**
+     * 查看用户的个人中心
+     * 
+     */
+    public function getUsercenters($id)
+    {
+        if($id == session('user')->uid){
+            return redirect('/home/user/information');
+        }else{
+            session(['uid'=>$id]);
+            return redirect('/home/user/usercenter');
+        }
     }
 
     /**
@@ -210,7 +243,6 @@ class UserController extends Controller
         }
     
     }
-
 
 
 

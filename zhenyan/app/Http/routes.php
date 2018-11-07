@@ -63,4 +63,5 @@ Route::group(['middleware'=>'home'], function() {
 	Route::controller('/home/answer_reply','home\Answer_replyController'); 					    // 前台问答评论回复
 	Route::resource('/home/glossary/collect','home\GlossaryCollectController'); 				// 前台图集收藏
 	Route::resource('/home/Invi_collect','home\Invi_collectController'); 						// 前台帖子收藏
+	Route::resource('/home/friending','home\FriendingController'); 						// 前台关注
 });
