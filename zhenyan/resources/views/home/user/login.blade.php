@@ -91,13 +91,75 @@
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/retina-1.1.0.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+        <script>
+                /*
+                    Fullscreen background
+                */    
+                $.backstretch("assets/img/backgrounds/1.jpg");
+                
+                $('#top-navbar-1').on('shown.bs.collapse', function(){
+                    $.backstretch("resize");
+                });
+                $('#top-navbar-1').on('hidden.bs.collapse', function(){
+                    $.backstretch("resize");
+                });
+                
+                /*
+                    Form validation
+                */
+                $('.registration-form input[type="text"], .registration-form textarea').on('focus', function() {
+                    $(this).removeClass('input-error');
+                });
+                
+                $('.registration-form').on('submit', function(e) {
+                    
+                    $(this).find('input[type="text"], textarea').each(function(){
+                        if( $(this).val() == "" ) {
+                            e.preventDefault();
+                            $(this).addClass('input-error');
+                        }
+                        else {
+                            $(this).removeClass('input-error');
+                        }
+                    });
+                    
+                });
+
+        </script>
         <script src="assets/js/login.js"></script>
 
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
 
+            <!-- 读取提示信息开始 -->
+        @if (session('success'))
+            <script type="text/javascript">
+                alert("{{ session('success')}}");           
+            </script>;
+        @endif
+        @if (session('error'))
+          <script type="text/javascript">
+                alert("{{ session('error')}}");         
+            </script>;
+        @endif
+    <!-- 读取提示信息结束 -->
+
+    <!-- 显示验证错误信息 开始 -->
+        @if (count($errors) > 0)
+        <div class="">
+            <ul> 
+            @foreach ($errors->all() as $k=>$v)
+                <script type="text/javascript">
+                    if('{{ $k }}' == 0){
+                        alert('{{ $v }}')
+                    }                   
+                </script>;
+            @endforeach
+           </ul>
+        </div>
+        @endif
+        <!-- 显示验证错误信息 结束 -->
     </body>
 
 </html>

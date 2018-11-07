@@ -12,6 +12,9 @@ use App\Models\Userdateail;
 
 class GlossaryCommentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('hlogin', ['only' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *

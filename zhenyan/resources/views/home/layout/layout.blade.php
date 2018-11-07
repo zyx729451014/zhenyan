@@ -403,9 +403,9 @@
 		    </script>;
 	  	@endif
 	  	@if (session('error'))
-	      <div class="alert alert-error">
-	          {{ session('error') }}
-	      </div>
+	      <script type="text/javascript">
+		      	alert("{{ session('error')}}");        	
+		    </script>;
 	  	@endif
 	<!-- 读取提示信息结束 -->
 

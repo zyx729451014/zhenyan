@@ -16,8 +16,9 @@ class LoginMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->session()->has('admin')) {
-                return $next($request); //执行下一次请求 通过
+            return $next($request); //执行下一次请求 通过
         }else{
+            session(['back_uri'=>$_SERVER['REQUEST_URI']]);
             // 跳转到登录页面
             return redirect('/admin/login/login');
         }

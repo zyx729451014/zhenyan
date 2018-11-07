@@ -13,6 +13,9 @@ use App\Models\Userdateail;
 
 class AnswerController extends Controller
 {
+    public function __construct(){
+        $this->middleware('hlogin', ['only' => ['create', 'edit']]);
+    }
     /**
      * Display a listing of the resource.
      *

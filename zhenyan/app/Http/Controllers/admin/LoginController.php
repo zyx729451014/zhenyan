@@ -46,7 +46,9 @@ class LoginController extends Controller
         // 判断密码错误
         if (Hash::check($res['upass'],$user['upass'])) {
             session(['admin'=>$user]);
-            return redirect('admin/index');
+            $uri=empty(session('back_uri')) ? '/admin/index':session('back_uri');
+            session('back_uri',NULL);
+            return redirect($uri);
         }else{
             return back()->withErrors('密码错误')->withInput();
         }

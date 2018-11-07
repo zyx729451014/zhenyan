@@ -16,6 +16,9 @@ use DB;
 
 class InvitationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('hlogin', ['only' => ['create', 'edit','destroy']]);
+    }
     /**
      * 
      * Display a listing of the resource.

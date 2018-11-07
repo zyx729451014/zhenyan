@@ -40,7 +40,6 @@ Route::group(['middleware'=>'login'],function(){
  *	前台路由
  * 
  */
-
 Route::group(['middleware'=>'home'], function() {
 	Route::controller('/home/user','home\UserController');  									// 前台用户管理 注册 登录
 	Route::get('/home/invitation/create','home\InvitationController@create'); 					// 前台帖子发布

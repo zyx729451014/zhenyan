@@ -21,7 +21,9 @@ use App\Models\Invi_comment;
 
 class UserController extends Controller
 { 
-
+    public function __construct(){
+        $this->middleware('hlogin', ['only' => ['getUserdateail', 'getInformation']]);
+    }
 
     /**
      * 前台注册
@@ -99,8 +101,11 @@ class UserController extends Controller
             $user = Userdateail::find($user->uid);
             $user->point +=10;
             $res1 = $user->save();
+
+            $uri=empty(session('back_uri')) ? '/admin/index':session('back_uri');
+            session('back_uri',NULL);
             // 密码正确跳转到首页
-            echo "<script>location.href='/';</script>";
+            echo "<script>location.href='$uri';</script>";
         }else{
             //密码错误返回error 
             echo "error";
