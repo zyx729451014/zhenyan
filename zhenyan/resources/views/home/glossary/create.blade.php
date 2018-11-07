@@ -11,8 +11,8 @@
 	.container>form>select{width: 150px;margin-left: 50px;height: 30px;}
 	.container>form>button{margin: 50px auto;background-color: #0f94b1;margin-top: 15px;margin-left: 400px;}
 </style>
-<section class="container">
-	<h3>发贴</h3>
+<section class="container" style="margin:200px auto;">
+	<h3>发表图集</h3>
 	<form method="post" action="/home/glossary" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<ul>

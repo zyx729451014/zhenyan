@@ -15,7 +15,7 @@
 		<link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
 		<script src="/home/js/responsiveslides.js"></script>
 		<script>
-	    $(function () {
+	    $(function () { 
 	      $("#slider").responsiveSlides({
 	        auto: true,
 	        pager: true,
@@ -66,7 +66,7 @@
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
 				<li><a href="/home/glossary">图集</a></li>
-				<li><a href="#">问答</a></li>
+				<li><a href="/home/answer">问答</a></li>
 			
 			@if (session()->has('user'))
 			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>

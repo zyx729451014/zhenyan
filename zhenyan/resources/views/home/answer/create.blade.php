@@ -10,17 +10,12 @@
 	.container>form>button{margin: 0px auto;background-color: #0f94b1;margin-top: 15px;margin-left: 400px;}
 	.container>form>.ueditor{width: 900px;margin-left: 40px;margin-top: -10px;}
 </style>
-<section class="container" style="margin:100px auto;">
-	<h3>发贴</h3>
-	<form method="post" action="/home/invitation/store">
+<section class="container" style="margin:100px auto;"> 
+	<h3>发表问答</h3>
+	<form method="post" action="/home/answer">
 		{{ csrf_field() }}
 		<span>标	题:</span><input type="text" name="title" placeholder="标题" value="{{ old('title') }}">
-		<select name="cid">
-			<option value="0">帖子类别</option>
-			@foreach($cates as $k=>$v)
-			<option value="{{ $v->cid }}">{{ $v->cname }}</option>
-			@endforeach
-		</select>
+		<br><br>
 		<span>内容:</span>
 		<div class="ueditor">
 			<!-- 加载编辑器的容器 -->

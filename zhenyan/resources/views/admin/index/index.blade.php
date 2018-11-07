@@ -8,12 +8,14 @@
                     <code>Administrators</code>
                   </p>
                   <table class="table">
+                  	@if(session()->has('admin'))
                     <thead>
                       <tr>
                         <th>当前管理员名称</th>
                         <th>{{ session('admin')->uname }}</th>
                       </tr>
                     </thead>
+                    @endif
    					<tbody>
 			            <tr>
 			                <th>服务器IP地址</th>

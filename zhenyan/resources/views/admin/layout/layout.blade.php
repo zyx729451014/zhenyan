@@ -38,6 +38,7 @@
           </form>
         </div>
         <ul class="navbar-nav navbar-nav-right">
+        @if(session()->has('admin'))
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <div class="nav-profile-img">
@@ -58,8 +59,16 @@
                 <i class="mdi mdi-logout mr-2 text-primary"></i>
                 退出
               </a>
-            </div>
+              </div>
           </li>
+        @else
+          <li class="nav-item nav-profile dropdown">
+            <a class="dropdown-item" href="/admin/login/login">
+                <i class="mdi mdi-cached mr-2 text-success"></i>
+               登录
+            </a>
+          </li>
+        @endif
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
@@ -71,6 +80,7 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          @if(session()->has('admin'))
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
@@ -84,6 +94,7 @@
               <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
           </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages1" aria-expanded="false" aria-controls="general-pages">
               <span class="menu-title">用户管理</span>
@@ -133,7 +144,7 @@
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">问答浏览</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/answer">问答浏览</a></li>
               </ul>
             </div>
           </li>

@@ -135,10 +135,15 @@ class UserController extends Controller
         $id = session('user')->uid;
         $user = User::where('uid',$id)->first();
         $userinfo = $user->userinfo;
-        $glossary = Glossary::where('uid',$id)->paginate(1);
-        $glossary_comment = Glocomment::where('uid',$id)->paginate(1);
-        $glossary_collect = Glocollect::where('uid',$id)->paginate(1);
-        // 我发布的帖子
+        // 我发布的图集
+        $glossary = Glossary::where('uid',$id)->paginate(15);
+        $glossaries = Glossary::where('uid',$id)->get();
+        // 我的图集评论
+        $glossary_comment = Glocomment::where('uid',$id)->paginate(5);
+        $glossary_comments = Glocomment::where('uid',$id)->get();
+        $glossary_collect = Glocollect::where('uid',$id)->paginate(15);
+        $glossary_collects = Glocollect::where('uid',$id)->get();
+        // 我的图集收藏
         $invitations = Invitation::where('uid',$id)->paginate(15);
         $invitations1 = Invitation::where('uid',$id)->get();
         // 我的回帖
@@ -148,7 +153,11 @@ class UserController extends Controller
         $invi_collects = Invi_collect::where('uid',$id)->paginate(15);
         $collects = Invi_collect::where('uid',$id)->get();
         // 加载模板
-        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,'invitations'=>$invitations,'invitations1'=>$invitations1,'invi_comments'=>$invi_comments,'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects,'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect]);
+        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,
+            'invitations'=>$invitations,'invitations1'=>$invitations1,'invi_comments'=>$invi_comments,
+            'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects,
+            'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect,
+            'glossaries'=>$glossaries,'glocomments'=>$glossary_comments,'glocollects'=>$glossary_collects]);
     }
 
     /**

@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Invi_comment;
+use App\Models\Notice_reply;
 use App\Models\Userdateail;
-use DB;
 
-class Invi_CommentController extends Controller
+class NoticereplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,6 +18,7 @@ class Invi_CommentController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -28,7 +28,7 @@ class Invi_CommentController extends Controller
      */
     public function create()
     {
-       
+        //
     }
 
     /**
@@ -37,25 +37,25 @@ class Invi_CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {  
-
-       if (empty($request->input('content'))) {
-            return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');
+    public function postStore(Request $request)
+    {
+        if (empty($request->input('content'))) {
+            return redirect() -> back() -> withInput() -> withErrors('回复内容不能为空');
         }
-        $iniv_comment = new Invi_comment;
-        $iniv_comment->iid     = $request->input('iid');
-        $iniv_comment->uid     = session('user')['uid'];
-        $iniv_comment->content = $request->input('content');
-        $res = $iniv_comment->save(); // bool
+        $notice_reply = new Notice_reply;
+        $notice_reply->nid     = $request->input('nid');
+        $notice_reply->cid     = $request->input('cid');
+        $notice_reply->uid     = session('user')['uid'];
+        $notice_reply->content = $request->input('content');
+        $res = $notice_reply->save(); // bool
         // 逻辑判断
         if($res){
             $userdateail = Userdateail::where('uid',session('user')['uid'])->first();
             $userdateail->point = $userdateail->point+5; 
             $res1 = $userdateail->save(); 
-            return back()->with('success', '评论成功');
+            return back()->with('success', '回复成功');
         }else{
-            return back()->with('error','评论失败');
+            return back()->with('error','回复失败');
         }
     }
 

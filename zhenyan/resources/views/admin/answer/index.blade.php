@@ -2,9 +2,9 @@
 @section('content-wrapper')
 <div class='card'>
   <div class="card-body">
-   <h4 class="card-title">公告浏览</h4>
+   <h4 class="card-title">问答浏览</h4>
     <br>
-    <form action="/admin/notice" method="get" class='table-primary'>
+    <form action="/admin/answer" method="get" class='table-primary'>
       <div class='sousuo'>
       <label class='num'>显示
         <select size="1" name="showCount">
@@ -27,34 +27,33 @@
           <tr>
             <th> ID </th>
             <th> 发表人 </th>
-            <th> 公告标题 </th>
-            <th> 公告内容 </th>
+            <th> 标题问题 </th>
+            <th> 问题内容 </th>
             <th> 发表时间 </th>
             <th> 操作 </th>
           </tr>
         </thead>
         <tbody>
-          @foreach($notice as $k => $v)
-      	 	<tr>
-            <td>{{ $v->id }}</td>
-      	 		<td>{{ $v->noticeuser->uname }}</td>
-      	 		<td>{{ $v->title }}</td>
-      	 		<td>{{ $v->content }}</td>
-      	 		<td>{{ $v->created_at }}</td>
-      	 		<td>
-      				<a href="/admin/notice/{{ $v->id }}/edit" class='badge badge-info'>修改</a>
-      				<form action="/admin/notice/{{ $v->id }}" method="post" style="display:inline-block;">
-      					{{ csrf_field() }}
-      					{{ method_field('DELETE') }}
-      					<a href="/admin/notice/{{ $v->id }}"></a><button type="submit" class="badge badge-danger">删除</button>
-      				</form>	
-      	 		</td>
-      	 	 </tr>
-	       	@endforeach
-	</tbody>
+        	@foreach($answer as $k => $v)
+        	<tr>
+		      	<td>{{ $v->id }}</td>
+		 		<td>{{ $v->id }}</td>
+		 		<td>{{ $v->title }}</td>
+		 		<td>{!! $v->content !!}</td>
+		 		<td>{{ $v->created_at }}</td>
+		 		<td>
+					<form action="/admin/answer/{{ $v->id }}" method="post" style="display:inline-block;">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<a href="/admin/answer/{{ $v->id }}"></a><button type="submit" class="badge badge-danger">删除</button>
+					</form>	
+		 		</td>
+			</tr>
+		    @endforeach
+		</tbody>
 	</table>
 	<ul class="pagination" style='margin-left:100px;'>
-		{!! $notice->appends ($request)->render() !!}
+		{!! $answer->appends ($request)->render() !!}
   	</ul>
 </div>
 </div>

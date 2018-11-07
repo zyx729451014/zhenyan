@@ -1,25 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Invi_comment;
-use App\Models\Userdateail;
-use DB;
+use App\Models\Answer;
 
-class Invi_CommentController extends Controller
+
+class AnswerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 问答浏览
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $showCount = $request->input('showCount',5);
+        $search    = $request->input('search','');
+        
+        // 获取数据
+        $answer = Answer::where('title','like','%'.$search .'%')->paginate($showCount);
+        // 加载到列表页面
+        return view('admin.answer.index',['title'=>'问答浏览','answer'=>$answer,'request'=>$request->all()]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +36,7 @@ class Invi_CommentController extends Controller
      */
     public function create()
     {
-       
+        //  
     }
 
     /**
@@ -38,25 +46,8 @@ class Invi_CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
-
-       if (empty($request->input('content'))) {
-            return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');
-        }
-        $iniv_comment = new Invi_comment;
-        $iniv_comment->iid     = $request->input('iid');
-        $iniv_comment->uid     = session('user')['uid'];
-        $iniv_comment->content = $request->input('content');
-        $res = $iniv_comment->save(); // bool
-        // 逻辑判断
-        if($res){
-            $userdateail = Userdateail::where('uid',session('user')['uid'])->first();
-            $userdateail->point = $userdateail->point+5; 
-            $res1 = $userdateail->save(); 
-            return back()->with('success', '评论成功');
-        }else{
-            return back()->with('error','评论失败');
-        }
+    {
+        //
     }
 
     /**
@@ -101,6 +92,11 @@ class Invi_CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Answer::destroy($id);
+        if ($res) {
+            return redirect('admin/answer')->with('success', '删除成功');
+        }else{
+            return back()->with('error', '删除失败');
+        }  
     }
 }
