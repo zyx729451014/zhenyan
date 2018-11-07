@@ -1,5 +1,26 @@
 @extends('home/layout/layout')
 @section('content-wrapper')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="/home/css/style4.css">
+	<script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+		#cont{
+			height: auto;
+		}
+		#content #cont p{
+			width: 100%;
+			height: 40px;
+			background-color: #f8f8f8;
+			line-height: 40px;
+			font-size: 13px;
+		}
+	</style>
+</head>
+<body>
 <section id="content">
 	<div class="zerogrid">
 		<div class="row block">
@@ -74,7 +95,7 @@
 
 						<ul class="list">
 							@foreach($notice as $k=>$v)
-							<li><a href="/home/index/notice/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+							<li><a href="/home/index/show/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -128,11 +149,12 @@
 							<h4><a href="#" style="line-height:60px;">用户名</a></h4>							
 						</section>
 					</div>
-
 				</section>
 			</div>
 			
 		</div>
 	</div>
 </section>  
+</body>
+</html>
 @endsection

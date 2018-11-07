@@ -28,6 +28,7 @@ Route::group(['middleware'=>'login'],function(){
 	Route::get('/admin/glossary/recovery/{id}','admin\GlossaryController@recovery');		// 后台图集恢复
 	Route::resource('/admin/invitation','admin\InvitationController');						// 后台帖子管理
 	Route::resource('/admin/notice','admin\NoticeController'); 								// 后台公告管理	
+	Route::resource('/admin/answer','admin\AnswerController'); 								// 后台问答管理	
 });
 Route::controller('/admin/login','admin\LoginController');   								// 后台 注册 登录
 
@@ -47,3 +48,8 @@ Route::resource('/home/Invi_reply','home\Invi_replyController'); 							// 前�
 Route::resource('/home/glossary/comment','home\GlossaryCommentController'); 				// 前台图集评论
 Route::resource('/home/glossary/reply','home\GlossaryReplyController'); 					// 前台图集回复评论
 Route::controller('/home/index','home\IndexController'); 									// 前台公告详情
+Route::controller('/home/noticecomment','home\NoticecommentController'); 					// 前台公告评论 
+Route::controller('/home/noticereply','home\NoticereplyController'); 					    // 前台公告评论回复
+Route::resource('/home/answer','home\AnswerController'); 					                // 前台问答详情
+Route::controller('/home/answer_comment','home\Answer_commentController'); 					// 前台问答评论
+Route::controller('/home/answer_reply','home\Answer_replyController'); 					    // 前台问答评论回复

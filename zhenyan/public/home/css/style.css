@@ -52,22 +52,28 @@ nav button{
 }
 nav div.person{
 	width:100px;
-	height:60px;
+	height:85px;
 	position:absolute;
 	background-color:#fff;
 	left:890px;
 	top:50px;
-	z-index: 9999;
+	border:1px solid #aaa;
+	display:none;
 }
 nav div.person li{
-	text-decoration:none;
-	width:100%;
-	height:50px;
+	width:100px;
 	text-align:center;
-	line-height:40px;
-	font-size:20px;
-	color:#aaa;
-	border:1px solid #ddd;
+	border-bottom:1px solid #aaa;
+}
+nav div.person li a{
+	text-decoration:none;
+	list-style:none;
+	color:#000;
+	width:100%;
+	height:30px;
+	line-height:20px;
+	z-index: 9999;
+
 }
 
 /*-------------content */

@@ -15,6 +15,7 @@ use DB;
 class InvitationController extends Controller
 {
     /**
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -118,7 +119,7 @@ class InvitationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) 
     {
         $invitation = Invitation::find($id);
         $invi_comments = Invi_comment::where('iid','=',$id)->get();
