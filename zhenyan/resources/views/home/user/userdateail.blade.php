@@ -246,7 +246,6 @@
         </ol>
     </div>
 </div>
-
 <!-- 我的图集  -->
 <div class="personalListBlank personalCont" id="glo" style="display:none;">
     <div style="text-align:center;line-height:40px;">
@@ -373,7 +372,6 @@
     </div>
     
 </div>
-
 <!-- 我的问答 -->
 
 <div class="personalListBlank personalCont" id="ans" style="display:none;">
@@ -459,14 +457,6 @@
         </ol>
     </div>    
 </div>
-
-
-
-
-
-
-
-
 
 <script type="text/javascript">
     $('.invi').click(function(){
@@ -604,7 +594,7 @@
 </body>
 </html>
 
-            <!-- 读取提示信息开始 -->
+        <!-- 读取提示信息开始 -->
         @if (session('success'))
             <script type="text/javascript">
                 alert("{{ session('success') }}");          
