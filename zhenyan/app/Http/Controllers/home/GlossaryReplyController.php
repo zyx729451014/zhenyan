@@ -34,13 +34,14 @@ class GlossaryReplyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 图集评论回复判断.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // 回复内容为空返回错误信息
         if (empty($request->input('content'))) {
             return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');
         }
@@ -50,8 +51,9 @@ class GlossaryReplyController extends Controller
         $gloreply->cid = $request->input('cid');
         $gloreply->content = $request->input('content');
         $res = $gloreply->save();
+        // 回复用户积分加5
         $user = Userdateail::find(session('user')->uid);
-        $user -> point +=50;
+        $user -> point +=5;
         $res1 = $user->save();
         if($res){
             return back()->with('success', '发表成功');

@@ -13,14 +13,14 @@ use App\Models\Web;
 class WebController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示浏览网站信息页面.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         // 查询网站信息
-        $web = Web::find(1);;
+        $web = Web::find(1);
         return view('admin.web.index',['web'=>$web]);
     }
 
@@ -57,7 +57,7 @@ class WebController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 显示修改网站信息页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -69,7 +69,7 @@ class WebController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 修改网站信息判断.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -79,15 +79,7 @@ class WebController extends Controller
     {
         // 开启事物
         DB::beginTransaction();
-        if($request->hasFile('logo')){
-            $profile = $request -> file('logo');
-            $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
-            $file_name = str_random('20').'.'.$ext;
-            $dir_name = './uploads/'.date('Ymd',time());
-            $res = $profile -> move($dir_name,$file_name);
-            // 拼接数据库存放路径
-            $profile_path = ltrim($dir_name.'/'.$file_name,'.');
-        }
+        
         $web = Web::find($id);
         $web->name = $request->input('name');
         $web->describe = $request->input('describe');
@@ -96,7 +88,17 @@ class WebController extends Controller
         $web->statu = $request->input('statu');
         $web->url = $request->input('url');
         $web->cright = $request->input('cright');
-        $web->logo = $profile_path;
+        // 判断图片文件是否上传
+        if($request->hasFile('logo')){
+            $profile = $request -> file('logo');
+            $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+            $res = $profile -> move($dir_name,$file_name);
+            // 拼接数据库存放路径
+            $profile_path = ltrim($dir_name.'/'.$file_name,'.');
+            $web->logo = $profile_path;
+        }
         $res = $web->save();
         if($res){
             // 提交事务

@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
+use App\Models\Notice_comment;
 use DB;
-
+ 
 class IndexController extends Controller
 {
     /**
@@ -30,13 +31,16 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getNotice($id)
+    public function getShow($id)
     { 
         // 获取一条数据
         $notice = Notice::where('id',$id)->first();
+        // dd($notice);
+        $notice_comments = Notice_comment::where('nid','=',$id)->get();
         // 加载模板
-        return view('home.index.notice',['notice'=>$notice]);
+        return view('home.index.notice',['notice'=>$notice,'notice_comments'=>$notice_comments]);
     }
+
 
 
 

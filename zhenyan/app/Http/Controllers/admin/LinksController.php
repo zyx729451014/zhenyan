@@ -13,7 +13,7 @@ use App\Http\Requests\LinksRequest;
 class LinksController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示浏览友情链接页
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +28,7 @@ class LinksController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 添加友情链接页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class LinksController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 添加友情链接判断
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -77,19 +77,19 @@ class LinksController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 修改友情链接页面
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $link = Link::first();
+        $link = Link::find($id);
         return view('admin.links.edit',['link'=>$link]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * 修改友情链接判断
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -116,13 +116,14 @@ class LinksController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除友情链接.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        // 删除数据
         $res = Link::destroy($id);
         if ($res) {
             return redirect('admin/links')->with('success', '删除成功');

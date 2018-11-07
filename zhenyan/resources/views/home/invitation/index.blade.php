@@ -93,7 +93,7 @@
 						@if($v['stick'] == 1)
 						<a class="cat" href="#" title="MZ-NetBlog主题" >置顶<i></i></a>
 						@endif
-						<h2><a href="/home/invitation/show/{{ $v['id'] }}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >{{ $v['title'] }}</a></h2>
+				 		<h2><a href="/home/invitation/show/{{ $v['id'] }}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >{{ $v['title'] }}</a></h2>
 					<p class="meta">
 						<br>
 						<?php

@@ -33,21 +33,24 @@ class GlossaryCommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 图集评论判断.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // 评论内容为空返回错误信息
         if (empty($request->input('content'))) {
             return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');
         }
+        // 添加数据
         $glocomment = new Glocomment;
         $glocomment->uid = session('user')->uid;
         $glocomment->gid = $request->input('gid');
         $glocomment->content = $request->input('content');
         $res = $glocomment->save();
+        // 评论用户积分加5
         $user = Userdateail::find(session('user')->uid);
         $user -> point +=5;
         $res1 = $user->save(); 

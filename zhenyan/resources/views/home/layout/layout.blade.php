@@ -15,7 +15,7 @@
 		<link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
 		<script src="/home/js/responsiveslides.js"></script>
 		<script>
-	    $(function () {
+	    $(function () { 
 	      $("#slider").responsiveSlides({
 	        auto: true,
 	        pager: true,
@@ -66,17 +66,19 @@
 				<li><a href="/home/invitation/{{ $v['cid'] }}">{{ $v['cname'] }}</a></li>
 				@endforeach
 				<li><a href="/home/glossary">图集</a></li>
-				<li><a href="#">问答</a></li>
+				<li><a href="/home/answer">问答</a></li>
 			
 			@if (session()->has('user'))
-			<button style='height:75px;float: left;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>
+			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>
 				<div class="person" style="display: none;">
 					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
 					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
 				</div>
-			@else  
-			<a href="/home/user/login" style='line-height:75px;'>登录</a>
-			<a href="/home/user/register" style='margin-left:5px;line-height:75px;'>注册</a>
+			@else
+
+			<a href="/home/user/register" style='float: right;line-height:75px;'>注册</a>  
+			<a href="/home/user/login" style='float: right;line-height:75px;margin-right:10px;'>登录</a>
+			
 			@endif
 		</ul>
 		</nav>
@@ -397,7 +399,7 @@
 			<!-- 读取提示信息开始 -->
 	  	@if (session('success'))
 	      	<script type="text/javascript">
-		      	alert('发表成功');        	
+		      	alert("{{ session('success')}}");        	
 		    </script>;
 	  	@endif
 	  	@if (session('error'))

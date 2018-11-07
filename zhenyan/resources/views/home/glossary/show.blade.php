@@ -16,7 +16,7 @@
 		<div class="cont">
 			<div class="tw1"></div>
 			<div class="bpic">
-				<img src="./1.jpg" class="image">
+				<img src="" class="image">
 			</div>
 			<div class="spic">
 				<ul class="spic">
@@ -58,8 +58,12 @@
 			
 			</script>
 			<div class="tw2"></div>
-			
+			<form action="/home/glossary/collect" method="post" style="float:right;">
+			{{ csrf_field() }}	
+			<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}">收藏</button>
+		</form>
 		</div>
+		<br>
 		<p>总楼层 <?= count($glocomment)?> | 发表时间	{{ $glossary->created_at }}</p>
 
 			<ol class="comment" >

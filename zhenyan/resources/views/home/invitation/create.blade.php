@@ -10,7 +10,7 @@
 	.container>form>button{margin: 0px auto;background-color: #0f94b1;margin-top: 15px;margin-left: 400px;}
 	.container>form>.ueditor{width: 900px;margin-left: 40px;margin-top: -10px;}
 </style>
-<section class="container">
+<section class="container" style="margin:100px auto;">
 	<h3>发贴</h3>
 	<form method="post" action="/home/invitation/store">
 		{{ csrf_field() }}

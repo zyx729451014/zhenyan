@@ -40,11 +40,12 @@ class Invi_collectController extends Controller
         $invi_collect = Invi_collect::where('iid',$request->collect)->where('uid',session('user')['uid'])->get();
         if(count($invi_collect) == 0){
             $iniv_collect = new Invi_collect;
-            $iniv_collect->iid     = $request->collect;
-            $iniv_collect->uid     = session('user')['uid'];
+            $iniv_collect->iid = $request->collect;
+            $iniv_collect->uid = session('user')['uid'];
             $res = $iniv_collect->save(); // bool
         }else{
-             return back()->with('error','已收藏');
+            return redirect() -> back() -> withInput() -> withErrors('您已收藏');
+             
         }
        
         // 逻辑判断
@@ -99,9 +100,9 @@ class Invi_collectController extends Controller
     {
         $res = Invi_collect::destroy($id);
         if ($res) {
-            return back()->with('success', '删除成功');
+            return back()->with('success', '取消收藏成功');
         }else{
-            return back()->with('error', '删除失败');
+            return back()->with('error', '取消收藏失败');
         }   
     }
 }

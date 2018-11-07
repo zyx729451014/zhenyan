@@ -38,7 +38,7 @@ class Invi_CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
 
        if (empty($request->input('content'))) {
             return redirect() -> back() -> withInput() -> withErrors('发表内容不能为空');

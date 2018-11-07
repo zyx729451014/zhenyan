@@ -35,22 +35,22 @@
         </thead>
         <tbody>
           @foreach($notice as $k => $v)
-	 	<tr>
-      <td>{{ $v->id }}</td>
-	 		<td>{{ $v->noticeuser->uname }}</td>
-	 		<td>{{ $v->title }}</td>
-	 		<td>{{ $v->content }}</td>
-	 		<td>{{ $v->created_at }}</td>
-	 		<td>
-				<a href="/admin/notice/{{ $v->id }}/edit" class='badge badge-info'>修改</a>
-				<form action="/admin/notice/{{ $v->id }}" method="post" style="display:inline-block;">
-					{{ csrf_field() }}
-					{{ method_field('DELETE') }}
-					<a href="/admin/notice/{{ $v->id }}"></a><button type="submit" class="badge badge-danger">删除</button>
-				</form>	
-	 		</td>
-	 	 </tr>
-	 	@endforeach
+      	 	<tr>
+            <td>{{ $v->id }}</td>
+      	 		<td>{{ $v->noticeuser->uname }}</td>
+      	 		<td>{{ $v->title }}</td>
+      	 		<td>{{ $v->content }}</td>
+      	 		<td>{{ $v->created_at }}</td>
+      	 		<td>
+      				<a href="/admin/notice/{{ $v->id }}/edit" class='badge badge-info'>修改</a>
+      				<form action="/admin/notice/{{ $v->id }}" method="post" style="display:inline-block;">
+      					{{ csrf_field() }}
+      					{{ method_field('DELETE') }}
+      					<a href="/admin/notice/{{ $v->id }}"></a><button type="submit" class="badge badge-danger">删除</button>
+      				</form>	
+      	 		</td>
+      	 	 </tr>
+	       	@endforeach
 	</tbody>
 	</table>
 	<ul class="pagination" style='margin-left:100px;'>

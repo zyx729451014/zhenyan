@@ -96,7 +96,7 @@
 </html>
 <script type="text/javascript">
 	$('.hf').click(function(){
-		$(this).parent().next().find('form').slideToggle();;
+		$(this).parent().next().find('form').slideToggle();
 	});
 
 </script>
