@@ -7,10 +7,11 @@
 </head>
 <body>
 	@section('content-wrapper')
-	  <div class="col-lg-12 grid-margin stretch-card">
+	  <div class="col-lg-13 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">帖子浏览</h4>
+          <a href="/admin/invitation/show" class="btn btn-gradient-primary" style="float:right;margin-top:8px;">回收站</a>
             <form action="/admin/invitation" method="get" class='table-primary'>
               <div class='sousuo'>
               <label class='num'>显示
@@ -30,7 +31,7 @@
                   @endforeach  
                 </select>
               </label>
-              <label class='uname' style="margin-left:300px;">
+              <label class='uname' style="margin-left:200px;">
                 <span>关键字</span>
                 <input type="text" name='search' value="{{ $request['search'] or '' }}">
               </label>

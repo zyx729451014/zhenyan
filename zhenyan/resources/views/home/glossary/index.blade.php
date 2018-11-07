@@ -3,6 +3,65 @@
 	<script src="/home/js/jquery-2.1.4.min.js"></script>
 	<script src="/home/js/nprogress.js"></script>
 	<script src="/home/js/jquery.lazyload.min.js"></script>
+	<!-- 轮播图 -->
+
+	<?php
+		$slids = \App\Models\Slid::where('status',1)->get();
+	?>
+	<div class="banner" style="margin-top: 65px;">
+		<ul>
+			@foreach($slids as $k=>$v)
+			<li style="background-image: url('{{ $v->simg }}');">
+				<div class="inner">
+					<h1></h1>
+				</div>
+			</li>			
+			@endforeach
+		</ul>
+	</div>
+	<script src="/home/js/jquery-1.11.0.min.js"></script>
+
+	<script src="/home/js/jquery.event.move.js"></script>
+	<script src="/home/js/jquery.event.swipe.js"></script>
+	
+	<script src="/home/js/unslider.min.js"></script>
+	<script src="/home/js/bootstrap.min.js"></script>
+
+	<script>
+		if(window.chrome) {
+			$('.banner li').css('background-size', '100% 100%');
+		}
+
+		$('.banner').unslider({
+			arrows: true,
+			fluid: true,
+			dots: true,
+			keys: true
+		});
+
+		//  Find any element starting with a # in the URL
+		//  And listen to any click events it fires
+		$('a[href^="#"]').click(function() {
+			//  Find the target element
+			var target = $($(this).attr('href'));
+
+			//  And get its position
+			var pos = target.offset(); // fallback to scrolling to top || {left: 0, top: 0};
+
+			//  jQuery will return false if there's no element
+			//  and your code will throw errors if it tries to do .offset().left;
+			if(pos) {
+				//  Scroll the page
+				$('html, body').animate({
+					scrollTop: pos.top,
+					scrollLeft: pos.left
+				}, 1000);
+			}
+
+			//  Don't let them visit the url, we'll scroll you there
+			return false;
+		});
+	</script>
 <section class="container">
 		<div class="content-wrap">
 			<div class="content">
@@ -18,8 +77,13 @@
 						<h2><a href="/home/glossary/{{ $v->id }}" target="_blank" >{{ $v->title }}</a></h2>
 					<p class="meta">
 						<br>
+						<?php
+							// 评论条数
+							$comment = \App\Models\Glocomment::where('gid',$v['id'])->get();
+							$sum = count($comment);
+						?>
 						<time class="time"><i class="glyphicon glyphicon-time"></i> {{ $v->created_at }}</time>
-						<span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
+						<span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> {{ $sum }}</a></p>
 						<?php 
 							$image = explode('!-!', $v->image);
 						?>

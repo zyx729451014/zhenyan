@@ -9,9 +9,8 @@
 	<script type="text/javascript" src="/home/dateails/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-	<div class="content">
+	<div class="content" style="margin-top:90px;">
 		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:10px;"><a href="/home/glossary">返回</a></div>
-		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:-30px;float:right;"><a href="/home/glossary/collect/{{ $glossary->id }}">收藏</a></div>
 		<div class="title">{{ $glossary->title }}</div>
 		<div class="name"><span>Posted by </span>|<a href="">{{ $glossary->glossaryuser->uname }}</a></div>
 		<div class="cont">
@@ -59,8 +58,12 @@
 			
 			</script>
 			<div class="tw2"></div>
-			
+			<form action="/home/glossary/collect" method="post" style="float:right;">
+			{{ csrf_field() }}	
+			<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}">收藏</button>
+		</form>
 		</div>
+		<br>
 		<p>总楼层 <?= count($glocomment)?> | 发表时间	{{ $glossary->created_at }}</p>
 
 			<ol class="comment" >

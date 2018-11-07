@@ -15,6 +15,9 @@ use App\Models\Userdateail;
 use App\Models\Glossary;
 use App\Models\Glocomment;
 use App\Models\Glocollect;
+use App\Models\Invi_collect;
+use App\Models\Invitation;
+use App\Models\Invi_comment;
 
 class UserController extends Controller
 { 
@@ -135,8 +138,17 @@ class UserController extends Controller
         $glossary = Glossary::where('uid',$id)->paginate(1);
         $glossary_comment = Glocomment::where('uid',$id)->paginate(1);
         $glossary_collect = Glocollect::where('uid',$id)->paginate(1);
+        // 我发布的帖子
+        $invitations = Invitation::where('uid',$id)->paginate(15);
+        $invitations1 = Invitation::where('uid',$id)->get();
+        // 我的回帖
+        $invi_comments = Invi_comment::where('uid',$id)->paginate(5);
+        $comments = Invi_comment::where('uid',$id)->get();
+        // 帖子收藏
+        $invi_collects = Invi_collect::where('uid',$id)->paginate(15);
+        $collects = Invi_collect::where('uid',$id)->get();
         // 加载模板
-        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect]);
+        return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,'invitations'=>$invitations,'invitations1'=>$invitations1,'invi_comments'=>$invi_comments,'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects,'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect]);
     }
 
     /**

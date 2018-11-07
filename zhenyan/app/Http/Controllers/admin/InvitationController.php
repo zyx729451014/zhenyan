@@ -34,9 +34,7 @@ class InvitationController extends Controller
         $search    = $request->input('search','');
         $cid       = $request->input('cid','');
         if($cid === "0" || $cid === ''){
-             $invitation = DB::table('invitations')
-                    ->where('title','like','%'.$search .'%')
-                    ->paginate($showCount);
+             $invitation = Invitation::where('title','like','%'.$search .'%')->paginate($showCount);            
         }else{
             // 先根据类别ID查出所有子类ID ，以一维数组返回
             $arr1 = Cates::where('cid','=',$cid)->get();
@@ -48,21 +46,14 @@ class InvitationController extends Controller
                      $arr_cid[] = $arr2[$k]->cid;
                 }
                 // 形成查询帖子的条件
-                $invitation = DB::table('invitations')
-                        ->where('title','like','%'.$search .'%')
-                        ->whereIn('cid', $arr_cid)                                     
-                        ->paginate($showCount); 
+                $invitation = invitation::where('title','like','%'.$search .'%')->whereIn('cid', $arr_cid)->paginate($showCount);        
 
             }else{              
                 $id = $arr1[0]->cid; 
-                $invitation = DB::table('invitations')
-                        ->where('title','like','%'.$search .'%')
-                        ->where('cid','=', $id)                                     
-                        ->paginate($showCount); 
+                $invitation = Invitation::where('title','like','%'.$search .'%')->where('cid','=', $id)->paginate($showCount);                  
             }
                        
         }
-
         return view('admin.invitation.index',['cates'=>self::getCates(),'invitation'=>$invitation]);
     }
 
@@ -95,7 +86,9 @@ class InvitationController extends Controller
      */
     public function show($id)
     {
-        //
+       //获取软删除的数据
+        $invitation = Invitation::onlyTrashed()->get();
+        return view('admin.invitation.show',['invitation'=>$invitation]);
     }
 
     /**
@@ -142,18 +135,50 @@ class InvitationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 软删除
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-       $res = Invitation::destroy($id);
+        $res = Invitation::destroy($id);
         if ($res) {
             return redirect('admin/invitation')->with('success', '删除成功');
         }else{
             return back()->with('error', '删除失败');
         }   
+    }
+     /**
+     *
+     *  永久删除  
+     *
+     *  @param  $id 被删除的id
+     * 
+     */
+    public function forcedelete($id)
+    {
+
+        $invitation = Invitation::onlyTrashed()->where('id',$id)->first();
+        $invitation->forceDelete();
+        return back()->with('success', '删除成功');
+    }
+
+    /**
+     *
+     *  恢复被软删除的数据
+     *
+     *  @param   $id 恢复的id
+     * 
+     */
+    
+    public function recovery($id)
+    {
+         $res = Invitation::withTrashed()->where('id',$id)->restore();
+         if ($res) {
+            return redirect('admin/invitation')->with('success', '恢复成功');
+        }else{
+            return back()->with('error', '恢复失败');
+        } 
     }
 }

@@ -11,4 +11,9 @@ class Invi_comment extends Model
     {
     	return $this->belongsTo('App\User','uid');
     }
+    
+    public function invi_commentinvi()
+    {
+    	return $this->belongsTo('App\Models\invitation','iid');
+    }
 }

@@ -16,7 +16,7 @@
         
         </select>
       条</label>
-      <label class='uname'>
+      <label class='uname' style="margin-left:380px;">
         <span>关键字</span>
         <input type="text" name='search' value="{{ $request['search'] or '' }}">
       </label>

@@ -47,7 +47,6 @@ class LoginController extends Controller
         if (Hash::check($res['upass'],$user['upass'])) {
             session(['admin'=>$user]);
             return redirect('admin/index');
-
         }else{
             return back()->withErrors('密码错误')->withInput();
         }

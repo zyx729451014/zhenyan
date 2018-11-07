@@ -10,6 +10,8 @@ use App\Models\Invitation;
 use App\Models\Invi_comment;
 use App\Http\Requests\InvitationRequest;
 use App\Models\Userdateail;
+use App\Models\Invi_collect;
+use App\Models\Invi_reply;
 use DB;
 
 class InvitationController extends Controller
@@ -34,10 +36,7 @@ class InvitationController extends Controller
             }
         // 形成查询商品的条件
         }
-        $invitation = DB::table('invitations')
-                    ->whereIn('cid', $arr_cid)
-                    ->get();
-
+        $invitation = Invitation::whereIn('cid', $arr_cid)->get();
         // 最新发布
                 $arr1 = Cates::where('path','like',"%,$id%")->get();
                 $arr_cid = [];
@@ -45,11 +44,7 @@ class InvitationController extends Controller
                      $arr_cid[] = $arr1[$k]->cid;
                 }
         // 形成查询帖子的条件
-        $invitations = DB::table('invitations')
-                        ->where('title','like','%'.$search .'%')
-                        ->orderBy('created_at','desc')
-                        ->whereIn('cid', $arr_cid)                                     
-                        ->paginate(8); 
+        $invitations = Invitation::where('title','like','%'.$search .'%')->orderBy('created_at','desc')->whereIn('cid', $arr_cid)->paginate(8);     
        return view('home.invitation.index',['cate'=>$cate,'invitation'=>$invitation,'invitations'=>$invitations]);
     }
 
@@ -133,7 +128,8 @@ class InvitationController extends Controller
      */
     public function edit($id)
     {
-        //
+         $invitation = Invitation::find($id);
+         return view('home.invitation.edit',['invitation'=>$invitation]);
     }
 
     /**
@@ -143,9 +139,22 @@ class InvitationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $invitation = Invitation::find($id);
+        $invitation->title = $request->input('title');
+        $invitation->content = $request->input('content');
+        $invitation->stick = '0';
+
+        $res = $invitation->save(); // bool
+        // 逻辑判断
+        if($res){ 
+            return back()->with('success', '修改成功');
+        }else{
+            // 事务回滚
+            DB::rollBack();
+            return back()->with('error','修改失败');
+        }
     }
 
     /**
@@ -156,6 +165,15 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Invi_collect::where('iid',$id)->delete();
+        $res1 = Invi_comment::where('iid',$id)->delete();
+        $res2 = Invi_reply::where('iid',$id)->delete();
+      
+        $res3 = Invitation::destroy($id);
+        if ($res && $res1 && $res2 && $res3) {
+            return back()->with('success', '删除成功');
+        }else{
+            return back()->with('error', '删除失败');
+        }   
     }
 }

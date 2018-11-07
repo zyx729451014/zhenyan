@@ -15,17 +15,9 @@ class GlossaryCollectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $glocollect = new Glocollect;
-        $glocollect->uid = session('user')->uid;
-        $glocollect->gid = $id;
-        $res = $glocollect->save();
-        if($res){
-            return back()->with('success', '收藏成功');
-        }else{
-            return back()->with('error','收藏失败');
-        }
+        //
     }
 
     /**
@@ -46,7 +38,21 @@ class GlossaryCollectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $glocollect = Glocollect::where('gid',$request->collect)->where('uid',session('user')['uid'])->get();
+        if(count($glocollect) == 0){
+            $glocollect = new Glocollect;
+            $glocollect->uid = session('user')->uid;
+            $glocollect->gid = $request->collect;
+            $res = $glocollect->save();
+        }else{
+            return redirect() -> back() -> withInput() -> withErrors('您已收藏');
+        }
+        
+        if($res){
+            return back()->with('success', '收藏成功');
+        }else{
+            return back()->with('error','收藏失败');
+        }
     }
 
     /**
@@ -91,6 +97,11 @@ class GlossaryCollectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Glocollect::destroy($id);
+        if ($res) {
+            return back()->with('success', '取消收藏成功');
+        }else{
+            return back()->with('error', '取消收藏失败');
+        }   
     }
 }
