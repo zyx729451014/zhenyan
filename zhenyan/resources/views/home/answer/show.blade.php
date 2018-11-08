@@ -55,7 +55,7 @@
 							@foreach($answer_replys as $kk => $vv)
 							<li>
 								<img src="{{ $vv->answer_replyuser->userinfo->face }}" height="20" width="20">
-								<a href="/home/user/information">{{ $vv->answer_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
+								<a href="/home/user/usercenters/{{ $vv->answer_replyuser->uid }}">{{ $vv->answer_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
 							</li>
 							@endforeach
 							<li>

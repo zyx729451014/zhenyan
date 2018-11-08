@@ -18,7 +18,7 @@
         $(function () {
           $("#slider").responsiveSlides({
             auto: true,
-            pager: true,
+            pager: true,  
             nav: true,
             speed: 500,
             maxwidth: 800,
@@ -200,11 +200,7 @@
 
             @endif
 		    <form>
-<<<<<<< HEAD
-		        <a href="#" id="pri">发私信</a>
-=======
 		        <button id="pri"><a href="#">发私信</a></button>
->>>>>>> origin/gxm
 		    </form>
 	    </div>
 	    <div class="menuPer yuanYin " id="private">
@@ -322,20 +318,20 @@
 	<div class="personalMain" id="coll" style="display:none">
 		<h3 class="yuanYin">Ta 的问题</h3>
         <dl class="yuanYin">
-            @foreach($invitations as $k=>$v)
+            @foreach($answers as $k=>$v)
                 <dd>
-                  <a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
+                  <a href="/home/answer/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
                 </dd>
             @endforeach     
         </dl>
         <h3 class="yuanYin">Ta 的回答</h3>
         <dl class="yuanYin">
             <dd> 
-            @foreach($invicomments as $k=>$v)
+            @foreach($answer_comments as $k=>$v)
                 <li style="border-bottom:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
-                    回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v->content }}</em>
+                    回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v['content'] }}</em>
                     <br>
-                    <a href="/home/invitation/show/{{ $v['id'] }}" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
+                    <a href="/home/answer/{{ $v->answeruser_comment->id }}" style="color:#47494a;">{{ $v->answeruser_comment->title }}</a>
                 </li>
             @endforeach
             </dd>       
@@ -399,7 +395,7 @@
                 </script>;
             @endforeach
            </ul>
-        </div>
+        </div>  
         @endif
         <!-- 显示验证错误信息 结束 -->
 	<!-- 尾部 -->

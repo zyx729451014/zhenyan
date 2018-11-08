@@ -128,7 +128,9 @@
     <dl class="headerPer yuanYin clearfix">
         <dt>
         	<a href="/home/user/userdateail">
+                @if(!empty($userinfo['face']))
             	<img class="img" src="{{ $userinfo['face'] }}" width="90" height="90">
+                @endif
             </a>
         <h4 class="tit"><b></b></h4>
         <span class="grade">普通会员</span>
@@ -191,9 +193,13 @@
 	                        </span>
 	                        <div class="module-main">
 	                            <span> 
+                                   
 									男<input type="radio" name='sex' value='m'>&nbsp&nbsp&nbsp
+                                   
 									女<input type="radio" name='sex' value='w'>&nbsp&nbsp&nbsp
+                                    
 									未知<input type="radio" name='sex' value='x' checked>
+                                    
 	                            </span>
 	                         </div>
 	                    </li>
@@ -205,17 +211,17 @@
 	                            用户积分
 	                        </span>
 	                        <div class="module-main">
-	                            <span>{{ $userinfo->point }}</span>
+	                            <span value='50'>{{ $userinfo->point }}</span>
 	                        </div>
 	                    </li>
 	                    <!--用户名积分 end-->
 
 	                    <!--生日 begin-->
-	                    <li class="mList">
+	                    <li class="mList" style='padding-top:10px;'>
 	                        <span class="module-tit">生日</span>
 	                        <div class="module-main">
 	                            <label class="inputText">    
-	                               <input type="date" name='birthdate' value='1990-01-01' style="height:40px;">
+	                               <input type="date" name='birthdate' value='{{ $userinfo->birthdate }}' style="height:40px;">
 	                            </label>
 	                        </div>
 	                    </li>

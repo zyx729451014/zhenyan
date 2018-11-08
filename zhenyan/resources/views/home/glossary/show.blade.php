@@ -15,7 +15,7 @@
 		<div class="name"><span>Posted by </span>|<a href="">{{ $glossary->glossaryuser->uname }}</a></div>
 		<div class="cont">
 			<div class="tw1"></div>
-			<div class="bpic">
+			<div class="bpic">  
 				<img src="" class="image">
 			</div>
 			<div class="spic">
@@ -94,7 +94,7 @@
 							@foreach ($gloreply as $kk=>$vv)
 								<li>
 									<img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30">
-									<a href="">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
+									<a href="/home/user/usercenter/{{ $vv->glossaryuser['uid'] }}">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
 								</li>
 							@endforeach
 							<li>
