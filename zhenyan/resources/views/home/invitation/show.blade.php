@@ -23,7 +23,7 @@
 <body>
 	<div class="content" style="margin-top:90px;">
 		<div class="title">{{ $invitation->title }}</div>
-		<div class="name"><span>Posted by </span>|<a href="">{{ $invitation->invitationuser->uname }}</a></div>
+		<div class="name"><span>Posted by </span>|<a href="/home/user/usercenters/$invitation->invitationuser->uid">{{ $invitation->invitationuser->uname }}</a></div>
 		<div id="cont">
 				{!! $invitation->content !!}	
 		</div>

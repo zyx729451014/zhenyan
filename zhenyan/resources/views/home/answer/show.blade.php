@@ -23,7 +23,7 @@
 <body>
 	<div class="content" style="margin-top:100px;">
 		<div class="title">{{ $answer->title }}</div>
-		<div class="name"><span>Posted by </span>|<a href="">{{ $answer->answersuser->uname }}</a></div>
+		<div class="name"><span>Posted by </span>|<a href="/home/user/usercenters/{{ $answer->answersuser->uid }}">{{ $answer->answersuser->uname }}</a></div>
 		<div id="cont">
 		{!! $answer->content !!}
 		</div>
@@ -38,8 +38,8 @@
 					</div>
 					
 					<cite>
-						<img alt="" src="{{ $v->answer_commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="/home/user/information">{{ $v->answer_commentuser->uname }}</a> 
+						<a href="/home/user/usercenters/{{ $v->answer_commentuser->uid }}"><img alt="" src="{{ $v->answer_commentuser->userinfo->face }}" height="70" width="70" /></a>		
+						<a href="/home/user/usercenters/{{ $v->answer_commentuser->uid }}">{{ $v->answer_commentuser->uname }}</a> 
 						<span style='color:#333;'>{{ $v['content'] }}</span>
 						<br />				
 						<a href="#comment-63">{{ $v['created_at'] }}</a><br>
@@ -54,7 +54,7 @@
 						<ul>
 							@foreach($answer_replys as $kk => $vv)
 							<li>
-								<img src="{{ $vv->answer_replyuser->userinfo->face }}" height="20" width="20">
+								<a href="/home/user/usercenters/{{ $vv->answer_replyuser->uid }}"><img src="{{ $vv->answer_replyuser->userinfo->face }}" height="20" width="20"></a>
 								<a href="/home/user/usercenters/{{ $vv->answer_replyuser->uid }}">{{ $vv->answer_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
 							</li>
 							@endforeach
