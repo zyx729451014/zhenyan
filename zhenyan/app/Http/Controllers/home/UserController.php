@@ -18,6 +18,7 @@ use App\Models\Glocollect;
 use App\Models\Invi_collect;
 use App\Models\Invitation;
 use App\Models\Invi_comment;
+use App\Models\Friending;
 
 class UserController extends Controller
 { 
@@ -187,10 +188,14 @@ class UserController extends Controller
         $glocomments = Glocomment::where('uid',session('uid'))->get();
         // 他的图集收藏
          $glocollects = Glocollect::where('uid',session('uid'))->get();
+        
+         $idol = count(Friending::where('fans',session('uid'))->get());
+         // 他的粉丝
+        $fans = count(Friending::where('idol',session('uid'))->get());
         return view('home.user.usercenter',['user'=>$user,'invitations'=>$invitations,'invitation'=>$invitation,
                     'invicomments'=>$invicomments,'invicollects'=>$invicollects,
                     'glossarys'=>$invitations,'glossary'=>$invitation,'glocomments'=>$glocomments,
-                    'glocollects'=>$glocollects]);
+                    'glocollects'=>$glocollects,'idol'=>$idol,'fans'=>$fans]);
     }
     /**
      * 查看用户的个人中心
@@ -221,8 +226,12 @@ class UserController extends Controller
         $id = session('user')->uid;
         $user = User::where('uid',$id)->first();
         $userinfo = $user->userinfo;
+        // 他的关注
+        $idol = count(Friending::where('fans',session('user')->uid)->get());
+         // 他的粉丝
+        $fans = count(Friending::where('idol',session('user')->uid)->get());
         // 加载模板
-        return view('home.user.information',['userinfo'=>$userinfo]);
+        return view('home.user.information',['userinfo'=>$userinfo,'idol'=>$idol,'fans'=>$fans]);
     }
 
     /**

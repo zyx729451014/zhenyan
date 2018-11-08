@@ -70,7 +70,7 @@
 			
 			@if (session()->has('user'))
 			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>
-				<div class="person" style="display: none;">
+				<div class="person" style="display: none;height:120px;">
 					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
 					<li><a href="/home/private" style='text-decoration:none;color:#333;'>我的私信</a></li>
 					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
