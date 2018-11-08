@@ -200,11 +200,7 @@
 
             @endif
 		    <form>
-<<<<<<< HEAD
-		        <a href="#" id="pri">发私信</a>
-=======
 		        <button id="pri"><a href="#">发私信</a></button>
->>>>>>> origin/gxm
 		    </form>
 	    </div>
 	    <div class="menuPer yuanYin " id="private">
