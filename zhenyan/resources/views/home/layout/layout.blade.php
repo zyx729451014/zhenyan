@@ -72,10 +72,14 @@
 			<button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您:{{ session('user')->uname }}</button>
 				<div class="person" style="display: none;">
 					<li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
+					<li><a href="/home/private" style='text-decoration:none;color:#333;'>我的私信</a></li>
 					<li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
 				</div>
 			@else
-
+			<?php  
+				$uri=\Request::getRequestUri();
+				session(['home_uri'=>$uri]);
+			?>
 			<a href="/home/user/register" style='float: right;line-height:75px;'>注册</a>  
 			<a href="/home/user/login" style='float: right;line-height:75px;margin-right:10px;'>登录</a>
 			

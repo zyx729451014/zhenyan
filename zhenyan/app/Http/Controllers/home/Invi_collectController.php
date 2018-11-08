@@ -9,9 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Invi_collect;
 class Invi_collectController extends Controller
 {
-    public function __construct(){
-        $this->middleware('hlogin', ['only' => ['store', 'destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *

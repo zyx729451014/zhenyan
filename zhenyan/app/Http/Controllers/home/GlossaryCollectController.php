@@ -10,9 +10,6 @@ use App\Models\Glocollect;
 
 class GlossaryCollectController extends Controller
 {
-    public function __construct(){
-        $this->middleware('hlogin', ['only' => ['store', 'destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *

@@ -44,7 +44,6 @@
 						<br />				
 						<a href="#comment-63">{{ $v['created_at'] }}</a><br>
 					</cite>
-						
 					<div style="width:100%;height:10px;">
 						<a href="#hf" style="float:right" class="hf">回复</a>
 					</div>
@@ -65,7 +64,17 @@
 									<label for="message"></label><br />
 									<input type="hidden" name="aid" value="{{ $answer->id }}">
 									<input type="hidden" name="cid" value="{{ $v->id }}">
+									@if(session()->has('user'))
 									<textarea id="message" name="content" rows="3" cols="30" tabindex="4" style="width:90%;margin-left:5%;"  placeholder="@ {{ $v->answer_commentuser->uname }}　{{ $v['created_at'] }}"></textarea>	
+									@else
+									<?php  
+										$uri=\Request::getRequestUri();
+										session(['home_uri'=>$uri]);
+									?>
+									<div style="width:90%;margin-left:5%;height:70px;border:1px solid #ccc;background:#fff;text-align:center;line-height:70px;">
+										<a href="/home/user/login">登录</a>后才可以回复哟~
+									</div>
+									@endif
 									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
 								</form>	
 							</li>
@@ -86,7 +95,13 @@
 			{{ csrf_field() }}	
 					<label for="message"></label><br />
 					<input type="hidden" name="aid" value="{{ $answer['id'] }}">
+					@if(session()->has('user'))
 					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>	
+					@else
+					<div style="width:90%;margin-left:5%;height:200px;border:1px solid #ccc;background:#fff;text-align:center;line-height:200px;">
+						<a href="/home/user/login">登录</a>后才可以回答哟~
+					</div>
+					@endif
 					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;" />         		
 			</form>
 	</div>

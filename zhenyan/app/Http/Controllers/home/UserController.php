@@ -102,10 +102,10 @@ class UserController extends Controller
             $user->point +=10;
             $res1 = $user->save();
 
-            $uri=empty(session('back_uri')) ? '/admin/index':session('back_uri');
-            session('back_uri',NULL);
+            $uri=empty(session('home_uri')) ? '/':session('home_uri');
+            session('home_uri',NULL);
             // 密码正确跳转到首页
-            echo "<script>location.href='$uri';</script>";
+            echo "<script>location.href='".$uri."';</script>";
         }else{
             //密码错误返回error 
             echo "error";
@@ -177,12 +177,20 @@ class UserController extends Controller
         $invitation = Invitation::where('uid',session('uid'))->paginate(5);
         $invitations = Invitation::where('uid',session('uid'))->get();
         // 他的回复
-        $invicomments = Invi_comment::where('uid',session('uid'))->paginate(5);
+        $invicomments = Invi_comment::where('uid',session('uid'))->get();
         // 他的收藏
-         $invicollect = Invi_collect::where('uid',session('uid'))->paginate(5);
          $invicollects = Invi_collect::where('uid',session('uid'))->get();
-        return view('home.user.usercenter',['user'=>$user,'invitations'=>$invitations,'invitation'=>$invitation,'invicomments'=>$invicomments,'invicollects'=>$invicollects,
-                                            'invicollect'=>$invicollect]);
+         // 他的图集
+        $glossary = Glossary::where('uid',session('uid'))->paginate(5);
+        $glossarys = Glossary::where('uid',session('uid'))->get();
+        // 他的图集评论
+        $glocomments = Glocomment::where('uid',session('uid'))->get();
+        // 他的图集收藏
+         $glocollects = Glocollect::where('uid',session('uid'))->get();
+        return view('home.user.usercenter',['user'=>$user,'invitations'=>$invitations,'invitation'=>$invitation,
+                    'invicomments'=>$invicomments,'invicollects'=>$invicollects,
+                    'glossarys'=>$invitations,'glossary'=>$invitation,'glocomments'=>$glocomments,
+                    'glocollects'=>$glocollects]);
     }
     /**
      * 查看用户的个人中心
@@ -190,8 +198,13 @@ class UserController extends Controller
      */
     public function getUsercenters($id)
     {
-        if($id == session('user')->uid){
-            return redirect('/home/user/information');
+        if(session()->has('user')){
+            if($id == session('user')->uid){
+                return redirect('/home/user/information');
+            }else{
+                session(['uid'=>$id]);
+                return redirect('/home/user/usercenter');
+            }
         }else{
             session(['uid'=>$id]);
             return redirect('/home/user/usercenter');

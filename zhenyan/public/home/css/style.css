@@ -27,7 +27,7 @@ input.button {	margin: 0;	border: 0;	height: 24px;	padding: 0px 12px 0px 12px;}
 a.button:hover, input.button:hover {background: #006699;color:#ffffff;}
 
 /*-------------header */
-header {height: 75px;width:100%;background-color: #fff;position: fixed;top: 0px;left: 0px;z-index: 2;}
+header {height: 75px;width:100%;background-color: #fff;position: fixed;top: 0px;left: 0px;z-index: 99999999;}
 
 /*------------menu */
 
@@ -52,7 +52,7 @@ nav button{
 }
 nav div.person{
 	width: 150px;
-	height:80px;
+	height:auto;
 	position:absolute;
 	background-color:#fff;
 	left:890px;
@@ -65,9 +65,6 @@ nav div.person li{
 	height: 40px;
 	text-align:center;
 	line-height:40px;
-	
-}
-nav div.person li:first-child{
 	border-bottom:1px solid #aaa;
 }
 nav div.person li a{

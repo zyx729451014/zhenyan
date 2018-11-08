@@ -17,7 +17,7 @@ use DB;
 class GlossaryController extends Controller
 {
     public function __construct(){
-        $this->middleware('hlogin', ['only' => ['create', 'edit']]);
+        $this->middleware('hlogin', ['only' => ['create', 'edit','destroy']]);
     }
     /**
      * 显示图集列表页.

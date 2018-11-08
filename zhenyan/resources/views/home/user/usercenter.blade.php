@@ -72,11 +72,12 @@
             <button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您：{{ session('user')->uname }}</button>
                 <div class="person" style="display: none;">
                     <li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
+                    <li><a href="/home/private" style='text-decoration:none;color:#333;'>我的私信</a></li>
                     <li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
                 </div>
             @else
-            <a href="/home/user/login">登录</a>
-            <a href="/home/user/register">注册</a>
+            <a href="/home/user/register" style='float: right;line-height:75px;'>注册</a>  
+            <a href="/home/user/login" style='float: right;line-height:75px;margin-right:10px;'>登录</a>
             @endif
         </nav>
     </header>
@@ -106,7 +107,8 @@
     .content{width: 980px;height: auto;margin: 0px auto;margin-top: 90px;}
 	.grade{color: #252727;text-align: center;}	   
     form{width: 120px;float: left;margin-left: 10px;} 
-    form button{background-color: #f2fbfd;width: 80px;height: 45px;margin-left: 10px;padding: 10px;margin-bottom: 10px; margin-top: 10px;font-size: 13px;}
+    form button{background-color: #f2fbfd;width: 80px;height: 30px;margin-left: 10px;margin-bottom: 10px; margin-top: 10px;font-size: 13px;}
+    form>a{display:inline-block;text-align:center;line-height:30px;background-color: #f2fbfd;width: 80px;height: 30px;margin-left: 10px;margin-bottom: 10px; margin-top: 10px;font-size: 13px;}
     .yuanYin dd{line-height: 35px;}
     .yuanYin dd span{width: 120px;display:line-block;float: right;}
     textarea{border:1px solid #ccc;width: 280px;height: 230px;text-indent: 1em;font-size: 14px;margin-top: 20px;}   
@@ -123,7 +125,7 @@
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/go_wap.js"></script>
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
-<div class="content" style="margin-top:100px;height:730px;">
+<div class="content" style="margin-top:100px;height:auto;">
     <!--personalSide-->
     <div class="personalSide">
 	    <dl class="headerPer yuanYin clearfix">
@@ -145,37 +147,76 @@
 	        </dd>
 	    </dl>
 	    <div class="menuPer yuanYin">
-            <?php 
-                $friend = App\Models\Friending::where('uid',session('user')->uid)->where('idol',$user->uid)->first();
+            <?php
+                if(session()->has('user')){
+                    $friend = App\Models\Friending::where('uid',session('user')->uid)->where('idol',$user->uid)->first();
+                } 
             ?>
-            @if(count($friend) != 1)
-	    	<form style="margin-left:10px;" method="post" action="/home/friending">
-                {{ csrf_field() }}
-		        <button type="submit" name="id" value="{{ $user->uid }}">+关注</button>
-		    </form>
+            @if(isset($friend))
+                @if(count($friend) != 1)
+    	    	<form style="margin-left:10px;" method="post" action="/home/friending">
+                    {{ csrf_field() }}
+    		        <button type="submit" name="id" value="{{ $user->uid }}">+关注</button>
+    		    </form>
+                @else
+                <form style="margin-left:10px;" method="post" action="/home/friending/{{ $friend->id }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit">取消关注</button>
+                </form>
+                @endif
             @else
-            <form style="margin-left:10px;" method="post" action="/home/friending/{{ $friend->id }}">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button type="submit">取消关注</button>
-            </form>
+                @if(!session()->has('user'))
+                <form style="margin-left:10px;" method="post" action="">
+                    {{ csrf_field() }}
+                    <button type="button" name="id" value="{{ $user->uid }}" onclick="friending()">+关注</button>
+                </form>
+                <?php  
+                    $uri=\Request::getRequestUri();
+                    session(['home_uri'=>$uri]);
+                ?>
+                <script type="text/javascript">
+                    function friending()
+                    {
+                        alert('您还未登录 请先去登录');
+                        location.href='/home/user/login';
+                        return false;
+                    }
+                </script>   
+                @else
+                    @if(count($friend) != 1)
+                    <form style="margin-left:10px;" method="post" action="/home/friending">
+                        {{ csrf_field() }}
+                        <button type="submit" name="id" value="{{ $user->uid }}">+关注</button>
+                    </form>
+                    @else
+                    <form style="margin-left:10px;" method="post" action="/home/friending/{{ $friend->id }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit">取消关注</button>
+                    </form>
+                    @endif
+                @endif
+
             @endif
 		    <form>
-		        <button id="pri"><a href="">发私信</a></button>
+		        <a href="#" id="pri">发私信</a>
 		    </form>
 	    </div>
 	    <div class="menuPer yuanYin " id="private">
 	    	<span id="x"><a href="#">x</a></span>
-	    	<form style="margin-top:10px;">
-		      	<textarea placeholder="给用户发私信:"></textarea>
-		      	<button>发送</button>
+	    	<form style="margin-top:10px;" action="/home/private" method="post">
+            {{ csrf_field() }}
+                <input type="hidden" name="oid" value="{{ $user->uid }}">
+		      	<textarea placeholder="给用户发私信:" name="content"></textarea>
+		      	<button type="submit">发送</button>
 		    </form>
 	    </div>
 	    <ul class="menuPer yuanYin">
 	        <li>
 	            <a href="#" class="invi">Ta的帖子</a>
-	            <a href="#" class="comm">Ta的回复</a>
-	            <a href="#" class="coll">Ta的收藏</a>
+	            <a href="#" class="comm">Ta的图集</a>
+	            <a href="#" class="coll">Ta的问答</a>
 	        </li>
 	    </ul>
 	</div>
@@ -188,47 +229,112 @@
 	            </dd>
             @endforeach      
         </dl>
-        <h3 class="yuanYin">Ta 的收藏</h3>
+        <h3 class="yuanYin">Ta 的图集</h3>
         <dl class="yuanYin">
-			@foreach($invicollect as $k=>$v)
+            @foreach($glossary as $k=>$v)
+                <dd>
+                  <a href="/home/glossary/show/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
+                </dd>
+            @endforeach   
+        </dl>
+        <h3 class="yuanYin">Ta 的问答</h3>
+        <dl class="yuanYin">
+			@foreach($invicollects as $k=>$v)
                 <dd>
                   <a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->invi_collectinvi->title }}</a></a><span>{{ $v->created_at }}</span>
                 </dd>
             @endforeach   
         </dl>
 	</div>
+
+    <!-- TA的帖子 -->
 	<div class="personalMain" id="invi" style="display:none">
 		<h3 class="yuanYin">Ta 的帖子</h3>
         <dl class="yuanYin">
-			@foreach($invitations as $k=>$v)
+            @foreach($invitations as $k=>$v)
                 <dd>
                   <a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
                 </dd>
             @endforeach     
         </dl>
-	</div>
-	<div class="personalMain" id="comm" style="display:none">
-		<h3 class="yuanYin">Ta 的回复</h3>
-        <dl class="yuanYin"
-			<dd> 
+        <h3 class="yuanYin">Ta 的回复</h3>
+        <dl class="yuanYin">
+            <dd> 
             @foreach($invicomments as $k=>$v)
-              	<li style="border-bottom:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
-	                回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v->content }}</em>
-	                <br>
-	                <a href="/home/invitation/show/{{ $v['id'] }}" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
-        		</li>
+                <li style="border-bottom:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                    回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v->content }}</em>
+                    <br>
+                    <a href="/home/invitation/show/{{ $v['id'] }}" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
+                </li>
             @endforeach
             </dd>       
         </dl>
-	</div>
-	<div class="personalMain" id="coll" style="display:none">
-		<h3 class="yuanYin">Ta 的收藏</h3>
+        <h3 class="yuanYin">Ta 的收藏</h3>
         <dl class="yuanYin">
-			@foreach($invicollects as $k=>$v)
+            @foreach($invicollects as $k=>$v)
                 <dd>
                   <a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->invi_collectinvi->title }}</a></a><span>{{ $v->created_at }}</span>
                 </dd>
             @endforeach  
+        </dl>
+
+	</div>
+
+    <!-- TA的图集 -->
+
+	<div class="personalMain" id="comm" style="display:none">
+		<h3 class="yuanYin">Ta 的图集</h3>
+        <dl class="yuanYin">
+            @foreach($glossarys as $k=>$v)
+                <dd>
+                  <a href="/home/glossary/show/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
+                </dd>
+            @endforeach     
+        </dl>
+        <h3 class="yuanYin">Ta 的评论</h3>
+        <dl class="yuanYin">
+            <dd> 
+            @foreach($glocomments as $k=>$v)
+                <li style="border-bottom:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                    回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v->content }}</em>
+                    <br>
+                    <a href="/home/glossary/show/{{ $v['id'] }}" style="color:#47494a;">{{ $v->commentglo->title }}</a>
+                </li>
+            @endforeach
+            </dd>       
+        </dl>
+        <h3 class="yuanYin">Ta 的收藏</h3>
+        <dl class="yuanYin">
+            @foreach($glocollects as $k=>$v)
+                <dd>
+                  <a href="/home/glossary/show/{{ $v['id'] }}">{{ $v->collectglo->title }}</a></a><span>{{ $v->created_at }}</span>
+                </dd>
+            @endforeach  
+        </dl>
+	</div>
+
+
+    <!-- TA的问答 -->
+	<div class="personalMain" id="coll" style="display:none">
+		<h3 class="yuanYin">Ta 的问题</h3>
+        <dl class="yuanYin">
+            @foreach($invitations as $k=>$v)
+                <dd>
+                  <a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->title }}</a></a><span>{{ $v->created_at }}</span>
+                </dd>
+            @endforeach     
+        </dl>
+        <h3 class="yuanYin">Ta 的回答</h3>
+        <dl class="yuanYin">
+            <dd> 
+            @foreach($invicomments as $k=>$v)
+                <li style="border-bottom:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
+                    回复内容 :<em style="font-size:13px;color:#babebf;cleal:both;font-style:normal;"> &nbsp {{ $v->content }}</em>
+                    <br>
+                    <a href="/home/invitation/show/{{ $v['id'] }}" style="color:#47494a;">{{ $v->invi_commentinvi->title }}</a>
+                </li>
+            @endforeach
+            </dd>       
         </dl>
 	</div>
 </div>

@@ -75,8 +75,8 @@
                     <li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
                 </div>
             @else
-            <a href="/home/user/login">登录</a>
-            <a href="/home/user/register">注册</a>
+           <a href="/home/user/register" style='float: right;line-height:75px;'>注册</a>  
+            <a href="/home/user/login" style='float: right;line-height:75px;margin-right:10px;'>登录</a>
             @endif
         </nav>
     </header>
