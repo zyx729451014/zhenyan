@@ -17,7 +17,7 @@ class FriendingController extends Controller
      */
     public function index()
     {
-        //
+        return view('home.friend.index');
     }
 
     /**
@@ -40,6 +40,7 @@ class FriendingController extends Controller
     {
         $friend = new Friending;
         $friend->uid = session('user')->uid;
+        $friend->fans = session('user')->uid;
         $friend->idol = $request->id;
         $res = $friend->save();       
         if($res){

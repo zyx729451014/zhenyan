@@ -70,9 +70,10 @@
             </ul>
             @if (session()->has('user'))
             <button style='height:75px;float: right;line-height: 75px;' class="navbut">欢迎您：{{ session('user')->uname }}</button>
-                <div class="person" style="display: none;">
+                <div class="person" style="display: none;height:120px;">
                     <li><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>个人中心</a></li>
-                    <li><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
+                   <li style="border-bottom:1px solid #ccc;"><a href="/home/user/userdateail" style='text-decoration:none;color:#333;'>我的私信</a></li>
+                    <li style="border"><a href="/home/user/logout" style='text-decoration:none;color:#333;'>退出</a></li>
                 </div>
             @else
             <a href="/home/user/login">登录</a>
@@ -123,7 +124,7 @@
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/go_wap.js"></script>
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
-<div class="content" style="margin-top:100px;height:730px;">
+<div class="content" style="margin-top:100px;height:auto;">
     <!--personalSide-->
     <div class="personalSide">
 	    <dl class="headerPer yuanYin clearfix">
@@ -137,11 +138,11 @@
 
 	        <dd class="rightBorder">
 	            <span>关注</span>
-	            <a href="https://my.fengniao.com/friend.php?action=friend">0</a>
+	            <a href="#">{{ $idol }}</a>
 	        </dd>
 	        <dd>
 	            <span>粉丝</span>
-	            <a href="https://my.fengniao.com/friend.php?action=fans">0</a>
+	            <a href="#">{{ $fans }}</a>
 	        </dd>
 	    </dl>
 	    <div class="menuPer yuanYin">
@@ -161,7 +162,7 @@
             </form>
             @endif
 		    <form>
-		        <button id="pri"><a href="">发私信</a></button>
+		        <button id="pri"><a href="#">发私信</a></button>
 		    </form>
 	    </div>
 	    <div class="menuPer yuanYin " id="private">
@@ -252,9 +253,11 @@
 		$('#comm').hide();
 	});
 	$('#pri').click(function(){
-		$('#private').show();
+
+		$('#private').css('display','block');
 	});
 	$('#x').click(function(){
+        $('#index').show()
 		$('#private').hide();
 	});
 
