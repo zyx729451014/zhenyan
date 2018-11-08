@@ -196,15 +196,18 @@ class UserController extends Controller
         // 他的图集评论
         $glocomments = Glocomment::where('uid',session('uid'))->get();
         // 他的图集收藏
-         $glocollects = Glocollect::where('uid',session('uid'))->get();
-        
+        $glocollects = Glocollect::where('uid',session('uid'))->get();
+        // 他的问题
+        $answers = Answer::where('uid',session('uid'))->get();
+        // 他的回答
+        $answer_comments = Answer_comment::where('uid',session('uid'))->get();
          $idol = count(Friending::where('fans',session('uid'))->get());
          // 他的粉丝
         $fans = count(Friending::where('idol',session('uid'))->get());
         return view('home.user.usercenter',['user'=>$user,'invitations'=>$invitations,'invitation'=>$invitation,
                     'invicomments'=>$invicomments,'invicollects'=>$invicollects,
                     'glossarys'=>$invitations,'glossary'=>$invitation,'glocomments'=>$glocomments,
-                    'glocollects'=>$glocollects,'idol'=>$idol,'fans'=>$fans]);
+                    'glocollects'=>$glocollects,'idol'=>$idol,'fans'=>$fans,'answers'=>$answers,'answer_comments'=>$answer_comments]);
     }
     /**
      * 查看用户的个人中心
@@ -224,7 +227,7 @@ class UserController extends Controller
             return redirect('/home/user/usercenter');
         }
     }
-
+ 
     /**
      * 我的资料
      *

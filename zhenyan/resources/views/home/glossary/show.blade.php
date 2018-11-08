@@ -12,10 +12,10 @@
 	<div class="content" style="margin-top:90px;">
 		<div style="border:1px solid #ccc; width:80px;height:30px;text-align:center;line-height:30px;margin-top:10px;"><a href="/home/glossary">返回</a></div>
 		<div class="title">{{ $glossary->title }}</div>
-		<div class="name"><span>Posted by </span>|<a href="">{{ $glossary->glossaryuser->uname }}</a></div>
+		<div class="name"><span>Posted by </span>|<a href="/home/user/usercenters/{{ $glossary->glossaryuser->uid }}">{{ $glossary->glossaryuser->uname }}</a></div>
 		<div class="cont">
 			<div class="tw1"></div>
-			<div class="bpic">
+			<div class="bpic">  
 				<img src="" class="image">
 			</div>
 			<div class="spic">
@@ -75,8 +75,8 @@
 					</div>
 
 					<cite>
-						<img alt="" src="{{ $v->commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="">{{ $v->commentuser->uname }}</a>
+						<a href="/home/user/usercenters/{{ $v->commentuser->uid }}"><img alt="" src="{{ $v->commentuser->userinfo->face }}" height="70" width="70" /></a>			
+						<a href="/home/user/usercenters/{{ $v->commentuser->uid }}">{{ $v->commentuser->uname }}</a>
 							<span>{{ $v->content }}</span> 
 						<br />				
 						<a href="">{{ $v->created_at }}</a><br>
@@ -93,8 +93,8 @@
 							?>
 							@foreach ($gloreply as $kk=>$vv)
 								<li>
-									<img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30">
-									<a href="">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
+									<a href="/home/user/usercenters/{{ $vv->replyuser->uid }}"><img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30"></a>
+									<a href="/home/user/usercenters/{{ $vv->replyuser->uid }}">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
 								</li>
 							@endforeach
 							<li>
