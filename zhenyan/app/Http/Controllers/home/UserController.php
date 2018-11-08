@@ -19,6 +19,9 @@ use App\Models\Invi_collect;
 use App\Models\Invitation;
 use App\Models\Invi_comment;
 use App\Models\Friending;
+use App\Models\Answer;
+use App\Models\Answer_comment;
+use App\Models\Answer_reply;
 
 class UserController extends Controller
 { 
@@ -159,12 +162,18 @@ class UserController extends Controller
         // 帖子收藏
         $invi_collects = Invi_collect::where('uid',$id)->paginate(15);
         $collects = Invi_collect::where('uid',$id)->get();
+        // 我的问题
+        $answer = Answer::where('uid',$id)->paginate(5);
+        $answers = Answer::where('uid',$id)->get();
+        // 我的回答
+        $answer_comment= Answer_comment::where('uid',$id)->paginate(5);
+        $answer_comments = Answer_comment::where('uid',$id)->get();
         // 加载模板
         return view('home.user.userdateail',['userinfo'=>$userinfo,'user'=>$user,
             'invitations'=>$invitations,'invitations1'=>$invitations1,'invi_comments'=>$invi_comments,
             'comments'=>$comments,'invi_collects'=>$invi_collects,'collects'=>$collects,
             'glossary'=>$glossary,'glocomment'=>$glossary_comment,'glocollect'=>$glossary_collect,
-            'glossaries'=>$glossaries,'glocomments'=>$glossary_comments,'glocollects'=>$glossary_collects]);
+            'glossaries'=>$glossaries,'glocomments'=>$glossary_comments,'glocollects'=>$glossary_collects,'answer'=>$answer,'answers'=>$answers,'answer_comment'=>$answer_comment,'answer_comments'=>$answer_comments]);
     }
     /**
      * 用户个人中心

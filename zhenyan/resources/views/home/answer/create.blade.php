@@ -14,9 +14,9 @@
 	<h3>发表问答</h3>
 	<form method="post" action="/home/answer">
 		{{ csrf_field() }}
-		<span>标	题:</span><input type="text" name="title" placeholder="标题" value="{{ old('title') }}">
+		<span>问题:</span><input type="text" name="title" placeholder="标题" value="{{ old('title') }}">
 		<br><br>
-		<span>内容:</span>
+		<span>回答:</span>
 		<div class="ueditor">
 			<!-- 加载编辑器的容器 -->
 		    <script id="content" name="content" type="text/plain" placeholder="内容" class="small" value="{{ old('content') }}" style="height:500px">

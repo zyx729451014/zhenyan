@@ -12,4 +12,5 @@ class Answer_reply extends Model
     {
     	return $this->belongsTo('App\User','uid');
     }
+    
 }
