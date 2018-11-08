@@ -12,4 +12,8 @@ class Answer_comment extends Model
     {
     	return $this->belongsTo('App\User','uid');
     }
+     public function answeruser_comment()
+    {
+    	return $this->belongsTo('App\Models\Answer','aid');
+    }
 }

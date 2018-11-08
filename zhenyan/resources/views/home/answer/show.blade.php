@@ -39,7 +39,7 @@
 					
 					<cite>
 						<img alt="" src="{{ $v->answer_commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="index.html">{{ $v->answer_commentuser->uname }}</a> 
+						<a href="/home/user/information">{{ $v->answer_commentuser->uname }}</a> 
 						<span style='color:#333;'>{{ $v['content'] }}</span>
 						<br />				
 						<a href="#comment-63">{{ $v['created_at'] }}</a><br>
@@ -56,7 +56,7 @@
 							@foreach($answer_replys as $kk => $vv)
 							<li>
 								<img src="{{ $vv->answer_replyuser->userinfo->face }}" height="20" width="20">
-								<a href="/home/information/{{ $vv->answer_replyuser->uid }}">{{ $vv->answer_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
+								<a href="/home/user/information">{{ $vv->answer_replyuser->uname }}</a>:<span>{{ $vv['content'] }}</span>
 							</li>
 							@endforeach
 							<li>

@@ -18,7 +18,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) 
     {
         $search    = $request->input('search','');
         // 获取数据
@@ -98,7 +98,8 @@ class AnswerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $answer = answer::find($id);
+        return view('home.answer.edit',['answer'=>$answer]);
     }
 
     /**
@@ -110,7 +111,18 @@ class AnswerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $answer = Answer::find($id);
+        $answer->title = $request->input('title');
+        $answer->content = $request->input('content');
+        $res = $answer->save(); // bool
+        // 逻辑判断
+        if($res){ 
+            return back()->with('success', '修改成功');
+        }else{
+            // 事务回滚
+            DB::rollBack();
+            return back()->with('error','修改失败');
+        }
     }
 
     /**
@@ -121,6 +133,11 @@ class AnswerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Answer::destroy($id);
+        if ($res) {
+            return back()->with('success', '删除成功');
+        }else{
+            return back()->with('error', '删除失败');
+        }  
     }
 }

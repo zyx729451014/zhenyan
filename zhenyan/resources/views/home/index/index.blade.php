@@ -178,11 +178,9 @@
 					<div class="heading">问答</div>
 					<div class="content">
 					<ul class="list">
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">2</a></li>					
+						@foreach($answer as $k => $v)
+						<li><a href="/home/answer/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+						@endforeach					
 					</ul>
 					</div>
 				</section>

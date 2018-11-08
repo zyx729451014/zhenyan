@@ -12,7 +12,7 @@
 */
 Route::get('/','home\IndexController@index'); // 前台首页
 /**
- *
+ * 
  *	后台路由
  * 
  */

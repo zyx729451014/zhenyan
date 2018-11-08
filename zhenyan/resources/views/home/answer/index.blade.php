@@ -75,12 +75,10 @@
 		<div class="content-wrap">
 			<div class="content">
 				<div class="title">
-					<h3 style="line-height: 1.3"></h3>
+					<h3 style="line-height: 1.3">问答</h3>
 					<br>
-					
-					<ul>
-						
-						<li><a href="/home/answer/create">发帖</a></li>
+					<ul style="width:600px;height:40px;margin-left:150px;">
+						<li style="float:left;width:80px;height:30px;border:1px solid #d8dadb;margin-left:450px;text-align: center;"><a href="/home/answer/create" style="line-height:30px;color:#809195">提问</a></li>
 					</ul>
   				</div>
   				@foreach($answer as $k => $v)

@@ -18,7 +18,7 @@
         $(function () {
           $("#slider").responsiveSlides({
             auto: true,
-            pager: true,
+            pager: true, 
             nav: true,
             speed: 500,
             maxwidth: 800,
@@ -138,6 +138,8 @@
         <a class="comment" href="#" target="_self" style="margin-right:20px;">我的回帖</a>
         <a class="collect" href="#" target="_self">我的收藏</a>
     </div>
+
+
     <div class="personalListBlank" id="invitation" style="width:970px;margin:0px auto;">
        @if($invitations->isEmpty())
             <div class="blankList non-existent show">
@@ -161,6 +163,7 @@
         @endif
         @endif
     </div>
+
      <div class="personalListBlank" id="invitations" style="width:970px;margin:0px auto;display:none;">
         <ol>
             @foreach($invitations1 as $k=>$v)
@@ -331,6 +334,8 @@
              @endforeach          
         </ol>
     </div>
+
+
     <div class="personalListBlank" id="gcollect" style="width:970px;margin:0px auto;display:none;">
          @if($glossary->isEmpty())
             <div class="blankList non-existent show">
@@ -381,83 +386,89 @@
         <a class="question" href="#" target="_self" style="margin-right:20px;color:#07aacd;">我的问题</a>
         <a class="answer" href="#" target="_self" style="margin-right:20px;">我的回答</a>
     </div>
+    <!-- 我的问题 5条 -->
     <div class="personalListBlank" id="question" style="display:block;width:970px;margin:0px auto;">
-        @if($glossary->isEmpty())
+        @if($answer->isEmpty())
             <div class="blankList non-existent show">
                 <p class="non-existentTxt">暂时木有内容呀~</p>
             </div>
         @else
         <h4>我的问题</h4>
         <ol>
-            @foreach($glossary as $k=>$v)
-            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/glossary/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
-                <form style="float:right;width:70px;" action="/home/glossary/{{ $v->id }}" method="post">
+            @foreach($answer as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/answer/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                <form style="float:right;width:70px;" action="/home/answer/{{ $v->id }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button>
                 </form>  
-                    <a href="/home/glossary/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+                    <a href="/home/answer/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
             </li>
             
             @endforeach
         </ol>
-         @if(count($glossary) >= 15)
+         @if(count($answer) >= 5)
         <div style="margin-left:450px;">
-            <a href="#" class="question">点击查看全部</a>
+            <a href="#" id="questionss">点击查看全部</a>
         </div>
         @endif
         @endif
     </div>
-    <div class="personalListBlank" id="questions" style="width:970px;margin:0px auto;display:none;">
+
+     <!-- 我的问题  全部 -->
+    <div class="personalListBlank" id="questions" style="display:block;width:970px;margin:0px auto;">
         <ol>
-            @foreach($glossaries as $k=>$v)
-            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/glossary/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
-                <form style="float:right;width:70px;" action="/home/glossary/{{ $v->id }}" method="post">
+            @foreach($answers as $k=>$v)
+            <li style="line-height:30px;margin-left:10px;border:1px solid #c1c9cb;padding:10px;margin:10px;">{{ $k+1 }}.&nbsp <a href="/home/answer/{{ $v->id }}" style="font-size:13px;line-height:30px;">{{ $v->title }}</a>               
+                <form style="float:right;width:70px;" action="/home/answer/{{ $v->id }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button style="background:#07aacd;color:#fff;"class="btn btn-default btn-search" >删除</button>
                 </form>  
-                    <a href="/home/glossary/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
-            </li>           
+                    <a href="/home/answer/{{$v->id}}/edit" style="float:right;width:70px;"><button style="background:#cccccc;color:#fff;;" class="btn btn-default btn-search">编辑</button> </a>                  
+            </li>
             @endforeach
         </ol>
     </div>
+
+    <!-- 我的回答 5条-->
     <div class="personalListBlank " id="answer" style="width:970px;margin:0px auto;display:none;">
-        @if($glossary->isEmpty())
+        @if($answer_comment->isEmpty())
             <div class="blankList non-existent show">
                 <p class="non-existentTxt">暂时木有内容呀~</p>
             </div>
         @else
         <h4>我的回答</h4>
-        <ol style="margin-left:20px;">
-            @foreach($glocomment as $k=>$v)
+         <ol style="margin-left:20px;">
+            @foreach($answer_comment as $kk=>$vv)
             <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
-                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                回复内容 : {{ $vv->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $vv->created_at }}</span>
                 <br>
-                <a href="/home/glossary/{{ $v->commentglo->id }}" style="color:#47494a;">{{ $v->commentglo->title }}</a>
-                <span style="color:#abafb0;font-size:15px;float:right;"> {{ $v->commentuser->uname }}</span>
+                <a href="/home/answer/{{ $vv->id }}" style="color:#0f3e6f;">{{ $vv->answeruser_comment['title'] }}</a><i style='color:#aaa;'>{{ $vv->answer_commentuser->uname }}</i>
             </li>
-             @endforeach          
+
+            @endforeach          
         </ol>
-        @if(count($glocomment) >= 5)
+        @if(count($answer_comment) >= 5)
         <div style="margin-left:450px;">
-            <a href="#" class="answers">点击查看全部</a>
+            <a href="#" id="answerss">点击查看全部</a>
         </div>
         @endif
-        @endif
+        @endif 
     </div>
-    <div class="personalListBlank" id="answers" style="width:970px;margin:0px auto;display:none;">
-        <ol style="margin-left:20px;">
-            @foreach($glocomments as $k=>$v)
+
+    <!-- 我的回答 全部-->
+    <div class="personalListBlank " id="answers" style="width:970px;margin:0px auto;display:none;">
+         <ol style="margin-left:20px;">
+            @foreach($answer_comments as $kk=>$vv)
             <li style="border:1px solid #c1c9cb;line-height:40px;padding:10px;margin:10px;">
-                回复内容 : {{ $v->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $v->created_at }}</span>
+                回复内容 : {{ $vv->content }} :<span style="font-size:13px;color:#babebf;"> &nbsp{{ $vv->created_at }}</span>
                 <br>
-                <a href="/home/glossary/{{ $v->commentglo->id }}" style="color:#47494a;">{{ $v->commentglo->title }}</a>
-                <span style="color:#abafb0;font-size:15px;float:right;"> {{ $v->commentuser->uname }}</span>
+                <a href="/home/answer/{{ $vv->id }}" style="color:#0f3e6f;">{{ $vv->answeruser_comment['title'] }}</a><i style='color:#aaa;'>{{ $vv->answer_commentuser->uname }}</i>
             </li>
-             @endforeach          
+            @endforeach          
         </ol>
-    </div>    
+    </div>
 </div>
 
 
@@ -552,13 +563,17 @@
     });
       $('.answer').click(function(){
         $('#answer').css('display','block');
+        $('#answers').css('display','none');
         $('#question').css('display','none');
+        $('#questions').css('display','none');
         $(this).css('color','#07aacd');
         $('.question').css('color','');
     });
      $('.question').click(function(){
         $('#question').css('display','block');
+        $('#questions').css('display','none');
         $('#answer').css('display','none');
+        $('#answers').css('display','none');
         $(this).css('color','#07aacd');
         $('.answer').css('color','');
     });
@@ -586,14 +601,19 @@
         $('#gcollect').css('display','none');
         $('#gcollects').css('display','block');
     });
-    $('.questions').click(function(){
+      $('#questionss').click(function(){ 
         $('#question').css('display','none');
         $('#questions').css('display','block');
     });
-    $('.answers').click(function(){
+    $('#answerss').click(function(){ 
         $('#answer').css('display','none');
         $('#answers').css('display','block');
     });
+    $('.ans').click(function(){ 
+        $('#questions').css('display','none');
+        $('#question').css('display','block');
+    });
+
 
 
 </script><style type="text/css">
@@ -604,7 +624,7 @@
 </body>
 </html>
 
-            <!-- 读取提示信息开始 -->
+            <!-- 读取提示信息开始
         @if (session('success'))
             <script type="text/javascript">
                 alert("{{ session('success') }}");          
