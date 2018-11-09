@@ -57,7 +57,6 @@ $(function() {
 	<link rel="stylesheet" type="text/css" href="/home/css/style4.css">
 	<script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
 	<style type="text/css">
-<<<<<<< HEAD
 		#cont{
 			height: auto;
 		}
@@ -71,9 +70,6 @@ $(function() {
 		*{
 			text-decoration: none;
 		}
-=======
-
->>>>>>> origin/gxm
 		#cont{height: auto;}
 		#content #cont p{width: 100%;height: 40px;background-color: #f8f8f8;line-height: 40px;font-size: 13px;}	
 		#invi{height: auto;}
@@ -108,7 +104,7 @@ $(function() {
 					<div class="heading">
 						<h2><a href="/home/glossary" style="color:#333;">图集</a></h2>
 						@foreach($glossary as $k=>$v)
-						<ul>
+						<ul style="width:640px;height:150px;">
 						<p><h4>
 						<a href="/home/glossary/{{ $v->id }}" style="font-size: 15px;color: #383838;text-decoration: none;">{{ $v->title }}</a>
 								<span style="display: inline-block;float: right;color: #9d9f9f;font-size: 13px;">{{ $v->created_at }}</span></h4></p>
@@ -116,7 +112,7 @@ $(function() {
 							$image = explode('!-!', $v->image);
 						?>
 						@foreach ($image as $kk=>$vv)
-						<li style="width:1000px;"><a href="/home/glossary/{{ $v->id }}"><img src="{{ $vv }}" style="height:100px;"></a></li>
+						<li style="width:1000px;"><a href="/home/glossary/{{ $v->id }}"><img src="{{ $vv }}" style="height:100px;float:left;"></a></li>
 						@endforeach
 						</ul>
 					@endforeach
