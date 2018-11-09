@@ -9,72 +9,59 @@
 		.title ul li a{line-height:30px;color:#809195;text-decoration: none;}	
 		.title ul li a:hover{color: #168da6;}		
 	</style>
-	<!-- 轮播图 -->
-
-	<?php
-		$slids = \App\Models\Slid::where('status',1)->get();
-	?>
-	<div class="banner" style="margin-top: 65px;">
-		<ul>
-			@foreach($slids as $k=>$v)
-			<li style="background-image: url('{{ $v->simg }}');">
-				<div class="inner">
-					<h1></h1>
-				</div>
-			</li>			
-			@endforeach
-		</ul>
-	</div>
-	<script src="/home/js/jquery-1.11.0.min.js"></script>
-
-	<script src="/home/js/jquery.event.move.js"></script>
-	<script src="/home/js/jquery.event.swipe.js"></script>
 	
-	<script src="/home/js/unslider.min.js"></script>
-	<script src="/home/js/bootstrap.min.js"></script>
+<!-- 轮播图 -->
+<?php
+		$slids = \App\Models\Slid::where('status',1)->get();
+?>
+<div id="banner_tabs" class="flexslider" style="width:1920px;margin:0px auto;">
+	<ul class="slides">
+		@foreach($slids as $k=>$v)
+		<li style="width:1920px;height:482px;">
+			<a title="" target="_blank" href="#">
+				<img   width="1920" height="482" alt="" style="background: url('{{ $v->simg }}') no-repeat center;" src="{{ $v->simg }}">
+			</a>
+		</li>
+		@endforeach
+	</ul>
+	<ul class="flex-direction-nav">
+		<li><a class="flex-prev" href="javascript:;">Previous</a></li>
+		<li><a class="flex-next" href="javascript:;">Next</a></li>
+	</ul>
+	<ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+		@foreach($slids as $k=>$v)
+		<li style="background:none;"><a></a></li>
+		@endforeach
+	</ol>
+</div>
+<script type="text/javascript">
+$(function() {
+	var bannerSlider = new Slider($('#banner_tabs'), {
+		time: 5000,
+		delay: 400,
+		event: 'hover',
+		auto: true,
+		mode: 'fade',
+		controller: $('#bannerCtrl'),
+		activeControllerCls: 'active'
+	});
+	$('#banner_tabs .flex-prev').click(function() {
+		bannerSlider.prev()
+	});
+	$('#banner_tabs .flex-next').click(function() {
+		bannerSlider.next()
+	});
+})
+</script>
+</div>
 
-	<script>
-		if(window.chrome) {
-			$('.banner li').css('background-size', '100% 100%');
-		}
-
-		$('.banner').unslider({
-			arrows: true,
-			fluid: true,
-			dots: true,
-			keys: true
-		});
-
-		//  Find any element starting with a # in the URL
-		//  And listen to any click events it fires
-		$('a[href^="#"]').click(function() {
-			//  Find the target element
-			var target = $($(this).attr('href'));
-
-			//  And get its position
-			var pos = target.offset(); // fallback to scrolling to top || {left: 0, top: 0};
-
-			//  jQuery will return false if there's no element
-			//  and your code will throw errors if it tries to do .offset().left;
-			if(pos) {
-				//  Scroll the page
-				$('html, body').animate({
-					scrollTop: pos.top,
-					scrollLeft: pos.left
-				}, 1000);
-			}
-
-			//  Don't let them visit the url, we'll scroll you there
-			return false;
-		});
-	</script>
 <section class="container">
 		<div class="content-wrap">
 			<div class="content">
 				<div class="title">
 					<h3 style="line-height: 1.3">{{ $cate['cname'] }}</h3>
 					<br>
-					<?php
+						<?php
 						$cates = \app\Models\Cates::getCates();
 					?>
 					<ul>

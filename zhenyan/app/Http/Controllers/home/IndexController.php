@@ -15,6 +15,7 @@ use App\Models\Invi_comment;
 use App\Models\Friending;
 use App\User;
 use DB;
+use App\Models\Glossary;
  
 class IndexController extends Controller
 {
@@ -27,11 +28,11 @@ class IndexController extends Controller
     public function index()
     {
         //  按发表时间顺序获取5条公告数据
-        $notice = DB::select('select * from notice order by created_at desc limit 10');
+        $notice = DB::select('select * from notice order by created_at desc limit 5');
          //  按发表时间顺序获取5条问答数据
-        $answer = DB::select('select * from answers order by created_at desc limit 10');
+        $answer = DB::select('select * from answers order by created_at desc limit 5');
         // 帖子推荐中的显示
-        $invitation = Invitation::orderBy('created_at','desc')->paginate(15);
+        $invitation = Invitation::orderBy('created_at','desc')->get()->take(15);
         // 热帖中的显示根据评论查询
         $iniv_comm = Invitation::get();
         $sum = [] ;
@@ -80,8 +81,11 @@ class IndexController extends Controller
                 $idol[] = User::where('uid',$v)->get();
             }         
         }
+        //  按发表时间顺序获取5条图集
+        $glossary = Glossary::orderBy('created_at','desc')->get()->take(10);
         // 加载模板
-        return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'invitation'=>$invitation,'comment'=>$comment,'idol'=>$idol]);
+        return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'invitation'=>$invitation,'comment'=>$comment,'idol'=>$idol,'glossary'=>$glossary]);
+       
        
     }
 

@@ -82,7 +82,7 @@ nav div.person li a{
 .block {padding: 10px 0px;background:#ffffff;}
 
 .main-content{}
-.main-content article{margin: 20px 0;overflow:hidden; position:relative;}
+.main-content article{overflow:hidden; position:relative;}
 .main-content .heading h2{ font-size:18px; line-height:25px; letter-spacing:-1px; font-weight:bold;}
 .main-content .heading .info{font-size:12px; font-style:italic;}
 .main-content .content{}

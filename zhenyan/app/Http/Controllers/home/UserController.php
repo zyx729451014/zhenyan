@@ -98,22 +98,26 @@ class UserController extends Controller
         $upass = $_POST['upass'];
         // 查询数据库用户 
         $user = User::where('uname',$uname)->first();
-        // 判断密码错误
-        if (Hash::check($upass,$user['upass'])) {
-            session(['user'=>$user]);
-            // 用户登录积分加10
-            $user = Userdateail::find($user->uid);
-            $user->point +=10;
-            $res1 = $user->save();
+        // 判断是管理员不能登录
+        if($user->identity != 1){
+            // 判断密码错误
+            if (Hash::check($upass,$user['upass'])) {
+                session(['user'=>$user]);
+                // 用户登录积分加10
+                $user = Userdateail::find($user->uid);
+                $user->point +=10;
+                $res1 = $user->save();
 
-            $uri=empty(session('home_uri')) ? '/':session('home_uri');
-            session('home_uri',NULL);
-            // 密码正确跳转到首页
-            echo "<script>location.href='".$uri."';</script>";
-        }else{
-            //密码错误返回error 
-            echo "error";
+                $uri=empty(session('home_uri')) ? '/':session('home_uri');
+                session('home_uri',NULL);
+                // 密码正确跳转到首页
+                echo "<script>location.href='".$uri."';</script>";
+            }else{
+                //密码错误返回error 
+                echo "error";
+            }
         }
+       
     
       
         

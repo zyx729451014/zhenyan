@@ -125,9 +125,9 @@
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/go_wap.js"></script>
 <script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
-<div class="content" style="margin-top:100px;height:auto;">
+<div class="content" style="margin-top:100px;height:auto;padding-bottom:390px;">
     <!--personalSide-->
-    <div class="personalSide">
+    <div class="personalSide" style="padding-bottom:100px;">
 	    <dl class="headerPer yuanYin clearfix">
 	        <dt>
 	        	<a href="/home/user/userdateail">
@@ -212,6 +212,7 @@
 		      	<button type="submit">发送</button>
 		    </form>
 	    </div>
+        <div style="cleal:both;"></div>
 	    <ul class="menuPer yuanYin">
 	        <li>
 	            <a href="#" class="invi">Ta的帖子</a>
@@ -220,6 +221,7 @@
 	        </li>
 	    </ul>
 	</div>
+
 	<div class="personalMain" id="index">
 		<h3 class="yuanYin">Ta 的帖子</h3>
         <dl class="yuanYin">
@@ -337,6 +339,7 @@
             </dd>       
         </dl>
 	</div>
+    <div style="cleal:both;"></div>
 </div>
 <script type="text/javascript">
 	$('.invi').click(function(){
