@@ -11,7 +11,7 @@
                   	@if(session()->has('admin'))
                     <thead>
                       <tr>
-                        <th>当前管理员名称</th>
+                        <th style='width:150px;'>当前管理员名称</th>
                         <th>{{ session('admin')->uname }}</th>
                       </tr>
                     </thead>

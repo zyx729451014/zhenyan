@@ -83,6 +83,7 @@ class IndexController extends Controller
         }
         //  按发表时间顺序获取10条图集
         $glossary = Glossary::orderBy('created_at','desc')->get()->take(10);
+
         // 加载模板
         return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'invitation'=>$invitation,'comment'=>$comment,'idol'=>$idol,'glossary'=>$glossary]);
 

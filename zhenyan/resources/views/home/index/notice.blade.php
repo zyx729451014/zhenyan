@@ -21,10 +21,11 @@
 	</style>
 </head>
 <body>
+
 	<div class="content" style="margin-top:90px;">
 		<div class="title">{{ $notice->title }}</div>
 		<div class="name">
-			<div id="cont">{{ $notice->content }}	</div>
+			<div id="cont">{{ $notice->content }}</div>
 			<p>总楼层  <?= count($notice_comments)?>  | 发表时间 {{ $notice->created_at }} </p>
 			@foreach($notice_comments as $k=>$v)
 			<ol class="comment">
@@ -63,12 +64,26 @@
 									<label for="message"></label><br />
 									<input type="hidden" name="nid" value="{{ $notice->id }}">
 									<input type="hidden" name="cid" value="{{ $v->id }}">
+									@if(session()->has('user'))
 									<textarea id="message" name="content" rows="3" cols="30" tabindex="4" style="width:90%;margin-left:5%;"  placeholder="@ {{ $v->notice_commentuser->uname }}　{{ $v['created_at'] }}"></textarea>	
+<<<<<<< HEAD
 									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;color:#fff;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
+=======
+									@else
+									<?php  
+										$uri=\Request::getRequestUri();
+										session(['home_uri'=>$uri]);
+									?>
+									<div style="width:90%;margin-left:5%;height:70px;border:1px solid #ccc;background:#fff;text-align:center;line-height:70px;">
+										<a href="/home/user/login">登录</a>后才可以回复哟~
+									</div>
+									@endif
+									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
+>>>>>>> origin/yanli
 								</form>	
 							</li>
 						</ul>
-					</div>
+					</div> 
 				</li>
 			</ol>
 			@endforeach
@@ -77,8 +92,19 @@
 			{{ csrf_field() }}	
 					<label for="message"></label><br>
 					<input type="hidden" name='nid' value="{{ $notice->id }}">
+<<<<<<< HEAD
 					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>	
 					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;color:#fff;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
+=======
+					@if(session()->has('user'))
+					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>
+					@else
+					<div style="width:90%;margin-left:5%;height:200px;border:1px solid #ccc;background:#fff;text-align:center;line-height:200px;">
+						<a href="/home/user/login">登录</a>后才可以评论哟~
+					</div>
+					@endif	
+					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
+>>>>>>> origin/yanli
 			</form>
 		</div>
 	</div>
@@ -86,7 +112,8 @@
 </html>
 <script type="text/javascript">
 	$('.hf').click(function(){
-		$(this).parent().next().find('form').toggle();
+		$(this).parent().next().find('form').slideToggle();
 	});
+
 </script>
 @endsection
