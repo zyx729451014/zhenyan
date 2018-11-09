@@ -22,9 +22,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        //  按发表时间顺序获取5条公告数据
+        //  按发表时间顺序获取10条公告数据
         $notice = DB::select('select * from notice order by created_at desc limit 10');
-         //  按发表时间顺序获取5条问答数据
+         //  按发表时间顺序获取10条问答数据
         $answer = DB::select('select * from answers order by created_at desc limit 10');
         // 加载模板
         return view('home.index.index',['notice'=>$notice,'answer'=>$answer]);

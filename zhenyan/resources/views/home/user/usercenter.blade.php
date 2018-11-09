@@ -20,7 +20,7 @@
             auto: true,
             pager: true,  
             nav: true,
-            speed: 500,
+            speed: 500, 
             maxwidth: 800,
             namespace: "centered-btns"
           });
@@ -130,7 +130,7 @@
     <div class="personalSide">
 	    <dl class="headerPer yuanYin clearfix">
 	        <dt>
-	        	<a href="/home/user/userdateail">
+	        	<a href="">
 	            	<img class="img" src="{{ $user->userinfo->face }}" width="90" height="90">
 	            </a>
 	        <h4 class="tit"><b></b></h4>
