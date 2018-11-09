@@ -27,7 +27,7 @@ class AnswerController extends Controller
         // 获取数据
         $answer = Answer::where('content','like','%'.$search .'%')->paginate(8);
         // 最新发布
-        $answer2 = DB::select('select * from answers order by created_at desc limit 5');
+        $answer2 = DB::select('select * from answers order by created_at desc limit 10');
         // dd($answer2);
         // 加载到列表页面
         return view('home.answer.index',['answer'=>$answer,'answer2'=>$answer2,'request'=>$request->all()]);

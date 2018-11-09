@@ -28,7 +28,6 @@
             <th> ID </th>
             <th> 发表人 </th>
             <th> 公告标题 </th>
-            <th> 公告内容 </th>
             <th> 发表时间 </th>
             <th> 操作 </th>
           </tr>
@@ -39,7 +38,6 @@
             <td>{{ $v->id }}</td>
       	 		<td>{{ $v->noticeuser->uname }}</td>
       	 		<td>{{ $v->title }}</td>
-      	 		<td>{{ $v->content }}</td>
       	 		<td>{{ $v->created_at }}</td>
       	 		<td>
       				<a href="/admin/notice/{{ $v->id }}/edit" class='badge badge-info'>修改</a>

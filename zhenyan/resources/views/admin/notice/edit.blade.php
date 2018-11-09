@@ -22,8 +22,10 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">公告内容：</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" name="content" value="{{ $notice['content'] }}" />
-                  </div>
+                    <script id="content" style='width:800px;' name="content" type="text/plain" placeholder="内容" class="small" value="{{ old('content') }}" style="height:500px">
+                        {!! $notice->content !!}  
+                    </script>
+                  </div> 
                 </div>
               </div>                     
             </div>
@@ -32,4 +34,15 @@
         </div>
       </div>
     </div>
+    </script>
+<!-- 配置文件 -->
+    <script type="text/javascript" src="\home\utf8-php\ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="\home\utf8-php\ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('content',{toolbars: [
+    
+        ]});
+    </script>
 @endsection
