@@ -70,6 +70,19 @@ $(function() {
 		*{
 			text-decoration: none;
 		}
+		#cont{height: auto;}
+		#content #cont p{width: 100%;height: 40px;background-color: #f8f8f8;line-height: 40px;font-size: 13px;}	
+		#invi{height: auto;}
+		#invi h2{height:20px;line-height: 20px;padding-bottom: 40px;}
+		#invi a{line-height: 25px;font-size: 15px;color: #383838;text-decoration: none;}
+		#invi span{display: inline-block;float: right;color: #9d9f9f;font-size: 13px;}
+		#invi a:hover{color: #249db7;}
+		#comm h4{width: 310px;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;}
+		#comm a{line-height: 25px;font-size: 15px;color: #383838;text-decoration: none;}
+		#comm a:hover{color: #249db7;}	
+		#idol h4>a{font-size: 15px;color: #383838;text-decoration: none;display: inline-block;margin-left: 20px;}	
+		#idol a:hover{color: #249db7;}		
+		#idol img{width: 60px;height: 60px;border: none;}	
 	</style>
 </head>
 <body>
@@ -80,26 +93,21 @@ $(function() {
 		<div class="row block">
 			<div class="main-content col11"> 
 				<article>
-					<div class="heading">
-						<h2><a href="#">帖子推荐</a></h2>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
-						<p><h4>标题</h4></p>
+					<div class="heading" id="invi">
+						<h2>帖子推荐</h2>
+						@foreach($invitation as $k=>$v)
+						<h4><a href="/home/invitation/show/{{ $v['id'] }}">{{ $v->title }}</a><span>{{ $v->created_at }}</span></h4>
+						@endforeach
 					</div>
 				</article>
 				<article>
 					<div class="heading">
-						<h2><a href="/home/glossary">图集</a></h2>
+						<h2><a href="/home/glossary" style="color:#333;">图集</a></h2>
 						@foreach($glossary as $k=>$v)
 						<ul>
-						<p><h4><a href="/home/glossary/{{ $v->id }}">{{ $v->title }}</a></h4></p>
+						<p><h4>
+						<a href="/home/glossary/{{ $v->id }}" style="font-size: 15px;color: #383838;text-decoration: none;">{{ $v->title }}</a>
+								<span style="display: inline-block;float: right;color: #9d9f9f;font-size: 13px;">{{ $v->created_at }}</span></h4></p>
 						<?php 
 							$image = explode('!-!', $v->image);
 						?>
@@ -121,21 +129,18 @@ $(function() {
 
 						<ul class="list">
 							@foreach($notice as $k=>$v)
-							<li><a href="/home/index/show/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+							<li style="overflow:hidden;"><a href="/home/index/show/{{ $v['id'] }}">{{ $v['title'] }}</a>
+							</li>
 							@endforeach
-
 						</ul>
 					</div>
 				</section>
 				<section>
 					<div class="heading">热帖</div>
-					<div class="content">
-						<h4><a href="" style="color:#030303;">标题</a></h4>
-						<h4><a href="" style="color:#030303;">标题</a></h4>
-						<h4><a href="" style="color:#030303;">标题</a></h4>
-						<h4><a href="" style="color:#030303;">标题</a></h4>
-						<h4><a href="" style="color:#030303;">标题</a></h4>
-
+					<div class="content" id="comm">
+						@foreach($comment as $k=>$v)
+						<h4><a href="/home/invitation/show/{{ $v[0]['id'] }}">{{ $v[0]['title'] }}</a></h4>
+						@endforeach
 					</div>
 				</section>
 				<section>
@@ -143,36 +148,18 @@ $(function() {
 					<div class="content">
 					<ul class="list">
 						@foreach($answer as $k => $v)
-						<li><a href="/home/answer/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+						<li style="overflow:hidden;"><a href="/home/answer/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
 						@endforeach	
 					</ul>
 					</div>
 				</section>
 				<section>
 					<div class="heading">最受喜欢</div>
-					<div class="content">
-						<section>
-							<img src="home/images/thumb4.jpg"/>
-							<h4><a href="#" style="line-height:60px;">用户名</a></h4>							
-						</section>
-					</div>
-					<div class="content">
-						<section>
-							<img src="home/images/thumb4.jpg"/>
-							<h4><a href="#" style="line-height:60px;">用户名</a></h4>							
-						</section>
-					</div>
-					<div class="content">
-						<section>
-							<img src="home/images/thumb4.jpg"/>
-							<h4><a href="#" style="line-height:60px;">用户名</a></h4>							
-						</section>
-					</div>
-					<div class="content">
-						<section>
-							<img src="home/images/thumb4.jpg"/>
-							<h4><a href="#" style="line-height:60px;">用户名</a></h4>							
-						</section>
+					<div class="content" id="idol">
+					@foreach($idol as $k=>$v)
+							<a href="/home/user/usercenters/{{ $v[0]->uid }}"><img src="{{ $v[0]->userinfo->face }}"/></a>
+							<h4><a href="/home/user/usercenters/{{ $v[0]->uid }}" style="line-height:60px;">{{ $v[0]->uname }}</a></h4>							
+					@endforeach
 					</div>
 				</section>
 			</div>

@@ -10,6 +10,10 @@ use App\Models\Notice;
 use App\Models\Notice_comment;
 use App\Models\Answer;
 use App\Models\Answer_comment;
+use App\Models\Invitation;
+use App\Models\Invi_comment;
+use App\Models\Friending;
+use App\User;
 use DB;
 use App\Models\Glossary;
  
@@ -29,8 +33,58 @@ class IndexController extends Controller
         $answer = DB::select('select * from answers order by created_at desc limit 10');
          //  按发表时间顺序获取5条图集
         $glossary = Glossary::orderBy('created_at','desc')->get()->take(5);
+        // 帖子推荐中的显示
+        $invitation = Invitation::orderBy('created_at','desc')->paginate(15);
+        // 热帖中的显示根据评论查询
+        $iniv_comm = Invitation::get();
+        $sum = [] ;
+       
+        foreach ($iniv_comm as $key => $value) {
+            $sum[] = ['count'=>Invi_comment::where('iid',$value->id)->count(),'iid'=>$value->id];
+        } 
+        foreach ($sum as $key => $row)
+            {
+                $count[$key]  = $row['count'];
+                $iid[$key] = $row['iid'];
+            }
+
+        array_multisort($count, SORT_DESC, $iid, SORT_ASC, $sum);
+        $arr = [] ;
+        foreach ($sum as $k => $v) {
+           $arr[] = $v['iid'];
+        }
+        $comment = [];
+        foreach ($arr as $k => $v) {
+            if($k < 11 ){
+                $comment[] = Invitation::where('id',$v)->get();
+            }
+            
+        }
+        // 最受欢迎的用户
+        $user = User::get();
+        $sum1 = [];
+        foreach ($user as $key => $value) {
+            $sum1[] = ['idol'=>Friending::where('idol',$value->uid)->count(),'uid'=>$value->uid];
+        } 
+        foreach ($sum1 as $key => $row)
+        {
+            $idol[$key]  = $row['idol'];
+            $uid[$key] = $row['uid'];
+        }
+
+        array_multisort($idol, SORT_DESC, $uid, SORT_ASC, $sum1);
+        $arr1 = [] ;
+        foreach ($sum1 as $k => $v) {
+           $arr1[] = $v['uid'];
+        }
+        $idol = [];
+        foreach ($arr1 as $k => $v) {
+            if($k < 6 ){
+                $idol[] = User::where('uid',$v)->get();
+            }         
+        }
         // 加载模板
-        return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'glossary'=>$glossary]);
+        return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'invitation'=>$invitation,'comment'=>$comment,'idol'=>$idol,'glossary'=>$glossary]);
        
     }
 

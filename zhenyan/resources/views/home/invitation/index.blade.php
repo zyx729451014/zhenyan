@@ -75,6 +75,23 @@ $(function() {
 						<li><a href="/home/invitation/create">发帖</a></li>
 					</ul>
   				</div>
+  				@foreach($stick as $k=>$v)
+				<article class="excerpt" style="margin-top:20px;">
+						<a class="cat" href="#" title="MZ-NetBlog主题" >置顶<i></i></a>
+				 		<h2><a href="/home/invitation/show/{{ $v['id'] }}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >{{ $v['title'] }}</a></h2>
+					<p class="meta">
+						<br>
+						<?php
+							// 评论条数
+							$comment = \App\Models\Invi_comment::where('iid',$v['id'])->get();
+							$sum = count($comment);
+						?>
+						<time class="time"><i class="glyphicon glyphicon-time"></i> {{ $v['created_at'] }}</time>
+						<span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment">{{ $sum }}</i></a></p>
+					<a class="note1">{!!$v['content'] !!}</a>
+				</article> 			
+				@endforeach	
+
   				@foreach($invitation as $k=>$v)
 				<article class="excerpt" style="margin-top:20px;">
 						@if($v['stick'] == 1)
