@@ -57,6 +57,7 @@ $(function() {
 	<link rel="stylesheet" type="text/css" href="/home/css/style4.css">
 	<script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
 	<style type="text/css">
+<<<<<<< HEAD
 		#cont{
 			height: auto;
 		}
@@ -70,6 +71,9 @@ $(function() {
 		*{
 			text-decoration: none;
 		}
+=======
+
+>>>>>>> origin/gxm
 		#cont{height: auto;}
 		#content #cont p{width: 100%;height: 40px;background-color: #f8f8f8;line-height: 40px;font-size: 13px;}	
 		#invi{height: auto;}
@@ -157,8 +161,10 @@ $(function() {
 					<div class="heading">最受喜欢</div>
 					<div class="content" id="idol">
 					@foreach($idol as $k=>$v)
+						@if($v[0]->identity != 1)
 							<a href="/home/user/usercenters/{{ $v[0]->uid }}"><img src="{{ $v[0]->userinfo->face }}"/></a>
-							<h4><a href="/home/user/usercenters/{{ $v[0]->uid }}" style="line-height:60px;">{{ $v[0]->uname }}</a></h4>							
+							<h4><a href="/home/user/usercenters/{{ $v[0]->uid }}" style="line-height:60px;">{{ $v[0]->uname }}</a></h4>
+						@endif						
 					@endforeach
 					</div>
 				</section>

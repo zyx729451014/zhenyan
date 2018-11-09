@@ -36,8 +36,8 @@
 					</div>
 					
 					<cite>
-						<img alt="" src="{{ $v->notice_commentuser->userinfo->face }}" height="70" width="70" />			
-						<a href="index.html">{{ $v->notice_commentuser->uname }}</a> 
+						<a href="/home/user/usercenters/{{ $v->uid }}"><img alt="" src="{{ $v->notice_commentuser->userinfo->face }}" height="70" width="70" /></a>			
+						<a href="/home/user/usercenters/{{ $v->uid }}">{{ $v->notice_commentuser->uname }}</a> 
 						<span style='color:#000;'>{{ $v['content'] }}</span>
 						<br />				
 						<a href="#comment-63">{{ $v['created_at'] }}</a><br>
@@ -64,7 +64,7 @@
 									<input type="hidden" name="nid" value="{{ $notice->id }}">
 									<input type="hidden" name="cid" value="{{ $v->id }}">
 									<textarea id="message" name="content" rows="3" cols="30" tabindex="4" style="width:90%;margin-left:5%;"  placeholder="@ {{ $v->notice_commentuser->uname }}　{{ $v['created_at'] }}"></textarea>	
-									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
+									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;color:#fff;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
 								</form>	
 							</li>
 						</ul>
@@ -78,7 +78,7 @@
 					<label for="message"></label><br>
 					<input type="hidden" name='nid' value="{{ $notice->id }}">
 					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>	
-					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
+					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;color:#fff;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
 			</form>
 		</div>
 	</div>
