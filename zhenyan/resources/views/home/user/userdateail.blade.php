@@ -179,7 +179,7 @@
             @endforeach
         </ol>
     </div>
-    <div class="personalListBlank" id="comment" style="width:970px;margin:0px auto;display:none;">
+    <div class="personalListBlank" id="comment" style="width:970px;margin:0px auto;display:none;font-size:13px;">
         @if($invi_comments->isEmpty())
             <div class="blankList non-existent show">
                 <p class="non-existentTxt">暂时木有内容呀~</p>

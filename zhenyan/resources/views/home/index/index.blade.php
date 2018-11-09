@@ -152,7 +152,7 @@ $(function() {
 					<div class="content">
 					<ul class="list">
 						@foreach($answer as $k => $v)
-						<li style="overflow:hidden;"><a href="/home/answer/{{ $v['id'] }}">{{ $v['title'] }}</a></li>
+						<li><a href="/home/answer/{{ $v[0]->id }}">{{ $v[0]->title }}</a></li>
 						@endforeach	
 					</ul>
 					</div>

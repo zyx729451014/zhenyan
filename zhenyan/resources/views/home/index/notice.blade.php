@@ -45,7 +45,7 @@
 					</cite>
 						
 					<div style="width:100%;height:10px;">
-						<a href="" style="float:right" class="hf">回复</a>
+						<a href="#" style="float:right" class="hf">回复</a>
 					</div>
 					<div class="huifu">
 						<?php
@@ -66,9 +66,6 @@
 									<input type="hidden" name="cid" value="{{ $v->id }}">
 									@if(session()->has('user'))
 									<textarea id="message" name="content" rows="3" cols="30" tabindex="4" style="width:90%;margin-left:5%;"  placeholder="@ {{ $v->notice_commentuser->uname }}　{{ $v['created_at'] }}"></textarea>	
-<<<<<<< HEAD
-									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;color:#fff;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
-=======
 									@else
 									<?php  
 										$uri=\Request::getRequestUri();
@@ -78,8 +75,7 @@
 										<a href="/home/user/login">登录</a>后才可以回复哟~
 									</div>
 									@endif
-									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
->>>>>>> origin/yanli
+									<input class="button" type="submit" value="回复" tabindex="5" style="background-color:#1e96b0;color:#fff;width:100px;margin-left:300px;height:40px;margin-top:10px;border:none;border-radius:10px;">         		
 								</form>	
 							</li>
 						</ul>
@@ -92,10 +88,6 @@
 			{{ csrf_field() }}	
 					<label for="message"></label><br>
 					<input type="hidden" name='nid' value="{{ $notice->id }}">
-<<<<<<< HEAD
-					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>	
-					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;color:#fff;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
-=======
 					@if(session()->has('user'))
 					<textarea id="message" name="content" rows="10" cols="30" tabindex="4" style="width:90%;margin-left:5%;"></textarea>
 					@else
@@ -103,8 +95,7 @@
 						<a href="/home/user/login">登录</a>后才可以评论哟~
 					</div>
 					@endif	
-					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
->>>>>>> origin/yanli
+					<input class="button" type="submit" value="发表" tabindex="5" style="background-color:#1e96b0;color:#fff;width:100px;margin-left:400px;height:40px;margin-top:10px;border:none;border-radius:10px;">        		
 			</form>
 		</div>
 	</div>

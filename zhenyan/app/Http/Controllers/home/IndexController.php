@@ -29,10 +29,39 @@ class IndexController extends Controller
     {
         //  按发表时间顺序获取5条公告数据
         $notice = DB::select('select * from notice order by created_at desc limit 5');
-         //  按发表时间顺序获取5条问答数据
-        $answer = DB::select('select * from answers order by created_at desc limit 5');
-        // 帖子推荐中的显示
+
+
+        //  按发表时间顺序获取5条问答数据
+        $answer_comment = Answer::get();
+        $sum2 = [] ;
+       
+        foreach ($answer_comment as $key => $value) {
+            $sum2[] = ['count1'=>Answer_comment::where('aid',$value->id)->count(),'aid'=>$value->id];
+        } 
+        foreach ($sum2 as $key => $row)
+        {
+            $count1[$key]  = $row['count1'];
+            $aid[$key] = $row['aid'];
+        }
+        array_multisort($count1, SORT_DESC, $aid, SORT_ASC, $sum2);
+        $arr2 = [] ;
+        foreach ($sum2 as $k => $v) {
+           $arr2[] = $v['aid'];
+        }
+        $answer = [];
+        foreach ($arr2 as $k => $v) {
+            if($k < 5 ){
+                $answer[] = Answer::where('id',$v)->get();
+            }
+            
+        }
+
+
+        // 帖子推荐中的显示15条
         $invitation = Invitation::orderBy('created_at','desc')->get()->take(15);
+
+
+
         // 热帖中的显示根据评论查询
         $iniv_comm = Invitation::get();
         $sum = [] ;
@@ -41,10 +70,10 @@ class IndexController extends Controller
             $sum[] = ['count'=>Invi_comment::where('iid',$value->id)->count(),'iid'=>$value->id];
         } 
         foreach ($sum as $key => $row)
-            {
-                $count[$key]  = $row['count'];
-                $iid[$key] = $row['iid'];
-            }
+        {
+            $count[$key]  = $row['count'];
+            $iid[$key] = $row['iid'];
+        }
 
         array_multisort($count, SORT_DESC, $iid, SORT_ASC, $sum);
         $arr = [] ;
@@ -53,11 +82,12 @@ class IndexController extends Controller
         }
         $comment = [];
         foreach ($arr as $k => $v) {
-            if($k < 11 ){
+            if($k < 10 ){
                 $comment[] = Invitation::where('id',$v)->get();
             }
             
         }
+
         // 最受欢迎的用户
         $user = User::get();
         $sum1 = [];
@@ -77,7 +107,7 @@ class IndexController extends Controller
         }
         $idol = [];
         foreach ($arr1 as $k => $v) {
-            if($k < 6 ){
+            if($k < 5 ){
                 $idol[] = User::where('uid',$v)->get();
             }         
         }
