@@ -40,7 +40,8 @@ class InvitationController extends Controller
             }
         // 形成查询商品的条件
         }
-        $invitation = Invitation::whereIn('cid', $arr_cid)->get();
+        $stick = Invitation::whereIn('cid', $arr_cid)->where('stick',1)->paginate(3);
+        $invitation = Invitation::whereIn('cid', $arr_cid)->where('stick','!=',1)->get();
         // 最新发布
                 $arr1 = Cates::where('path','like',"%,$id%")->get();
                 $arr_cid = [];
@@ -49,7 +50,7 @@ class InvitationController extends Controller
                 }
         // 形成查询帖子的条件
         $invitations = Invitation::where('title','like','%'.$search .'%')->orderBy('created_at','desc')->whereIn('cid', $arr_cid)->paginate(8);     
-       return view('home.invitation.index',['cate'=>$cate,'invitation'=>$invitation,'invitations'=>$invitations]);
+       return view('home.invitation.index',['cate'=>$cate,'invitation'=>$invitation,'invitations'=>$invitations,'stick'=>$stick]);
     }
 
     /**
