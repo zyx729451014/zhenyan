@@ -21,7 +21,11 @@
 	</style>
 </head>
 <body>
+<<<<<<< HEAD
 	<div class="content" style='margin-top:100px;'>
+=======
+	<div class="content" style="margin-top:90px;">
+>>>>>>> e9dc92fa6616cf9dbb96b32ef97c1f635df19cb0
 		<div class="title">{{ $notice->title }}</div>
 		<div class="name">
 			<div id="cont">{{ $notice->content }}</div>

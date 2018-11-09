@@ -29,7 +29,7 @@ class GlossaryController extends Controller
         // 查询全部
         $glossary = Glossary::all(); 
         // 查询最新发布
-        $newglossary = Glossary::orderBy('created_at','desc')->get();
+        $newglossary = Glossary::orderBy('created_at','desc')->get()->take(8);
         // 以title为关键字查询
         if (!empty($_GET['title'])) {
            $glossary = Glossary::where('title','like','%'.$_GET['title'].'%')->get(); 

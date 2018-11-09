@@ -56,7 +56,7 @@ class NoticeController extends Controller
         $notice = new Notice;
         $notice->title = $request->input('title');
         $notice->content = $request->input('content');
-        $uname = session('uname');
+        $uname = session('admin')->uname;
         $user = User::where('uname',$uname)->first();
         $id= $user->uid;
         $notice->uid = $id;
