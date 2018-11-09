@@ -11,6 +11,7 @@ use App\Models\Notice_comment;
 use App\Models\Answer;
 use App\Models\Answer_comment;
 use DB;
+use App\Models\Glossary;
  
 class IndexController extends Controller
 {
@@ -26,8 +27,10 @@ class IndexController extends Controller
         $notice = DB::select('select * from notice order by created_at desc limit 10');
          //  按发表时间顺序获取5条问答数据
         $answer = DB::select('select * from answers order by created_at desc limit 10');
+         //  按发表时间顺序获取5条图集
+        $glossary = Glossary::orderBy('created_at','desc')->get()->take(5);
         // 加载模板
-        return view('home.index.index',['notice'=>$notice,'answer'=>$answer]);
+        return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'glossary'=>$glossary]);
        
     }
 

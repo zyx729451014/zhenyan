@@ -40,9 +40,12 @@
 	<link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/home/css/nprogress.css">
 	<link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/home/banner/css/banner.css">
 	<script src="/home/js/jquery-2.1.4.min.js"></script>
 	<script src="/home/js/nprogress.js"></script>
 	<script src="/home/js/jquery.lazyload.min.js"></script>
+	<script src="/home/banner/js/jquery-1.10.2.min.js"></script>
+	<script src="/home/banner/js/slider.js"></script>
 </head>
 <body>
 <!-- 导航 -->
@@ -204,7 +207,7 @@
 
 		#carousel li span {
 
-			background: transparent url(img/carousel_shine.png) no-repeat 0 0;
+			background: transparent url(/home/img/carousel_shine.png) no-repeat 0 0;
 
 			text-indent: -999px;
 
@@ -296,7 +299,7 @@
 
 		#carousel .pager a {
 
-			background: transparent url(img/carousel_control.png) no-repeat -2px -32px;
+			background: transparent url(/home/img/carousel_control.png) no-repeat -2px -32px;
 
 			text-decoration: none;
 
@@ -316,7 +319,7 @@
 
 		#carousel .pager a.selected {
 
-			background: transparent url(img/carousel_control.png) no-repeat -12px -32px;
+			background: transparent url(/home/img/carousel_control.png) no-repeat -12px -32px;
 
 			text-decoration: underline;				
 
@@ -394,7 +397,9 @@
 
 				<ul>
 					@foreach($advers as $k=>$v)
-					<li><img src="{{ $v['apic'] }}" alt="" /><span>Image1</span></li>					
+					<li style="background:transparent url(/home/img/carousel_polaroid.png) no-repeat 0 0;">
+						<img src="{{ $v['apic'] }}" alt="" />
+						<span style="background:transparent url(/home/img/carousel_shine.png) no-repeat 0 ">Image1</span></li>					
 					@endforeach
 				</ul>
 

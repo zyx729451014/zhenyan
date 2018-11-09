@@ -21,7 +21,7 @@
 	</style>
 </head>
 <body>
-	<div class="content">
+	<div class="content" style="margin-top:90px;">
 		<div class="title">{{ $notice->title }}</div>
 		<div class="name">
 			<div id="cont">{{ $notice->content }}	</div>
