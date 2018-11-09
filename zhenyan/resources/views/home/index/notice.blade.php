@@ -44,7 +44,7 @@
 					</cite>
 						
 					<div style="width:100%;height:10px;">
-						<a href="" style="float:right" class="hf">回复</a>
+						<a href="#hf" style="float:right" class="hf">回复</a>
 					</div>
 					<div class="huifu">
 						<?php
