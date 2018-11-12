@@ -35,14 +35,14 @@
     <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/home/css/flexible-bootstrap-carousel.css" />
     <link rel="stylesheet" href="/home/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/styles1.css" />
+    <link rel="stylesheet" type="text/css" href="/home/css/style1.css" />
 
     <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/home/css/nprogress.css">
     <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
     <script src="/home/js/jquery-2.1.4.min.js"></script>
     <script src="/home/js/nprogress.js"></script>
-    <script src="/home/js/jquery.lazyload.min.js"></script>
+
 </head>
 <body>
 <!-- 导航 -->
@@ -97,6 +97,7 @@
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+ <meta name="csrf-token" content="{{ csrf_token() }}">
 <title></title>
 <link href="/home/user/css/jquery.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/home/user/css/personalPublic20180626.css">
@@ -119,12 +120,15 @@
 <!--吸顶-->
 <link rel="stylesheet" href="/home/user/css/20171109AllbbsHead.css">
 <link rel="stylesheet" type="text/css" href="/home/user/css/black.css">
+<link rel="stylesheet" type="text/css" href="/home/layui-v2.4.5/layui/css/layui.css">
 <script src="/home/user/css/push.js"></script>
 <script src="/home/user/css/hm.js"></script>
 <script src="/home/user/css/jquery-1.js"></script>
 <script language="JavaScript" type="text/javascript" src="/home/user/css/go_wap.js"></script>
 <script language="JavaScript" type="text/javascript" src="/home/user/css/pv.js"></script>
 <script type="text/javascript" id="pv_d" src="/home/user/css/p.js"></script>
+<script src="/home/js/jquery.lazyload.min.js"></script>
+<script src="/home/layui-v2.4.5/layui/layui.all.js"></script>
 <img id="fn_dot_pvm" style="display:none" src="/home/user/css/dot.gif" width="1" height="1" border="0">
 <img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
@@ -158,12 +162,15 @@
         </li>
     </ul>
 </div>
+    <script type="text/javascript">
+        {{ csrf_field() }}
+    </script>
     <!--personalMain-->
     <div class="personalMain">
         <h3 class="yuanYin">个人资料</h3>
         <dl class="yuanYin">
             <dt>基本信息</dt>
-            <form action="/home/user/update/{{ session('user')->uid }}" method='post' enctype="multipart/form-data">
+            <form action="/home/user/update/{{ $userinfo->uid }}" method='post' enctype="multipart/form-data">
             	{{ csrf_field() }}
 				<dd>
 	                <ul class="module-box">
@@ -175,7 +182,36 @@
 	                        </span>
 	                        <div>
 	                            <span>
-									<input type="file" name='face' style='padding-top:30px;'>
+                                    <label class='users' for="test1">
+                                        <img src="{{ $userinfo['face'] }}" style='width:90px;height:90px;border-radius:50%'>
+                                        <input type="hidden" name="face">
+                                    </label>
+									<button type="button" class="layui-btn" id="test1" style='display:none;margin-top:30px;'>
+                                        <i class="layui-icon">&#xe67c;</i>上传图片
+                                    </button>
+                                    <script>
+                                        layui.use('upload', function(){
+                                          var upload = layui.upload;
+                                          //执行实例
+                                          var uploadInst = upload.render({
+                                            elem: '#test1' //绑定元素
+                                            ,url: '/home/user/uploads' //上传接口
+                                            ,data: {'_token':$('input[name=_token').eq(0).val()}
+                                            ,field:'face'
+                                            ,done: function(res){
+                                                  //上传完毕回调
+                                                  if(res.code == 1){
+                                                    // 修改头像
+                                                    $('.users img').eq(0).attr('src',res.data.src);
+                                                    $('.users input[type=hidden]').val(res.data.src);
+                                                  }
+                                            }
+                                            ,error: function(){
+                                              //请求异常回调
+                                            }
+                                          });
+                                        });
+                                    </script>
 	                            </span>
 	                       	</div>
 	                    </li>
@@ -200,11 +236,14 @@
 	                        <div class="module-main">
 	                            <span> 
                                    
-									男<input type="radio" name='sex' value='m'>&nbsp&nbsp&nbsp
+									男<input type="radio" name='sex' value='m' @if($userinfo->sex=='m')
+                                    checked @endif>&nbsp&nbsp&nbsp
                                    
-									女<input type="radio" name='sex' value='w'>&nbsp&nbsp&nbsp
+									女<input type="radio" name='sex' value='w' @if($userinfo->sex=='w')
+                                    checked @endif>&nbsp&nbsp&nbsp
                                     
-									未知<input type="radio" name='sex' value='x' checked>
+									未知<input type="radio" name='sex' value='x' @if($userinfo->sex=='x')
+                                    checked @endif>
                                     
 	                            </span>
 	                         </div>
@@ -216,8 +255,8 @@
 	                        <span class="module-tit">
 	                            用户积分
 	                        </span>
-	                        <div class="module-main">
-	                            <span value='50'>{{ $userinfo->point }}</span>
+	                        <div class="module-main" readonly>
+	                            <span>{{ $userinfo->point }}</span>
 	                        </div>
 	                    </li>
 	                    <!--用户名积分 end-->

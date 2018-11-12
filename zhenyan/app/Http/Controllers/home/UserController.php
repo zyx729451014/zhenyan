@@ -47,7 +47,7 @@ class UserController extends Controller
        // 获取数据 进行添加
         $user = new User;
         $user->uname = $request->input('uname');
-        $user->upass = hash::make($request->input('upass'));
+        $user->upass = hash::make($request->input('upass'));  
         $res1 = $user->save(); // bool
         $id = $user->uid;
         $userdateail = new Userdateail;
@@ -251,6 +251,42 @@ class UserController extends Controller
     }
 
     /**
+     * 上传头像
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUploads(Request $request)
+    {
+        // 接收数据执行上传
+         if($request->hasFile('face')){
+            // 创建对象
+            $profile = $request -> file('face');
+            // 获取文件后缀
+            $ext = $profile ->getClientOriginalExtension(); 
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+             if($profile -> move($dir_name,$file_name)){
+                $str = [
+                    'code' =>1,
+                    'msg' =>'上传成功',
+                    'data'=>[
+                        'src' => ltrim($dir_name.'/'.$file_name,'.'),
+                    ],
+                ];
+            }else{
+                $str = [
+                    'code' =>0,
+                    'msg' =>'上传失败',
+                    'data'=>[
+                        'src' =>ltrim($dir_name.'/'.$file_name,'.'),
+                    ],
+                ];
+            }
+        }
+        return response()->json($str);
+    }
+
+    /**
      * 资料保存
      *
      * @param  \Illuminate\Http\Request  $request
@@ -259,24 +295,12 @@ class UserController extends Controller
     public function postUpdate(Request $request,$id)
     {
         // 获取一条数据
-         $userdateail = Userdateail::where('uid',$id)->first();
-        if($request->hasFile('face')){
-            $profile = $request -> file('face');
-            // 获取文件后缀
-            $ext = $profile ->getClientOriginalExtension(); 
-            $file_name = str_random('20').'.'.$ext;
-            $dir_name = './uploads/'.date('Ymd',time());
-            $res = $profile -> move($dir_name,$file_name);
-            // 拼接数据库存放路径
-            $profile_path = ltrim($dir_name.'/'.$file_name,'.');        
-        }else{
-            $profile_path = $userdateail->face;
-        }
-        $userdateail->face = $profile_path;
+        $userdateail = Userdateail::where('uid',$id)->first();
         $userdateail->sex = $request->input('sex');
         $userdateail->birthdate = $request->input('birthdate');
-        $userdateail->point = $request->input('point');
-       
+        if (!empty($request->input('face'))) {
+            $userdateail->face = $request->input('face');
+        }
         $res = $userdateail->save();
         // 逻辑判断
         if($res){

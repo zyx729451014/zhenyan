@@ -5,7 +5,7 @@ $(function(){
 			$('span:eq(0)').html('<font color="#CBCBCB">请输入8-16字母数字下划线组合</font>');
 		})
 		$('input[name=uname]').blur(function(){
-			var user_preg = /^[A-Za-z0-9_\x{4e00}-\x{9fa5}]+$/u; 
+			var user_preg = /^[A-Za-z0-9_\u4e00-u9fa5]{2,10}$/; 
 			var user_vals = $(this).val();
 			if(user_preg.test(user_vals)){
 				$.ajaxSetup({
