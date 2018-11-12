@@ -13,12 +13,13 @@
         <link rel="stylesheet" href="/home/css/responsive.css">
         <link rel="stylesheet" href="/home/css/responsiveslides.css" />
         <link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+        <script src="/home/layui/layui.all.js"></script>
         <script src="/home/js/responsiveslides.js"></script>
         <script>
         $(function () {
           $("#slider").responsiveSlides({
             auto: true,
-            pager: true,
+            pager: true, 
             nav: true,
             speed: 500,
             maxwidth: 800,
@@ -27,19 +28,6 @@
         });
       </script>
       <!-- 轮播图 -->
-     <link rel="stylesheet" type="text/css" href="/home/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/home/css/default.css">
-    <link rel="stylesheet" href="/home/css/style1.css">
-
-    <link href="/home/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/flexible-bootstrap-carousel.css" />
-    <link rel="stylesheet" href="/home/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/styles1.css" />
-
-    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/nprogress.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
     <script src="/home/js/jquery-2.1.4.min.js"></script>
     <script src="/home/js/nprogress.js"></script>
     <script src="/home/js/jquery.lazyload.min.js"></script>
@@ -98,8 +86,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title></title>
-<link href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/jquery.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/personalPublic20180626.css">
+<link href="/home/user/css/jquery.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/home/user/css/personalPublic20180626.css">
 <style>
     .ui-datepicker .ui-datepicker-title select {
         float: left !important;
@@ -113,14 +101,20 @@
         margin-right: 5px  !important;
     }
 </style>
-<link type="text/css" rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/laydate.css"><link type="text/css" rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/laydate_002.css" id="LayDateSkin"></head>
+<link type="text/css" rel="stylesheet" href="/home/user/css/laydate.css">
+<link type="text/css" rel="stylesheet" href="/home/user/css/laydate_002.css" id="LayDateSkin"></head>
 <body>
 <!--吸顶-->
-<link rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/20171109AllbbsHead.css">
-<link rel="stylesheet" type="text/css" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/black.css">
-<script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/push.js"></script><script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/hm.js"></script><script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/jquery-1.js"></script>
-<script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/go_wap.js"></script>
-<script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
+<link rel="stylesheet" href="/home/user/css/20171109AllbbsHead.css">
+<link rel="stylesheet" type="text/css" href="/home/user/css/black.css">
+<script src="/home/user/css/push.js"></script>
+<script src="/home/user/css/hm.js"></script>
+<script src="/home/user/css/jquery-1.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/css/go_wap.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/css/pv.js"></script>
+<script type="text/javascript" id="pv_d" src="/home/user/css/p.js"></script>
+<img id="fn_dot_pvm" style="display:none" src="/home/user/css/dot.gif" width="1" height="1" border="0">
+<img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
 <div class="personalBox wrapper1380" style="margin-top:100px;height:630px;">
     <!--personalSide-->
@@ -239,27 +233,34 @@
 </body>
 </html>
 
-            <!-- 读取提示信息开始 -->
+        <!-- 读取提示信息开始 -->
         @if (session('success'))
-            <script type="text/javascript">
-                alert('发表成功');          
-            </script>;
+        <script type="text/javascript">
+            var layer = layui.layer
+                 ,form = layui.form;
+
+            layer.msg("{{ session('success')}}");           
+        </script>;
         @endif
         @if (session('error'))
-          <div class="alert alert-error">
-              {{ session('error') }}
-          </div>
+          <script type="text/javascript">
+          var layer = layui.layer
+             ,form = layui.form;
+                layer.msg("{{ session('error')}}");         
+            </script>;
         @endif
-    <!-- 读取提示信息结束 -->
+        <!-- 读取提示信息结束 -->
 
-    <!-- 显示验证错误信息 开始 -->
+        <!-- 显示验证错误信息 开始 -->
         @if (count($errors) > 0)
         <div class="">
             <ul> 
             @foreach ($errors->all() as $k=>$v)
                 <script type="text/javascript">
+                var layer = layui.layer
+                    ,form = layui.form;
                     if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
+                        layer.msg('{{ $v }}')
                     }                   
                 </script>;
             @endforeach

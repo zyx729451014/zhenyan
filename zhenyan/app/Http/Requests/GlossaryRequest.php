@@ -24,7 +24,7 @@ class GlossaryRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|max:20',
+            'title' => 'required|max:100',
             'image' => 'required'
         ];
     }
@@ -36,7 +36,7 @@ class GlossaryRequest extends Request
     {
         return [
             'title.required' => '标题不能为空',
-            'title.max' => '标题最长为20个字符',
+            'title.max' => '标题最长为100个字符',
             'image.required' => '图片必须上传'
 
         ];

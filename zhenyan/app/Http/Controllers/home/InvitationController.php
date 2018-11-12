@@ -173,9 +173,9 @@ class InvitationController extends Controller
         $res = Invi_collect::where('iid',$id)->delete();
         $res1 = Invi_comment::where('iid',$id)->delete();
         $res2 = Invi_reply::where('iid',$id)->delete();
-      
+        
         $res3 = Invitation::destroy($id);
-        if ($res && $res1 && $res2 && $res3) {
+        if ($res || $res1 || $res2 || $res3) {
             return back()->with('success', '删除成功');
         }else{
             return back()->with('error', '删除失败');

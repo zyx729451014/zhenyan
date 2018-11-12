@@ -34,7 +34,7 @@
 		    </script>
 		   
 		</div>
-			<button type="submit" style="background:#07aacd;color:#fff;margin-left:940px;margin-top:10px;"class="btn btn-default btn-search">修改</button>
+			<button type="submit" style="background:#07aacd;color:#fff;margin-left:540px;margin-top:10px;"class="btn btn-gradient-primary">修改</button>
 		</form>
 		
 	</div>

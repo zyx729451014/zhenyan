@@ -131,35 +131,6 @@
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
-
-            <!-- 读取提示信息开始 -->
-        @if (session('success'))
-            <script type="text/javascript">
-                alert("{{ session('success')}}");           
-            </script>;
-        @endif
-        @if (session('error'))
-          <script type="text/javascript">
-                alert("{{ session('error')}}");         
-            </script>;
-        @endif
-    <!-- 读取提示信息结束 -->
-
-    <!-- 显示验证错误信息 开始 -->
-        @if (count($errors) > 0)
-        <div class="">
-            <ul> 
-            @foreach ($errors->all() as $k=>$v)
-                <script type="text/javascript">
-                    if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
-                    }                   
-                </script>;
-            @endforeach
-           </ul>
-        </div>
-        @endif
-        <!-- 显示验证错误信息 结束 -->
     </body>
 
 </html>

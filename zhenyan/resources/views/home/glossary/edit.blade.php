@@ -29,7 +29,7 @@
 			</li>
 		</ul>
 		
-		<button type="submit" class="btn btn-gradient-primary">发布</button>
+		<button type="submit" class="btn btn-gradient-primary">修改</button>
 	</form>
 </section> 
 @endsection

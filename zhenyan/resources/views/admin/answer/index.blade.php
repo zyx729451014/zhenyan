@@ -15,7 +15,7 @@
         
         </select>
       条</label>
-      <label class='uname'>
+      <label class='uname'> 
         <span>关键字</span>
         <input type="text" name='search' value="{{ $request['search'] or '' }}">
       </label>
@@ -37,11 +37,11 @@
         	@foreach($answer as $k => $v)
         	<tr>
 		      	<td>{{ $v->id }}</td>
-		 		<td>{{ $v->id }}</td>
-		 		<td>{{ $v->title }}</td>
-		 		<td>{!! $v->content !!}</td>
-		 		<td>{{ $v->created_at }}</td>
-		 		<td>
+    		 		<td>{{ $v->answersuser->uname }}</td>  
+    		 		<td>{{ $v->title }}</td>
+    		 		<td>{!! $v->content !!}</td>
+    		 		<td>{{ $v->created_at }}</td>
+    		 		<td>
 					<form action="/admin/answer/{{ $v->id }}" method="post" style="display:inline-block;">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}

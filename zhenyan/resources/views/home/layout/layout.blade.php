@@ -13,6 +13,8 @@
 	    <link rel="stylesheet" href="/home/css/responsive.css">
 		<link rel="stylesheet" href="/home/css/responsiveslides.css" />
 		<link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+		<script src="/home/layui/layui.all.js"></script>
+
 		<script src="/home/js/responsiveslides.js"></script>
 		<script>
 	    $(function () { 
@@ -404,35 +406,7 @@
 				</ul>
 
 			</div>
-
-			<!-- 读取提示信息开始 -->
-	  	@if (session('success'))
-	      	<script type="text/javascript">
-		      	alert("{{ session('success')}}");        	
-		    </script>;
-	  	@endif
-	  	@if (session('error'))
-	      <script type="text/javascript">
-		      	alert("{{ session('error')}}");        	
-		    </script>;
-	  	@endif
-	<!-- 读取提示信息结束 -->
-
-	<!-- 显示验证错误信息 开始 -->
-	    @if (count($errors) > 0)
-	    <div class="">
-	        <ul> 
-	        @foreach ($errors->all() as $k=>$v)
-		        <script type="text/javascript">
-		        	if('{{ $k }}' == 0){
-		        		alert('{{ $v }}')
-		        	}		        	
-		        </script>;
-	     	@endforeach
-	       </ul>
-	    </div>
-	    @endif
-	    <!-- 显示验证错误信息 结束 -->
+	
 <!-- 尾部 -->
 	<footer>
 		<div class="footer-top">
@@ -468,6 +442,40 @@
 		</div>
 		
 	</footer>
+    <!-- 读取提示信息开始 -->
+  	@if (session('success'))
+      	<script type="text/javascript">
+      		var layer = layui.layer
+				 ,form = layui.form;
 
+	      	layer.msg("{{ session('success')}}");        	
+	    </script>;
+  	@endif
+  	@if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+		 ,form = layui.form;
+	      	layer.msg("{{ session('error')}}");        	
+	    </script>;
+  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+	        <script type="text/javascript">
+	        var layer = layui.layer
+				,form = layui.form;
+	        	if('{{ $k }}' == 0){
+	        		layer.msg('{{ $v }}')
+	        	}		        	
+	        </script>;
+     	@endforeach
+       </ul>
+    </div>
+    @endif
+	<!-- 显示验证错误信息 结束 -->
 </body>
 </html>

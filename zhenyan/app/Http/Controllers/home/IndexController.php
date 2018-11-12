@@ -29,6 +29,8 @@ class IndexController extends Controller
     {
         //  按发表时间顺序获取5条公告数据
         $notice = DB::select('select * from notice order by created_at desc limit 5');
+
+
         //  按发表时间顺序获取5条问答数据
         $answer_comment = Answer::get();
         $sum2 = [] ;
@@ -53,8 +55,13 @@ class IndexController extends Controller
             }
             
         }
-        // 帖子推荐中的显示
+
+
+        // 帖子推荐中的显示15条
         $invitation = Invitation::orderBy('created_at','desc')->get()->take(15);
+
+
+
         // 热帖中的显示根据评论查询
         $iniv_comm = Invitation::get();
         $sum = [] ;
@@ -104,11 +111,12 @@ class IndexController extends Controller
                 $idol[] = User::where('uid',$v)->get();
             }         
         }
-        //  按发表时间顺序获取5条图集
+        //  按发表时间顺序获取10条图集
         $glossary = Glossary::orderBy('created_at','desc')->get()->take(10);
+
         // 加载模板
         return view('home.index.index',['notice'=>$notice,'answer'=>$answer,'invitation'=>$invitation,'comment'=>$comment,'idol'=>$idol,'glossary'=>$glossary]);
-       
+
        
     }
 

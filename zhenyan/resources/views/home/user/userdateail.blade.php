@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/home/css/responsive.css">
         <link rel="stylesheet" href="/home/css/responsiveslides.css" />
         <link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+        <script src="/home/layui/layui.all.js"></script>
         <script src="/home/js/responsiveslides.js"></script>
         <script>
         $(function () {
@@ -90,23 +91,27 @@
             });
     </script>
 
-
 <!-- 内容 -->
 
     <!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<link href="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/jquery.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/headList20180626.css">
+<link href="/home/user/style/jquery.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/home/user/style/headList20180626.css">
 </head>
 <body>
 <!--吸顶-->
-<link rel="stylesheet" href="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/20171109AllbbsHead.css">
-<link rel="stylesheet" type="text/css" href="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/black.css">
-<script src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/push.js"></script><script src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/hm.js"></script><script src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/jquery-1.js"></script>
-<script language="JavaScript" type="text/javascript" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/go_wap.js"></script>
-<script language="JavaScript" type="text/javascript" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83-%E7%A9%BA%E7%99%BD%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
+<link rel="stylesheet" href="/home/user/style/20171109AllbbsHead.css">
+<link rel="stylesheet" type="text/css" href="/home/user/style/black.css">
+<script src="/home/user/style/push.js"></script>
+<script src="/home/user/style/hm.js"></script>
+<script src="/home/user/style/jquery-1.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/style/go_wap.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/style/pv.js"></script>
+<script type="text/javascript" id="pv_d" src="/home/user/style/p.js"></script>
+<img id="fn_dot_pvm" style="display:none" src="/home/user/style/dot.gif" width="1" height="1" border="0">
+<img style="display:none" src="/home/user/style/pvhit0001.gif" width="1" height="1" border="0">
 <div class="personalHead clearfix">
     <div class="personalInfor">
         <p class='touxiang' style='width:100px;height:100px;margin:0px auto;'>
@@ -175,7 +180,7 @@
             @endforeach
         </ol>
     </div>
-    <div class="personalListBlank" id="comment" style="width:970px;margin:0px auto;display:none;">
+    <div class="personalListBlank" id="comment" style="width:970px;margin:0px auto;display:none;font-size:13px;">
         @if($invi_comments->isEmpty())
             <div class="blankList non-existent show">
                 <p class="non-existentTxt">暂时木有内容呀~</p>
@@ -615,35 +620,40 @@
 </body>
 </html>
 
-        <!-- 读取提示信息开始 -->
-
-        @if (session('success'))
-            <script type="text/javascript">
-                alert("{{ session('success') }}");          
-            </script>;
-        @endif
-        @if (session('error'))
-          <div class="alert alert-error">
-              {{ session('error') }}
-          </div>
-        @endif
+    <!-- 读取提示信息开始 -->
+    @if (session('success'))
+        <script type="text/javascript">
+            var layer = layui.layer
+            ,form = layui.form;
+            layer.msg("{{ session('success')}}");           
+        </script>;
+    @endif
+    @if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+         ,form = layui.form;
+            layer.msg("{{ session('error')}}");         
+        </script>;
+    @endif
     <!-- 读取提示信息结束 -->
 
     <!-- 显示验证错误信息 开始 -->
-        @if (count($errors) > 0)
-        <div class="">
-            <ul> 
-            @foreach ($errors->all() as $k=>$v)
-                <script type="text/javascript">
-                    if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
-                    }                   
-                </script>;
-            @endforeach
-           </ul>
-        </div>
-        @endif
-        <!-- 显示验证错误信息 结束 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+            <script type="text/javascript">
+            var layer = layui.layer
+                ,form = layui.form;
+                if('{{ $k }}' == 0){
+                    layer.msg('{{ $v }}')
+                }                   
+            </script>;
+        @endforeach
+       </ul>
+    </div>
+    @endif
+    <!-- 显示验证错误信息 结束 -->
 <!-- 尾部 -->
     <footer>
         <div class="footer-top">

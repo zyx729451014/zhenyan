@@ -53,7 +53,7 @@ class PrivateController extends Controller
         $privatemess->content = $request->input('content');
         $res = $privatemess->save();
         if($res){
-            return back()->with('success', '发送成功');
+            return back()->with('psuccess', '发送成功');
         }else{
             return back()->with('error','发送失败');
         }
