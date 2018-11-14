@@ -117,11 +117,6 @@
                                         <a href='javascript:;' style='position:absolute;bottom:10px;right:20px;border:1px solid #ccc;color:#333;background-color:#ddd' onclick='sendPhoneCode();'>获取验证码</a>
                                     </div>
                                     <script>
-                                        $(function(){
-                                            $('#doc-my-tabs').tabs();
-                                        });
-                                    </script>
-                                    <script>
                                         function sendPhoneCode(){
                                             // 获取用户输入的手机号
                                             var phone_vals = $('input[name=phone]').val();

@@ -161,7 +161,7 @@ class UserController extends Controller
         }
     }
 
-
+ 
 
     //  验证手机注册
     public function postCheckphone()
