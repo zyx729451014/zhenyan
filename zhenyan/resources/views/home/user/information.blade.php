@@ -115,6 +115,11 @@
 <script type="text/javascript" id="pv_d" src="/home/user/css/p.js"></script>
 <img id="fn_dot_pvm" style="display:none" src="/home/user/css/dot.gif" width="1" height="1" border="0">
 <img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
+    <link rel="stylesheet" type="text/css" href="/home/user/pass/TY.css">
+    <link rel="stylesheet" type="text/css" href="/home/user/pass/change-password_ed8d7e7.css">
+    <script type="text/javascript" charset="utf-8" src="/home/user/pass/TY.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/home/user/pass/change-password_79c3254.js"></script>
+<script type="text/javascript" charset="utf-8" src="/home/user/pass/interface.js" async=""></script><link type="text/css" charset="utf-8" rel="stylesheet" href="/home/user/pass/nav2_0.css"><script type="text/javascript" charset="utf-8" src="/home/user/pass/nav2_0.js" async=""></script>
 <!--blackHead-->
 <div class="personalBox wrapper1380" style="margin-top:100px;height:630px;">
     <!--personalSide-->
@@ -140,14 +145,12 @@
     </dl>
     <ul class="menuPer yuanYin">
         <li>
-            <a href="" target="_self" class="">我的帖子</a>
-            <a href="" target="_self" class="">我的回复</a>
-            <a href="" target="_self" class="">我的收藏</a>
+            <a href="#" target="_self" class="pass" style="color:#0f0f0f;">密码修改</a>
         </li>
     </ul>
 </div>
     <!--personalMain-->
-    <div class="personalMain">
+    <div class="personalMain" id="infomation">
         <h3 class="yuanYin">个人资料</h3>
         <dl class="yuanYin">
             <dt>基本信息</dt>
@@ -229,9 +232,59 @@
             
         </dl>
     </div>
+    <div class="personalMain" id="password" style="display:none">
+        <dl class="yuanYin">
+            <dt>修改密码</dt>
+            <form action="#" method='post' enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <input type="hidden" name="fowardURL" value="http://passport.tianya.cn/safe.do">
+                <input type="hidden" name="source" value="">
+                    <div class="form-item">
+                        <label class="label" for="oldpassword">当前密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="oldpassword" id="oldpassword">
+                            <span id="oldpassword_tips" class="form-tips tips-info"></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="label" for="password">新密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="password" id="password">
+                            <span id="password_tips" class="form-tips tips-info">大小写字母、数字、字符组合更安全</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="label" for="password">密码强度：</label>
+                        <div class="field">
+                            <div class="lv-state">
+                                <div class="lv-state-bg"><div class="rate" style="width:100%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="label" for="password2">确认密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="password2" id="password2">
+                            <span id="password2_tips" class="form-tips tips-info">请再输入一遍</span>
+                        </div>
+                    </div>    
+                    <div class="subBtn">
+                       <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
+                    </div>              
+                </dd>
+            </form>
+            
+        </dl>
+    </div>
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    $('.pass').click(function(){
+        $('#password').show();
+        $('#infomation').hide();     
+    });
+</script>
 
         <!-- 读取提示信息开始 -->
         @if (session('success'))
