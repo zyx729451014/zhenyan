@@ -22,6 +22,7 @@ use App\Models\Friending;
 use App\Models\Answer;
 use App\Models\Answer_comment;
 use App\Models\Answer_reply;
+use Mail;
 
 class UserController extends Controller
 { 
@@ -38,36 +39,135 @@ class UserController extends Controller
     }
 
      /**
-     * 前台注册成功
+     * 前台邮箱注册成功
      *
      * @return \Illuminate\Http\Response
      */
     public function postDoregister(Request $request)
     {
        // 获取数据 进行添加
+        $email = $request->input('email');
         $user = new User;
-        $user->uname = $request->input('uname');
-        $user->upass = hash::make($request->input('upass'));  
+        $user->email = $email;
+        $user->upass = hash::make($request->input('upass')); 
+        $token = str_random(60);
+        // 加密签名
+        $user->token = $token; 
         $res1 = $user->save(); // bool
-        $id = $user->uid;
+        $id = $user->uid;  
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
         $userdateail->point = 200;
         $res2 = $userdateail->save();
         // 逻辑判断
         if($res1 && $res2){
-            return redirect('/home/user/login');
+            // 发送邮件
+            Mail::send('home.email.index', ['email' => $email,'id'=>$id,'token'=>$token], function ($m) use ($user) {
+               $res = $m->to($user->email)->subject('【LAMP官方】');
+            });
+            return redirect('/home/user/register');
         }else{
             echo "<script>alert('很遗憾您注册失败了');";
         }
 
     } 
-
-    //  验证用户名
-    public function postCheckname()
+    // 邮箱激活
+    public function getJihuo($id,$token)
     {
-        $name = $_POST['uname'];
-        $data = User::where('uname',$name)->first();
+        // 修改用户的状态
+        $user = User::find($id);
+        // 检测用户
+        if($user->status == 1){
+            return redirect('/home/user/login')->with('error','用户已经激活');
+            
+        }
+        if($user->token != $token){
+            return redirect('/home/user/login')->with('error','链接失效');
+        }
+        $user->status = 1;
+        $user->token = str_random(60);
+        if($user->save()){
+            return redirect('/home/user/login')->with('success','激活成功 去登录');
+        }
+    }
+
+    //  验证邮箱注册
+    public function postCheckemail()
+    {
+        $email = $_POST['email'];
+        $data = User::where('email',$email)->first();
+        if ($data) {
+           // 用户名存在返回error
+           echo "error";  
+        }else{
+            // 用户不存在返回success
+            echo "success";
+           
+        }
+        
+    }
+
+    // 发送短信验证
+    public function getSendphonecode(Request $request)
+    {
+
+        // URL 请求手机短信验证的接口地址
+        $mobile = $request->input('phone');
+        dump($mobile);
+        $str_rand = rand(1000,9999);
+        // 压入session
+        session(['phone_code'=>$str_rand]);
+        $mobile_code = $str_rand;
+        //短信接口地址
+        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
+        $target .= "&account=C01852037&password=04313695dc00345c014c807e39f29b71&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+        //初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL,$target);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        //执行命令
+        $data = curl_exec($curl);
+        //关闭URL请求
+        curl_close($curl);
+        echo $data;
+
+    }
+
+    // 前台手机号注册
+    public function postPhonedoregister(Request $request)
+    {
+        
+        if($request->input('phone_code') != session('phone_code')){
+            return redirect('/home/user/register')->with('error','验证码错误');
+        }
+         // 获取数据 进行添加
+        $phone = $request->input('phone');
+        $user = new User;
+        $user->phone = $phone;
+        $user->upass = hash::make($request->input('upass')); 
+        $res1 = $user->save(); // bool
+        $id = $user->uid;  
+        $userdateail = new Userdateail;
+        $userdateail->uid = $id;
+        $userdateail->point = 200;
+        $res2 = $userdateail->save();
+        // 逻辑判断
+        if($res1 && $res2){
+            return redirect('/home/user/register');
+        }else{
+            echo "<script>alert('很遗憾您注册失败了');";
+        }
+    }
+
+
+
+    //  验证手机注册
+    public function postCheckphone()
+    {
+        $phone = $_POST['phone'];
+        $data = User::where('phone',$phone)->first();
         if ($data) {
            // 用户名存在返回error
            echo "error";  

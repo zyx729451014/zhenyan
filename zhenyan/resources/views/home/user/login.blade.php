@@ -126,7 +126,6 @@
                 });
 
         </script>
-        <script src="assets/js/login.js"></script>
 
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

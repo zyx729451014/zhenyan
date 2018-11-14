@@ -7,8 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>臻妍论坛注册</title>
  
-        <!-- CSS --> 
-        <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+        <!-- CSS -->
         <link rel="stylesheet" href="/home/user/assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/home/user/assets/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/home/user/assets/css/form-elements.css">
@@ -28,7 +27,10 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/home/user/assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/home/user/assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="/home/user/assets/ico/apple-touch-icon-57-precomposed.png">
+        <style type="text/css">
+            .reg h3{width: 120px;text-align: center;float: left;margin-left: 30px;cursor: pointer;margin-bottom: 5px;border-bottom: 2px solid rgba(0,0,0,0);}
 
+        </style>
     </head>
 
     <body>
@@ -55,24 +57,79 @@
                         </div>
                         <div class="col-sm-5 form-box">
                             <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3>注册</h3>
-                                    <p>Fill in the form below to get instant access:</p>
+                                <div class="form-top-left reg">
+                                    <h3 class="email">邮箱注册</h3>
+                                    <h3 class="phone">手机注册</h3>
+                                    <em>Fill in the form below to get instant access:</em>
                                 </div>
                                 <div class="form-top-right">
                                     <i class="fa fa-pencil"></i>
                                 </div>
                             </div>
-                            <div class="form-bottom">
+                            <div class="form-bottom" id="email">
                                 <form role="form" action="/home/user/doregister" method="post" class="registration-form">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-first-name">用户名</label>
-                                        <input type="text" name="uname" placeholder="请输入用户名" class="form-first-name form-control" id="uname">
+                                        <label class="sr-only" for="form-first-name">邮箱</label>
+                                        <input type="text" name="email" placeholder="请输入邮箱" class="form-first-name form-control" id="uname">
+                                        <div class="col-sm-10">
+                                             <span style='color:#333;'></span>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-last-name">密码</label>
+                                        <input type="password" name="upass" placeholder="请输入密码" class="form-last-name form-control" id="upass">
+                                        <ul>
+                                            <li>弱</li>
+                                            <li>中</li>
+                                            <li>强</li>
+                                            <li>特别强</li>
+                                        </ul>
                                         <div class="col-sm-10">
                                              <span style='color:#333;'></span>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-email">确认密码</label>
+                                        <input type="password" name="upassok" placeholder="请输入确认密码" class="form-email form-control" id="upassok">
+                                    </div>
+                                    <div class="col-sm-10">
+                                             <span style='color:#333;'></span>
+                                        </div>
+                                    <button type="submit" class="btn">注  册</button>
+
+                                </form>
+                                <h5 style="float:right;">已有账号?点击去<a href="/home/user/login">登录</a>吧!</h5>
+                            </div>
+                            <div class="form-bottom" id="phone" style="display:none;">
+                                <form role="form" action="/home/user/phonedoregister" method="post" class="registration-form">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-first-name">手机号</label>
+                                        <input type="text" name="phone" placeholder="请输入手机号" class="form-first-name form-control" id="phone">
+                                        <div class="col-sm-10">
+                                             <span style='color:#333;'></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style='position:relative;'>
+                                        <label class="sr-only" for="form-first-name">验证码</label>
+                                        <input type="text" name="phone_code" placeholder="请输入手机验证码" class="form-first-name form-control" id="phone_code">
+                                        <a href='javascript:;' style='position:absolute;bottom:10px;right:20px;border:1px solid #ccc;color:#333;background-color:#ddd' onclick='sendPhoneCode();'>获取验证码</a>
+                                    </div>
+                                    <script>
+                                        $(function(){
+                                            $('#doc-my-tabs').tabs();
+                                        });
+                                    </script>
+                                    <script>
+                                        function sendPhoneCode(){
+                                            // 获取用户输入的手机号
+                                            var phone_vals = $('input[name=phone]').val();
+                                            $.get('/home/user/sendphonecode',{'phone':phone_vals},function(msg){
+                                              alert(msg);
+                                            },'json');
+                                        }
+                                    </script>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-last-name">密码</label>
                                         <input type="password" name="upass" placeholder="请输入密码" class="form-last-name form-control" id="upass">
@@ -105,19 +162,32 @@
             
         </div>
 
-
         <!-- Javascript -->
         <script src="/home/user/assets/js/jquery-1.11.1.min.js"></script>
         <script src="/home/user/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="/home/user/assets/js/jquery.backstretch.min.js"></script>
         <script src="/home/user/assets/js/retina-1.1.0.min.js"></script>
         <script src="/home/user/assets/js/scripts.js"></script>
-        <script src='/home/user/assets/js/register.js'></script>
+        <!-- <script src='/home/user/assets/js/register.js'></script> -->
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
-
+        <script type="text/javascript">
+        $('.email').click(function(){
+            $('#email').show();
+            $('#phone').hide();
+            $(this).css('border-bottom','2px solid #999');
+            $('.phone').css('border-bottom','');
+        });
+        $('.phone').click(function(){
+            $('#email').hide();
+            $('#phone').show();
+            $(this).css('border-bottom','2px solid #999');
+            $('.email').css('border-bottom','');
+        })
+        </script>
+        
     </body>
 
 </html>
