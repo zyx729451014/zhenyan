@@ -475,8 +475,21 @@ class UserController extends Controller
     
     }
 
-
-
+    // 找回密码
+    public function getFp()
+    {
+        return view('home.user.fp');
+    }
+    // 通过邮箱找回密码
+    public function getEmails()
+    {
+        return view('home.user.emails');
+    }
+    // 通过手机号找回密码
+    public function getMobile()
+    {
+        return view('home.user.mobile');
+    }
 
 
 

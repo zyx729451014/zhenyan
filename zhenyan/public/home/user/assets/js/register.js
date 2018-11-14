@@ -218,7 +218,9 @@ $(function(){
 			$('#phone li').each(function(){
 				$('#phone li').css('background','');
 				$('#phone ul:eq(0)').hide();
+
 			})
+			
 			var pass_vals = $(this).val();
 			if(pass_vals.length < 6){
 				return;
@@ -265,6 +267,7 @@ $(function(){
 					$('#phone li:eq(3)').css('color','#666');
 					$('#phone ul:eq(0)').show();
 					$('#phone span:eq(1)').html('');
+
 			}
 			
 

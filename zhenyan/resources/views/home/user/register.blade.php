@@ -59,6 +59,7 @@
                             <div class="form-top">
                                 <div class="form-top-left reg">
                                     <h3 class="email" style="border-bottom:2px solid #999;">邮箱注册</h3>
+
                                     <h3 class="phone">手机注册</h3>
                                     <em>Fill in the form below to get instant access:</em>
                                 </div>

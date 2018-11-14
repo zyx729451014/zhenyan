@@ -77,6 +77,7 @@
                                     </div>
 			                        <button type="submit" class="btn">登 录</button>
 			                    </form>
+                                <h5 style="float:left;margin-top:5px;"><a href="/home/user/fp" style="color:#fff;">忘记密码?</a></h5>
                                 <h5 style="float:right;">还没有账号?赶快去<a href="/home/user/register">注册</a>吧!</h5>
 		                    </div>
                         </div>
