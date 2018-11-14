@@ -7,7 +7,6 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>臻妍论坛登录</title>
 
-        <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
@@ -57,7 +56,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>登录</h3>
-                            		<p>Fill in the form below to get instant access:</p>
+                            		<em>Fill in the form below to get instant access:</em>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-pencil"></i>
@@ -126,7 +125,6 @@
                 });
 
         </script>
-        <script src="assets/js/login.js"></script>
 
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

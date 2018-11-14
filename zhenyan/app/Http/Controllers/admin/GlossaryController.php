@@ -132,4 +132,6 @@ class GlossaryController extends Controller
             return back()->with('error', '恢复失败');
         } 
     }
+
+    
 }

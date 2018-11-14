@@ -57,31 +57,13 @@ class GlossaryController extends Controller
     public function store(GlossaryRequest $request)
     {
         // 开启事物
-        DB::beginTransaction();
-        // 声明文件路径数组 (多文件)
-        $file_paths = [];
-        if($request -> hasFile('image')){
-            $profile = $request -> file('image');
-            foreach ($profile as $key => $value) {
-                $ext = $value ->getClientOriginalExtension(); //获取文件后缀
-                $file_name = str_random('20').'.'.$ext;
-                $dir_name = './uploads/'.date('Ymd',time());
-                $res = $value -> move($dir_name,$file_name);
-                if($res){
-                    // 拼接数据库存放路径
-                    $profile_path = ltrim($dir_name.'/'.$file_name,'.');    
-                    $file_paths[] = $profile_path;
-                    // 把数组拼接成一个字符串 用 !-! 隔开
-                    $file = implode('!-!',$file_paths);  
-                }
-            }
-        }
+        DB::beginTransaction();    
         // 添加数据
         $glossary = new Glossary;
         $glossary -> uid = session('user')->uid;
         $glossary -> title = $request->input('title');
-        $glossary -> image = $file;
-        $glossary -> save();
+        $glossary -> image = implode('!-!',$request->input('image'));
+        $res = $glossary -> save();
         // 发布图集用户积分加5
         $user = Userdateail::find(session('user')->uid);
         $user -> point +=5;
@@ -132,28 +114,14 @@ class GlossaryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
          // 添加数据
         $glossary = Glossary::find($id);
         $glossary -> title = $request->input('title');
         // 声明文件路径数组 (多文件)
-        $file_paths = [];
-        if($request -> hasFile('image')){
-            $profile = $request -> file('image');
-            foreach ($profile as $key => $value) {
-                $ext = $value ->getClientOriginalExtension(); //获取文件后缀
-                $file_name = str_random('20').'.'.$ext;
-                $dir_name = './uploads/'.date('Ymd',time());
-                $res = $value -> move($dir_name,$file_name);
-                if($res){
-                    // 拼接数据库存放路径
-                    $profile_path = ltrim($dir_name.'/'.$file_name,'.');    
-                    $file_paths[] = $profile_path;
-                    // 把数组拼接成一个字符串 用 !-! 隔开
-                    $file = implode('!-!',$file_paths);  
-                }
-            }
-            $glossary -> image = $file;
-        }
+        if ($request->input('image')) {
+            $glossary -> image = implode('!-!',$request->input('image'));
+        }  
         $res = $glossary -> save();
         if($res){
             return back()->with('success', '修改成功');
@@ -179,5 +147,80 @@ class GlossaryController extends Controller
         }else{
             return back()->with('error', '删除失败');
         }   
+    }
+
+    /**
+     *
+     *
+     *  验证图集图片无刷新上传
+     * 
+     */
+    public function uploads(Request $request)
+    {
+        
+        if($request -> hasFile('image')){
+                $profile = $request -> file('image');
+                $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+                $file_name = str_random('20').'.'.$ext;
+                $dir_name = './uploads/'.date('Ymd',time());
+                $res = $profile -> move($dir_name,$file_name);
+                if($res){
+                    // 拼接数据库存放路径
+                    $profile_path = ltrim($dir_name.'/'.$file_name,'.');    
+                   
+                    
+                    $str=[
+                        'code'=>1,
+                        'msg'=>'上传成功',
+                        'data'=>$profile_path
+                    ];
+                }else{
+                   $str=[
+                       'code'=>0,
+                       'msg'=>'上传失败',
+                       'data'=>$profile_path
+                       ];
+                }
+            
+        }
+        return response()->json($str);
+    }
+
+    /**
+     *
+     *
+     *  验证图集图片无刷新上传修改
+     * 
+     */
+    
+    public function edituploads(Request $request)
+    {
+        
+        if($request -> hasFile('image')){
+            $profile = $request -> file('image');
+            $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+            $res = $profile -> move($dir_name,$file_name);
+            if($res){
+                // 拼接数据库存放路径
+                $profile_path = ltrim($dir_name.'/'.$file_name,'.');    
+               
+                
+                $str=[
+                    'code'=>1,
+                    'msg'=>'上传成功',
+                    'data'=>$profile_path
+                ];
+            }else{
+               $str=[
+                   'code'=>0,
+                   'msg'=>'上传失败',
+                   'data'=>$profile_path
+                   ];
+            }
+            
+        }
+        return response()->json($str);
     }
 }

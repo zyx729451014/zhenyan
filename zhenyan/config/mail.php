@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => '729451014@qq.com', 'name' => '臻妍论坛'],
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     */
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-
+    'encryption' => 'ssl',
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username

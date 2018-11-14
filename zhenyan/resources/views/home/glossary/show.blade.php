@@ -90,13 +90,14 @@
 						<ul>
 							<?php
 								 $gloreply = App\Models\Gloreply::where('cid',$v->id)->get();
+							
 							?>
 							@foreach ($gloreply as $kk=>$vv)
 								<li>
 									<img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30">
 									<a href="/home/user/usercenter/{{ $vv->glossaryuser['uid'] }}">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
 								</li>
-							@endforeachn
+							@endforeach
 							<li>
 								<form action="/home/glossary/reply" method="post" class="fbpl fbpl1" style="width:750px;height:180px;" hidden>	
 									{{ csrf_field() }}	

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="www.zhenyan.com">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<?php $web = \App\Models\Web::find(1); ?>
 	<title>{{ $web->name }}</title>
 
@@ -46,8 +47,40 @@
 	<script src="/home/js/jquery.lazyload.min.js"></script>
 	<script src="/home/banner/js/jquery-1.10.2.min.js"></script>
 	<script src="/home/banner/js/slider.js"></script>
+
+	 <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+	 <script src="/layui/layui.all.js"></script>
+	 <style type="text/css">
+		.name{
+			width: 300px;
+			height: 200px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			position: fixed;
+			top: 250px;
+			left: 40%;
+			z-index: 9999999999;
+		}
+		.name input{
+			border: 1px solid #ccc;
+			width: 200px;
+			height: 30px;
+			margin-bottom: 10px;
+
+		}
+		.name input[type=submit]{
+			width: 50px;
+			margin-left: 110px;
+			margin-top: 10px;
+		}
+		.name form{
+			margin-top: 10px;
+			padding: 20px;
+		}
+	 </style>
 </head>
 <body>
+
 <!-- 导航 -->
 	<header>
 	<?php
@@ -100,7 +133,50 @@
 	</script>
 
 <!-- 内容 -->
+	@if (session()->has('user') && !session('user')->uname)
+		<div class="name">
+			<p style="background:#ccc;font-size:20px;padding:5px;">请设置用户名</p>
 
+			<form action="/home/user/changename/{{ session('user')->uid }}" method="post">
+				{{ csrf_field() }}
+				用户名：<input type="text" name="uname" placeholder="请输入中文英文数字2~6位字符">
+				<span></span>
+				<p>*用户名设置后不可修改 可作为登录账户</p>
+				<input type="submit" value="确认">
+			</form>
+		</div>
+	@endif
+	<script type="text/javascript">
+		$('input[name=uname]').blur(function(){
+			var user_preg =  /^[a-zA-Z0-9_\u4e00-\u9fa5]{2,6}$/; 
+			var user_vals = $(this).val();
+			if(user_preg.test(user_vals)){
+				$.ajaxSetup({
+				        headers: {
+				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				        }
+				});
+				$.ajax({
+					url:'/home/user/checkname',
+					type:'post',
+					data:{'uname':user_vals},
+					success:function(msg){
+						if(msg == 'success'){
+						isUname = true;
+						$('.name span:eq(0)').html('<font color="#CBCBCB">恭喜用户名可用</font>');
+						}else{
+						$('.name span:eq(0)').html('<font color="red">用户已经存在</font>') ;
+						}
+					},
+					dataType:'html',
+					async:false
+				});
+
+			}else{
+				$('.name span:eq(0)').html('<font color="red">用户名格式错误</font>');
+			}
+		});
+	</script>
 @section('content-wrapper')
 
 @show
