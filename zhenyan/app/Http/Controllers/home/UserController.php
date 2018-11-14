@@ -26,7 +26,8 @@ use App\Models\Answer_reply;
 
 class UserController extends Controller
 { 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('hlogin', ['only' => ['getUserdateail', 'getInformation']]);
     }
 
@@ -39,13 +40,14 @@ class UserController extends Controller
     }
 
      /**
-     * 前台注册成功
+     * 前台邮箱注册成功
      *
      * @return \Illuminate\Http\Response
      */
     public function postDoregister(Request $request)
     {
        // 获取数据 进行添加
+        $email = $request->input('email');
         $user = new User;
         if($request->input('email')){
           $user->email = $request->input('email');  
@@ -60,7 +62,7 @@ class UserController extends Controller
         $user->upass = hash::make($request->input('upass'));
         $user->token = str_random(60);
         $res1 = $user->save(); // bool
-        $id = $user->uid;
+        $id = $user->uid;  
         $userdateail = new Userdateail;
         $userdateail->uid = $id;
         $userdateail->point = 200;
@@ -89,8 +91,8 @@ class UserController extends Controller
      
     public function postCheckname()
     {
-        $name = $_POST['uname'];
-        $data = User::where('uname',$name)->first();
+        $uname = $_POST['uname'];
+        $data = User::where('uname',$uname)->first();
         if ($data) {
            // 用户名存在返回error
            echo "error";  
@@ -152,12 +154,12 @@ class UserController extends Controller
         $user = User::find($id);
         if($user->status == 1)
         {
-            return '用户已经激活';
+            return redirect('/home/user/login')->with('error','用户已经激活');
         }
 
         if ($user->token != $token) 
         {
-            return '该链接已经失效';
+            return redirect('/home/user/login')->with('error','该链接已经失效');
         }
         $user ->token = str_random(60);
         $user ->status = 1;
@@ -266,7 +268,7 @@ class UserController extends Controller
                     session(['user'=>$user]);
                     // 用户登录积分加10
                     $userdateail = Userdateail::find($user->uid);
-                  
+                    $userdateail -> point +=10;
                     $res1 = $userdateail->save();
 
                     $uri=empty(session('home_uri')) ? '/':session('home_uri');
@@ -413,6 +415,42 @@ class UserController extends Controller
     }
 
     /**
+     * 上传头像
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUploads(Request $request)
+    {
+        // 接收数据执行上传
+         if($request->hasFile('face')){
+            // 创建对象
+            $profile = $request -> file('face');
+            // 获取文件后缀
+            $ext = $profile ->getClientOriginalExtension(); 
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+             if($profile -> move($dir_name,$file_name)){
+                $str = [
+                    'code' =>1,
+                    'msg' =>'上传成功',
+                    'data'=>[
+                        'src' => ltrim($dir_name.'/'.$file_name,'.'),
+                    ],
+                ];
+            }else{
+                $str = [
+                    'code' =>0,
+                    'msg' =>'上传失败',
+                    'data'=>[
+                        'src' =>ltrim($dir_name.'/'.$file_name,'.'),
+                    ],
+                ];
+            }
+        }
+        return response()->json($str);
+    }
+
+    /**
      * 资料保存
      *
      * @param  \Illuminate\Http\Request  $request
@@ -421,24 +459,12 @@ class UserController extends Controller
     public function postUpdate(Request $request,$id)
     {
         // 获取一条数据
-         $userdateail = Userdateail::where('uid',$id)->first();
-        if($request->hasFile('face')){
-            $profile = $request -> file('face');
-            // 获取文件后缀
-            $ext = $profile ->getClientOriginalExtension(); 
-            $file_name = str_random('20').'.'.$ext;
-            $dir_name = './uploads/'.date('Ymd',time());
-            $res = $profile -> move($dir_name,$file_name);
-            // 拼接数据库存放路径
-            $profile_path = ltrim($dir_name.'/'.$file_name,'.');        
-        }else{
-            $profile_path = $userdateail->face;
-        }
-        $userdateail->face = $profile_path;
+        $userdateail = Userdateail::where('uid',$id)->first();
         $userdateail->sex = $request->input('sex');
         $userdateail->birthdate = $request->input('birthdate');
-        $userdateail->point = $request->input('point');
-       
+        if (!empty($request->input('face'))) {
+            $userdateail->face = $request->input('face');
+        }
         $res = $userdateail->save();
         // 逻辑判断
         if($res){

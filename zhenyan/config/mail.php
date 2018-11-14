@@ -46,7 +46,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
-    |--------------------------------------------------------------------------
+    |----------------------
     |
     | You may wish for all e-mails sent by your application to be sent from
     | the same address. Here, you may specify a name and address that is
@@ -69,6 +69,7 @@ return [
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
     'encryption' => 'ssl',
+
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username

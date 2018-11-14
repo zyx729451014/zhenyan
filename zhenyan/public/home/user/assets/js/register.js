@@ -141,6 +141,84 @@ $(function(){
 				$('#phone li').css('background','');
 				$('#phone ul:eq(0)').hide();
 			})
+			
+			var pass_vals = $(this).val();
+			if(pass_vals.length < 6){
+				return;
+			}
+			if(pass_vals.length > 16){
+				$('#phone span:eq(1)').html( '✖ 密码长度为6-16位');
+				$('#phone ul:eq(0)').hide();
+				return;
+			}
+			var temp = [];
+			var n_preg = /[0-9]+/g;
+			if(n_preg.test(pass_vals)){
+				temp.push('数字');
+			}
+			var ms_preg = /[a-z]+/g;
+			if(ms_preg.test(pass_vals)){
+				temp.push('小写字母');
+			}
+			var bg_preg = /[A-Z]+/g;
+			if(bg_preg.test(pass_vals)){
+				temp.push('大写字母');
+			}
+			var ts_preg = /[^0-9a-zA-Z]+/g;
+			if(ts_preg.test(pass_vals)){
+				temp.push('特殊字符');
+			}
+			if(temp.length==1){
+					$('#phone li:eq(0)').css('background','#AD4242');
+					$('#phone li:eq(0)').css('color','#666');
+					$('#phone ul:eq(0)').show();
+					$('#phone span:eq(1)').html('');
+			}else if(temp.length==2){
+					$('#phone li:eq(1)').css('background','#BEB367');
+					$('#phone li:eq(1)').css('color','#666');
+					$('#phone ul:eq(0)').show();
+					$('#phone span:eq(1)').html('');
+			}else if(temp.length==3){
+					$('#phone li:eq(2)').css('background','#628B3E');
+					$('#phone li:eq(2)').css('color','#666');
+					$('#phone ul:eq(0)').show();
+					$('#phone span:eq(1)').html('');	
+			}else if(temp.length==4){
+					$('#phone li:eq(3)').css('background','#40C032');
+					$('#phone li:eq(3)').css('color','#666');
+					$('#phone ul:eq(0)').show();
+					$('#phone span:eq(1)').html('');
+					$('#email li:eq(0)').css('background','#AD4242');
+					$('#email li:eq(0)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
+			}else if(temp.length==2){
+					$('#email li:eq(1)').css('background','#BEB367');
+					$('#email li:eq(1)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
+			}else if(temp.length==3){
+					$('#email li:eq(2)').css('background','#628B3E');
+					$('#email li:eq(2)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');					
+			}else if(temp.length==4){
+					$('#email li:eq(3)').css('background','#40C032');
+					$('#email li:eq(3)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
+			}
+			
+
+		}); 
+		$('#email input[name=upassok]').keyup(function(){
+			var passok_vals = $(this).val();
+			if (passok_vals==$('#email input[name=upass]').val()) {
+		$('#phone input[name=upass]').keyup(function(){
+			$('#phone li').each(function(){
+				$('#phone li').css('background','');
+				$('#phone ul:eq(0)').hide();
+			})
 			var pass_vals = $(this).val();
 			if(pass_vals.length < 6){
 				return;
@@ -193,7 +271,7 @@ $(function(){
 		}); 
 		$('#email input[name=upassok]').keyup(function(){
 			var passok_vals = $(this).val();
-			if (passok_vals==$('#email input[name=upass]').val()) {
+			if (passok_vals==$('input[name=upass]').val()) {
 				isUpass=true;
 				$('#email span:eq(2)').html('<font color="green">两次密码输入一致</font>');
 			}else{

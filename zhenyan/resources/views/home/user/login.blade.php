@@ -137,14 +137,14 @@
             var layer = layui.layer
                  ,form = layui.form;
 
-            alert("{{ session('success')}}");           
+            layui.alert("{{ session('success') }}");           
         </script>;
     @endif
     @if (session('error'))
       <script type="text/javascript">
       var layer = layui.layer
          ,form = layui.form;
-            alert("{{ session('error')}}");         
+            layui.alert("{{ session('error') }}");         
         </script>;
     @endif
     <!-- 读取提示信息结束 -->
@@ -158,7 +158,7 @@
             var layer = layui.layer
                 ,form = layui.form;
                 if('{{ $k }}' == 0){
-                    alert('{{ $v }}')
+                    layui.alert('{{ $v }}')
                 }                   
             </script>;
         @endforeach

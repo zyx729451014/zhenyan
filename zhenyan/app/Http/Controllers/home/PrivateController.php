@@ -11,6 +11,10 @@ use DB;
 
 class PrivateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('hlogin', ['only' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *

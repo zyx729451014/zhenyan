@@ -7,7 +7,10 @@
 	<?php $web = \App\Models\Web::find(1); ?>
 	<title>{{ $web->name }}</title>
 
-		<!-- 首页 -->
+		<!--  layui -->
+		<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+	 	<script src="/layui/layui.all.js"></script>
+	 	<!-- 首页 -->
 		<link rel="stylesheet" type="text/css" href="/home/css/style2.css">
 		<link rel="stylesheet" href="/home/css/zerogrid.css">
 		<link rel="stylesheet" href="/home/css/style.css">
@@ -50,8 +53,7 @@
 	<script src="/home/banner/js/jquery-1.10.2.min.js"></script>
 	<script src="/home/banner/js/slider.js"></script>
 
-	 <link rel="stylesheet" href="/layui/css/layui.css" media="all">
-	 <script src="/layui/layui.all.js"></script>
+	 
 	 <style type="text/css">
 		.uname{
 			width: 300px;
@@ -490,9 +492,9 @@
 				$links = \App\Models\Link::where('status',1)->get();
 			?>
 			<ol>
-				<h4>友情链接：</h4>
+				<h4 style="margin-bottom:10px;">友情链接：</h4>
 				@foreach ($links as $k=>$v)
-				<li style="color:#337ab7;"><a href="{{ $v->lurl }}">{{ $v->lname }}</a></li>
+				<li><a href="{{ $v->lurl }}" style="color:#337ab7;">{{ $v->lname }}</a></li>
 				@endforeach
 			<ol>
 		</div>

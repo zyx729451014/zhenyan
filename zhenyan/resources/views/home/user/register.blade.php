@@ -75,7 +75,7 @@
                                         <div class="col-sm-10">
                                              <span style='color:#333;'></span>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="form-group">
                                         <label class="sr-only" for="form-last-name">密码</label>
                                         <input type="password" name="upass" placeholder="请输入密码" class="form-last-name form-control" id="upass">
@@ -182,7 +182,6 @@
         <script src="/home/user/assets/js/retina-1.1.0.min.js"></script>
         <script src="/home/user/assets/js/scripts.js"></script>
         <script src='/home/user/assets/js/register.js'></script>
-        
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
