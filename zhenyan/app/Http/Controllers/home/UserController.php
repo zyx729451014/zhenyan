@@ -22,6 +22,7 @@ use App\Models\Friending;
 use App\Models\Answer;
 use App\Models\Answer_comment;
 use App\Models\Answer_reply;
+use Mail;
 
 class UserController extends Controller
 { 
@@ -46,7 +47,8 @@ class UserController extends Controller
     {
        // 获取数据 进行添加
         $user = new User;
-        $user->uname = $request->input('uname');
+        $user->uname = $request->input('email');
+        $user->email = $request->input('email');
         $user->upass = hash::make($request->input('upass'));
         $res1 = $user->save(); // bool
         $id = $user->uid;
@@ -56,12 +58,17 @@ class UserController extends Controller
         $res2 = $userdateail->save();
         // 逻辑判断
         if($res1 && $res2){
+            // 发送邮件
+            Mail::send('home.user.index',['email'=>$user->email,'uid'=>$id],function($m) use ($user) {
+                $m->to($user->email,$user->name)->subject('臻妍论坛');
+            });
             return redirect('/home/user/login');
         }else{
             echo "<script>alert('很遗憾您注册失败了');";
         }
 
-    } 
+    }
+
 
     //  验证用户名
     public function postCheckname()
