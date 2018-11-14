@@ -58,7 +58,23 @@ $(function() {
 					<h3 style="line-height: 1.3">图集</h3>
 					<br>
 					<ul style="width:600px;height:40px;margin-left:150px;">
-						<li style="float:left;width:80px;height:30px;border:1px solid #d8dadb;margin-left:450px;text-align: center;"><a href="/home/glossary/create" style="line-height:30px;color:#809195">发表</a></li>
+						@if(!session()->has('user'))
+							<li style="float:left;width:80px;height:30px;border:1px solid #d8dadb;margin-left:450px;text-align: center;"><a href="#" style="line-height:30px;color:#809195" onclick="create()">发表</a></li>
+						@else
+							<li style="float:left;width:80px;height:30px;border:1px solid #d8dadb;margin-left:450px;text-align: center;"><a href="/home/glossary/create" style="line-height:30px;color:#809195">发表</a></li>
+						@endif
+						
+						 <?php  
+		                    $uri=\Request::getRequestUri();
+		                    session(['home_uri'=>$uri]);
+		                ?>
+		                <script type="text/javascript">
+			                function create()
+			                {
+			                  	layer.alert('您还未登录 请先去登录', {icon: 2,time: 5000},function(){ location.href='/home/user/login'; }); 
+		                        return false;
+			                }
+		                </script> 
 					</ul>
   				</div>
   				@foreach ($glossary as $k=>$v)

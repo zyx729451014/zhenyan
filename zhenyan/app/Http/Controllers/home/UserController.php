@@ -265,9 +265,9 @@ class UserController extends Controller
                 if (Hash::check($upass,$user['upass'])) {
                     session(['user'=>$user]);
                     // 用户登录积分加10
-                    $user = Userdateail::find($user->uid);
-                    $user->point +=10;
-                    $res1 = $user->save();
+                    $userdateail = Userdateail::find($user->uid);
+                  
+                    $res1 = $userdateail->save();
 
                     $uri=empty(session('home_uri')) ? '/':session('home_uri');
                     session('home_uri',NULL);

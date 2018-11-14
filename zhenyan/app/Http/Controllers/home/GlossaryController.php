@@ -142,7 +142,7 @@ class GlossaryController extends Controller
         $res1 = Glocomment::where('gid',$id)->delete();
         $res2 = Gloreply::where('gid',$id)->delete();
         $res3 = Glocollect::where('gid',$id)->delete();
-        if ($res && $res1 && $res2 && $res3) {
+        if ($res || $res1 || $res2 || $res3) {
             return back()->with('success', '删除成功');
         }else{
             return back()->with('error', '删除失败');

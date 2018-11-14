@@ -14,6 +14,8 @@
 	    <link rel="stylesheet" href="/home/css/responsive.css">
 		<link rel="stylesheet" href="/home/css/responsiveslides.css" />
 		<link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+		<script src="/home/layui/layui.all.js"></script>
+
 		<script src="/home/js/responsiveslides.js"></script>
 		<script>
 	    $(function () { 
@@ -51,7 +53,7 @@
 	 <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 	 <script src="/layui/layui.all.js"></script>
 	 <style type="text/css">
-		.name{
+		.uname{
 			width: 300px;
 			height: 200px;
 			background-color: #fff;
@@ -61,19 +63,19 @@
 			left: 40%;
 			z-index: 9999999999;
 		}
-		.name input{
+		.uname input{
 			border: 1px solid #ccc;
 			width: 200px;
 			height: 30px;
 			margin-bottom: 10px;
 
 		}
-		.name input[type=submit]{
+		.uname input[type=submit]{
 			width: 50px;
 			margin-left: 110px;
 			margin-top: 10px;
 		}
-		.name form{
+		.uname form{
 			margin-top: 10px;
 			padding: 20px;
 		}
@@ -134,7 +136,7 @@
 
 <!-- 内容 -->
 	@if (session()->has('user') && !session('user')->uname)
-		<div class="name">
+		<div class="uname">
 			<p style="background:#ccc;font-size:20px;padding:5px;">请设置用户名</p>
 
 			<form action="/home/user/changename/{{ session('user')->uid }}" method="post">
@@ -480,35 +482,7 @@
 				</ul>
 
 			</div>
-
-			<!-- 读取提示信息开始 -->
-	  	@if (session('success'))
-	      	<script type="text/javascript">
-		      	alert("{{ session('success')}}");        	
-		    </script>;
-	  	@endif
-	  	@if (session('error'))
-	      <script type="text/javascript">
-		      	alert("{{ session('error')}}");        	
-		    </script>;
-	  	@endif
-	<!-- 读取提示信息结束 -->
-
-	<!-- 显示验证错误信息 开始 -->
-	    @if (count($errors) > 0)
-	    <div class="">
-	        <ul> 
-	        @foreach ($errors->all() as $k=>$v)
-		        <script type="text/javascript">
-		        	if('{{ $k }}' == 0){
-		        		alert('{{ $v }}')
-		        	}		        	
-		        </script>;
-	     	@endforeach
-	       </ul>
-	    </div>
-	    @endif
-	    <!-- 显示验证错误信息 结束 -->
+	
 <!-- 尾部 -->
 	<footer>
 		<div class="footer-top">
@@ -518,7 +492,7 @@
 			<ol>
 				<h4>友情链接：</h4>
 				@foreach ($links as $k=>$v)
-				<li><a href="{{ $v->lurl }}">{{ $v->lname }}</a></li>
+				<li style="color:#337ab7;"><a href="{{ $v->lurl }}">{{ $v->lname }}</a></li>
 				@endforeach
 			<ol>
 		</div>
@@ -544,6 +518,40 @@
 		</div>
 		
 	</footer>
+    <!-- 读取提示信息开始 -->
+  	@if (session('success'))
+      	<script type="text/javascript">
+      		var layer = layui.layer
+				 ,form = layui.form;
 
+	      	layer.msg("{{ session('success')}}");        	
+	    </script>;
+  	@endif
+  	@if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+		 ,form = layui.form;
+	      	layer.msg("{{ session('error')}}");        	
+	    </script>;
+  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+	        <script type="text/javascript">
+	        var layer = layui.layer
+				,form = layui.form;
+	        	if('{{ $k }}' == 0){
+	        		layer.msg('{{ $v }}')
+	        	}		        	
+	        </script>;
+     	@endforeach
+       </ul>
+    </div>
+    @endif
+	<!-- 显示验证错误信息 结束 -->
 </body>
 </html>

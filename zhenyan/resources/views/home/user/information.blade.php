@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/home/css/responsive.css">
         <link rel="stylesheet" href="/home/css/responsiveslides.css" />
         <link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+        <script src="/home/layui/layui.all.js"></script>
         <script src="/home/js/responsiveslides.js"></script>
         <script>
         $(function () {
@@ -27,19 +28,6 @@
         });
       </script>
       <!-- 轮播图 -->
-     <link rel="stylesheet" type="text/css" href="/home/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/home/css/default.css">
-    <link rel="stylesheet" href="/home/css/style1.css">
-
-    <link href="/home/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/flexible-bootstrap-carousel.css" />
-    <link rel="stylesheet" href="/home/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/styles1.css" />
-
-    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/nprogress.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
     <script src="/home/js/jquery-2.1.4.min.js"></script>
     <script src="/home/js/nprogress.js"></script>
     <script src="/home/js/jquery.lazyload.min.js"></script>
@@ -245,27 +233,34 @@
 </body>
 </html>
 
-            <!-- 读取提示信息开始 -->
+        <!-- 读取提示信息开始 -->
         @if (session('success'))
-            <script type="text/javascript">
-                alert('发表成功');          
-            </script>;
+        <script type="text/javascript">
+            var layer = layui.layer
+                 ,form = layui.form;
+
+            layer.msg("{{ session('success')}}");           
+        </script>;
         @endif
         @if (session('error'))
-          <div class="alert alert-error">
-              {{ session('error') }}
-          </div>
+          <script type="text/javascript">
+          var layer = layui.layer
+             ,form = layui.form;
+                layer.msg("{{ session('error')}}");         
+            </script>;
         @endif
-    <!-- 读取提示信息结束 -->
+        <!-- 读取提示信息结束 -->
 
-    <!-- 显示验证错误信息 开始 -->
+        <!-- 显示验证错误信息 开始 -->
         @if (count($errors) > 0)
         <div class="">
             <ul> 
             @foreach ($errors->all() as $k=>$v)
                 <script type="text/javascript">
+                var layer = layui.layer
+                    ,form = layui.form;
                     if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
+                        layer.msg('{{ $v }}')
                     }                   
                 </script>;
             @endforeach

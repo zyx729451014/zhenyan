@@ -72,7 +72,23 @@ $(function() {
 								@endforeach
 							@endif						
 						@endforeach	
-						<li><a href="/home/invitation/create">发帖</a></li>
+						@if(!session()->has('user'))
+							<li><a href="#" onclick="create()">发帖</a></li>
+						@else
+							<li><a href="/home/invitation/create">发帖</a></li>
+						@endif
+						
+						 <?php  
+		                    $uri=\Request::getRequestUri();
+		                    session(['home_uri'=>$uri]);
+		                ?>
+		                <script type="text/javascript">
+			                function create()
+			                {
+			                  	layer.alert('您还未登录 请先去登录', {icon: 2,time: 5000},function(){ location.href='/home/user/login'; }); 
+		                        return false;
+			                }
+		                </script> 
 					</ul>
   				</div>
   				@foreach($stick as $k=>$v)
