@@ -3,16 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="www.zhenyan.com">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<?php $web = \App\Models\Web::find(1); ?>
 	<title>{{ $web->name }}</title>
 
-		<!-- 首页 -->
+		<!--  layui -->
+		<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+	 	<script src="/layui/layui.all.js"></script>
+	 	<!-- 首页 -->
 		<link rel="stylesheet" type="text/css" href="/home/css/style2.css">
 		<link rel="stylesheet" href="/home/css/zerogrid.css">
 		<link rel="stylesheet" href="/home/css/style.css">
 	    <link rel="stylesheet" href="/home/css/responsive.css">
 		<link rel="stylesheet" href="/home/css/responsiveslides.css" />
 		<link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+		<script src="/home/layui/layui.all.js"></script>
+
 		<script src="/home/js/responsiveslides.js"></script>
 		<script>
 	    $(function () { 
@@ -46,8 +52,39 @@
 	<script src="/home/js/jquery.lazyload.min.js"></script>
 	<script src="/home/banner/js/jquery-1.10.2.min.js"></script>
 	<script src="/home/banner/js/slider.js"></script>
+
+	 
+	 <style type="text/css">
+		.uname{
+			width: 300px;
+			height: 200px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			position: fixed;
+			top: 250px;
+			left: 40%;
+			z-index: 9999999999;
+		}
+		.uname input{
+			border: 1px solid #ccc;
+			width: 200px;
+			height: 30px;
+			margin-bottom: 10px;
+
+		}
+		.uname input[type=submit]{
+			width: 50px;
+			margin-left: 110px;
+			margin-top: 10px;
+		}
+		.uname form{
+			margin-top: 10px;
+			padding: 20px;
+		}
+	 </style>
 </head>
 <body>
+
 <!-- 导航 -->
 	<header>
 	<?php
@@ -100,7 +137,50 @@
 	</script>
 
 <!-- 内容 -->
+	@if (session()->has('user') && !session('user')->uname)
+		<div class="uname">
+			<p style="background:#ccc;font-size:20px;padding:5px;">请设置用户名</p>
 
+			<form action="/home/user/changename/{{ session('user')->uid }}" method="post">
+				{{ csrf_field() }}
+				用户名：<input type="text" name="uname" placeholder="请输入中文英文数字2~6位字符">
+				<span></span>
+				<p>*用户名设置后不可修改 可作为登录账户</p>
+				<input type="submit" value="确认">
+			</form>
+		</div>
+	@endif
+	<script type="text/javascript">
+		$('input[name=uname]').blur(function(){
+			var user_preg =  /^[a-zA-Z0-9_\u4e00-\u9fa5]{2,6}$/; 
+			var user_vals = $(this).val();
+			if(user_preg.test(user_vals)){
+				$.ajaxSetup({
+				        headers: {
+				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				        }
+				});
+				$.ajax({
+					url:'/home/user/checkname',
+					type:'post',
+					data:{'uname':user_vals},
+					success:function(msg){
+						if(msg == 'success'){
+						isUname = true;
+						$('.name span:eq(0)').html('<font color="#CBCBCB">恭喜用户名可用</font>');
+						}else{
+						$('.name span:eq(0)').html('<font color="red">用户已经存在</font>') ;
+						}
+					},
+					dataType:'html',
+					async:false
+				});
+
+			}else{
+				$('.name span:eq(0)').html('<font color="red">用户名格式错误</font>');
+			}
+		});
+	</script>
 @section('content-wrapper')
 
 @show
@@ -404,35 +484,7 @@
 				</ul>
 
 			</div>
-
-			<!-- 读取提示信息开始 -->
-	  	@if (session('success'))
-	      	<script type="text/javascript">
-		      	alert("{{ session('success')}}");        	
-		    </script>;
-	  	@endif
-	  	@if (session('error'))
-	      <script type="text/javascript">
-		      	alert("{{ session('error')}}");        	
-		    </script>;
-	  	@endif
-	<!-- 读取提示信息结束 -->
-
-	<!-- 显示验证错误信息 开始 -->
-	    @if (count($errors) > 0)
-	    <div class="">
-	        <ul> 
-	        @foreach ($errors->all() as $k=>$v)
-		        <script type="text/javascript">
-		        	if('{{ $k }}' == 0){
-		        		alert('{{ $v }}')
-		        	}		        	
-		        </script>;
-	     	@endforeach
-	       </ul>
-	    </div>
-	    @endif
-	    <!-- 显示验证错误信息 结束 -->
+	
 <!-- 尾部 -->
 	<footer>
 		<div class="footer-top">
@@ -440,9 +492,9 @@
 				$links = \App\Models\Link::where('status',1)->get();
 			?>
 			<ol>
-				<h4>友情链接：</h4>
+				<h4 style="margin-bottom:10px;">友情链接：</h4>
 				@foreach ($links as $k=>$v)
-				<li><a href="{{ $v->lurl }}">{{ $v->lname }}</a></li>
+				<li><a href="{{ $v->lurl }}" style="color:#337ab7;">{{ $v->lname }}</a></li>
 				@endforeach
 			<ol>
 		</div>
@@ -468,6 +520,40 @@
 		</div>
 		
 	</footer>
+    <!-- 读取提示信息开始 -->
+  	@if (session('success'))
+      	<script type="text/javascript">
+      		var layer = layui.layer
+				 ,form = layui.form;
 
+	      	layer.msg("{{ session('success')}}");        	
+	    </script>;
+  	@endif
+  	@if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+		 ,form = layui.form;
+	      	layer.msg("{{ session('error')}}");        	
+	    </script>;
+  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+	        <script type="text/javascript">
+	        var layer = layui.layer
+				,form = layui.form;
+	        	if('{{ $k }}' == 0){
+	        		layer.msg('{{ $v }}')
+	        	}		        	
+	        </script>;
+     	@endforeach
+       </ul>
+    </div>
+    @endif
+	<!-- 显示验证错误信息 结束 -->
 </body>
 </html>

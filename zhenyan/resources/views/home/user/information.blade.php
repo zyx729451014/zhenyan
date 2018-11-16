@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/home/css/responsive.css">
         <link rel="stylesheet" href="/home/css/responsiveslides.css" />
         <link href='/home/images/favicon.ico' rel='icon' type='image/x-icon'/>
+        <script src="/home/layui/layui.all.js"></script>
         <script src="/home/js/responsiveslides.js"></script>
         <script>
         $(function () {
@@ -131,15 +132,18 @@
 <script src="/home/layui-v2.4.5/layui/layui.all.js"></script>
 <img id="fn_dot_pvm" style="display:none" src="/home/user/css/dot.gif" width="1" height="1" border="0">
 <img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
+    <link rel="stylesheet" type="text/css" href="/home/user/pass/TY.css">
+    <link rel="stylesheet" type="text/css" href="/home/user/pass/change-password_ed8d7e7.css">
+<link type="text/css" charset="utf-8" rel="stylesheet" href="/home/user/pass/nav2_0.css">
 <!--blackHead-->
-<div class="personalBox wrapper1380" style="margin-top:100px;height:630px;">
+<div class="personalBox wrapper1380" style="margin-top:100px;height:790px;">
     <!--personalSide-->
     <div class="personalSide">
     <dl class="headerPer yuanYin clearfix">
         <dt>
-        	<a href="/home/user/userdateail">
+            <a href="/home/user/userdateail">
                 @if(!empty($userinfo['face']))
-            	<img class="img" src="{{ $userinfo['face'] }}" width="90" height="90">
+                <img class="img" src="{{ $userinfo['face'] }}" width="90" height="90">
                 @endif
             </a>
         <h4 class="tit"><b></b></h4>
@@ -156,9 +160,8 @@
     </dl>
     <ul class="menuPer yuanYin">
         <li>
-            <a href="" target="_self" class="">我的帖子</a>
-            <a href="" target="_self" class="">我的回复</a>
-            <a href="" target="_self" class="">我的收藏</a>
+            <a href="#" target="_self" class="info" style="color:#0f0f0f;">资料编辑</a>
+            <a href="#" target="_self" class="pass" style="color:#0f0f0f;">密码修改</a>
         </li>
     </ul>
 </div>
@@ -166,27 +169,27 @@
         {{ csrf_field() }}
     </script>
     <!--personalMain-->
-    <div class="personalMain">
+    <div class="personalMain" id="infomation">
         <h3 class="yuanYin">个人资料</h3>
         <dl class="yuanYin">
             <dt>基本信息</dt>
             <form action="/home/user/update/{{ $userinfo->uid }}" method='post' enctype="multipart/form-data">
-            	{{ csrf_field() }}
-				<dd>
-	                <ul class="module-box">
-	                    <!--头像 begin-->
-	                    <li class="mList headerEdit">
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            头像
-	                        </span>
-	                        <div>
-	                            <span>
+                {{ csrf_field() }}
+                <dd>
+                    <ul class="module-box">
+                        <!--头像 begin-->
+                        <li class="mList headerEdit">
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                头像
+                            </span>
+                            <div>
+                                <span>
                                     <label class='users' for="test1">
                                         <img src="{{ $userinfo['face'] }}" style='width:90px;height:90px;border-radius:50%'>
                                         <input type="hidden" name="face">
                                     </label>
-									<button type="button" class="layui-btn" id="test1" style='display:none;margin-top:30px;'>
+                                    <button type="button" class="layui-btn" id="test1" style='display:none;margin-top:30px;'>
                                         <i class="layui-icon">&#xe67c;</i>上传图片
                                     </button>
                                     <script>
@@ -212,99 +215,259 @@
                                           });
                                         });
                                     </script>
-	                            </span>
-	                       	</div>
-	                    </li>
-	                    <!--头像 end-->
-	                    <!--用户名 begin-->
-	                    <li class="mList" style='margin-top:40px;'>
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            用户名
-	                        </span>
-	                        <div>
-	                            <span><input type="text" name='uname' style='width:100px;margin-top:10px;' value="{{ session('user')->uname }}" readonly></span>
-	                         </div>
-	                    </li>
-	                    <!--用户名 end-->
-	                    <!--性别 begin-->
-	                    <li class="mList" style='padding-top:10px;'>
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            性别
-	                        </span>
-	                        <div class="module-main">
-	                            <span> 
+                                </span>
+                            </div>
+                        </li>
+                        <!--头像 end-->
+                        <!--用户名 begin-->
+                        <li class="mList" style='margin-top:40px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                用户名
+                            </span>
+                            <div>
+                                <span><input type="text" name='uname' style='width:100px;margin-top:10px;' value="{{ session('user')->uname }}" readonly></span>
+                             </div>
+                        </li>
+                        <!--用户名 end-->
+                        <!--性别 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                性别
+                            </span>
+                            <div class="module-main">
+                                <span> 
                                    
-									男<input type="radio" name='sex' value='m' @if($userinfo->sex=='m')
+                                    男<input type="radio" name='sex' value='m' @if($userinfo->sex=='m')
                                     checked @endif>&nbsp&nbsp&nbsp
                                    
-									女<input type="radio" name='sex' value='w' @if($userinfo->sex=='w')
+                                    女<input type="radio" name='sex' value='w' @if($userinfo->sex=='w')
                                     checked @endif>&nbsp&nbsp&nbsp
                                     
-									未知<input type="radio" name='sex' value='x' @if($userinfo->sex=='x')
+                                    未知<input type="radio" name='sex' value='x' @if($userinfo->sex=='x')
                                     checked @endif>
                                     
-	                            </span>
-	                         </div>
-	                    </li>
-	                    <!--性别 end-->
+                                </span>
+                             </div>
+                        </li>
+                        <!--性别 end-->
+                        
+                        <!--手机号 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                手机号
+                            </span>
+                            <div class="module-main">
+                                <span id="phone"> 
+                                    <input type="tel" name='phone' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->phone }}">
+                                    <span></span>
+                                </span>
+                             </div>
+                        </li>
+                        <!--手机号 end-->
+                        
+                        <!--邮箱 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                邮箱
+                            </span>
+                            <div class="module-main" >
+                                <span id="email"> 
+                                    <input type="text" name='email' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->email }}">
+                                    <span></span>
+                                </span>
+                             </div>
+                        </li>
+                        <script type="text/javascript">
+                            $('input[name=phone]').blur(function(){
+                            var phone_preg = /^1{1}[3-9]{1}[0-9]{9}$/;
+                            var phone_vals = $(this).val();
+                            if(phone_preg.test(phone_vals)){
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                    url:'/home/user/checkphone',
+                                    type:'post',
+                                    data:{'phone':phone_vals},
+                                    success:function(msg){
+                                        if(msg == 'success'){
 
-	                    <!--用户名积分 begin-->
-	                    <li class="mList">
-	                        <span class="module-tit">
-	                            用户积分
-	                        </span>
-	                        <div class="module-main" readonly>
-	                            <span>{{ $userinfo->point }}</span>
-	                        </div>
-	                    </li>
-	                    <!--用户名积分 end-->
+                                        }else{
+                                            $('#phone span:eq(0)').html('<font color="red">手机号已经存在</font>') ;
+                                        }
+                                    },
+                                    dataType:'html',
+                                    async:false
+                                });
+                                
+                            }else{
+                                $('#phone span:eq(0)').html('<font color="red">手机号格式错误</font>');
+                            }
+                        });
+                            $('input[name=email]').blur(function(){
+                                var email_preg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+                                var email_vals = $(this).val();
+                                if(email_preg.test(email_vals)){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    $.ajax({
+                                        url:'/home/user/checkemail',
+                                        type:'post',
+                                        data:{'email':email_vals},
+                                        success:function(msg){
+                                            if(msg == 'success'){
 
-	                    <!--生日 begin-->
-	                    <li class="mList" style='padding-top:10px;'>
-	                        <span class="module-tit">生日</span>
-	                        <div class="module-main">
-	                            <label class="inputText">    
-	                               <input type="date" name='birthdate' value='{{ $userinfo->birthdate }}' style="height:40px;">
-	                            </label>
-	                        </div>
-	                    </li>
-	                    <!--生日 end-->
-	                </ul>
-	                <div class="subBtn">
-	                   <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
-	                </div>
-	            </dd>
+                                            }else{
+                                                $('#email span:eq(0)').html('<font color="red">邮箱号已经存在</font>') ;
+                                            }
+                                        },
+                                        dataType:'html',
+                                        async:false
+                                    });
+                                    
+                                }else{
+                                    $('#email span:eq(0)').html('<font color="red">邮箱格式错误</font>');
+                                }
+                            });
+                        </script>
+                        <!--邮箱 end-->
+    
+                        <!--生日 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">生日</span>
+                            <div class="module-main">
+                                <label class="inputText">    
+                                   <input type="date" name='birthdate' value='{{ $userinfo->birthdate }}' style="height:40px;">
+                                </label>
+                            </div>
+                        </li>
+                        <!--生日 end-->
+                    </ul>
+                    <div class="subBtn">
+                       <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
+                    </div>
+                </dd>
             </form>
+            
+        </dl>
+    </div>
+    <div class="personalMain" id="password" style="display:none">
+        <dl class="yuanYin">
+            <dt>修改密码</dt>
+            <form action="/home/user/updateupass/{{ $userinfo->uid }}" method='post' enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <input type="hidden" name="fowardURL" value="http://passport.tianya.cn/safe.do">
+                <input type="hidden" name="source" value="">
+                    <div class="form-item">
+                        <label class="label" for="oldpassword">当前密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="oldpassword" id="oldpassword">
+                            <span id="oldpassword_tips" class="form-tips tips-info"></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="label" for="password">新密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="upass" id="password">
+                            <span id="password_tips" class="form-tips tips-info">大小写字母、数字、字符组合更安全</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="label" for="password2">确认密码：</label>
+                        <div class="field">
+                            <input type="password" placeholder="" class="form-input" name="upassok" id="password2">
+                            <span id="password2_tips" class="form-tips tips-info">请再输入一遍</span>
+                        </div>
+                    </div>    
+                    <div class="subBtn">
+                       <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
+                    </div>              
+                </dd>
+            </form>
+            <script type="text/javascript">
+    $('input[name=upass]').focus(function()
+    {   
+        $('#password_tips').html('<font color="#CBCBCB">请输入6-16位的密码</font>');
+    });
+    $('input[name=upass]').keyup(function(){
+        var pass_vals = $(this).val();
+        if(pass_vals.length < 6){
+            $('#password_tips').html( '✖ 密码长度为6-16位');
+
+            return;
+        }
+        if(pass_vals.length > 16){
+            $('#password_tips').html( '✖ 密码长度为6-16位');
+            return;
+        }else{
+            $('#password_tips').html( '');
+
+        }
+    });
+     $('input[name=upassok]').keyup(function(){
+        var passok_vals = $(this).val();
+        if (passok_vals==$('input[name=upass]').val()) {
+            $('#password2_tips').html('<font color="green">两次密码输入一致</font>');
+        }else{
+            $('#password2_tips').html('<font color="red">两次密码输入不一致</font>');
+        };
+    });
+</script>
             
         </dl>
     </div>
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    $('.pass').click(function(){
+        $('#password').show();
+        $('#infomation').hide();     
+    });
+    $('.info').click(function(){
+        $('#password').hide();
+        $('#infomation').show();     
+    });
+</script>
 
-            <!-- 读取提示信息开始 -->
+
+        <!-- 读取提示信息开始 -->
         @if (session('success'))
-            <script type="text/javascript">
-                alert('发表成功');          
-            </script>;
+        <script type="text/javascript">
+            var layer = layui.layer
+                 ,form = layui.form;
+
+            layer.msg("{{ session('success')}}");           
+        </script>;
         @endif
         @if (session('error'))
-          <div class="alert alert-error">
-              {{ session('error') }}
-          </div>
+          <script type="text/javascript">
+          var layer = layui.layer
+             ,form = layui.form;
+                layer.msg("{{ session('error')}}");         
+            </script>;
         @endif
-    <!-- 读取提示信息结束 -->
+        <!-- 读取提示信息结束 -->
 
-    <!-- 显示验证错误信息 开始 -->
+        <!-- 显示验证错误信息 开始 -->
         @if (count($errors) > 0)
         <div class="">
             <ul> 
             @foreach ($errors->all() as $k=>$v)
                 <script type="text/javascript">
+                var layer = layui.layer
+                    ,form = layui.form;
                     if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
+                        layer.msg('{{ $v }}')
                     }                   
                 </script>;
             @endforeach

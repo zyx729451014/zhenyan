@@ -18,6 +18,9 @@ class InvitationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
+    
      public static function getCates()
     {
         $cates = Cates::select('*',DB::raw("concat(path,',',cid) as paths"))->orderBy('paths','asc')->get();

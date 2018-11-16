@@ -27,22 +27,11 @@
         });
       </script>
       <!-- 轮播图 -->
-     <link rel="stylesheet" type="text/css" href="/home/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/home/css/default.css">
-    <link rel="stylesheet" href="/home/css/style1.css">
 
-    <link href="/home/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/flexible-bootstrap-carousel.css" />
-    <link rel="stylesheet" href="/home/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/styles1.css" />
-
-    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/nprogress.css">
-    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.min.css">
     <script src="/home/js/jquery-2.1.4.min.js"></script>
     <script src="/home/js/nprogress.js"></script>
     <script src="/home/js/jquery.lazyload.min.js"></script>
+    <script src="/home/layui/layui.all.js"></script>
 </head>
 <body>
 <!-- 导航 -->
@@ -98,8 +87,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title></title>
-<link href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/jquery.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/personalPublic20180626.css">
+<link href="/home/user/css/jquery.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/home/user/css/personalPublic20180626.css">
 <style>
     .ui-datepicker .ui-datepicker-title select { float: left !important;font-size: 1em !important;margin: 1px 0 !important;}
     .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {width: 45%  !important;}   
@@ -119,11 +108,16 @@
 <link type="text/css" rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/laydate.css"><link type="text/css" rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/laydate_002.css" id="LayDateSkin"></head>
 <body>
 <!--吸顶-->
-<link rel="stylesheet" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/20171109AllbbsHead.css">
-<link rel="stylesheet" type="text/css" href="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/black.css">
-<script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/push.js"></script><script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/hm.js"></script><script src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/jquery-1.js"></script>
-<script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/go_wap.js"></script>
-<script language="JavaScript" type="text/javascript" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pv.js"></script><script type="text/javascript" id="pv_d" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/p.js"></script><img id="fn_dot_pvm" style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/dot.gif" width="1" height="1" border="0"><img style="display:none" src="FNYX11008815%E7%9A%84%E8%B5%84%E6%96%99-FNYX11008815%E7%9A%84%E4%B8%BB%E9%A1%B5_files/pvhit0001.gif" width="1" height="1" border="0">
+<link rel="stylesheet" href="/home/user/css/20171109AllbbsHead.css">
+<link rel="stylesheet" type="text/css" href="/home/user/css/black.css">
+<script src="/home/user/css/push.js"></script>
+<script src="/home/user/css/hm.js"></script>
+<script src="/home/user/css/jquery-1.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/css/go_wap.js"></script>
+<script language="JavaScript" type="text/javascript" src="/home/user/css/pv.js"></script>
+<script type="text/javascript" id="pv_d" src="/home/user/css/p.js"></script>
+<img id="fn_dot_pvm" style="display:none" src="/home/user/css/dot.gif" width="1" height="1" border="0">
+<img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
 <!--blackHead-->
 <div class="content" style="margin-top:100px;height:auto;padding-bottom:390px;">
     <!--personalSide-->
@@ -178,8 +172,7 @@
                 <script type="text/javascript">
                     function friending()
                     {
-                        alert('您还未登录 请先去登录');
-                        location.href='/home/user/login';
+                        layer.alert('您还未登录 请先去登录', {icon: 2,time: 5000},function(){ location.href='/home/user/login'; });                       
                         return false;
                     }
                 </script>   
@@ -200,7 +193,7 @@
 
             @endif
 		    <form>
-		        <button id="pri"><a href="#">发私信</a></button>
+		        <a href="#" id="pri">发私信</a>
 		    </form>
 	    </div>
 	    <div class="menuPer yuanYin " id="private">
@@ -208,7 +201,7 @@
 	    	<form style="margin-top:10px;" action="/home/private" method="post">
             {{ csrf_field() }}
                 <input type="hidden" name="oid" value="{{ $user->uid }}">
-		      	<textarea placeholder="给用户发私信:" name="content"></textarea>
+		      	<textarea placeholder="给{{  $user->uname }}发私信:" name="content"></textarea>
 		      	<button type="submit">发送</button>
 		    </form>
 	    </div>
@@ -373,34 +366,47 @@
 </body>
 </html>
 
-        <!-- 读取提示信息开始 -->
-        @if (session('success'))
-            <script type="text/javascript">
-                alert("{{ session('success') }}");          
-            </script>;
-        @endif
-        @if (session('error'))
-          <div class="alert alert-error">
-              {{ session('error') }}
-          </div>
-        @endif
+    <!-- 读取提示信息开始 -->
+    @if (session('success'))
+        <script type="text/javascript">
+            var layer = layui.layer
+             ,form = layui.form;
+            layer.msg("{{ session('success')}}",{icon: 6});           
+        </script>;
+    @endif
+     @if (session('psuccess'))
+        <script type="text/javascript">
+            var layer = layui.layer
+             ,form = layui.form;
+            layer.msg("{{ session('psuccess')}}",{icon: 4});           
+        </script>;
+    @endif
+    @if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+         ,form = layui.form;
+            layer.msg("{{ session('error')}}",{icon: 5});         
+        </script>;
+    @endif
     <!-- 读取提示信息结束 -->
 
     <!-- 显示验证错误信息 开始 -->
-        @if (count($errors) > 0)
-        <div class="">
-            <ul> 
-            @foreach ($errors->all() as $k=>$v)
-                <script type="text/javascript">
-                    if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
-                    }                   
-                </script>;
-            @endforeach
-           </ul>
-        </div>  
-        @endif
-        <!-- 显示验证错误信息 结束 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+            <script type="text/javascript">
+            var layer = layui.layer
+                ,form = layui.form;
+                if('{{ $k }}' == 0){
+                    layer.msg('{{ $v }}',{icon: 2})
+                }                   
+            </script>;
+        @endforeach
+       </ul>
+    </div>
+    @endif
+    <!-- 显示验证错误信息 结束 -->
 	<!-- 尾部 -->
     <footer>
         <div class="footer-top">
@@ -436,6 +442,6 @@
         </div>
         
     </footer>
-
+    
 </body>
 </html>

@@ -58,7 +58,8 @@
                         <div class="col-sm-5 form-box">
                             <div class="form-top">
                                 <div class="form-top-left reg">
-                                    <h3 class="email">邮箱注册</h3>
+                                    <h3 class="email" style="border-bottom:2px solid #999;">邮箱注册</h3>
+
                                     <h3 class="phone">手机注册</h3>
                                     <em>Fill in the form below to get instant access:</em>
                                 </div>
@@ -102,27 +103,47 @@
                                 <h5 style="float:right;">已有账号?点击去<a href="/home/user/login">登录</a>吧!</h5>
                             </div>
                             <div class="form-bottom" id="phone" style="display:none;">
-                                <form role="form" action="/home/user/phonedoregister" method="post" class="registration-form">
+                                <form role="form" action="/home/user/doregister" method="post" class="registration-form">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label class="sr-only" for="form-first-name">手机号</label>
-                                        <input type="text" name="phone" placeholder="请输入手机号" class="form-first-name form-control" id="phone">
+                                        <input type="text" name="phone" placeholder="请输入手机号" class="form-first-name form-control" id="uname">
                                         <div class="col-sm-10">
                                              <span style='color:#333;'></span>
                                         </div>
                                     </div>
-                                    <div class="form-group" style='position:relative;'>
+                                    <div class="form-group">
                                         <label class="sr-only" for="form-first-name">验证码</label>
-                                        <input type="text" name="phone_code" placeholder="请输入手机验证码" class="form-first-name form-control" id="phone_code">
-                                        <a href='javascript:;' style='position:absolute;bottom:10px;right:20px;border:1px solid #ccc;color:#333;background-color:#ddd' onclick='sendPhoneCode();'>获取验证码</a>
+                                        <input type="text" name="phonecode" placeholder="请输入手机验证码" class="form-first-name form-control"  style="float:left;width:255px;">
+                                        <button style="width:150px;height:51px;float:left;" onclick="sendmobilecode()" class="code">获取验证码</button> 
+                                        <div style="clear:both;"></div>
                                     </div>
-                                    <script>
-                                        function sendPhoneCode(){
-                                            // 获取用户输入的手机号
-                                            var phone_vals = $('input[name=phone]').val();
-                                            $.get('/home/user/sendphonecode',{'phone':phone_vals},function(msg){
-                                              alert(msg);
+
+                                 
+                                    <script type="text/javascript">
+                                        function sendmobilecode()
+                                        {
+                                            var phone_vals=$('input[name=phone]').val();
+                                            $.get('/home/user/sendmobilecode',{'phone':phone_vals},function(msg){
+                                                if(msg.SubmitResult.code == 2){
+                                                    alert('验证码发送成功');
+                                                     var i=60;
+                                                    time=setInterval(function(){
+                                                        $('.code').attr('disabled',true);
+                                                        $('.code').html('发送成功('+i+'秒)');
+                                                        i--;
+                                                        if (i==0) {
+                                                            clearInterval(time);
+                                                            $('.code').attr('disabled',false);
+                                                            $('.code').html('获取验证码');
+                                                        };
+                                                    },1000);
+                                                }else{
+                                                    alert(msg.SubmitResult.msg);
+                                                } 
                                             },'json');
+                    
+                                           
                                         }
                                     </script>
                                     <div class="form-group">
@@ -163,8 +184,7 @@
         <script src="/home/user/assets/js/jquery.backstretch.min.js"></script>
         <script src="/home/user/assets/js/retina-1.1.0.min.js"></script>
         <script src="/home/user/assets/js/scripts.js"></script>
-        <!-- <script src='/home/user/assets/js/register.js'></script> -->
-        
+        <script src='/home/user/assets/js/register.js'></script>
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->

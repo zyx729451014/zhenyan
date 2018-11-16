@@ -156,12 +156,16 @@ $(function() {
 				<section>
 					<div class="heading">最受喜欢</div>
 					<div class="content" id="idol">
+					<ul>
 					@foreach($idol as $k=>$v)
 						@if($v[0]->identity != 1)
+							<li style="height:70px;">
 							<a href="/home/user/usercenters/{{ $v[0]->uid }}"><img src="{{ $v[0]->userinfo->face }}"/></a>
 							<h4><a href="/home/user/usercenters/{{ $v[0]->uid }}" style="line-height:60px;">{{ $v[0]->uname }}</a></h4>
+							</li>
 						@endif						
 					@endforeach
+					</ul>
 					</div>
 				</section>
 			</div>

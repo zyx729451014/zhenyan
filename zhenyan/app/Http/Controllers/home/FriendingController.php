@@ -94,9 +94,9 @@ class FriendingController extends Controller
     {
         $res = Friending::destroy($id);
         if ($res) {
-            return back()->with('success', '取消关注成功');
+            return back()->with('error', '取消关注成功');
         }else{
-            return back()->with('error', '取消关注失败');
+            return back()->with('success', '取消关注失败');
         }   
     }
 }

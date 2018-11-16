@@ -58,10 +58,56 @@
 			
 			</script>
 			<div class="tw2"></div>
-			<form action="/home/glossary/collect" method="post" style="float:right;">
-			{{ csrf_field() }}	
-			<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}">收藏</button>
-		</form>
+			<?php
+				if(session()->has('user')){
+		            $collect = App\Models\Glocollect::where('uid',session('user')->uid)->where('gid',$glossary->id)->first();
+		        }
+	        ?>
+			@if(isset($collect))
+                @if(count($collect) != 1)
+				<form action="/home/glossary/collect" method="post" style="float:right;">
+					{{ csrf_field() }}	
+					<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}">收藏</button>
+				</form>
+                @else
+                <form method="post" action="/home/glossary/collect/{{ $collect->id }}" style="float:right;">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-gradient-primary">取消收藏</button>
+                </form>
+                @endif
+            @else
+           		@if(!session()->has('user'))
+					{{ csrf_field() }}	
+					<button  style="float:right;" type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}" onclick="collects()">收藏</button>
+                <?php  
+                    $uri=\Request::getRequestUri();
+                    session(['home_uri'=>$uri]);
+                ?>
+                <script type="text/javascript">
+                    function collects()
+                    {
+                    	
+                    layer.alert('您还未登录 请先去登录', {icon: 2,time: 5000},function(){ location.href='/home/user/login'; });                       
+                        return false;
+                    }
+                </script>   
+                @else
+                    @if(count($collect) != 1)
+	                   	<form action="/home/glossary/collect" method="post" style="float:right;">
+						{{ csrf_field() }}	
+						<button type="submit" class="btn btn-gradient-primary" name="collect" value="{{ $glossary->id }}">收藏</button>
+					</form>
+                    @else
+                  	<form method="post" action="/home/glossary/collect/{{ $collect->id }}" style="float:right;">
+	                    {{ csrf_field() }}
+	                    {{ method_field('DELETE') }}
+	                    <button type="submit" class="btn btn-gradient-primary">取消收藏</button>
+                	</form>
+                    @endif
+                @endif
+
+            @endif
 		</div>
 		<br>
 		<p>总楼层 <?= count($glocomment)?> | 发表时间	{{ $glossary->created_at }}</p>
@@ -90,13 +136,14 @@
 						<ul>
 							<?php
 								 $gloreply = App\Models\Gloreply::where('cid',$v->id)->get();
+							
 							?>
 							@foreach ($gloreply as $kk=>$vv)
 								<li>
 									<img src="{{ $vv->replyuser->userinfo->face }}" height="30" width="30">
 									<a href="/home/user/usercenter/{{ $vv->glossaryuser['uid'] }}">{{ $vv->replyuser->uname }}</a>:<span>{{ $vv->content }}</span>
 								</li>
-							@endforeachn
+							@endforeach
 							<li>
 								<form action="/home/glossary/reply" method="post" class="fbpl fbpl1" style="width:750px;height:180px;" hidden>	
 									{{ csrf_field() }}	
@@ -147,6 +194,42 @@
 	});
 
 	</script>
+	<!-- 读取提示信息开始 -->
+  	@if (session('success'))
+      	<script type="text/javascript">
+      		var layer = layui.layer
+				 ,form = layui.form;
+
+	      	layer.msg("{{ session('success')}}");        	
+	    </script>;
+  	@endif
+  	@if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+		 ,form = layui.form;
+	      	layer.msg("{{ session('error')}}");        	
+	    </script>;
+  	@endif
+	<!-- 读取提示信息结束 -->
+
+	<!-- 显示验证错误信息 开始 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+	        <script type="text/javascript">
+	        var layer = layui.layer
+				,form = layui.form;
+	        	if('{{ $k }}' == 0){
+	        		layer.msg('{{ $v }}')
+	        	}		        	
+	        </script>;
+     	@endforeach
+       </ul>
+    </div>
+    @endif
+	<!-- 显示验证错误信息 结束 -->
+	
 </body>
 </html>
 @endsection

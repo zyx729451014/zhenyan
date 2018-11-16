@@ -1,12 +1,12 @@
 $(function(){ 
-	//alert($);
+
 	var isUpass,isEmail,isPhone = false;
 			$('input[name=email]').focus(function()
 			{	
 				$('#email span:eq(0)').html('<font color="#CBCBCB">请输入邮箱号</font>');
-			})
+			});
 			$('input[name=email]').blur(function(){
-				var email_preg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/; ; 
+				var email_preg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
 				var email_vals = $(this).val();
 				if(email_preg.test(email_vals)){
 					$.ajaxSetup({
@@ -14,7 +14,7 @@ $(function(){
 				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				        }
 					});
-					$.ajax({ 
+					$.ajax({
 						url:'/home/user/checkemail',
 						type:'post',
 						data:{'email':email_vals},
@@ -41,7 +41,7 @@ $(function(){
 				$('#phone span:eq(0)').html('<font color="#CBCBCB">请输入手机号</font>');
 			})
 			$('input[name=phone]').blur(function(){
-				var phone_preg = /^1[345786]\d{9}$/; 
+				var phone_preg = /^1{1}[3-9]{1}[0-9]{9}$/;
 				var phone_vals = $(this).val();
 				if(phone_preg.test(phone_vals)){
 					$.ajaxSetup({
@@ -141,6 +141,7 @@ $(function(){
 				$('#phone li').css('background','');
 				$('#phone ul:eq(0)').hide();
 			})
+			
 			var pass_vals = $(this).val();
 			if(pass_vals.length < 6){
 				return;
@@ -187,6 +188,25 @@ $(function(){
 					$('#phone li:eq(3)').css('color','#666');
 					$('#phone ul:eq(0)').show();
 					$('#phone span:eq(1)').html('');
+					$('#email li:eq(0)').css('background','#AD4242');
+					$('#email li:eq(0)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
+			}else if(temp.length==2){
+					$('#email li:eq(1)').css('background','#BEB367');
+					$('#email li:eq(1)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
+			}else if(temp.length==3){
+					$('#email li:eq(2)').css('background','#628B3E');
+					$('#email li:eq(2)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');					
+			}else if(temp.length==4){
+					$('#email li:eq(3)').css('background','#40C032');
+					$('#email li:eq(3)').css('color','#666');
+					$('#email ul:eq(0)').show();
+					$('#email span:eq(1)').html('');
 			}
 			
 
@@ -203,7 +223,7 @@ $(function(){
 		});
 		$('#phone input[name=upassok]').keyup(function(){
 			var passok_vals = $(this).val();
-			if (passok_vals==$('input[name=upass]').val()) {
+			if (passok_vals==$('#phone input[name=upass]').val()) {
 				isUpass=true;
 				$('#phone span:eq(2)').html('<font color="green">两次密码输入一致</font>');
 			}else{

@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => '1458579551@qq.com', 'name' => ''],
+    'from' => ['address' => '1458579551@qq.com', 'name' => '臻妍论坛'],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    // 'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
     'encryption' => 'ssl',
 
     /*

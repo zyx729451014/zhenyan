@@ -11,6 +11,7 @@ use App\User;
 use DB;
 use Hash;
 use Crypt;
+use Mail;
 use App\Models\Userdateail;
 use App\Models\Glossary;
 use App\Models\Glocomment;
@@ -22,11 +23,11 @@ use App\Models\Friending;
 use App\Models\Answer;
 use App\Models\Answer_comment;
 use App\Models\Answer_reply;
-use Mail;
 
 class UserController extends Controller
 { 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('hlogin', ['only' => ['getUserdateail', 'getInformation']]);
     }
 
@@ -48,11 +49,18 @@ class UserController extends Controller
        // 获取数据 进行添加
         $email = $request->input('email');
         $user = new User;
-        $user->email = $email;
-        $user->upass = hash::make($request->input('upass')); 
-        $token = str_random(60);
-        // 加密签名
-        $user->token = $token; 
+        if($request->input('email')){
+          $user->email = $request->input('email');  
+        }
+        if($request->input('phone')){
+          if ($request->input('phonecode')!= session('phone_code')) {
+            return back()->with('error','手机验证码错误');
+          }
+          $user->phone = $request->input('phone');
+          $user->status = 1;  
+        }
+        $user->upass = hash::make($request->input('upass'));
+        $user->token = str_random(60);
         $res1 = $user->save(); // bool
         $id = $user->uid;  
         $userdateail = new Userdateail;
@@ -61,122 +69,167 @@ class UserController extends Controller
         $res2 = $userdateail->save();
         // 逻辑判断
         if($res1 && $res2){
-            // 发送邮件
-            Mail::send('home.email.index', ['email' => $email,'id'=>$id,'token'=>$token], function ($m) use ($user) {
-               $res = $m->to($user->email)->subject('【LAMP官方】');
-            });
-            return redirect('/home/user/register');
+            if($request->input('email')){
+                 Mail::send('home.index.email', ['user' => $user], function ($m) use ($user) {
+                    $m->to($user->email)->subject('臻妍论坛-账号激活');
+                 });
+                 return redirect('/home/user/login')->with('success','邮件发送成功 请去邮箱激活账号');
+            }
+            if($request->input('phone')){
+                 return redirect('/home/user/login')->with('success','注册成功 即将到登录页面');
+            }
         }else{
-            echo "<script>alert('很遗憾您注册失败了');";
+            return back()->with('error','注册失败');
         }
 
     } 
-    // 邮箱激活
-    public function getJihuo($id,$token)
+    /**
+     *
+     *  验证用户名
+     * 
+     */
+     
+    public function postCheckname()
     {
-        // 修改用户的状态
-        $user = User::find($id);
-        // 检测用户
-        if($user->status == 1){
-            return redirect('/home/user/login')->with('error','用户已经激活');
-            
+        $uname = $_POST['uname'];
+        $data = User::where('uname',$uname)->first();
+        if ($data) {
+           // 用户名存在返回error
+           echo "error";  
+        }else{
+            // 用户不存在返回success
+            echo "success";
+           
         }
-        if($user->token != $token){
-            return redirect('/home/user/login')->with('error','链接失效');
-        }
-        $user->status = 1;
-        $user->token = str_random(60);
-        if($user->save()){
-            return redirect('/home/user/login')->with('success','激活成功 去登录');
-        }
+        
     }
-
-    //  验证邮箱注册
+    /**
+     *
+     *  验证邮箱
+     * 
+     */
     public function postCheckemail()
     {
         $email = $_POST['email'];
         $data = User::where('email',$email)->first();
         if ($data) {
-           // 用户名存在返回error
+           // 邮箱存在返回error
            echo "error";  
         }else{
-            // 用户不存在返回success
+            // 邮箱不存在返回success
             echo "success";
            
         }
         
     }
-
-    // 发送短信验证
-    public function getSendphonecode(Request $request)
-    {
-
-        // URL 请求手机短信验证的接口地址
-        $mobile = $request->input('phone');
-        dump($mobile);
-        $str_rand = rand(1000,9999);
-        // 压入session
-        session(['phone_code'=>$str_rand]);
-        $mobile_code = $str_rand;
-        //短信接口地址
-        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
-        $target .= "&account=C01852037&password=04313695dc00345c014c807e39f29b71&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
-        //初始化
-        $curl = curl_init();
-        //设置抓取的url
-        curl_setopt($curl, CURLOPT_URL,$target);
-        //设置获取的信息以文件流的形式返回，而不是直接输出。
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        //执行命令
-        $data = curl_exec($curl);
-        //关闭URL请求
-        curl_close($curl);
-        echo $data;
-
-    }
-
-    // 前台手机号注册
-    public function postPhonedoregister(Request $request)
-    {
-        
-        if($request->input('phone_code') != session('phone_code')){
-            return redirect('/home/user/register')->with('error','验证码错误');
-        }
-         // 获取数据 进行添加
-        $phone = $request->input('phone');
-        $user = new User;
-        $user->phone = $phone;
-        $user->upass = hash::make($request->input('upass')); 
-        $res1 = $user->save(); // bool
-        $id = $user->uid;  
-        $userdateail = new Userdateail;
-        $userdateail->uid = $id;
-        $userdateail->point = 200;
-        $res2 = $userdateail->save();
-        // 逻辑判断
-        if($res1 && $res2){
-            return redirect('/home/user/register');
-        }else{
-            echo "<script>alert('很遗憾您注册失败了');";
-        }
-    }
-
- 
-
-    //  验证手机注册
+    /**
+     *
+     *  验证手机号
+     * 
+     */
     public function postCheckphone()
     {
         $phone = $_POST['phone'];
         $data = User::where('phone',$phone)->first();
         if ($data) {
-           // 用户名存在返回error
+           // 手机号存在返回error
            echo "error";  
         }else{
-            // 用户不存在返回success
+            // 手机号不存在返回success
             echo "success";
            
         }
         
+    }
+
+    /**
+     *
+     *  用户邮箱注册激活
+     *
+     *  $id 激活的用户id  $token 激活用户的token
+     * 
+     */
+    public function getActivation($id,$token)
+    {
+        $user = User::find($id);
+        if($user->status == 1)
+        {
+            return redirect('/home/user/login')->with('error','用户已经激活');
+        }
+
+        if ($user->token != $token) 
+        {
+            return redirect('/home/user/login')->with('error','该链接已经失效');
+        }
+        $user ->token = str_random(60);
+        $user ->status = 1;
+        $user ->save();
+        return redirect('/home/user/login')->with('success','账号已成功激活快去登录吧!');
+    }
+
+    /**
+     *
+     *  用户手机注册发送验证码
+     *
+     * 
+     */
+    public function getSendmobilecode()
+    {
+        $str_rand = rand(1000,9999);
+        session(['phone_code'=>$str_rand]);
+        $mobile_code = $str_rand; 
+        //获取手机号
+        $mobile = $_GET['phone'];
+        //短信接口地址
+        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
+        $target .= "&account=C31354845&password=ea2a13501ac56076dd64149fa2d14622&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+
+        //初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL, $target);
+        //设置头文件的信息作为数据流出
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        //设置获取的信息以文件流的形式返回 而不是直接输出
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        //执行集合
+        $data = curl_exec($curl);
+        //关闭URL请求
+        curl_close($curl);
+        function xml_to_array($data){
+            $reg = "/<(\w+)[^>]*>([\\x00-\\xFF]*)<\\/\\1>/";
+            if(preg_match_all($reg, $data, $matches)){
+                $count = count($matches[0]);
+                for($i = 0; $i < $count; $i++){
+                $subxml= $matches[2][$i];
+                $key = $matches[1][$i];
+                    if(preg_match( $reg, $subxml )){
+                        $arr[$key] = xml_to_array( $subxml );
+                    }else{
+                        $arr[$key] = $subxml;
+                    }
+                }
+            }
+            return $arr;
+        }
+        var_dump(xml_to_array($data));
+    }
+    /**
+     *
+     *  修改用户名
+     * 
+     */
+    public function postChangename(Request $request,$id)
+    {
+        $user = User::find($id);
+        $user -> uname = $request->input('uname');
+        if($user -> save()){
+            $request->session()->flush();
+            session(['user'=>$user]);
+            return back()->with('success','用户名设置成功');
+        }else{
+            return back()->with('error','用户名设置失败');
+        }
     }
 
     /**
@@ -194,38 +247,49 @@ class UserController extends Controller
      */
     public function postDologin(Request $request)
     {
-        $uname = $_POST['uname'];
-        $upass = $_POST['upass'];
+        $uname = $request->input('uname');
+        $upass = $request->input('upass');
         // 查询数据库用户 
-        $user = User::where('uname',$uname)->first();
+        if (preg_match('/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/',$uname)) {
+            $user = User::where('email',$uname)->first(); 
+        }else if(preg_match('/^1[345786]\d{9}$/', $uname)){
+            $user = User::where('phone',$uname)->first();
+        }else{
+            $user = User::where('uname',$uname)->first();
+        }
+        if(!$user){
+            return back()->with('error','用户不存在请核对用户名');
+        }
         // 判断是管理员不能登录
         if($user->identity != 1){
-            // 判断密码错误
-            if (Hash::check($upass,$user['upass'])) {
-                session(['user'=>$user]);
-                // 用户登录积分加10
-                $user = Userdateail::find($user->uid);
-                $user->point +=10;
-                $res1 = $user->save();
+            if($user->status == 1){
+                // 判断密码错误
+                if (Hash::check($upass,$user['upass'])) {
+                    session(['user'=>$user]);
+                    // 用户登录积分加10
+                    $userdateail = Userdateail::find($user->uid);
+                    $userdateail -> point +=10;
+                    $res1 = $userdateail->save();
 
-                $uri=empty(session('home_uri')) ? '/':session('home_uri');
-                session('home_uri',NULL);
-                // 密码正确跳转到首页
-                echo "<script>location.href='".$uri."';</script>";
+                    $uri=empty(session('home_uri')) ? '/':session('home_uri');
+                    session('home_uri',NULL);
+                    // 密码正确跳转到首页
+                    return redirect($uri);
+                }else{
+                    //密码错误返回error 
+                    return back()->with('error','用户名和密码不匹配');
+                }
             }else{
-                //密码错误返回error 
-                echo "error";
+                return back()->with('error','账号未激活 请先激活账号');
             }
+        }else{
+            return back()->with('error','管理员不能登录前后哦');
         }
-       
-    
-      
-        
     } 
 
 
     /**
-     * 前退出登录
+     * 前台退出登录
      *
      * @return \Illuminate\Http\Response
      */
@@ -411,10 +475,182 @@ class UserController extends Controller
     
     }
 
+    // 找回密码
+    public function getFp()
+    {
+        return view('home.user.fp');
+    }
+    // 通过邮箱找回密码
+    public function getEmails(Request $request)
+    {
+        return view('home.user.emails');
+    }
+    // 通过手机号找回密码
+    public function getMobile()
+    {
+        return view('home.user.mobile');
+    }
 
 
 
+    /**
+     * 通过手机号修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUpdatephone()
+    {
+        return view('home.user.updatephone');
+    }
+    /**
+     * 通过手机号修改密码成功
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUpdatephone2(Request $request)
+    {
+        $phone = $request->input('phone');
+        $upass = $request->input('upass');
+        $user = User::where('phone','=',$phone)->first();
+        if(empty($phone)){
+            return back()->with('error','手机号不能为空');
+        }
+        if($phone != $user['phone']){
+            return back()->with('error','该手机号不存在');
+        }
+        if(Hash::check($upass,$user['upass'])){
+            return back()->with('error','修改密码不能与原来密码相同');
+        }
+        $res = $user->save();
+        if($res){
+            return redirect('/')->with('success','修改密码成功!');
+        }else{
+            return back()->with('error','修改密码失败!');
+        }
+       
+    }
 
+
+    /**
+     * 通过邮箱修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUpdateemail()
+    {
+        return view('home.user.updateemail');
+    }
+
+     /**
+     *
+     *  邮箱用户修改密码发送验证码
+     *
+     * 
+     */
+    public function getSendemailcode(Request $request)
+    {
+        
+        $email = $_GET['email'];
+        $str_rand = rand(1000,9999);
+        session(['mobilecode'=>$str_rand]);
+        if($email){
+            Mail::send('home.index.emailcode', ['str_rand' => $str_rand,'email'=>$email], function ($m) use ($email) {
+                $m->to($email)->subject('臻妍论坛-获取验证码');
+            });
+            
+        }
+        return 'success';
+    }
+
+
+
+    /**
+     * 通过邮箱修改密码成功
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function postUpdateemail2(Request $request)
+    {   
+        $email = $request->input('email');
+        $upass = $request->input('upass');
+        $user = User::where('email','=',$email)->first();
+        if(empty($email)){
+            return back()->with('error','邮箱不能为空');
+        }
+        if($email != $user['email']){
+            return back()->with('error','该邮箱号不存在');
+        }
+        if(Hash::check($upass,$user['upass'])){
+            return back()->with('error','修改密码不能与原来密码相同');
+        }
+        $res = $user->save();
+        if($res){
+            return redirect('/')->with('success','修改密码成功!');
+        }else{
+            return back()->with('error','修改密码失败!');
+        }
+    }
+
+    /**
+     * 邮箱验证不能为空
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCheckemailcode(Request $request)
+    {
+        if (empty($request->input('email')) || empty($request->input('emailcode'))) {
+            return back()->with('error','请先验证');
+        }
+        if(session('mobilecode') == $request->input('emailcode')){
+            return redirect('/home/user/updateemail');
+        }else{
+            return back()->with('error','校验码错误');
+        }
+    }
+
+    /**
+     * 手机验证不能为空
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCheckmobilecode(Request $request)
+    {
+        if (empty($request->input('phone')) || empty($request->input('phonecode'))) {
+            return back()->with('error','请先验证');
+        }
+        exit;
+        if(session('phone_code') == $request->input('phonecode')){
+            return redirect('/home/user/updateemail');
+        }else{
+            return back()->with('error','校验码错误');
+        }
+    }
+
+
+     /**
+     * 修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUpdateupass(Request $request,$id)
+    {
+        $user = User::find($id);
+        $oldpassword = $request->input('oldpassword');
+        if(!Hash::check($oldpassword,$user['upass'])){
+            return back()->with('error','原密码错误,请重新输入');
+        }
+        $upass = hash::make($request->input('upass'));
+        $user->upass = $upass;
+        if(Hash::check($oldpassword,$upass)){
+            return back()->with('error','原密码不能与新密码一致');
+        }
+        $res = $user->save();
+        if($res){
+            return back()->with('success','修改密码成功');
+        }else{
+            return back()->with('error','修改密码失败');
+        }
+    }
 
 
 

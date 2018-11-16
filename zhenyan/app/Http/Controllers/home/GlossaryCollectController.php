@@ -104,4 +104,6 @@ class GlossaryCollectController extends Controller
             return back()->with('error', '取消收藏失败');
         }   
     }
+
+    
 }

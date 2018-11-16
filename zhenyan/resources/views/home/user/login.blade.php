@@ -7,13 +7,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>臻妍论坛登录</title>
 
-        <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/login.css">
+        <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+        <script src="/layui/layui.all.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,7 +58,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>登录</h3>
-                            		<p>Fill in the form below to get instant access:</p>
+                            		<em>Fill in the form below to get instant access:</em>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-pencil"></i>
@@ -76,6 +77,7 @@
                                     </div>
 			                        <button type="submit" class="btn">登 录</button>
 			                    </form>
+                                <h5 style="float:left;margin-top:5px;"><a href="/home/user/fp" style="color:#fff;">忘记密码?</a></h5>
                                 <h5 style="float:right;">还没有账号?赶快去<a href="/home/user/register">注册</a>吧!</h5>
 		                    </div>
                         </div>
@@ -126,40 +128,45 @@
                 });
 
         </script>
-        <script src="assets/js/login.js"></script>
 
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
+         <!-- 读取提示信息开始 -->
+    @if (session('success'))
+        <script type="text/javascript">
+            var layer = layui.layer
+                 ,form = layui.form;
 
-            <!-- 读取提示信息开始 -->
-        @if (session('success'))
-            <script type="text/javascript">
-                alert("{{ session('success')}}");           
-            </script>;
-        @endif
-        @if (session('error'))
-          <script type="text/javascript">
-                alert("{{ session('error')}}");         
-            </script>;
-        @endif
+            layer.alert("{{ session('success') }}");           
+        </script>;
+    @endif
+    @if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+         ,form = layui.form;
+            layer.alert("{{ session('error') }}");         
+        </script>;
+    @endif
     <!-- 读取提示信息结束 -->
 
     <!-- 显示验证错误信息 开始 -->
-        @if (count($errors) > 0)
-        <div class="">
-            <ul> 
-            @foreach ($errors->all() as $k=>$v)
-                <script type="text/javascript">
-                    if('{{ $k }}' == 0){
-                        alert('{{ $v }}')
-                    }                   
-                </script>;
-            @endforeach
-           </ul>
-        </div>
-        @endif
-        <!-- 显示验证错误信息 结束 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+            <script type="text/javascript">
+            var layer = layui.layer
+                ,form = layui.form;
+                if('{{ $k }}' == 0){
+                    layer.alert('{{ $v }}')
+                }                   
+            </script>;
+        @endforeach
+       </ul>
+    </div>
+    @endif
+    <!-- 显示验证错误信息 结束 -->
     </body>
 
 </html>

@@ -45,6 +45,8 @@ Route::group(['middleware'=>'home'], function() {
 	Route::get('/home/invitation/create','home\InvitationController@create'); 					// 前台帖子发布
 	Route::get('/home/invitation/{id}','home\InvitationController@index');						// 前台列表
 	Route::resource('/home/glossary','home\GlossaryController'); 								// 前台图集
+	Route::post('/home/glossary/uploads','home\GlossaryController@uploads'); 					// 前台图集图片上传
+	Route::post('/home/glossary/edituploads','home\GlossaryController@edituploads'); 			// 前台图集图片修改
 	Route::post('/home/invitation/store','home\InvitationController@store'); 					// 前台帖子发布判断
 	Route::get('/home/invitation/show/{id}','home\InvitationController@show');					// 前台帖子详情
 	Route::get('/home/invitation/{id}/edit','home\InvitationController@edit');					// 前台帖子修改
