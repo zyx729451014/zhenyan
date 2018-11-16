@@ -120,6 +120,8 @@
                                         <button style="width:150px;height:51px;float:left;" onclick="sendmobilecode()" class="code">获取验证码</button> 
                                         <div style="clear:both;"></div>
                                     </div>
+
+                                 
                                     <script type="text/javascript">
                                         function sendmobilecode()
                                         {

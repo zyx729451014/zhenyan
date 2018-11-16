@@ -141,9 +141,9 @@
     <div class="personalSide">
     <dl class="headerPer yuanYin clearfix">
         <dt>
-        	<a href="/home/user/userdateail">
+            <a href="/home/user/userdateail">
                 @if(!empty($userinfo['face']))
-            	<img class="img" src="{{ $userinfo['face'] }}" width="90" height="90">
+                <img class="img" src="{{ $userinfo['face'] }}" width="90" height="90">
                 @endif
             </a>
         <h4 class="tit"><b></b></h4>
@@ -174,22 +174,22 @@
         <dl class="yuanYin">
             <dt>基本信息</dt>
             <form action="/home/user/update/{{ $userinfo->uid }}" method='post' enctype="multipart/form-data">
-            	{{ csrf_field() }}
-				<dd>
-	                <ul class="module-box">
-	                    <!--头像 begin-->
-	                    <li class="mList headerEdit">
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            头像
-	                        </span>
-	                        <div>
-	                            <span>
+                {{ csrf_field() }}
+                <dd>
+                    <ul class="module-box">
+                        <!--头像 begin-->
+                        <li class="mList headerEdit">
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                头像
+                            </span>
+                            <div>
+                                <span>
                                     <label class='users' for="test1">
                                         <img src="{{ $userinfo['face'] }}" style='width:90px;height:90px;border-radius:50%'>
                                         <input type="hidden" name="face">
                                     </label>
-									<button type="button" class="layui-btn" id="test1" style='display:none;margin-top:30px;'>
+                                    <button type="button" class="layui-btn" id="test1" style='display:none;margin-top:30px;'>
                                         <i class="layui-icon">&#xe67c;</i>上传图片
                                     </button>
                                     <script>
@@ -215,43 +215,43 @@
                                           });
                                         });
                                     </script>
-	                            </span>
-	                       	</div>
-	                    </li>
-	                    <!--头像 end-->
-	                    <!--用户名 begin-->
-	                    <li class="mList" style='margin-top:40px;'>
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            用户名
-	                        </span>
-	                        <div>
-	                            <span><input type="text" name='uname' style='width:100px;margin-top:10px;' value="{{ session('user')->uname }}" readonly></span>
-	                         </div>
-	                    </li>
-	                    <!--用户名 end-->
-	                    <!--性别 begin-->
-	                    <li class="mList" style='padding-top:10px;'>
-	                        <span class="module-tit">
-	                            <em class="red">*</em>
-	                            性别
-	                        </span>
-	                        <div class="module-main">
-	                            <span> 
+                                </span>
+                            </div>
+                        </li>
+                        <!--头像 end-->
+                        <!--用户名 begin-->
+                        <li class="mList" style='margin-top:40px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                用户名
+                            </span>
+                            <div>
+                                <span><input type="text" name='uname' style='width:100px;margin-top:10px;' value="{{ session('user')->uname }}" readonly></span>
+                             </div>
+                        </li>
+                        <!--用户名 end-->
+                        <!--性别 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">
+                                <em class="red">*</em>
+                                性别
+                            </span>
+                            <div class="module-main">
+                                <span> 
                                    
-									男<input type="radio" name='sex' value='m' @if($userinfo->sex=='m')
+                                    男<input type="radio" name='sex' value='m' @if($userinfo->sex=='m')
                                     checked @endif>&nbsp&nbsp&nbsp
                                    
-									女<input type="radio" name='sex' value='w' @if($userinfo->sex=='w')
+                                    女<input type="radio" name='sex' value='w' @if($userinfo->sex=='w')
                                     checked @endif>&nbsp&nbsp&nbsp
                                     
-									未知<input type="radio" name='sex' value='x' @if($userinfo->sex=='x')
+                                    未知<input type="radio" name='sex' value='x' @if($userinfo->sex=='x')
                                     checked @endif>
                                     
-	                            </span>
-	                         </div>
-	                    </li>
-	                    <!--性别 end-->
+                                </span>
+                             </div>
+                        </li>
+                        <!--性别 end-->
                         
                         <!--手机号 begin-->
                         <li class="mList" style='padding-top:10px;'>
@@ -261,13 +261,13 @@
                             </span>
                             <div class="module-main">
                                 <span id="phone"> 
-                                    <input type="tel" name='phone' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->phone }}">
+                                    <input type="tel" name='phone' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ user->phone }}">
                                     <span></span>
                                 </span>
                              </div>
                         </li>
                         <!--手机号 end-->
-	                    
+                        
                         <!--邮箱 begin-->
                         <li class="mList" style='padding-top:10px;'>
                             <span class="module-tit">
@@ -276,7 +276,7 @@
                             </span>
                             <div class="module-main" >
                                 <span id="email"> 
-                                    <input type="text" name='email' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->email }}">
+                                    <input type="text" name='email' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ user->email }}">
                                     <span></span>
                                 </span>
                              </div>
@@ -341,21 +341,21 @@
                         </script>
                         <!--邮箱 end-->
     
-	                    <!--生日 begin-->
-	                    <li class="mList" style='padding-top:10px;'>
-	                        <span class="module-tit">生日</span>
-	                        <div class="module-main">
-	                            <label class="inputText">    
-	                               <input type="date" name='birthdate' value='{{ $userinfo->birthdate }}' style="height:40px;">
-	                            </label>
-	                        </div>
-	                    </li>
-	                    <!--生日 end-->
-	                </ul>
-	                <div class="subBtn">
-	                   <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
-	                </div>
-	            </dd>
+                        <!--生日 begin-->
+                        <li class="mList" style='padding-top:10px;'>
+                            <span class="module-tit">生日</span>
+                            <div class="module-main">
+                                <label class="inputText">    
+                                   <input type="date" name='birthdate' value='{{ $userinfo->birthdate }}' style="height:40px;">
+                                </label>
+                            </div>
+                        </li>
+                        <!--生日 end-->
+                    </ul>
+                    <div class="subBtn">
+                       <button type='submit' class="btnPer redBtn" id="saveUserBaseInfo">保存</button>
+                    </div>
+                </dd>
             </form>
             
         </dl>
@@ -363,7 +363,7 @@
     <div class="personalMain" id="password" style="display:none">
         <dl class="yuanYin">
             <dt>修改密码</dt>
-            <form action="#" method='post' enctype="multipart/form-data">
+            <form action="/home/user/updateupass/{{ $userinfo->uid }}" method='post' enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" name="fowardURL" value="http://passport.tianya.cn/safe.do">
                 <input type="hidden" name="source" value="">
@@ -394,6 +394,10 @@
                 </dd>
             </form>
             <script type="text/javascript">
+    $('input[name=upass]').focus(function()
+    {   
+        $('#password_tips').html('<font color="#CBCBCB">请输入6-16位的密码</font>');
+    });
     $('input[name=upass]').keyup(function(){
         var pass_vals = $(this).val();
         if(pass_vals.length < 6){
@@ -404,6 +408,9 @@
         if(pass_vals.length > 16){
             $('#password_tips').html( '✖ 密码长度为6-16位');
             return;
+        }else{
+            $('#password_tips').html( '');
+
         }
     });
      $('input[name=upassok]').keyup(function(){

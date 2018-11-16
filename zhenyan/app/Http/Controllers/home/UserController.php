@@ -199,6 +199,7 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         }
+        session(['phone'=>$_GET['phone']]);
         return curl_exec($curl);
     }
     /**
@@ -276,7 +277,7 @@ class UserController extends Controller
 
 
     /**
-     * 前退出登录
+     * 前台退出登录
      *
      * @return \Illuminate\Http\Response
      */
@@ -398,7 +399,7 @@ class UserController extends Controller
          // 他的粉丝
         $fans = count(Friending::where('idol',session('user')->uid)->get());
         // 加载模板
-        return view('home.user.information',['userinfo'=>$userinfo,'idol'=>$idol,'fans'=>$fans]);
+        return view('home.user.information',['userinfo'=>$userinfo,'idol'=>$idol,'fans'=>$fans,'user'=>$user]);
     }
 
     /**
@@ -452,6 +453,10 @@ class UserController extends Controller
         if (!empty($request->input('face'))) {
             $userdateail->face = $request->input('face');
         }
+        $user = User::where('uid',$id)->first();
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->save();
         $res = $userdateail->save();
         // 逻辑判断
         if($res){
@@ -468,7 +473,7 @@ class UserController extends Controller
         return view('home.user.fp');
     }
     // 通过邮箱找回密码
-    public function getEmails()
+    public function getEmails(Request $request)
     {
         return view('home.user.emails');
     }
@@ -479,6 +484,154 @@ class UserController extends Controller
     }
 
 
+
+    /**
+     * 通过手机号修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUpdatephone()
+    {
+        return view('home.user.updatephone');
+    }
+    /**
+     * 通过手机号修改密码成功
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUpdatephone2(Request $request)
+    {
+        $phone = $request->input('phone');
+        $upass = $request->input('upass');
+        $user = User::where('phone','=',$phone)->first();
+        if(Hash::check($upass,$user['upass'])){
+            return back()->with('error','修改密码不能与原来密码相同');
+        }
+        $res = $user->save();
+        if($res){
+            return redirect('/home/user/login')->with('success','修改密码成功!');
+        }else{
+            return back()->with('error','修改密码失败!');
+        }
+       
+    }
+
+
+    /**
+     * 通过邮箱修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUpdateemail()
+    {
+        $email = session('email');
+        return view('home.user.updateemail',['email'=>$email]);
+    }
+
+     /**
+     *
+     *  邮箱用户修改密码发送验证码
+     *
+     * 
+     */
+    public function getSendemailcode(Request $request)
+    {
+        
+        $email = $_GET['email'];
+        $str_rand = rand(1000,9999);
+        session(['mobilecode'=>$str_rand]);
+        if($email){
+            Mail::send('home.index.emailcode', ['str_rand' => $str_rand,'email'=>$email], function ($m) use ($email) {
+                $m->to($email)->subject('臻妍论坛-获取验证码');
+            });
+            
+        }
+        return 'success';
+    }
+
+
+
+    /**
+     * 通过邮箱修改密码成功
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function postUpdateemail2(Request $request)
+    {   
+        $email = $request->input('email');
+        $upass = $request->input('upass');
+        $user = User::where('email','=',$email)->first();
+        if(Hash::check($upass,$user['upass'])){
+            return back()->with('error','修改密码不能与原来密码相同');
+        }
+        $res = $user->save();
+        if($res){
+            return redirect('/')->with('success','修改密码成功!');
+        }else{
+            return back()->with('error','修改密码失败!');
+        }
+    }
+
+    /**
+     * 邮箱验证不能为空
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCheckemailcode(Request $request)
+    {
+        if (empty($request->input('email')) || empty($request->input('emailcode'))) {
+            return back()->with('error','请先验证');
+        }
+        session(['email'=>$request->input('email')]);
+        if(session('mobilecode') == $request->input('emailcode')){
+            return redirect('/home/user/updateemail');
+        }else{
+            return back()->with('error','校验码错误');
+        }
+    }
+
+    /**
+     * 手机验证不能为空
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCheckmobilecode(Request $request)
+    {
+        if (empty($request->input('phone')) || empty($request->input('phonecode'))) {
+            return back()->with('error','请先验证');
+        }
+        if(session('phone_code') == $request->input('phonecode')){
+            return redirect('/home/user/updateemail');
+        }else{
+            return back()->with('error','校验码错误');
+        }
+    }
+
+
+     /**
+     * 修改密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postUpdateupass(Request $request,$id)
+    {
+        $user = User::find($id);
+        $oldpassword = $request->input('oldpassword');
+        if(!Hash::check($oldpassword,$user['upass'])){
+            return back()->with('error','原密码错误,请重新输入');
+        }
+        $upass = hash::make($request->input('upass'));
+        $user->upass = $upass;
+        if(Hash::check($oldpassword,$upass)){
+            return back()->with('error','新密码不能与原密码一致');
+        }
+        $res = $user->save();
+        if($res){
+            return back()->with('success','修改密码成功');
+        }else{
+            return back()->with('error','修改密码失败');
+        }
+    }
 
 
 
