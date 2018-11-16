@@ -134,9 +134,7 @@
 <img style="display:none" src="/home/user/css/pvhit0001.gif" width="1" height="1" border="0">
     <link rel="stylesheet" type="text/css" href="/home/user/pass/TY.css">
     <link rel="stylesheet" type="text/css" href="/home/user/pass/change-password_ed8d7e7.css">
-    <script type="text/javascript" charset="utf-8" src="/home/user/pass/TY.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/home/user/pass/change-password_79c3254.js"></script>
-<script type="text/javascript" charset="utf-8" src="/home/user/pass/interface.js" async=""></script><link type="text/css" charset="utf-8" rel="stylesheet" href="/home/user/pass/nav2_0.css"><script type="text/javascript" charset="utf-8" src="/home/user/pass/nav2_0.js" async=""></script>
+<link type="text/css" charset="utf-8" rel="stylesheet" href="/home/user/pass/nav2_0.css">
 <!--blackHead-->
 <div class="personalBox wrapper1380" style="margin-top:100px;height:790px;">
     <!--personalSide-->
@@ -162,6 +160,7 @@
     </dl>
     <ul class="menuPer yuanYin">
         <li>
+            <a href="#" target="_self" class="info" style="color:#0f0f0f;">资料编辑</a>
             <a href="#" target="_self" class="pass" style="color:#0f0f0f;">密码修改</a>
         </li>
     </ul>
@@ -261,9 +260,9 @@
                                 手机号
                             </span>
                             <div class="module-main">
-                                <span> 
-                                    <input type="tel" name='phone' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->phone }}" readonly>
-                                    
+                                <span id="phone"> 
+                                    <input type="tel" name='phone' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->phone }}">
+                                    <span></span>
                                 </span>
                              </div>
                         </li>
@@ -275,13 +274,71 @@
                                 <em class="red">*</em>
                                 邮箱
                             </span>
-                            <div class="module-main">
-                                <span> 
-                                    <input type="email" name='email' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->email }}" readonly>
-                                    
+                            <div class="module-main" >
+                                <span id="email"> 
+                                    <input type="text" name='email' style='width:200px;height:30px;margin-top:10px;border:1px solid #ccc;' value="{{ session('user')->email }}">
+                                    <span></span>
                                 </span>
                              </div>
                         </li>
+                        <script type="text/javascript">
+                            $('input[name=phone]').blur(function(){
+                            var phone_preg = /^1{1}[3-9]{1}[0-9]{9}$/;
+                            var phone_vals = $(this).val();
+                            if(phone_preg.test(phone_vals)){
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                    url:'/home/user/checkphone',
+                                    type:'post',
+                                    data:{'phone':phone_vals},
+                                    success:function(msg){
+                                        if(msg == 'success'){
+
+                                        }else{
+                                            $('#phone span:eq(0)').html('<font color="red">手机号已经存在</font>') ;
+                                        }
+                                    },
+                                    dataType:'html',
+                                    async:false
+                                });
+                                
+                            }else{
+                                $('#phone span:eq(0)').html('<font color="red">手机号格式错误</font>');
+                            }
+                        });
+                            $('input[name=email]').blur(function(){
+                                var email_preg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+                                var email_vals = $(this).val();
+                                if(email_preg.test(email_vals)){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    $.ajax({
+                                        url:'/home/user/checkemail',
+                                        type:'post',
+                                        data:{'email':email_vals},
+                                        success:function(msg){
+                                            if(msg == 'success'){
+
+                                            }else{
+                                                $('#email span:eq(0)').html('<font color="red">邮箱号已经存在</font>') ;
+                                            }
+                                        },
+                                        dataType:'html',
+                                        async:false
+                                    });
+                                    
+                                }else{
+                                    $('#email span:eq(0)').html('<font color="red">邮箱格式错误</font>');
+                                }
+                            });
+                        </script>
                         <!--邮箱 end-->
     
 	                    <!--生日 begin-->
@@ -320,22 +377,14 @@
                     <div class="form-item">
                         <label class="label" for="password">新密码：</label>
                         <div class="field">
-                            <input type="password" placeholder="" class="form-input" name="password" id="password">
+                            <input type="password" placeholder="" class="form-input" name="upass" id="password">
                             <span id="password_tips" class="form-tips tips-info">大小写字母、数字、字符组合更安全</span>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="label" for="password">密码强度：</label>
-                        <div class="field">
-                            <div class="lv-state">
-                                <div class="lv-state-bg"><div class="rate" style="width:100%;"></div></div>
-                            </div>
                         </div>
                     </div>
                     <div class="form-item">
                         <label class="label" for="password2">确认密码：</label>
                         <div class="field">
-                            <input type="password" placeholder="" class="form-input" name="password2" id="password2">
+                            <input type="password" placeholder="" class="form-input" name="upassok" id="password2">
                             <span id="password2_tips" class="form-tips tips-info">请再输入一遍</span>
                         </div>
                     </div>    
@@ -344,6 +393,28 @@
                     </div>              
                 </dd>
             </form>
+            <script type="text/javascript">
+    $('input[name=upass]').keyup(function(){
+        var pass_vals = $(this).val();
+        if(pass_vals.length < 6){
+            $('#password_tips').html( '✖ 密码长度为6-16位');
+
+            return;
+        }
+        if(pass_vals.length > 16){
+            $('#password_tips').html( '✖ 密码长度为6-16位');
+            return;
+        }
+    });
+     $('input[name=upassok]').keyup(function(){
+        var passok_vals = $(this).val();
+        if (passok_vals==$('input[name=upass]').val()) {
+            $('#password2_tips').html('<font color="green">两次密码输入一致</font>');
+        }else{
+            $('#password2_tips').html('<font color="red">两次密码输入不一致</font>');
+        };
+    });
+</script>
             
         </dl>
     </div>
@@ -355,7 +426,12 @@
         $('#password').show();
         $('#infomation').hide();     
     });
+    $('.info').click(function(){
+        $('#password').hide();
+        $('#infomation').show();     
+    });
 </script>
+
 
         <!-- 读取提示信息开始 -->
         @if (session('success'))

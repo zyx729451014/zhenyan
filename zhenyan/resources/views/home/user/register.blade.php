@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>臻妍论坛注册</title>
  
+        <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+        <script src="/layui/layui.all.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="/home/user/assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/home/user/assets/font-awesome/css/font-awesome.min.css">
@@ -123,8 +125,8 @@
                                         {
                                             var phone_vals=$('input[name=phone]').val();
                                             $.get('/home/user/sendmobilecode',{'phone':phone_vals},function(msg){
-                                                if(msg.SubmitResult.code == 2){
-                                                    alert('验证码发送成功');
+                                                if(msg.return_code == "00000"){
+                                                    layer.alert('验证码发送成功');
                                                      var i=60;
                                                     time=setInterval(function(){
                                                         $('.code').attr('disabled',true);
@@ -137,7 +139,7 @@
                                                         };
                                                     },1000);
                                                 }else{
-                                                    alert(msg.SubmitResult.msg);
+                                                    layer.alert("验证码发送失败 请检查手机号");
                                                 } 
                                             },'json');
                     
@@ -200,7 +202,41 @@
             $('.email').css('border-bottom','');
         })
         </script>
-        
+               <!-- 读取提示信息开始 -->
+    @if (session('success'))
+        <script type="text/javascript">
+            var layer = layui.layer
+                 ,form = layui.form;
+
+            layui.alert("{{ session('success') }}");           
+        </script>;
+    @endif
+    @if (session('error'))
+      <script type="text/javascript">
+      var layer = layui.layer
+         ,form = layui.form;
+            layui.alert("{{ session('error') }}");         
+        </script>;
+    @endif
+    <!-- 读取提示信息结束 -->
+
+    <!-- 显示验证错误信息 开始 -->
+    @if (count($errors) > 0)
+    <div class="">
+        <ul> 
+        @foreach ($errors->all() as $k=>$v)
+            <script type="text/javascript">
+            var layer = layui.layer
+                ,form = layui.form;
+                if('{{ $k }}' == 0){
+                    layui.alert('{{ $v }}')
+                }                   
+            </script>;
+        @endforeach
+       </ul>
+    </div>
+    @endif
+    <!-- 显示验证错误信息 结束 -->
     </body>
 
 </html>

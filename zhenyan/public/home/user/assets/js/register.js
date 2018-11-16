@@ -1,10 +1,10 @@
 $(function(){ 
-	//alert($);
+
 	var isUpass,isEmail,isPhone = false;
 			$('input[name=email]').focus(function()
 			{	
 				$('#email span:eq(0)').html('<font color="#CBCBCB">请输入邮箱号</font>');
-			})
+			});
 			$('input[name=email]').blur(function(){
 				var email_preg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
 				var email_vals = $(this).val();
@@ -207,67 +207,6 @@ $(function(){
 					$('#email li:eq(3)').css('color','#666');
 					$('#email ul:eq(0)').show();
 					$('#email span:eq(1)').html('');
-			}
-			
-
-		}); 
-		$('#email input[name=upassok]').keyup(function(){
-			var passok_vals = $(this).val();
-			if (passok_vals==$('#email input[name=upass]').val()) {
-		$('#phone input[name=upass]').keyup(function(){
-			$('#phone li').each(function(){
-				$('#phone li').css('background','');
-				$('#phone ul:eq(0)').hide();
-
-			})
-			
-			var pass_vals = $(this).val();
-			if(pass_vals.length < 6){
-				return;
-			}
-			if(pass_vals.length > 16){
-				$('#phone span:eq(1)').html( '✖ 密码长度为6-16位');
-				$('#phone ul:eq(0)').hide();
-				return;
-			}
-			var temp = [];
-			var n_preg = /[0-9]+/g;
-			if(n_preg.test(pass_vals)){
-				temp.push('数字');
-			}
-			var ms_preg = /[a-z]+/g;
-			if(ms_preg.test(pass_vals)){
-				temp.push('小写字母');
-			}
-			var bg_preg = /[A-Z]+/g;
-			if(bg_preg.test(pass_vals)){
-				temp.push('大写字母');
-			}
-			var ts_preg = /[^0-9a-zA-Z]+/g;
-			if(ts_preg.test(pass_vals)){
-				temp.push('特殊字符');
-			}
-			if(temp.length==1){
-					$('#phone li:eq(0)').css('background','#AD4242');
-					$('#phone li:eq(0)').css('color','#666');
-					$('#phone ul:eq(0)').show();
-					$('#phone span:eq(1)').html('');
-			}else if(temp.length==2){
-					$('#phone li:eq(1)').css('background','#BEB367');
-					$('#phone li:eq(1)').css('color','#666');
-					$('#phone ul:eq(0)').show();
-					$('#phone span:eq(1)').html('');
-			}else if(temp.length==3){
-					$('#phone li:eq(2)').css('background','#628B3E');
-					$('#phone li:eq(2)').css('color','#666');
-					$('#phone ul:eq(0)').show();
-					$('#phone span:eq(1)').html('');	
-			}else if(temp.length==4){
-					$('#phone li:eq(3)').css('background','#40C032');
-					$('#phone li:eq(3)').css('color','#666');
-					$('#phone ul:eq(0)').show();
-					$('#phone span:eq(1)').html('');
-
 			}
 			
 

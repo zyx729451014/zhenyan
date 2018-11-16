@@ -177,42 +177,29 @@ class UserController extends Controller
     {
         $str_rand = rand(1000,9999);
         session(['phone_code'=>$str_rand]);
-        $mobile_code = $str_rand; 
-        //获取手机号
-        $mobile = $_GET['phone'];
-        //短信接口地址
-        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
-        $target .= "&account=C31354845&password=ea2a13501ac56076dd64149fa2d14622&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+        $host = "http://dingxin.market.alicloudapi.com";
+        $path = "/dx/sendSms";
+        $method = "POST";
+        $appcode = "9dbe8d5778ad4e1eb332d6124f83fd71";
+        $headers = array();
+        array_push($headers, "Authorization:APPCODE " . $appcode);
+        $querys = "mobile=".$_GET['phone']."&param=code%3A".$str_rand."&tpl_id=TP1711063";
+        $bodys = "";
+        $url = $host . $path . "?" . $querys;
 
-        //初始化
         $curl = curl_init();
-        //设置抓取的url
-        curl_setopt($curl, CURLOPT_URL, $target);
-        //设置头文件的信息作为数据流出
-        curl_setopt($curl, CURLOPT_HEADER, 1);
-        //设置获取的信息以文件流的形式返回 而不是直接输出
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        //执行集合
-        $data = curl_exec($curl);
-        //关闭URL请求
-        curl_close($curl);
-        function xml_to_array($data){
-            $reg = "/<(\w+)[^>]*>([\\x00-\\xFF]*)<\\/\\1>/";
-            if(preg_match_all($reg, $data, $matches)){
-                $count = count($matches[0]);
-                for($i = 0; $i < $count; $i++){
-                $subxml= $matches[2][$i];
-                $key = $matches[1][$i];
-                    if(preg_match( $reg, $subxml )){
-                        $arr[$key] = xml_to_array( $subxml );
-                    }else{
-                        $arr[$key] = $subxml;
-                    }
-                }
-            }
-            return $arr;
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_FAILONERROR, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        /*curl_setopt($curl, CURLOPT_HEADER, true);*/
+        if (1 == strpos("$".$host, "https://"))
+        {
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         }
-        return xml_to_array($data);
+        return curl_exec($curl);
     }
     /**
      *

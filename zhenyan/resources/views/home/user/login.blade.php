@@ -7,14 +7,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>臻妍论坛登录</title>
 
+        <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+        <script src="/layui/layui.all.js"></script>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/login.css">
-        <link rel="stylesheet" href="/layui/css/layui.css" media="all">
-        <script src="/layui/layui.all.js"></script>
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -138,14 +139,14 @@
             var layer = layui.layer
                  ,form = layui.form;
 
-            layui.alert("{{ session('success') }}");           
+            layer.alert("{{ session('success') }}");           
         </script>;
     @endif
     @if (session('error'))
       <script type="text/javascript">
       var layer = layui.layer
          ,form = layui.form;
-            layui.alert("{{ session('error') }}");         
+            layer.alert("{{ session('error') }}");         
         </script>;
     @endif
     <!-- 读取提示信息结束 -->
@@ -159,7 +160,7 @@
             var layer = layui.layer
                 ,form = layui.form;
                 if('{{ $k }}' == 0){
-                    layui.alert('{{ $v }}')
+                    layer.alert('{{ $v }}')
                 }                   
             </script>;
         @endforeach

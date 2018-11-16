@@ -22,7 +22,7 @@ class HloginMiddleware
             // 储存跳转之前的页面
             session(['home_uri'=>$_SERVER['REQUEST_URI']]);
             // 跳转到登录页面
-            return back() -> with('error','您还未登录 请先去登录');
+            return redirect('/home/user/login') -> withErrors('您还未登录 请先去登录') -> withInput();
         }
     }
 }
